@@ -1,0 +1,14 @@
+:root {
+  --color-primary: #5656b5;
+  --color-yellow: #f3b12a;
+  --color-black: #1e1e1e;
+  --color-white: #ffffff;
+  --font-main: "Montserrat", sans-serif;
+}
+
+.dark {
+  --color-primary: #121245;
+  --color-yellow: #f3b12a;
+  --color-black: #ffffff;
+  --color-white: #1e1e1e;
+}

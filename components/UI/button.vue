@@ -54,4 +54,13 @@ export default {
   color: #888;
   cursor: not-allowed;
 }
+
+@media (max-width: 900px) {
+  .sg-button{
+    font-size: 1rem;
+    width: 100%;
+
+  }
+}
+
 </style>

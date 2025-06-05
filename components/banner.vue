@@ -123,7 +123,7 @@ export default {
   methods: {
     startRotation() {
       this.intervalId = setInterval(() => {
-        this.currentIndex = (this.currentIndex + 1) % this.banners.length;
+        this.currentIndex = (this.currentIndex + 1) % this.banners.length;        
       }, 10000);
     },
     handleParallax() {
@@ -190,7 +190,7 @@ export default {
 
 .banner.light::before {
   background-color: none;
-  background: linear-gradient(var(--color-primary) 0%, #e0e0ff 50%);
+  /* background: linear-gradient(var(--color-primary) 0%, #e0e0ff 50%); */
   opacity: 0.5;
   filter: blur(1000px);
 }
@@ -234,8 +234,8 @@ export default {
 }
 
 .banner__image img {
-  max-width: 60%;
-  height: 60%;
+  max-width: 70%;
+  height: 70%;
   object-fit: cover;
 }
 

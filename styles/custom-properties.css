@@ -7,11 +7,12 @@
   --color-dark-gray: #929292;
   --color-light: #fafafa;
   --color-white: #ffffff;
+  --color-primary-tint: #eeeefb;
   --font-main: "Montserrat", sans-serif;
 
 
   --color-primary-to-white: var(--color-primary);
-  --color-dark-to-yellow: var(--color-dark);
+  --color-dark-to-yellow: #1e1e1e;
 }
 
 :root[data-theme='dark']{
@@ -25,5 +26,5 @@
   --font-main: "Montserrat", sans-serif;
 
 
-  --color-dark-to-yellow: var(--color-yellow);
+  --color-dark-to-yellow: #f3b12a;
 }

@@ -65,10 +65,9 @@ onMounted(() => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
           entry.target.classList.remove("hidden");
-        }else{
+        } else {
           entry.target.classList.remove("visible");
           entry.target.classList.add("hidden");
-
         }
       });
     },
@@ -127,12 +126,11 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  transition: box-shadow 0.2s, transform 1s,opacity 1s ease;
+  transition: box-shadow 0.2s, transform 1s, opacity 1s ease;
   cursor: pointer;
   opacity: 1;
   transform: translateY(0);
 }
-
 
 .hidden {
   opacity: 0;
@@ -150,8 +148,8 @@ onMounted(() => {
 }
 
 .service-card img {
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 
@@ -193,6 +191,7 @@ onMounted(() => {
 
 @media (min-width: 1280px) {
   .our-services {
+    padding: 0;
     min-width: 50%;
   }
 

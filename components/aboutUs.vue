@@ -4,8 +4,9 @@
       <div class="about__description">
         <span class="about__description-subtitle">Quienes somos</span>
         <h1 class="about__description-title">
-          En <span>Star Grow Studio</span> somos un equipo multidisciplinario apasionado por
-          la tecnología, el diseño y la innovación.        </h1>
+          En <span>Star Grow Studio</span> somos un equipo multidisciplinario
+          apasionado por la tecnología, el diseño y la innovación.
+        </h1>
         <p class="about__description-text">
           Conectamos ideas con tecnología para transformar negocios y generar
           impacto real.
@@ -64,28 +65,35 @@
 .about__description {
   display: flex;
   flex-direction: column;
-  padding: 10px;
   justify-content: center;
+  align-items: center;
+  padding: 10px;
   gap: 20px;
 }
 
 .about__description .about__description-subtitle {
   color: var(--color-primary);
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
 }
 
 .about__description .about__description-title {
-  font-size: clamp(1.6rem, 2vw, 2.4rem);
+  font-size: clamp(1.4rem, 2vw, 2rem);
   font-weight: 700;
+  text-align: center;
+  max-width: 90%;
   color: var(--color-black);
 }
 
-.about__description .about__description-title span{
+.about__description .about__description-title span {
   color: var(--color-primary);
 }
 
 .about__description .about__description-text {
   color: var(-color-dark-gray);
   font-weight: 300;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  text-align: center;
+  max-width: 90%;
 }
 
 .about__description .about__description-call-action {
@@ -97,7 +105,7 @@
   align-items: center;
   gap: 10px;
   border-radius: 10px;
-  width: 50%;
+  width: max-content;
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-white);
@@ -113,12 +121,13 @@
 .about__image img {
   max-width: 80%;
   height: 80%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 @media (min-width: 1280px) {
   .about {
     max-width: 90%;
+    height: 80vh;
     margin: 0 auto;
   }
 
@@ -126,18 +135,26 @@
     flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
-}
+  }
 
   .about__description {
     width: 60%;
+    align-items: start;
   }
 
   .about__description .about__description-title {
-    font-size: clamp(3rem, 2vw, 3.2rem);
+    font-size: clamp(2.4rem, 2vw, 3rem);
+    max-width: 75%;
   }
 
   .about__description .about__description-call-action {
-    width: 25%;
+    width: max-content;
+  }
+
+  .about__description .about__description-title,
+  .about__description-subtitle,
+  .about__description-text {
+    text-align: start !important;
   }
 
   .about__image {

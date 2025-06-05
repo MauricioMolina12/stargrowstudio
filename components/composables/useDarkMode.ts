@@ -1,9 +1,8 @@
 // composables/useDarkMode.ts
 import { useStorage } from '@vueuse/core'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 
 export function useDarkMode() {
-  // Guarda el modo oscuro como booleano
   const isDark = useStorage('dark-mode', false)
 
   const toggleDark = () => {

@@ -4,6 +4,7 @@
     <Banner></Banner>
     <OurServices></OurServices>
     <AboutUs></AboutUs>
+    <OurWay></OurWay>
     <!-- <button class="choose-theme" @click="toggleThemesMenu()">
       <span class="material-symbols-outlined"> light_mode </span>
     </button>
@@ -52,7 +53,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--color-light);
+  background-color: #FAFAFA;
   position: relative;
 }
 

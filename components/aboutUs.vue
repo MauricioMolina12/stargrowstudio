@@ -1,7 +1,7 @@
 <template>
   <section class="about">
     <div class="about--inner">
-      <div class="about__description">
+      <div class="about__description parallaxElement">
         <span class="about__description-subtitle">Quienes somos</span>
         <h1 class="about__description-title">
           En <span>Star Grow Studio</span> somos un equipo multidisciplinario
@@ -18,12 +18,38 @@
           >
         </button>
       </div>
-      <div class="about__image">
+      <div class="about__image parallaxElement">
         <img src="../public/team.png" alt="team" />
       </div>
     </div>
   </section>
 </template>
+<script lang="ts" setup>
+import { onMounted } from "vue";
+
+onMounted(() => {
+  const cards = document.querySelectorAll(".parallaxElement");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          entry.target.classList.remove("hidden");
+        }
+      });
+    },
+    {
+      threshold: 0.9,
+    }
+  );
+
+  cards.forEach((card) => {
+    card.classList.add("hidden");
+    observer.observe(card);
+  });
+});
+</script>
+
 <style scoped>
 .about {
   width: 100%;
@@ -89,7 +115,7 @@
 }
 
 .about__description .about__description-text {
-  color: var(-color-dark-gray);
+  color: var(--color-dark-gray);
   font-weight: 300;
   font-size: clamp(1rem, 1.5vw, 1.5rem);
   text-align: center;
@@ -160,7 +186,7 @@
   .about__image {
     width: 40%;
     display: flex;
-    justify-content: start;
+    justify-content: center;
   }
 
   .about__image img {
@@ -169,4 +195,3 @@
   }
 }
 </style>
-<script lang="ts"></script>

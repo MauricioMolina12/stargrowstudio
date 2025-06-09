@@ -8,42 +8,42 @@
       <div class="nav__inner-links" :class="{ 'is-open': isMenuOpen }">
         <div class="nav__inner-link">
           <span class="material-symbols-outlined">home</span>
-          <HeaderLink label="Inicio" />
+          <HeaderLink label="Inicio" color="var(--color-dark)" padding="22px"/>
           <span class="material-symbols-outlined chevron-right"
             >navigate_next</span
           >
         </div>
         <div class="nav__inner-link">
           <span class="material-symbols-outlined">handshake</span>
-          <HeaderLink label="Servicios" />
+          <HeaderLink label="Servicios" color="var(--color-dark)" padding="22px"/>
           <span class="material-symbols-outlined chevron-right"
             >navigate_next</span
           >
         </div>
         <div class="nav__inner-link">
           <span class="material-symbols-outlined">groups</span>
-          <HeaderLink label="Nosotros" />
+          <HeaderLink label="Nosotros" color="var(--color-dark)" padding="22px"/>
           <span class="material-symbols-outlined chevron-right"
             >navigate_next</span
           >
         </div>
         <div class="nav__inner-link">
           <span class="material-symbols-outlined">trending_up</span>
-          <HeaderLink label="Progreso" />
+          <HeaderLink label="Progreso" color="var(--color-dark)" padding="22px"/>
           <span class="material-symbols-outlined chevron-right"
             >navigate_next</span
           >
         </div>
         <div class="nav__inner-link">
           <span class="material-symbols-outlined">collections</span>
-          <HeaderLink label="Portafolio" />
+          <HeaderLink label="Portafolio" color="var(--color-dark)" padding="22px"/>
           <span class="material-symbols-outlined chevron-right"
             >navigate_next</span
           >
         </div>
         <div class="nav__inner-link">
           <span class="material-symbols-outlined">mail</span>
-          <HeaderLink label="Contacto" />
+          <HeaderLink label="Contacto" color="var(--color-dark)" padding="22px"/>
           <span class="material-symbols-outlined chevron-right"
             >navigate_next</span
           >
@@ -95,6 +95,9 @@ export default {
       toggleDarkMode: toggleDark,
     };
   },
+
+  methods: {
+  }
 };
 </script>
 <style scoped>
@@ -122,8 +125,7 @@ export default {
 }
 
 .nav .nav__inner figure {
-  min-width: 40px;
-  min-height: 40px;
+  width: 30px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -132,12 +134,15 @@ export default {
 }
 
 .nav .nav__inner figure img {
-  max-width: 70%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .nav .nav__inner figure figcaption {
   font-weight: 700;
+  font-size: 100%;
+  white-space: nowrap;
   color: var(--color-primary);
 }
 

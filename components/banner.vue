@@ -164,7 +164,7 @@ export default {
 
 <style scoped>
 .banner {
-  width: 100%;
+  width: 80%;
   height: 92vh;
   position: relative;
   overflow: hidden;
@@ -249,7 +249,6 @@ export default {
   text-align: center;
 }
 .banner__description .banner__description--hero-service {
-  background-color: #fff;
   border-radius: 10px;
   padding: 10px;
   font-weight: 500;

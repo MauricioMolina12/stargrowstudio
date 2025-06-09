@@ -1,5 +1,9 @@
 <template>
-  <a :href="href" class="header-link">
+  <a
+    :href="href"
+    class="header-link"
+    :style="{ color: color, padding: padding }"
+  >
     {{ label }}
   </a>
 </template>
@@ -14,6 +18,16 @@ defineProps({
     type: String,
     required: true,
   },
+  color: {
+    type: String,
+    default: "#fff",
+  },
+  fontWeight: {
+    type: String,
+  },
+  padding: {
+    type: String
+  }
 });
 </script>
 
@@ -21,7 +35,6 @@ defineProps({
 .header-link {
   text-decoration: none;
   color: var(--color-primary);
-  padding: 0.5rem 1rem;
   font-weight: 400;
   transition: color 0.2s;
   cursor: pointer;

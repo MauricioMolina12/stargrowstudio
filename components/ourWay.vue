@@ -1,13 +1,13 @@
 <template>
   <section class="ourWay">
     <div class="ourWay--inner">
-      <div class="ourWay__description">
+      <div class="ourWay__description parallaxElement">
         <span class="ourWay__description-subtitle">Como conectamos</span>
         <h1 class="ourWay__description-title">
           Nuestro <span>camino</span> hacia proyectos que brillan ✨
         </h1>
       </div>
-      <div class="ourWay__grid">
+      <div class="ourWay__grid parallaxElement">
         <div class="item" v-for="(step, index) of steps">
           <span class="item--index">{{ index + 1 }}</span>
           <img class="item--icon" :src="step.icon" :alt="step.title" />
@@ -15,7 +15,7 @@
           <p class="item--description">{{ step.description }}</p>
         </div>
       </div>
-      <div class="ourWay__quote">
+      <div class="ourWay__quote parallaxElement">
         <div class="ourWay__quote--description">
           <h2>¿Estás listo para llevar tu proyecto al siguiente nivel?</h2>
           <p>
@@ -24,7 +24,7 @@
           </p>
         </div>
         <div class="ourWay__quote--call-action">
-          <button>Contacta con nosotros</button>
+          <button @click="confirmAction">Solicitar una cita</button>
         </div>
       </div>
     </div>
@@ -142,7 +142,7 @@
 
 .ourWay__grid .item .item--title {
   font-size: clamp(1rem, 1.8vw, 1.2rem);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-dark);
 }
 
@@ -186,7 +186,7 @@
 .ourWay__quote .ourWay__quote--description p {
   color: var(--color-light);
   font-weight: 200;
-  font-size: clamp(.85rem, 2vw, .9rem);
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
 }
 
 .ourWay__quote .ourWay__quote--call-action button {
@@ -230,6 +230,7 @@
 </style>
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
+const emit = defineEmits(["openMetting"]);
 
 interface Step {
   icon: string;
@@ -238,6 +239,10 @@ interface Step {
 }
 
 const steps = ref<Step[]>([]);
+
+function confirmAction() {
+  emit("openMetting", true);
+}
 
 onMounted(() => {
   steps.value = [
@@ -278,5 +283,25 @@ onMounted(() => {
         "Monitorizamos resultados y ajustamos estrategias para lograr impacto y crecimiento constante.",
     },
   ];
+
+  const cards = document.querySelectorAll(".parallaxElement");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          entry.target.classList.remove("hidden");
+        }
+      });
+    },
+    {
+      threshold: 0.9,
+    }
+  );
+
+  cards.forEach((card) => {
+    card.classList.add("hidden");
+    observer.observe(card);
+  });
 });
 </script>

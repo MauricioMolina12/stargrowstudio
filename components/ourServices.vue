@@ -65,14 +65,11 @@ onMounted(() => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
           entry.target.classList.remove("hidden");
-        } else {
-          entry.target.classList.remove("visible");
-          entry.target.classList.add("hidden");
         }
       });
     },
     {
-      threshold: 0.4,
+      threshold: 0.9,
     }
   );
 
@@ -164,6 +161,7 @@ onMounted(() => {
   color: var(--color-dark);
   margin-bottom: 0.5rem;
   text-align: center;
+  height: 60px;
 }
 
 .service-desc {
@@ -172,6 +170,7 @@ onMounted(() => {
   margin-bottom: 1.2rem;
   font-weight: 200;
   text-align: center;
+  min-height: 60px;
 }
 
 .see-more {
@@ -187,16 +186,17 @@ onMounted(() => {
   justify-content: space-between;
   gap: 10px;
   color: var(--color-primary);
+  height: 60px;
 }
 
 @media (min-width: 1280px) {
   .our-services {
     padding: 0;
-    min-width: 50%;
+    min-width: 70%;
   }
 
   .services-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
   .service-name {

@@ -1,30 +1,25 @@
-// composables/useDarkMode.ts
-import { useStorage } from '@vueuse/core'
-import { onMounted } from 'vue'
+import { useStorage } from "@vueuse/core";
+import { onMounted, watch } from "vue";
 
 export function useDarkMode() {
-  const isDark = useStorage('dark-mode', false)
+  const isDark = useStorage("dark-mode", false);
 
   const toggleDark = () => {
-    isDark.value = !isDark.value
-    updateHtmlClass()
-  }
+    isDark.value = !isDark.value;
+  };
 
   const setDark = (value: boolean) => {
-    isDark.value = value
-    updateHtmlClass()
-  }
+    isDark.value = value;
+  };
 
   const updateHtmlClass = () => {
-    const root = document.documentElement
-    if (isDark.value) {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
-    }
-  }
+    const root = document.documentElement;
+    root.classList.toggle("dark", isDark.value);
+  };
 
-  onMounted(updateHtmlClass)
+  onMounted(updateHtmlClass);
 
-  return { isDark, toggleDark, setDark }
+  watch(isDark, updateHtmlClass); 
+
+  return { isDark, toggleDark, setDark };
 }

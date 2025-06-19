@@ -29,7 +29,7 @@ export default {
   box-sizing: border-box;
   border: none;
   border-radius: 5px;
-  font-size: .9rem;
+  font-size: .8rem;
   font-weight: 400;
   cursor: pointer;
   transition: background 0.2s;

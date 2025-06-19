@@ -1,5 +1,5 @@
 <template>
-  <section class="about">
+  <section class="about" :class="{ dark: isDark }">
     <div class="about--inner">
       <div class="about__description parallaxElement">
         <span class="about__description-subtitle">Quienes somos</span>
@@ -26,28 +26,14 @@
 </template>
 <script lang="ts" setup>
 import { onMounted } from "vue";
+import { useIntersectionObserver } from "./composables/useIntersectionObserver";
+import { useDarkMode } from "./composables/useDarkMode";
 
 onMounted(() => {
-  const cards = document.querySelectorAll(".parallaxElement");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          entry.target.classList.remove("hidden");
-        }
-      });
-    },
-    {
-      threshold: 0.9,
-    }
-  );
-
-  cards.forEach((card) => {
-    card.classList.add("hidden");
-    observer.observe(card);
-  });
+  useIntersectionObserver(".parallaxElement", { threshold: 0.8 }, "2");
 });
+
+const { isDark } = useDarkMode();
 </script>
 
 <style scoped>
@@ -59,6 +45,25 @@ onMounted(() => {
   align-items: center;
 }
 
+.about.dark {
+  background-color: #121245;
+}
+
+.about.dark .about__description .about__description-title {
+  color: var(--color-white);
+}
+.about.dark .about__description .about__description-title span {
+  color: var(--color-yellow);
+}
+
+.about.dark .about__description .about__description-subtitle{
+  color: var(--color-white);
+}
+
+.about.dark .about__description .about__description-text{
+  color: var(--color-white);
+}
+
 .about--inner {
   width: 100%;
   height: 100%;
@@ -66,20 +71,6 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   z-index: 10;
-}
-
-.about::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(var(--color-primary) 0%, #e0e0ff 50%);
-  opacity: 0.5;
-  filter: blur(1000px);
 }
 
 .about__image,
@@ -151,12 +142,6 @@ onMounted(() => {
 }
 
 @media (min-width: 1280px) {
-  .about {
-    max-width: 90%;
-    height: 80vh;
-    margin: 0 auto;
-  }
-
   .about--inner {
     flex-direction: row-reverse;
     align-items: center;
@@ -164,7 +149,7 @@ onMounted(() => {
   }
 
   .about__description {
-    width: 60%;
+    width: 50%;
     align-items: start;
   }
 
@@ -184,7 +169,7 @@ onMounted(() => {
   }
 
   .about__image {
-    width: 40%;
+    width: 50%;
     display: flex;
     justify-content: center;
   }

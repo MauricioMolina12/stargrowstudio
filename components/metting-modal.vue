@@ -1,5 +1,5 @@
 <template>
-  <div class="overlay" :class="{'not-connection': !isOnline}">
+  <div class="overlay" :class="{ 'not-connection': !isOnline }">
     <button class="close" @click="closeAction">X</button>
 
     <!-- Loader overlay -->
@@ -14,7 +14,7 @@
     <ClientOnly v-if="isOnline">
       <iframe
         @load="loading = false"
-        src="https://calendly.com/molinamau37/30min?primary_color=5656b5"
+        src="https://calendly.com/molinamau37/nueva-reunion?primary_color=5656b5"
         width="100%"
         height="100%"
         frameborder="0"
@@ -75,7 +75,7 @@ function closeAction() {
   will-change: opacity, transform;
 }
 
-.overlay.not-connection{
+.overlay.not-connection {
   background-color: aliceblue;
 }
 
@@ -100,7 +100,7 @@ function closeAction() {
   animation: loader 1s linear infinite;
 }
 
-.not-connection{
+.not-connection {
   color: red;
   font-size: 1.8rem;
   font-weight: 700;

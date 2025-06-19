@@ -1,39 +1,41 @@
 <template>
-  <section class="banner" :class="{ 'dark': isDark, 'light': !isDark }">
-    <transition name="fade" mode="out-in">
-      <div :key="currentIndex" class="banner__content" ref="bannerContent">
-        <div class="banner__description" ref="parallaxText">
-          <div class="banner__description--hero">
-            <span class="banner__description--hero-service">
-              <img
-                ref="parallaxImage"
-                :src="banners[currentIndex].icon"
-                alt="icono 3D"
-                class="banner__icon-3d"
-              />
-              {{ banners[currentIndex].service }}
-            </span>
-            <h1 class="banner__description--hero-title">
-              {{ banners[currentIndex].title.main }}
-              <span>
-                {{ banners[currentIndex].title.second }}
+  <section class="banner" :class="{ dark: isDark, light: !isDark }">
+    <div class="banner--inner">
+      <transition name="fade" mode="out-in">
+        <div :key="currentIndex" class="banner__content" ref="bannerContent">
+          <div class="banner__description" ref="parallaxText">
+            <div class="banner__description--hero">
+              <span class="banner__description--hero-service">
+                <img
+                  ref="parallaxImage"
+                  :src="currentBanner.icon"
+                  alt="icono 3D"
+                  class="banner__icon-3d"
+                />
+                {{ currentBanner.service }}
               </span>
-            </h1>
-            <p class="banner__description--hero-subtitle">
-              {{ banners[currentIndex].subtitle }}
-            </p>
-            <Button name="Cotiza ahora">Cotiza ahora</Button>
+              <h1 class="banner__description--hero-title">
+                {{ currentBanner.title.main }}
+                <span>
+                  {{ currentBanner.title.second }}
+                </span>
+              </h1>
+              <p class="banner__description--hero-subtitle">
+                {{ currentBanner.subtitle }}
+              </p>
+              <Button name="Cotiza ahora">Cotiza ahora</Button>
+            </div>
+          </div>
+          <div class="banner__image">
+            <img
+              :src="currentBanner.image"
+              :alt="currentBanner.alt"
+              class="banner-image"
+            />
           </div>
         </div>
-        <div class="banner__image">
-          <img
-            :src="banners[currentIndex].image"
-            :alt="banners[currentIndex].alt"
-            class="banner-image"
-          />
-        </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
   </section>
 </template>
 
@@ -43,77 +45,47 @@ import { useDarkMode } from "./composables/useDarkMode";
 
 export default {
   name: "DynamicBanner",
+  props: {
+    bannersProp: {
+      type: Array,
+      default: () => [],
+    },
+    isDynamic: {
+      type: Boolean,
+      default: true,
+    },
+    banner: {
+      type: Object,
+      default: () => ({
+        icon: "",
+        service: "",
+        title: { main: "", second: "" },
+        subtitle: "",
+        image: "",
+        alt: "",
+      }),
+    },
+  },
   data() {
     return {
-      banners: [
-        {
-          image: "developer.webp",
-          alt: "Desarrollador",
-          service: "Desarrollo de software a medida",
-          icon: "icons/computer.png",
-          title: {
-            main: "Transforma tu idea en software real.",
-            second: "Creamos soluciones que hacen la diferencia.",
-          },
-          subtitle:
-            "Desarrollamos tecnología con propósito, visión y estrategia.",
-        },
-        {
-          image: "analisis.webp",
-          alt: "Analista de datos",
-          service: "Análisis de datos y visualización",
-          icon: "icons/analisis.png",
-          title: {
-            main: "Convierte tus datos en decisiones inteligentes.",
-            second: "Te ayudamos a entender lo que importa.",
-          },
-          subtitle:
-            "Diseñamos dashboards y reportes personalizados para impulsar tu crecimiento.",
-        },
-        {
-          image: "bases-de-datos.webp",
-          alt: "Bases de datos",
-          service: "Arquitectura y gestión de bases de datos",
-          icon: "icons/basesdedatos.png",
-          title: {
-            main: "Tu información siempre segura y accesible.",
-            second: "Optimizamos el corazón de tu sistema.",
-          },
-          subtitle:
-            "Diseñamos estructuras de datos eficientes, escalables y preparadas para el futuro.",
-        },
-        {
-          image: "consultoria.webp",
-          alt: "Consultoría",
-          service: "Consultoría en transformación digital",
-          icon: "icons/consultoria.png",
-          title: {
-            main: "¿No sabes por dónde empezar?",
-            second: "Te guiamos paso a paso.",
-          },
-          subtitle:
-            "Analizamos, proponemos y ejecutamos estrategias tecnológicas adaptadas a tus objetivos.",
-        },
-        {
-          image: "diseño.webp",
-          alt: "Diseño",
-          service: "Diseño UX/UI centrado en el usuario",
-          icon: "icons/diseño.png",
-
-          title: {
-            main: "Haz que tu producto enamore a primera vista.",
-            second: "Diseñamos experiencias memorables.",
-          },
-          subtitle:
-            "Combinamos estética y funcionalidad para conectar con tu audiencia desde el primer clic.",
-        },
-      ],
       currentIndex: 0,
       intervalId: null,
     };
   },
+  computed: {
+    banners() {
+      return this.bannersProp ?? [];
+    },
+    currentBanner() {
+      return this.banners.length > 0
+        ? this.banners[this.currentIndex]
+        : this.banner;
+    },
+  },
   mounted() {
-    this.startRotation();
+    if (this.isDynamic && this.banners.length > 1) {
+      this.startRotation();
+    }
     window.addEventListener("scroll", this.handleParallax);
   },
   beforeDestroy() {
@@ -123,51 +95,43 @@ export default {
   methods: {
     startRotation() {
       this.intervalId = setInterval(() => {
-        this.currentIndex = (this.currentIndex + 1) % this.banners.length;        
-      }, 10000);
+        this.currentIndex = (this.currentIndex + 1) % this.banners.length;
+      }, 30000);
     },
     handleParallax() {
       const scrollY = window.scrollY;
 
-      const text = this.$refs.parallaxText;
-      const image = this.$refs.parallaxImage;
-      const content = this.$refs.bannerContent;
-
-      if (text) {
-        text.style.transform = `translateY(${scrollY * 0.1}px)`;
-      }
-      if (image) {
-        image.style.transform = `translateY(${scrollY * 0.05}px)`;
-      }
-      if (content) {
-        content.style.transform = `translateY(${scrollY * 0.02}px)`;
-      }
+      this.$refs.parallaxText?.style.setProperty(
+        "transform",
+        `translateY(${scrollY * 0.1}px)`
+      );
+      this.$refs.parallaxImage?.style.setProperty(
+        "transform",
+        `translateY(${scrollY * 0.05}px)`
+      );
+      this.$refs.bannerContent?.style.setProperty(
+        "transform",
+        `translateY(${scrollY * 0.02}px)`
+      );
     },
   },
   setup() {
-    const isMenuOpen = ref(false);
-    const toggleMenu = () => {
-      isMenuOpen.value = !isMenuOpen.value;
-    };
-
-    const { isDark, toggleDark } = useDarkMode();
-
-    return {
-      isMenuOpen,
-      toggleMenu,
-      isDark,
-      toggleDark,
-    };
+    const { isDark } = useDarkMode();
+    return { isDark };
   },
 };
 </script>
 
 <style scoped>
 .banner {
-  width: 80%;
+  width: 100%;
   height: 92vh;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
 }
 
 .banner::before {
@@ -181,18 +145,41 @@ export default {
   pointer-events: none;
 }
 
-.banner.dark::before {
-  background: none;
-  background-color: var(--color-primary);
+.banner .banner--inner {
+  width: 100%;
+  height: 100%;
+}
+
+/* THEME */
+
+.banner::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(var(--color-primary) 0%, #ffffff 30%);
+  filter: blur(1000px);
+}
+
+.banner.dark::after {
+  background: linear-gradient(#121245 0%, #121245 50%);
   opacity: 1;
   filter: blur(0);
 }
 
-.banner.light::before {
-  background-color: none;
-  /* background: linear-gradient(var(--color-primary) 0%, #e0e0ff 50%); */
-  opacity: 0.5;
-  filter: blur(1000px);
+.banner.dark .banner__description--hero-title {
+  color: var(--color-yellow);
+}
+
+.banner.dark .banner__description--hero-title span,
+.banner.dark .banner__description--hero-service {
+  color: var(--color-white);
+}
+
+.banner.dark .banner__description--hero-subtitle {
+  color: var(--color-white);
 }
 
 .banner__description,
@@ -231,12 +218,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
 }
 
 .banner__image img {
   max-width: 70%;
   height: 70%;
-  object-fit: cover;
+  object-fit: contain;
+  border-radius: 10px;
 }
 
 .banner__description .banner__description--hero {
@@ -293,14 +282,35 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transform: translateY(0);
+  transform: translateX(0);
   opacity: 1;
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-  transform: translateY(15%);
+  transform: translateX(15%);
+}
+
+@media (max-width: 380px) {
+
+  .banner{
+    height: 100vh;
+    gap: 0;
+  }
+
+  .banner__description .banner__description--hero-title {
+    font-size: clamp(1.2rem, 2vw, 2rem);
+  }
+  .banner__description .banner__description--hero-subtitle,
+  .banner__description .banner__description--hero-service {
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
+  }
+
+  .banner__image img {
+    height: 40%;
+    width: 40%;
+  }
 }
 
 @media (min-width: 768px) {
@@ -329,9 +339,16 @@ export default {
 
 @media (min-width: 1280px) {
   .banner {
+    display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     box-sizing: border-box;
+  }
+
+  .banner .banner--inner {
+    height: 100%;
+    width: 90%;
   }
 
   .banner__content {
@@ -369,6 +386,7 @@ export default {
     padding-inline: 0;
     font-size: clamp(2.5rem, 2.5vw, 3rem);
     text-align: start;
+    max-width: 100%;
   }
   .banner__description .banner__description--hero-subtitle {
     font-size: clamp(0.8rem, 2vw, 1.2rem);

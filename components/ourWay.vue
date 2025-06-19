@@ -1,5 +1,5 @@
 <template>
-  <section class="ourWay">
+  <section class="ourWay" :class="{'dark' : isDark}">
     <div class="ourWay--inner">
       <div class="ourWay__description parallaxElement">
         <span class="ourWay__description-subtitle">Como conectamos</span>
@@ -33,12 +33,27 @@
 <style scoped>
 .ourWay {
   width: 100%;
-  /* height: 100vh; */
   max-height: max-content;
   position: relative;
   display: flex;
   align-items: center;
   padding-block: 10px;
+}
+
+.ourWay.dark{
+  background-color: #121245;
+}
+
+.ourWay.dark .ourWay__description-subtitle{
+  color: var(--color-white);
+}
+
+.ourWay.dark .ourWay__description-title{
+  color: var(--color-white);
+}
+
+.ourWay.dark .ourWay__description-title span{
+  color: var(--color-yellow);
 }
 
 .ourWay--inner {
@@ -230,6 +245,8 @@
 </style>
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
+import { useIntersectionObserver } from "./composables/useIntersectionObserver";
+import { useDarkMode } from "./composables/useDarkMode";
 const emit = defineEmits(["openMetting"]);
 
 interface Step {
@@ -243,6 +260,9 @@ const steps = ref<Step[]>([]);
 function confirmAction() {
   emit("openMetting", true);
 }
+
+useIntersectionObserver(".parallaxElement", { threshold: [0, 0.2, 0.8] }, "2"); 
+const { isDark } = useDarkMode();
 
 onMounted(() => {
   steps.value = [
@@ -283,25 +303,5 @@ onMounted(() => {
         "Monitorizamos resultados y ajustamos estrategias para lograr impacto y crecimiento constante.",
     },
   ];
-
-  const cards = document.querySelectorAll(".parallaxElement");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          entry.target.classList.remove("hidden");
-        }
-      });
-    },
-    {
-      threshold: 0.9,
-    }
-  );
-
-  cards.forEach((card) => {
-    card.classList.add("hidden");
-    observer.observe(card);
-  });
 });
 </script>

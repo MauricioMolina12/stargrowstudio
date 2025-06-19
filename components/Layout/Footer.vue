@@ -40,21 +40,25 @@
           label="Inicio"
           fontWeight="'900'"
           color="var(--color-light)"
+          href="#inicio"
         />
         <HeaderLink
           label="Servicios"
           fontWeight="'900'"
           color="var(--color-light)"
+          href="#servicios"
         />
         <HeaderLink
           label="Nosotros"
           fontWeight="'900'"
           color="var(--color-light)"
+          href="#nosotros"
         />
         <HeaderLink
           label="Progreso"
           fontWeight="'900'"
           color="var(--color-light)"
+          href="#progreso"
         />
         <HeaderLink
           label="Portafolio"
@@ -64,9 +68,10 @@
         <HeaderLink
           label="Contacto"
           fontWeight="'900'"
-          color="var(--color-light)"
+          color="var(--cZolor-light)"
         />
       </div>
+      
       <div class="footer-contact">
         <h3>Contacto</h3>
         <div class="email">

@@ -1,49 +1,23 @@
 <template>
-  <nav class="nav">
+  <nav class="nav" :class="{ dark: isDarkMode, light: !isDarkMode }">
     <div class="nav__inner">
       <figure class="nav__inner-figure">
-        <img src="public/logo.png" alt="logo stargrow" />
+        <img
+          :src="isDarkMode ? '/logo-white.png' : '/logo.png'"
+          alt="logo stargrow"
+        />
         <figcaption>STAR GROW STUDIO</figcaption>
       </figure>
       <div class="nav__inner-links" :class="{ 'is-open': isMenuOpen }">
-        <div class="nav__inner-link">
-          <span class="material-symbols-outlined">home</span>
-          <HeaderLink label="Inicio" color="var(--color-dark)" padding="22px"/>
-          <span class="material-symbols-outlined chevron-right"
-            >navigate_next</span
-          >
-        </div>
-        <div class="nav__inner-link">
-          <span class="material-symbols-outlined">handshake</span>
-          <HeaderLink label="Servicios" color="var(--color-dark)" padding="22px"/>
-          <span class="material-symbols-outlined chevron-right"
-            >navigate_next</span
-          >
-        </div>
-        <div class="nav__inner-link">
-          <span class="material-symbols-outlined">groups</span>
-          <HeaderLink label="Nosotros" color="var(--color-dark)" padding="22px"/>
-          <span class="material-symbols-outlined chevron-right"
-            >navigate_next</span
-          >
-        </div>
-        <div class="nav__inner-link">
-          <span class="material-symbols-outlined">trending_up</span>
-          <HeaderLink label="Progreso" color="var(--color-dark)" padding="22px"/>
-          <span class="material-symbols-outlined chevron-right"
-            >navigate_next</span
-          >
-        </div>
-        <div class="nav__inner-link">
-          <span class="material-symbols-outlined">collections</span>
-          <HeaderLink label="Portafolio" color="var(--color-dark)" padding="22px"/>
-          <span class="material-symbols-outlined chevron-right"
-            >navigate_next</span
-          >
-        </div>
-        <div class="nav__inner-link">
-          <span class="material-symbols-outlined">mail</span>
-          <HeaderLink label="Contacto" color="var(--color-dark)" padding="22px"/>
+        <div class="nav__inner-link" v-for="tab of sections">
+          <span class="material-symbols-outlined">{{ tab.icon }}</span>
+          <HeaderLink
+            :label="tab.label"
+            :is-active="tab.label === activeSection"
+            :href="'#' + tab.id"
+            :color="!isDarkMode ? 'var(--color-dark-gray)' : 'var(--color-white)'"
+            padding="22px"
+          />
           <span class="material-symbols-outlined chevron-right"
             >navigate_next</span
           >
@@ -51,7 +25,9 @@
         <Button name="Cotiza ahora">Cotiza ahora</Button>
 
         <div class="dark-mode-switch">
-          <label class="switch-theme-text">Modo {{ isDarkMode ? 'oscuro' : 'claro' }}</label>
+          <label class="switch-theme-text"
+            >Modo {{ isDarkMode ? "oscuro" : "claro" }}</label
+          >
           <label>
             <input type="checkbox" v-model="isDarkMode" />
           </label>
@@ -86,6 +62,39 @@ export default {
       isMenuOpen.value = !isMenuOpen.value;
     };
 
+    const sections = [
+      { id: "inicio", label: "Inicio", icon: "home" },
+      { id: "servicios", label: "Servicios", icon: "handshake" },
+      { id: "nosotros", label: "Nosotros", icon: "groups" },
+      { id: "progreso", label: "Progreso", icon: "trending_up" },
+      { id: "paquetes", label: "Paquetes", icon: "trending_up" },
+      { id: "portafolio", label: "Portafolio", icon: "collections" },
+      { id: "contacto", label: "Contacto", icon: "mail" },
+    ];
+
+    const activeSection = ref("inicio");
+
+    const onScroll = () => {
+      for (const section of sections) {
+        const el = document.getElementById(section.id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= (window.innerHeight / 2) * 0.3 && rect.bottom > 0) {
+          activeSection.value = section.label;
+          break;
+        }
+      }
+    };
+
+    onMounted(() => {
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener("scroll", onScroll);
+    });
+
     const { isDark, toggleDark, setDark } = useDarkMode();
 
     return {
@@ -93,11 +102,12 @@ export default {
       toggleMenu,
       isDarkMode: isDark,
       toggleDarkMode: toggleDark,
+      activeSection,
+      sections,
     };
   },
 
-  methods: {
-  }
+  methods: {},
 };
 </script>
 <style scoped>
@@ -114,13 +124,22 @@ export default {
   z-index: 1000;
 }
 
+/* THEME */
+.nav.dark {
+  background: linear-gradient(#121245 0%, #121245 50%);
+}
+
+.nav.dark figcaption {
+  color: var(--color-white) !important;
+}
+
 .nav .nav__inner {
   width: 90%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px;
+  padding: 15px;
   gap: 15px;
 }
 
@@ -147,7 +166,7 @@ export default {
 }
 
 .nav .nav__inner .nav__inner-links {
-  min-width: 75%;
+  min-width: 76%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -258,7 +277,7 @@ export default {
   margin-left: 2px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .burger {
     display: flex;
   }

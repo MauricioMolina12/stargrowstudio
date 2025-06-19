@@ -1,35 +1,50 @@
 <template>
-  <section class="our-services">
-    <h2 class="title">Nuestros Servicios</h2>
-    <p class="subtitle">
-      Soluciones integrales que combinan tecnología, estrategia y diseño para
-      impulsar tu negocio.
-    </p>
-    <div class="services-grid">
-      <div class="service-card" v-for="service in services" :key="service.name">
-        <img :src="`/${service.icon}`" :alt="service.name" class="icon-3d" />
-        <h3 class="service-name">{{ service.name }}</h3>
-        <p class="service-desc">{{ service.description }}</p>
-        <button class="see-more">
-          Leer más
-          <span class="material-symbols-outlined chevron-right"
-            >arrow_forward</span
-          >
-        </button>
+  <section class="our-services" :class="{ dark: isDark }">
+    <div class="our-services--inner">
+      <h2 class="title">Nuestros Servicios</h2>
+      <p class="subtitle">
+        Soluciones integrales que combinan tecnología, estrategia y diseño para
+        impulsar tu negocio.
+      </p>
+      <div class="services-grid">
+        <div
+          class="service-card"
+          v-for="service in services"
+          :key="service.name"
+        >
+          <img :src="`/${service.icon}`" :alt="service.name" class="icon-3d" />
+          <h3 class="service-name">{{ service.name }}</h3>
+          <p class="service-desc">{{ service.description }}</p>
+          <button class="see-more">
+            Leer más
+            <span class="material-symbols-outlined chevron-right"
+              >arrow_forward</span
+            >
+          </button>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { useDarkMode } from "./composables/useDarkMode";
+import { useIntersectionObserver } from "./composables/useIntersectionObserver";
+
+const { isDark, toggleDark, setDark } = useDarkMode();
 
 const services = [
   {
     icon: "icons/computer.png",
     name: "Desarrollo de software a medida",
     description:
-      "Creamos aplicaciones web y móviles adaptadas a tus necesidades y objetivos.",
+      "Creamos aplicaciones web adaptadas a tus necesidades y objetivos.",
+  },
+  {
+    icon: "icons/mobile.webp",
+    name: "Desarrollo de apps móviles",
+    description:
+      "Creamos aplicaciones móviles adaptadas a tus necesidades y objetivos.",
   },
   {
     icon: "icons/analisis.png",
@@ -57,40 +72,42 @@ const services = [
   },
 ];
 
-onMounted(() => {
-  const cards = document.querySelectorAll(".service-card");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          entry.target.classList.remove("hidden");
-        }
-      });
-    },
-    {
-      threshold: 0.9,
-    }
-  );
-
-  cards.forEach((card) => {
-    card.classList.add("hidden");
-    observer.observe(card);
-  });
-});
+useIntersectionObserver(".service-card", { threshold: 0.8 }, "2");
 </script>
 
 <style scoped>
 .our-services {
-  min-width: 60%;
-  margin: 0 auto;
+  width: 100%;
   padding: 2rem 1rem;
   padding-block: 50px;
+  position: relative;
+}
+
+.our-services.dark {
+  background: linear-gradient(#121245 0%, #121245 50%);
+}
+
+.our-services .our-services--inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
 }
+
+.our-services.dark .title {
+  color: var(--color-white);
+}
+
+.our-services.dark .service-card {
+  box-shadow: none;
+}
+
+/*
+.our-services.dark .service-card .service-name,
+.our-services.dark .service-card .service-desc,
+.our-services.dark .service-card .see-more {
+  color: var(--color-white);
+}
+ */
 
 .title {
   font-size: clamp(1.6rem, 2.5vw, 2.5rem);
@@ -111,7 +128,7 @@ onMounted(() => {
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
+  gap: 0.4rem;
   width: 100%;
 }
 
@@ -124,19 +141,18 @@ onMounted(() => {
   align-items: center;
   gap: 10px;
   transition: box-shadow 0.2s, transform 1s, opacity 1s ease;
-  cursor: pointer;
   opacity: 1;
   transform: translateY(0);
 }
 
 .hidden {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(40px) scale(0.8);
 }
 
 .visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .service-card:hover {
@@ -187,16 +203,27 @@ onMounted(() => {
   gap: 10px;
   color: var(--color-primary);
   height: 60px;
+  transition: transform 1s ease;
+}
+
+.see-more:hover{
+  transform: translateX(10px);
 }
 
 @media (min-width: 1280px) {
   .our-services {
     padding: 0;
-    min-width: 70%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .our-services .our-services--inner {
+    max-width: 60%;
+    margin: 0 auto;
   }
 
   .services-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 
   .service-name {

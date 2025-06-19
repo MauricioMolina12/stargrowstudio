@@ -2,6 +2,7 @@
   <a
     :href="href"
     class="header-link"
+    :class="{ active: isActive }"
     :style="{ color: color, padding: padding }"
   >
     {{ label }}
@@ -12,7 +13,7 @@
 defineProps({
   href: {
     type: String,
-    required: true,
+    required: false,
   },
   label: {
     type: String,
@@ -26,28 +27,33 @@ defineProps({
     type: String,
   },
   padding: {
-    type: String
-  }
+    type: String,
+  },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
 <style scoped>
 .header-link {
   text-decoration: none;
-  color: var(--color-primary);
   font-weight: 400;
-  transition: color 0.2s;
+  transition: all 0.2s ease;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
-/* .header-link.active {
-  color: var(--color-primary);
+.header-link.active {
+  color: #5656b5 !important;
+  font-weight: 600;
 }
 
 .header-link:hover {
   color: var(--color-primary);
-} */
+  font-weight: 600;
+}
 
 @media (max-width: 900px) {
   .header-link {

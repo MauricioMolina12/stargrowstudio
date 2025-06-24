@@ -497,10 +497,10 @@ onMounted(() => {
 .cards-transition-wrapper {
   width: 100%;
   min-height: 60vh;
-
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  display: flex;
+  overflow-x: auto;
+  /* grid-template-columns: 1fr;
+  grid-template-rows: auto; */
   gap: 10px;
   padding: 10px;
 }
@@ -543,7 +543,8 @@ onMounted(() => {
 .package-card-container {
   position: relative;
   max-width: 100%;
-  /* min-width: 320px; */
+  min-width: 400px;
+  flex-grow: 1;
   border-radius: 15px;
   overflow: hidden;
   background-color: var(--color-white);
@@ -741,7 +742,13 @@ onMounted(() => {
   }
 
   .cards-transition-wrapper {
+    display: grid;
+    overflow: hidden;
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .package-card-container{
+    min-width: 100%;
   }
 
   .tabs{

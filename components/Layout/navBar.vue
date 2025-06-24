@@ -1,13 +1,15 @@
 <template>
   <nav class="nav" :class="{ dark: isDarkMode, light: !isDarkMode }">
     <div class="nav__inner">
-      <figure class="nav__inner-figure">
-        <img
-          :src="isDarkMode ? '/logo-white.png' : '/logo.png'"
-          alt="logo stargrow"
-        />
-        <figcaption>STAR GROW STUDIO</figcaption>
-      </figure>
+      <NuxtLink :to="'/'" class="nav__inner-logo">
+        <figure class="nav__inner-figure">
+          <img
+            :src="isDarkMode ? '/logo-white.png' : '/logo.png'"
+            alt="logo stargrow"
+          />
+          <figcaption>STAR GROW STUDIO</figcaption>
+        </figure>
+      </NuxtLink>
       <div class="nav__inner-links" :class="{ 'is-open': isMenuOpen }">
         <div class="nav__inner-link" v-for="tab of sections">
           <span class="material-symbols-outlined">{{ tab.icon }}</span>
@@ -15,23 +17,25 @@
             :label="tab.label"
             :is-active="tab.label === activeSection"
             :href="'#' + tab.id"
-            :color="!isDarkMode ? 'var(--color-dark-gray)' : 'var(--color-white)'"
+            :color="
+              !isDarkMode ? 'var(--color-dark-gray)' : 'var(--color-white)'
+            "
             padding="22px"
           />
           <span class="material-symbols-outlined chevron-right"
             >navigate_next</span
           >
         </div>
-        <Button name="Cotiza ahora">Cotiza ahora</Button>
+        <Button name="Cotiza ahora" @click="show()">Cotiza ahora</Button>
 
-        <div class="dark-mode-switch">
+        <!-- <div class="dark-mode-switch">
           <label class="switch-theme-text"
             >Modo {{ isDarkMode ? "oscuro" : "claro" }}</label
           >
           <label>
             <input type="checkbox" v-model="isDarkMode" />
           </label>
-        </div>
+        </div> -->
       </div>
 
       <button
@@ -48,9 +52,12 @@
 <script>
 import Button from "../UI/button.vue";
 import HeaderLink from "../UI/headerLink.vue";
+import { useComponentMeeting } from "../composables/useComponentMeeting";
 import { useDarkMode } from "../composables/useDarkMode";
+
 import { ref } from "vue";
 const isMenuOpen = ref(false);
+const { show } = useComponentMeeting();
 
 export default {
   components: {
@@ -110,7 +117,7 @@ export default {
   methods: {},
 };
 </script>
-<style scoped>
+<style>
 .nav {
   width: 100%;
   height: 8vh;
@@ -122,6 +129,10 @@ export default {
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+
+.nav__inner-logo{
+  text-decoration: none;
 }
 
 /* THEME */

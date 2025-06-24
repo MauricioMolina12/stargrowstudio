@@ -1,8 +1,8 @@
 import { useStorage } from "@vueuse/core";
-import { onMounted, watch } from "vue";
+import { watchEffect } from "vue";
 
 export function useDarkMode() {
-  const isDark = useStorage("dark-mode", false);
+  const isDark = useStorage("dark-mode", false); 
 
   const toggleDark = () => {
     isDark.value = !isDark.value;
@@ -12,14 +12,14 @@ export function useDarkMode() {
     isDark.value = value;
   };
 
-  const updateHtmlClass = () => {
-    const root = document.documentElement;
-    root.classList.toggle("dark", isDark.value);
-  };
+  if (process.client) {
+    const updateHtmlClass = () => {
+      document.documentElement.classList.toggle("dark", isDark.value);
+    };
 
-  onMounted(updateHtmlClass);
-
-  watch(isDark, updateHtmlClass); 
+    updateHtmlClass();
+    watchEffect(updateHtmlClass);
+  }
 
   return { isDark, toggleDark, setDark };
 }

@@ -1,16 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
-
-html{
+html {
   scroll-behavior: smooth;
 }
 
-*{
-  font-family: "Montserrat";
+body {
+  font-family: "Montserrat", sans-serif;
 }
 
 ::selection {
   background: var(--color-primary);
   color: white;
+}
+
+[v-cloak] {
+  display: none;
 }
 
 html,
@@ -160,10 +162,11 @@ table {
 
 .hidden {
   opacity: 0;
-  transform: translateY(40px) scale(.8);
+  transform: translateY(40px) scale(0.9);
 }
 
 .visible {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+

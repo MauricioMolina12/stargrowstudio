@@ -15,21 +15,22 @@
           <img :src="`/${service.icon}`" :alt="service.name" class="icon-3d" />
           <h3 class="service-name">{{ service.name }}</h3>
           <p class="service-desc">{{ service.description }}</p>
-          <button class="see-more">
+          <NuxtLink :to="'/test'" class="see-more">
             Leer más
-            <span class="material-symbols-outlined chevron-right"
-              >arrow_forward</span
-            >
-          </button>
+            <span class="material-symbols-outlined chevron-right">arrow_forward</span>
+          </NuxtLink>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useDarkMode } from "./composables/useDarkMode";
 import { useIntersectionObserver } from "./composables/useIntersectionObserver";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const { isDark, toggleDark, setDark } = useDarkMode();
 
@@ -37,40 +38,50 @@ const services = [
   {
     icon: "icons/computer.png",
     name: "Desarrollo de software a medida",
+    slug: "desarrollo-software",
     description:
       "Creamos aplicaciones web adaptadas a tus necesidades y objetivos.",
   },
   {
     icon: "icons/mobile.webp",
     name: "Desarrollo de apps móviles",
+    slug: "desarrollo-apps",
     description:
       "Creamos aplicaciones móviles adaptadas a tus necesidades y objetivos.",
   },
   {
     icon: "icons/analisis.png",
     name: "Análisis de datos y visualización",
+    slug: "analisis-datos",
     description:
       "Convierte tus datos en decisiones inteligentes con dashboards personalizados.",
   },
   {
     icon: "icons/basesdedatos.png",
     name: "Arquitectura y gestión de bases de datos",
+    slug: "bases-datos",
     description:
       "Optimizamos la estructura de datos para asegurar rendimiento y escalabilidad.",
   },
   {
     icon: "icons/consultoria.png",
     name: "Consultoría en transformación digital",
+    slug: "consultoria-transformacion",
     description:
       "Te guiamos paso a paso hacia una transformación tecnológica estratégica.",
   },
   {
     icon: "icons/diseño.png",
     name: "Diseño UX/UI centrado en el usuario",
+    slug: "diseno-ux-ui",
     description:
       "Creamos experiencias digitales memorables que conectan con tu audiencia.",
   },
 ];
+
+function navigateToService(serviceSlug: string) {
+  router.push({ name: "service-detail", params: { slug: serviceSlug } });
+}
 
 useIntersectionObserver(".service-card", { threshold: 0.8 }, "2");
 </script>
@@ -204,9 +215,10 @@ useIntersectionObserver(".service-card", { threshold: 0.8 }, "2");
   color: var(--color-primary);
   height: 60px;
   transition: transform 1s ease;
+  text-decoration: none;
 }
 
-.see-more:hover{
+.see-more:hover {
   transform: translateX(10px);
 }
 

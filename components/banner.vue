@@ -5,7 +5,7 @@
         <div :key="currentIndex" class="banner__content" ref="bannerContent">
           <div class="banner__description" ref="parallaxText">
             <div class="banner__description--hero">
-              <span class="banner__description--hero-service">
+              <span class="banner__description--hero-service" v-if="currentBanner.service">
                 <img
                   ref="parallaxImage"
                   :src="currentBanner.icon"
@@ -23,7 +23,7 @@
               <p class="banner__description--hero-subtitle">
                 {{ currentBanner.subtitle }}
               </p>
-              <Button name="Cotiza ahora">Cotiza ahora</Button>
+              <Button name="call-action">{{ currentBanner.callAction }}</Button>
             </div>
           </div>
           <div class="banner__image">
@@ -63,6 +63,7 @@ export default {
         subtitle: "",
         image: "",
         alt: "",
+        callAction: ""
       }),
     },
   },
@@ -122,7 +123,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .banner {
   width: 100%;
   height: 92vh;
@@ -277,7 +278,7 @@ export default {
   border: none;
   background-color: #5656b5;
   color: #fff;
-  font-family: "Montserrat";
+  cursor: pointer;
 }
 
 .fade-enter-active,

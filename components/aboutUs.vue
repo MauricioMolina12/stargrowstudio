@@ -11,7 +11,7 @@
           Conectamos ideas con tecnología para transformar negocios y generar
           impacto real.
         </p>
-        <button class="about__description-call-action">
+        <button class="about__description-call-action" @click="show()">
           Agenda tu cita
           <span class="material-symbols-outlined chevron-right"
             >arrow_forward</span
@@ -28,6 +28,10 @@
 import { onMounted } from "vue";
 import { useIntersectionObserver } from "./composables/useIntersectionObserver";
 import { useDarkMode } from "./composables/useDarkMode";
+import { useComponentMeeting } from "./composables/useComponentMeeting";
+
+const { show } = useComponentMeeting();
+
 
 onMounted(() => {
   useIntersectionObserver(".parallaxElement", { threshold: 0.8 }, "2");

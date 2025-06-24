@@ -102,7 +102,7 @@
 <script setup>
 import HeaderLink from "../UI/headerLink.vue";
 </script>
-<style scoped>
+<style>
 footer {
   width: 100%;
   min-height: 60vh;

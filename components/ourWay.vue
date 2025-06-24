@@ -24,7 +24,7 @@
           </p>
         </div>
         <div class="ourWay__quote--call-action">
-          <button @click="confirmAction">Solicitar una cita</button>
+          <button @click="show()">Solicitar una cita</button>
         </div>
       </div>
     </div>
@@ -135,7 +135,6 @@
   flex-direction: column;
   justify-content: center;
   gap: 14px;
-  cursor: pointer;
   position: relative;
   background-color: var(--color-white);
 }
@@ -247,7 +246,7 @@
 import { ref, onMounted } from "vue";
 import { useIntersectionObserver } from "./composables/useIntersectionObserver";
 import { useDarkMode } from "./composables/useDarkMode";
-const emit = defineEmits(["openMetting"]);
+import { useComponentMeeting } from "./composables/useComponentMeeting";
 
 interface Step {
   icon: string;
@@ -257,9 +256,7 @@ interface Step {
 
 const steps = ref<Step[]>([]);
 
-function confirmAction() {
-  emit("openMetting", true);
-}
+const { show } = useComponentMeeting();
 
 useIntersectionObserver(".parallaxElement", { threshold: [0, 0.2, 0.8] }, "2"); 
 const { isDark } = useDarkMode();

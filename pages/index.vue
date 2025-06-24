@@ -10,7 +10,7 @@
       <AboutUs></AboutUs>
     </section>
     <section id="progreso">
-      <OurWay @openMetting="handleConfirm"></OurWay>
+      <OurWay></OurWay>
     </section>
     <section id="paquetes">
       <Packages @emitPackage="viewPackage"></Packages>
@@ -19,7 +19,7 @@
       <WhyChoose></WhyChoose>
     </section>
 
-    <MettingModal v-if="isMetting" @close="handleConfirm" />
+    <MettingModal v-if="isVisible" @close="hide" />
     <PurchaseIntentModal
       v-if="showPackageDetail"
       :plan="packageDetail"
@@ -30,14 +30,17 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { useComponentMeeting } from "~/components/composables/useComponentMeeting";
 import MettingModal from "~/components/metting-modal.vue";
 import Packages from "~/components/packages.vue";
 import PurchaseIntentModal from "~/components/PurchaseIntentModal.vue";
+
 const showThemes = ref(false);
 const currentTheme = ref("light");
-
 const showPackageDetail = ref(false);
 const packageDetail = ref({});
+
+const { isVisible, hide } = useComponentMeeting();
 
 function viewPackage(data) {
   showPackageDetail.value = true;
@@ -79,6 +82,7 @@ const banners = ref([
       second: "Creamos soluciones que hacen la diferencia.",
     },
     subtitle: "Desarrollamos tecnología con propósito, visión y estrategia.",
+    callAction: "Cotiza ahora",
   },
   {
     image: "dashboards.png",
@@ -91,6 +95,7 @@ const banners = ref([
     },
     subtitle:
       "Diseñamos dashboards y reportes personalizados para impulsar tu crecimiento.",
+    callAction: "Cotiza ahora",
   },
   {
     image: "bases-de-datos.webp",
@@ -103,6 +108,7 @@ const banners = ref([
     },
     subtitle:
       "Diseñamos estructuras de datos eficientes, escalables y preparadas para el futuro.",
+    callAction: "Cotiza ahora",
   },
   {
     image: "consultoria.webp",
@@ -115,24 +121,25 @@ const banners = ref([
     },
     subtitle:
       "Analizamos, proponemos y ejecutamos estrategias tecnológicas adaptadas a tus objetivos.",
+    callAction: "Cotiza ahora",
   },
   {
     image: "design.webp",
     alt: "Diseño",
     service: "Diseño UX/UI centrado en el usuario",
     icon: "icons/diseño.png",
-
     title: {
       main: "Haz que tu producto enamore a primera vista.",
       second: "Diseñamos experiencias memorables.",
     },
     subtitle:
       "Combinamos estética y funcionalidad para conectar con tu audiencia desde el primer clic.",
+    callAction: "Cotiza ahora",
   },
 ]);
 </script>
 
-<style scoped>
+<style>
 .home {
   width: 100%;
   min-height: 100vh;

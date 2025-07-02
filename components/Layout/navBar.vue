@@ -94,6 +94,7 @@ export default {
     };
 
     onMounted(() => {
+      activeSection.value = 'Inicio'
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
     });

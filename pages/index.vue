@@ -15,9 +15,12 @@
     <section id="paquetes">
       <Packages @emitPackage="viewPackage"></Packages>
     </section>
-    <section id="whyChoose">
-      <WhyChoose></WhyChoose>
+    <section id="portafolio">
+      <Portfolio></Portfolio>
     </section>
+    <!-- <section id="whyChoose">
+      <WhyChoose></WhyChoose>
+    </section> -->
 
     <MettingModal v-if="isVisible" @close="hide" />
     <PurchaseIntentModal

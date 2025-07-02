@@ -383,7 +383,7 @@ onMounted(() => {
   initContent();
 });
 </script>
-<style>
+<style scoped>
 .packages {
   width: 100%;
   max-height: max-content;

@@ -50,8 +50,8 @@
   </nav>
 </template>
 <script>
-import Button from "../UI/button.vue";
-import HeaderLink from "../UI/headerLink.vue";
+import Button from "../../components/UI/button.vue";
+import HeaderLink from "../../components/UI/headerLink.vue";
 import { useComponentMeeting } from "../composables/useComponentMeeting";
 import { useDarkMode } from "../composables/useDarkMode";
 

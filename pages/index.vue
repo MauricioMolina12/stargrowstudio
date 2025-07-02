@@ -39,7 +39,7 @@ import Packages from "~/components/packages.vue";
 import PurchaseIntentModal from "~/components/PurchaseIntentModal.vue";
 
 const showThemes = ref(false);
-const currentTheme = ref("light");
+const currentTheme = ref();
 const showPackageDetail = ref(false);
 const packageDetail = ref({});
 

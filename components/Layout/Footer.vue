@@ -100,7 +100,7 @@
   </footer>
 </template>
 <script setup>
-import HeaderLink from "../UI/headerLink.vue";
+import HeaderLink from "../../components/UI/headerLink.vue";
 </script>
 <style>
 footer {

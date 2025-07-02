@@ -15,7 +15,7 @@
           <img :src="`/${service.icon}`" :alt="service.name" class="icon-3d" />
           <h3 class="service-name">{{ service.name }}</h3>
           <p class="service-desc">{{ service.description }}</p>
-          <NuxtLink :to="'/test'" class="see-more">
+          <NuxtLink :to="`/services/${service.slug}`" class="see-more">
             Leer más
             <span class="material-symbols-outlined chevron-right">arrow_forward</span>
           </NuxtLink>

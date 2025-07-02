@@ -6,7 +6,13 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Star Grow Studio",
-      meta: [{ name: "description", content: "Star grow studio es una agencia de desarrollo, diseño y marketing digital" }],
+      meta: [
+        {
+          name: "description",
+          content:
+            "Star grow studio es una agencia de desarrollo, diseño y marketing digital",
+        },
+      ],
       link: [
         {
           rel: "icon",

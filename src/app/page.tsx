@@ -1,103 +1,160 @@
+'use client'
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+// Components
+import Banner from "./components/shared/Banner";
+import OurServices from "./components/OurServices";
+import AboutUs from "./components/shared/AboutUs/index"
+import OurWay from "./components/OurWay";
+import Plans from "./components/shared/Plans";
+import MeetingModal from "./components/shared/MeetingModal";
+import Portfolio from "./components/Portfolio";
+import Contact from "./components/Contact";
+import InternetStatus from "./components/layout/InternetStatus";
+import ModalMessage from "./components/shared/modalMessage";
+
+// Interfaces
+import { BannerInterface } from "./types/Banner";
+
+// Hooks
+import { useComponentMeeting } from "./hooks/useComponentMeeting";
+import { useMeeting } from "./context/MeetingContext";
+import { useEffect, useState } from "react";
+
+export default function Home() {
+  const banners: BannerInterface[] = [
+    {
+      image: "img/software.png",
+      alt: "Desarrollador",
+      service: "Desarrollo de software a medida",
+      icon: "/icons/computer.png",
+      title: {
+        main: "Transforma tu idea en software real.",
+        second: "Creamos soluciones que hacen la diferencia.",
+      },
+      subtitle: "Desarrollamos tecnología con propósito, visión y estrategia.",
+    },
+    {
+      image: "img/powerbi.png",
+      alt: "Analista de datos",
+      service: "Análisis de datos y visualización",
+      icon: "/icons/analisis.png",
+      title: {
+        main: "Convierte tus datos en decisiones inteligentes.",
+        second: "Te ayudamos a entender lo que importa.",
+      },
+      subtitle:
+        "Diseñamos dashboards y reportes personalizados para impulsar tu crecimiento.",
+    },
+    {
+      image: "img/bases-de-datos.webp",
+      alt: "Bases de datos",
+      service: "Arquitectura y gestión de bases de datos",
+      icon: "/icons/basesdedatos.png",
+      title: {
+        main: "Tu información siempre segura y accesible.",
+        second: "Optimizamos el corazón de tu sistema.",
+      },
+      subtitle:
+        "Diseñamos estructuras de datos eficientes, escalables y preparadas para el futuro.",
+    },
+    {
+      image: "img/consultoria.webp",
+      alt: "Consultoría",
+      service: "Consultoría en transformación digital",
+      icon: "/icons/consultoria.png",
+      title: {
+        main: "¿No sabes por dónde empezar?",
+        second: "Te guiamos paso a paso.",
+      },
+      subtitle:
+        "Analizamos, proponemos y ejecutamos estrategias tecnológicas adaptadas a tus objetivos.",
+    },
+    {
+      image: "img/design.webp",
+      alt: "Diseño",
+      service: "Diseño UX/UI centrado en el usuario",
+      icon: "/icons/diseño.png",
+      title: {
+        main: "Haz que tu producto enamore a primera vista.",
+        second: "Diseñamos experiencias memorables.",
+      },
+      subtitle:
+        "Combinamos estética y funcionalidad para conectar con tu audiencia desde el primer clic.",
+    },
+  ];
+
+  const [modalInfo, setModalInfo] = useState<{ message: string; isSuccess: boolean } | null>(null);
+  const { isVisible } = useMeeting();
+
+  const [isOnline, setIsOnline] = useState<boolean>(typeof window !== "undefined" ? navigator.onLine : true);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
+
+  const handleContactFeedback = (message: string, isSuccess: boolean) => {
+    setModalInfo({ message, isSuccess });
+    setTimeout(() => setModalInfo(null), 4000);
+  };
+
+  return (
+    <>
+      {isOnline ? (
+
+        <main>
+          <section id="inicio">
+            <Banner
+              banners={banners}
+              defaultCallActions={[
+                { label: "Contactar", actionKey: "contactar" },
+                { label: "Más info", actionKey: "info" },
+              ]}
+              isDynamic
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+          </section>
+          <section id="servicios">
+            <OurServices />
+          </section>
+          <section id="nosotros">
+            <AboutUs />
+          </section>
+          <section id="progreso">
+            <OurWay />
+          </section>
+          <section id="planes">
+            <Plans />
+          </section>
+          <section id="portafolio">
+            <Portfolio />
+          </section>
+          <section id="contacto">
+            <Contact onFeedback={handleContactFeedback} />
+          </section>
+
+          {modalInfo && (
+            <ModalMessage
+              message={modalInfo.message}
+              isSuccess={modalInfo.isSuccess}
+            />
+          )}
+
+          {isVisible && <MeetingModal />}
+        </main>
+      ) :
+        <InternetStatus isOnline={isOnline} />
+      }
+    </>
   );
 }

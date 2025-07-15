@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useState } from "react";
 import clsx from "clsx";
 import useDarkMode from "../hooks/useDarkMode";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";

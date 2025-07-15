@@ -89,7 +89,7 @@ export default function OurServices() {
               key={service.name}
               className="service-card bg-white dark:bg-[#1e1e1e] rounded-lg p-6 flex flex-col items-start justify-between gap-4 transform transition duration-700 opacity-0 translate-y-10 scale-95"
             >
-              <Image
+              <img
                 src={`/${service.icon}`}
                 alt={service.name}
                 width={40}

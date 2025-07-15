@@ -21,7 +21,7 @@ const navItems: { label: string, href: string, path?: string }[] = [
 ];
 
 const NavBar = () => {
-  const { isDark, toggleDarkMode } = useDarkMode();
+  const { isDark } = useDarkMode();
   const activeSection = useActiveSection(navItems);
   const activeClassScroll = useActiveClassScroll()
   const pathname = usePathname();

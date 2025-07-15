@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useState } from "react";
-import { useMeeting } from "../context/MeetingContext";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import emailjs from '@emailjs/browser';
 

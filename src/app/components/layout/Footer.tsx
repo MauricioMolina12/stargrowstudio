@@ -51,7 +51,7 @@ const Footer = () => {
                 {/* Branding */}
                 <div className="flex flex-col gap-4 w-full xl:w-1/4 border-b xl:border-none pb-6">
                     <figure className="flex items-center gap-3 w-fit h-fit">
-                        <Image src="/img/logo-white.png" alt="logo-stargrowstudio" width={26} height={26} />
+                        <img src="/img/logo-white.png" alt="logo-stargrowstudio" width={26} height={26} />
                         <figcaption className="text-white font-semibold text-xl whitespace-nowrap">
                             Star Grow Studio
                         </figcaption>
@@ -64,8 +64,8 @@ const Footer = () => {
                 {/* Servicios */}
                 <div className="flex flex-col gap-3 w-full xl:w-1/4 border-b xl:border-none pb-6">
                     <h3 className="font-bold text-[var(--color-light)]">Servicios</h3>
-                    {services.map((service) => (
-                        <span onClick={() => detailsService(service)} className="text-sm text-[var(--color-light)] hover:underline cursor-pointer">{service.label}</span>
+                    {services.map((service,index) => (
+                        <span key={index} onClick={() => detailsService(service)} className="text-sm text-[var(--color-light)] hover:underline cursor-pointer">{service.label}</span>
                     ))}
                 </div>
 

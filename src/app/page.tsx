@@ -12,9 +12,9 @@ import Portfolio from "./components/Portfolio";
 import Contact from "./components/Contact";
 import InternetStatus from "./components/layout/InternetStatus";
 import ModalMessage from "./components/shared/modalMessage";
-import Grid from "./components/shared/Grid";
+import Grid from "./components/shared/Grid"; 
 
-// Interfaces
+// Interfaces 
 import { Services } from "./types/Services";
 
 // Hooks

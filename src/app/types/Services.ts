@@ -3,7 +3,7 @@ export type CallAction = {
   actionKey: string; 
 };
 
-export interface BannerInterface {
+export interface Services {
   icon?: string;
   service?: string;
   title: { main: string; second: string };
@@ -11,5 +11,7 @@ export interface BannerInterface {
   image: string;
   alt: string;
   callAction?: CallAction[];
+  techs?: {name: string; image: string}[];
+  projects?: {image: string; title: string; description: string}[]; 
 }
 

@@ -16,37 +16,37 @@ interface Service {
 
 const services: Service[] = [
   {
-    icon: "icons/computer.png",
+    icon: "icons/code.gif",
     name: "Desarrollo de software a medida",
     slug: "desarrollo-software",
     description: "Creamos aplicaciones web adaptadas a tus necesidades y objetivos.",
   },
   {
-    icon: "icons/mobile.webp",
+    icon: "icons/mobile2.gif",
     name: "Desarrollo de apps móviles",
     slug: "desarrollo-apps",
     description: "Creamos aplicaciones móviles adaptadas a tus necesidades y objetivos.",
   },
   {
-    icon: "icons/analisis.png",
+    icon: "icons/chart.gif",
     name: "Análisis de datos y visualización",
     slug: "analisis-datos",
     description: "Convierte tus datos en decisiones inteligentes con dashboards personalizados.",
   },
   {
-    icon: "icons/basesdedatos.png",
+    icon: "icons/bdd.gif",
     name: "Arquitectura y gestión de bases de datos",
     slug: "bases-datos",
     description: "Optimizamos la estructura de datos para asegurar rendimiento y escalabilidad.",
   },
   {
-    icon: "icons/consultoria.png",
+    icon: "icons/megaphone.gif",
     name: "Consultoría en transformación digital",
     slug: "consultoria-transformacion",
     description: "Te guiamos paso a paso hacia una transformación tecnológica estratégica.",
   },
   {
-    icon: "icons/diseño.png",
+    icon: "icons/design.gif",
     name: "Diseño UX/UI centrado en el usuario",
     slug: "diseno-ux-ui",
     description: "Creamos experiencias digitales memorables que conectan con tu audiencia.",
@@ -70,11 +70,12 @@ export default function OurServices() {
 
   useIntersectionObserver('.service-card', { threshold: 0.4 }, 'all');
 
+  
+
   return (
     <section
       className={clsx(
-        "w-full lg:max-w-[70%] lg:mx-auto lg:my-0 py-12 px-4 transition-colors duration-500",
-        isDark && "bg-[linear-gradient(#121245_0%,#121245_50%)]"
+        "w-full lg:max-w-[70%] lg:mx-auto lg:my-0 py-12 px-4 transition-colors duration-500"
       )}
     >
 
@@ -93,7 +94,7 @@ export default function OurServices() {
                 alt={service.name}
                 width={40}
                 height={40}
-                className="object-contain bg-gray-100 p-2 rounded-2xl"
+                className="object-contain bg-gray-100 p-1 rounded-2xl"
               />
               <h2 className="text-[1rem] font-[600] text-[var(--color-dark)] dark:text-white">
                 {service.name}

@@ -21,7 +21,6 @@ const navItems: { label: string, href: string, path?: string }[] = [
 ];
 
 const NavBar = () => {
-  const { isDark } = useDarkMode();
   const activeSection = useActiveSection(navItems);
   const activeClassScroll = useActiveClassScroll()
   const pathname = usePathname();
@@ -42,7 +41,7 @@ const NavBar = () => {
             <figure className="flex items-center gap-3">
               <img
                 className="h-8 w-auto object-contain"
-                src={isDark ? "/logo-white.png" : "/logo.png"}
+                src={"/logo.png"}
                 alt="logo sgs"
               />
               <figcaption className="text-[var(--color-primary-to-white)] font-bold text-lg whitespace-nowrap">
@@ -55,20 +54,20 @@ const NavBar = () => {
             <span
               className={`
                 w-full h-[4px] rounded-2xl transition-all duration-300 ease-in-out
-                ${isDark ? 'bg-white' : 'bg-[var(--color-primary)]'}
+                ${'bg-white'}
                 ${stateSideBar ? 'rotate-45 translate-y-[8px]' : ''}
               `}></span>
 
             <span
               className={`
                 w-full h-[4px] rounded-2xl transition-all duration-300 ease-in-out
-                ${isDark ? 'bg-white' : 'bg-[var(--color-primary)]'}
+                ${'bg-white'}
                 ${stateSideBar ? 'opacity-0 scale-0' : ''}`}></span>
 
             <span
               className={`
                 w-full h-[4px] rounded-2xl transition-all duration-300 ease-in-out
-                ${isDark ? 'bg-white' : 'bg-[var(--color-primary)]'}
+                ${'bg-white'}
                 ${stateSideBar ? '-rotate-45 -translate-y-[8px]' : ''}`}></span>
           </button>
         </header>
@@ -85,8 +84,6 @@ const NavBar = () => {
             gap-4 lg:mt-0 lg:w-[70%] lg:gap-6 overflow-hidden
           `}
         >
-
-
           {navItems.map((item) => (
             <li
               key={item.href}

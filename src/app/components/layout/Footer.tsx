@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
 
 
 type Link = {
@@ -16,13 +17,16 @@ type Service = {
 
 const Footer = () => {
     const router = useRouter();
-    const year = new Date().getFullYear();
-
+    const [today, setToday] = useState(0);
 
     function detailsService(Service: Service) {
         router.push(`/services/${Service.slug}`);
     }
 
+
+    useEffect(() => {
+        setToday(new Date().getFullYear());
+    }, [])
 
     const links: Link[] = [
         { label: "Inicio", href: "#inicio", path: '' },
@@ -63,7 +67,7 @@ const Footer = () => {
                 {/* Servicios */}
                 <div className="flex flex-col gap-3 w-full xl:w-1/4 border-b xl:border-none pb-6">
                     <h3 className="font-bold text-[var(--color-light)]">Servicios</h3>
-                    {services.map((service,index) => (
+                    {services.map((service, index) => (
                         <span key={index} onClick={() => detailsService(service)} className="text-sm text-[var(--color-light)] hover:underline cursor-pointer">{service.label}</span>
                     ))}
                 </div>
@@ -81,7 +85,7 @@ const Footer = () => {
                     <h3 className="font-bold text-[var(--color-light)]">Contacto</h3>
                     <div className="flex items-center gap-3 text-white">
                         <span className="material-symbols-outlined">email</span>
-                        <a href="mailto:jstargrowstudio@gmai.com" className="text-sm hover:underline">jstargrowstudio@gmai.com</a>
+                        <a href="mailto:jstargrowstudio@gmail.com" className="text-sm hover:underline">jstargrowstudio@gmail.com</a>
                     </div>
                     <div className="flex items-center gap-3 text-white">
                         <span className="material-symbols-outlined">phone</span>
@@ -109,12 +113,12 @@ const Footer = () => {
             {/* Copyright */}
             <div className="w-full bg-[var(--color-secondary)] py-4 absolute bottom-0 left-0">
                 <div className="w-[90%] mx-auto flex flex-col xl:flex-row items-center justify-between gap-3">
-                    <span className="text-[var(--color-white)] text-center">
-                        © {year} StarGrowStudio. Todos los derechos reservados.
+                    <span className="text-[var(--color-white)] text-[12px] text-center">
+                        © {today} StarGrowStudio. Todos los derechos reservados.
                     </span>
                     <div className="flex gap-4">
-                        <a href="#" className="text-sm text-[var(--color-light)] hover:underline">Política de privacidad</a>
-                        <a href="#" className="text-sm text-[var(--color-light)] hover:underline">Términos de servicio</a>
+                        <a href="#" className="text-[12px] text-[var(--color-light)] hover:underline">Política de privacidad</a>
+                        <a href="#" className="text-[12px] text-[var(--color-light)] hover:underline">Términos de servicio</a>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ interface Project {
     category: string;
     image: string;
     description: string;
+    techs?: { image: string; name: string }[]
 }
 
 const projects: Project[] = [
@@ -13,25 +14,40 @@ const projects: Project[] = [
         name: 'Renta GO',
         category: 'web',
         image: '/projects/rentago.jpg',
-        description: 'Renta Go es un proyecto innovador de renta de autos...'
+        description: 'Renta Go es un proyecto innovador de renta de autos diseñado para ofrecer una experiencia rápida, confiable y 100% digital. La plataforma permite a los usuarios alquilar vehículos de forma sencilla y rápida.',
+        techs: [
+            { image: '/techs/angular.png', name: 'Angular' },
+            { image: '/techs/nodejs.png', name: 'Node JS' },
+            { image: '/techs/mysql.png', name: 'MySQL' },
+        ]
     },
     {
         name: 'Mercadatos SAS BIC',
         category: 'web',
         image: '/projects/mercadatos.png',
-        description: "Mercadatos SAS BIC es una empresa especializada en gestión documental, dedicada a optimizar la forma en que las organizaciones administran, protegen y transforman su información. Con procesos eficientes y tecnología de vanguardia, Mercadatos ayuda a digitalizar, organizar y mantener seguros los documentos críticos de empresas e instituciones. Su compromiso con la calidad y la mejora continua se refleja en cada proyecto, aportando valor y confianza a sus clientes.",
+        description: "Mercadatos SAS BIC es una empresa especializada en gestión documental, dedicada a optimizar la forma en que las organizaciones administran, protegen y transforman su información.",
+        techs: [
+            { image: '/techs/angular.png', name: 'Angular' }
+        ]
     },
     {
         name: 'Software Programación Lineal',
         category: 'web',
         image: '/projects/PL-software.png',
-        description: 'Aplicación desarrollada en Vue para resolver problemas de programación lineal, permitiendo a los usuarios modelar, visualizar y optimizar soluciones de manera intuitiva y eficiente.'
+        description: 'Aplicación desarrollada en Vue para resolver problemas de programación lineal, permitiendo a los usuarios modelar, visualizar y optimizar soluciones de manera intuitiva y eficiente.',
+        techs: [
+            { image: '/techs/vue.png', name: 'Vue' },
+            { image: '/techs/python.png', name: 'Python' },
+        ]
     },
     {
         name: 'Vehicle care',
         category: 'design',
         image: '/projects/vehicleCare.png',
-        description: 'Vehicle Care es el diseño de una app móvil...'
+        description: 'Vehicle Care es el diseño de una aplicación móvil enfocada en la gestión integral del mantenimiento vehicular. Está pensada para ayudar a los usuarios a llevar el control de sus vehículos de forma sencilla, eficiente y completamente digital.',
+        techs: [
+            { image: '/techs/figma.png', name: 'Figma' },
+        ]
     }
 ];
 
@@ -114,6 +130,19 @@ export default function Portfolio() {
                                     <h2 className="font-bold text-lg text-[var(--color-primary)]">{project.name}</h2>
                                     <p className="text-sm text-[var(--color-dark-gray)] leading-relaxed">{project.description}</p>
                                 </div>
+                                {project.techs && (
+                                    <div className='px-4 flex flex-col gap-2'>
+                                        <h4 className='text-[var(--color-dark)] font-semibold text-[.95rem]'>Tecnologías usadas</h4>
+                                        <div className='flex items-center gap-2'>
+                                            {project.techs?.map((tech, idx) => (
+                                                <figure key={idx} className='flex flex-col items-center gap-2'>
+                                                    <img className='bg-gray-50 rounded-[10px] p-[2px] w-7 object-cover' src={tech.image} alt={`Imagen de: ` + tech.name} />
+                                                    <figcaption className='text-[var(--color-dark-gray)] text-[.8rem]'>{tech.name}</figcaption>
+                                                </figure>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>

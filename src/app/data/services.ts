@@ -1,6 +1,6 @@
-import { BannerInterface } from "@/app/types/Banner";
+import { Services } from "@/app/types/Services";
 
-type Service = Omit<BannerInterface, "callAction"> & {
+type Service = Omit<Services, "callAction"> & {
   slug: string;
   callAction: { label: string; actionKey: string }[];
 };
@@ -23,22 +23,58 @@ export const services: Service[] = [
         actionKey: "contact",
       },
     ],
+    techs: [
+      { name: "Html", image: "/techs/html.png" },
+      { name: "Css", image: "/techs/css.png" },
+      { name: "JavaScript", image: "/techs/js.png" },
+      { name: "Angular", image: "/techs/angular.png" },
+      { name: "React", image: "/techs/react.png" },
+      { name: "Next.js", image: "/techs/next.png" },
+      { name: "Vue", image: "/techs/vue.png" },
+      { name: "Nuxt", image: "/techs/nuxt.png" },
+      { name: "Astro", image: "/techs/astro.png" },
+      { name: "Typescript", image: "/techs/typescript.png" },
+      { name: "Mongo", image: "/techs/mongo.webp" },
+      { name: "SqlServer", image: "/techs/sqlserver.png" },
+    ],
   },
   {
     slug: "desarrollo-apps",
     icon: "/icons/mobile.webp",
     service: "Desarrollo de apps móviles",
     title: {
-      main: "Impulsa tu empresa",
-      second: "con soluciones móviles inteligentes",
+      main: "Apps que Impulsan tu Negocio",
+      second: "Diseñadas para Crecer Contigo.",
     },
-    subtitle: "Soluciones móviles escalables y modernas.",
+    subtitle:
+      "Desarrollamos aplicaciones móviles a medida con tecnología escalable y diseño centrado en el usuario.",
     image: "/img/mobile.png",
     alt: "Banner desarrollo",
     callAction: [
       {
         label: "Contáctanos",
         actionKey: "contact",
+      },
+    ],
+    techs: [
+      { name: "Flutter", image: "/techs/flutter.png" },
+      { name: "Ionic", image: "/techs/ionic.png" },
+      { name: "Swift", image: "/techs/swift.png" },
+      { name: "Kotlin", image: "/techs/kotlin.png" },
+      { name: "React Native", image: "/techs/react.png" },
+    ],
+    projects: [
+      {
+        title: "App empresarial",
+        image: "/projects-services/businness-app.png",
+        description:
+          "Elije entre variedad de soluciones de software personalizables a las necesidad des de su negocio.",
+      },
+      {
+        title: "App comercial",
+        image: "/img/design.webp",
+        description:
+          "Elije entre variedad de soluciones de software personalizables a las necesidad des de su negocio.",
       },
     ],
   },
@@ -78,6 +114,15 @@ export const services: Service[] = [
         label: "Contáctanos",
         actionKey: "contact",
       },
+    ],
+    techs: [
+      { name: "Figma", image: "/techs/figma.png" },
+      { name: "Adobe XD", image: "/techs/Adobe_XD.png" },
+      { name: "Adobe Ilustrator", image: "/techs/Adobe_Illustrator.png" },
+      { name: "Adobe Photoshop", image: "/techs/Adobe_Photoshop.png" },
+      { name: "Adobe Premiere Pro", image: "/techs/Adobe_Premiere_Pro.png" },
+      { name: "Canva", image: "/techs/Canva_Logo.png" },
+      { name: "Corel Draw", image: "/techs/coreldraw.png" },
     ],
   },
 ];

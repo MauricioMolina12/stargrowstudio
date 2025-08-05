@@ -1,0 +1,46 @@
+.splash-container {
+  position: fixed;
+  inset: 0;
+  background-color: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease-out;
+  overflow: hidden;
+}
+
+.splash-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.splash-logo {
+  width: 100px;
+  height: auto;
+  transform-origin: center;
+  animation: scaleAndFade 2.8s ease forwards;
+}
+
+@keyframes scaleAndFade {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+
+  75% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}

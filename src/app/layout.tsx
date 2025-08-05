@@ -5,6 +5,8 @@ import NavBar from "./components/layout/NavBar";
 import { MeetingProvider } from "./context/MeetingContext";
 import { AppProviders } from "@/providers/AppProviders";
 import Footer from "./components/layout/Footer";
+import InternetStatus from "./components/layout/InternetStatus";
+import SplashScreen from "./components/layout/Splash/Splash";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -25,6 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <InternetStatus />
       <head>
         <link rel="icon" href="/logo.png" type="image/png" />
         <link
@@ -34,6 +37,7 @@ export default function RootLayout({
       </head>
       <body className={`${montserrat.variable} antialiased`}>
         <AppProviders>
+          <SplashScreen />
           <NavBar />
           {children}
           <Footer />

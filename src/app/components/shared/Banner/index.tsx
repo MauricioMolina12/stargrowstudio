@@ -2,14 +2,15 @@
 import { useEffect, useRef, useState } from "react";
 import styles from './Banner.module.scss';
 import useDarkMode from "@/app/hooks/useDarkMode";
-import { CallAction, BannerInterface } from "@/app/types/Banner";
+import { CallAction, Services } from "@/app/types/Services";
 
 
 type Props = {
-  banners?: BannerInterface[];
+  banners?: Services[];
   isDynamic?: boolean;
-  fallbackBanner?: BannerInterface;
+  fallbackBanner?: Services;
   defaultCallActions?: CallAction[]
+  hideService?: boolean;
 };
 
 export default function Banner({
@@ -24,6 +25,7 @@ export default function Banner({
     alt: "",
     callAction: [],
   },
+  hideService = false,
   defaultCallActions = []
 }: Props) {
   const { isDark } = useDarkMode();
@@ -84,7 +86,7 @@ export default function Banner({
         <div key={currentIndex} className={`${styles.banner__content} ${animate ? styles.animated : ""}`} ref={bannerContentRef}>
           <div className={styles.banner__description} ref={parallaxTextRef}>
             <div className={styles["banner__description--hero"]}>
-              {currentBanner.service && (
+              {currentBanner.service && !hideService &&(
                 <span className={styles["banner__description--hero-service"]}>
                   <img
                     ref={parallaxImageRef}

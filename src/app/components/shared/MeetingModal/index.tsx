@@ -4,17 +4,20 @@ import { useMeeting } from "@/app/context/MeetingContext";
 import { useComponentMeeting } from "@/app/hooks/useComponentMeeting";
 import { useEffect, useState } from "react";
 
-let isOnline = window.navigator.onLine;
-function updateOnlineStatus() {
-    isOnline = window.navigator.onLine;
-}
-
 const MeetingModal = () => {
 
     const { hide } = useMeeting();
+
     const [isLoading, setLoading] = useState(true);
+    const [isOnline, setIsOnline] = useState(true);
+
 
     useEffect(() => {
+        const updateOnlineStatus = () => {
+            setIsOnline(window.navigator.onLine);
+        };
+        updateOnlineStatus();
+
         window.addEventListener('online', updateOnlineStatus);
         window.addEventListener('offline', updateOnlineStatus);
         document.body.style.overflow = "hidden";
@@ -61,7 +64,7 @@ const MeetingModal = () => {
                                 transition: "opacity 0.3s ease-in-out",
                             }}
                         ></iframe>
-                    ) }
+                    )}
 
                     {isLoading && (
                         <div className="absolute inset-0 flex items-center justify-center bg-white rounded-2xl z-10">

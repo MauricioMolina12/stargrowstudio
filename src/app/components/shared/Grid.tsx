@@ -1,27 +1,18 @@
 'use client';
 
+import { ReactNode } from "react";
 import { useMeeting } from "../../context/MeetingContext";
-import { useComponentMeeting } from "../../hooks/useComponentMeeting";
-import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 
-type card = {
-    title: string;
-    icon?: string;
-    description?: string;
-    items?: string[];
-}
+
 
 type Props = {
     title: { main: string; left: string; right: string };
     subtitle: string;
-    cards: card[];
     showMeetingCall?: boolean;
-    showSteps?: boolean;
+    children?: ReactNode; // <-- Add this line
 };
 
-const Grid = ({ title, subtitle, cards, showMeetingCall = true, showSteps = true }: Props) => {
-
-    useIntersectionObserver('.parallax', { threshold: 0.4 }, 'all');
+const Grid = ({ title, subtitle, showMeetingCall = true, children}: Props) => {
     const { show } = useMeeting();
 
     return (
@@ -30,30 +21,8 @@ const Grid = ({ title, subtitle, cards, showMeetingCall = true, showSteps = true
                 <span className="text-[var(--color-primary-to-white)]">{subtitle}</span>
                 <h1 className="text-3xl text-center font-bold lg:w-[70%] lg:text-4xl">{title.left} <span className="text-[var(--color-primary-to-white)]">{title.main} </span>{title.right}</h1>
             </aside>
-            <main className="w-full h-1/2 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] p-4">
-                {cards.map((card, index) => (
-                    <div key={index} className="item parallax bg-[var(--color-white)] w-full h-[240px] rounded-2xl relative flex flex-col justify-center gap-4 p-4">
-                        {showSteps && (
-                            <span className="absolute top-[-10px] left-[-10px] bg-[var(--color-primary)] text-white p-3 [clip-path:circle()]">
-                                {index + 1}
-                            </span>
-                        )}
-                        {card.icon && (
-                            <img className="w-10 h-10 bg-gray-100 p-2 rounded-2xl" src={card.icon} alt={`Icono de: ${card.title}`} />
-                        )}
-                        <h2 className="text-[1rem] font-[600] text-[var(--color-dark)] dark:text-white">{card.title}</h2>
-                        {card.description && (
-                            <p className="text-[var(--color-dark-gray)] text-[.9rem]">{card.description}</p>
-                        )}
-                        {card.items && (
-                            <ul className="flex flex-col gap-2">
-                                {card.items.map((item) => (
-                                    <p key={item} className="text-[var(--color-dark-gray)] text-[.9rem]">{item}</p>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                ))}
+            <main className="w-full mx-auto h-1/2 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] p-4 2xl:w-6xl ">
+                {children}
             </main>
             {showMeetingCall && (
                 <article className="call-action w-full h-[250px] lg:h-[170px] p-4 parallax">

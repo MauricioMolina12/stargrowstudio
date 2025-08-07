@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import TabsNav from './shared/TabsNav';
+import ContentCard from './shared/ContentCard';
 
 interface Project {
     name: string;
@@ -52,13 +54,13 @@ const projects: Project[] = [
 ];
 
 const tabs = [
-    { name: 'App webs', filterKey: 'web' },
-    { name: 'App móviles', filterKey: 'mobile' },
-    { name: 'Diseños', filterKey: 'design' }
+    { label: 'App webs', key: 'web' },
+    { label: 'App móviles', key: 'mobile' },
+    { label: 'Diseños', key: 'design' }
 ];
 
 export default function Portfolio() {
-    const [currentTab, setCurrentTab] = useState('web');
+    const [tabActive, setTab] = useState('web');
     const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
     const [isAtStart, setIsAtStart] = useState(true);
     const [isAtEnd, setIsAtEnd] = useState(false);
@@ -68,8 +70,8 @@ export default function Portfolio() {
 
 
     useEffect(() => {
-        setFilteredProjects(projects.filter(p => p.category === currentTab));
-    }, [currentTab]);
+        setFilteredProjects(projects.filter(p => p.category === tabActive));
+    }, [tabActive]);
 
     useEffect(() => {
         const slider = sliderRef.current;
@@ -103,48 +105,12 @@ export default function Portfolio() {
                 </div>
 
                 {/* Tabs */}
-                <div className="flex items-center justify-center lg:justify-start gap-6 mb-6 overflow-x-auto overflow-y-hidden parallax">
-                    {tabs.map(tab => (
-                        <button
-                            key={tab.filterKey}
-                            onClick={() => setCurrentTab(tab.filterKey)}
-                            className="cursor-pointer text-gray-600 text-[1rem]" style={{
-                                color: currentTab === tab.filterKey ? 'var(--color-primary)' : 'initial',
-                                fontWeight: currentTab === tab.filterKey ? 'bold' : '300'
-                            }}
-                        >
-                            {tab.name}
-                        </button>
-                    ))}
-                </div>
+                <TabsNav tabs={tabs} tabActive={tabActive} setTabActive={setTab} />
 
                 {/* Slider */}
                 <div className="relative px-4">
                     <div ref={sliderRef} className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth">
-                        {filteredProjects.map((project, index) => (
-                            <div key={index} className="parallax min-w-[350px] max-w-[350px] flex-shrink-0 rounded-xl overflow-hidden bg-white border border-[var(--color-gray)]">
-                                <figure className="h-[200px] overflow-hidden">
-                                    <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
-                                </figure>
-                                <div className="p-4 flex flex-col gap-3">
-                                    <h2 className="font-bold text-lg text-[var(--color-primary)]">{project.name}</h2>
-                                    <p className="text-sm text-[var(--color-dark-gray)] leading-relaxed">{project.description}</p>
-                                </div>
-                                {project.techs && (
-                                    <div className='px-4 flex flex-col gap-2'>
-                                        <h4 className='text-[var(--color-dark)] font-semibold text-[.95rem]'>Tecnologías usadas</h4>
-                                        <div className='flex items-center gap-2'>
-                                            {project.techs?.map((tech, idx) => (
-                                                <figure key={idx} className='flex flex-col items-center gap-2'>
-                                                    <img className='bg-gray-50 rounded-[10px] p-[2px] w-7 object-cover' src={tech.image} alt={`Imagen de: ` + tech.name} />
-                                                    <figcaption className='text-[var(--color-dark-gray)] text-[.8rem]'>{tech.name}</figcaption>
-                                                </figure>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
+                        <ContentCard contents={filteredProjects} ></ContentCard>
                     </div>
 
                     {/* Slider Buttons */}

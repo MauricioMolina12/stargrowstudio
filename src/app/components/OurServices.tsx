@@ -1,5 +1,7 @@
 'use client';
 
+// NO SE ESTÁ USANDO
+
 import { useState } from "react";
 import clsx from "clsx";
 import useDarkMode from "../hooks/useDarkMode";

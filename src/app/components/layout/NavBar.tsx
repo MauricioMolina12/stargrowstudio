@@ -3,28 +3,31 @@
 import { useActiveSection } from "@/app/hooks/useActiveSection";
 import useDarkMode from "@/app/hooks/useDarkMode";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ActivitySquare, BarChart3, ChevronRight, Database, DatabaseBackup, DatabaseZap, GaugeCircle, Glasses, Layers, LayoutTemplate, Lightbulb, Link2, MonitorSmartphone, MousePointerClick, Palette, PieChart, ScrollText, SearchCheck, ServerCog, Settings, Share2, Shield, ShieldCheck, Sliders, Smartphone, TrendingUp, Users, Wrench } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { WorkflowIcon } from "lucide-react";
 import { useActiveClassScroll } from "@/app/hooks/useScrollNav";
 import { usePathname } from 'next/navigation';
 import { useState } from "react";
 import { useMeeting } from "@/app/context/MeetingContext";
+import { ShareModal } from "../shared/ShareModal/ShareModal";
+import { CardLinkList } from "../shared/CardLinkList/CardLinkList";
 
 
-const navItems: { label: string, href: string, path?: string }[] = [
-  { label: "Inicio", href: "#inicio", path: '' },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Progreso", href: "#progreso" },
-  { label: "Planes", href: "#planes" },
-  { label: "Portafolio", href: "#portafolio" },
-  { label: "Contacto", href: "#contacto" },
+const navItems: { label: string, href: string, path?: string, isDropdown?: boolean }[] = [
+  { label: "Servicios", href: "#servicios", isDropdown: true },
+  { label: "Explorar", href: "#nosotros" },
 ];
 
 const NavBar = () => {
   const activeSection = useActiveSection(navItems);
   const activeClassScroll = useActiveClassScroll()
   const pathname = usePathname();
+
   const [stateSideBar, setStateSideBar] = useState(false);
+  const [openModal, setOpenModal] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+
   const { show, isVisible } = useMeeting();
 
 
@@ -90,14 +93,236 @@ const NavBar = () => {
               className="mb-10 flex justify-between items-center w-full lg:w-auto lg:m-0"
             >
               <Link
-                href={`${pathname === "/" ? "" : "/"}${item.href}`}
-                className={`lg:text-[0.9rem]  transition-all ${activeSection === item.label
-                  ? "text-[var(--color-primary-to-white)] font-bold"
-                  : "text-gray-400 hover:text-[var(--color-primary)]"
-                  }`}
+                href="#"
+                onClick={() => {
+                  setSelectedItem(item.label);
+                  setOpenModal(true)
+                }}
+                className="flex items-center gap-2 lg:text-[0.9rem] text-gray-500 transition-all"
               >
                 {item.label}
+                <ChevronDown
+                  className={`hidden lg:block w-5 h-5 text-gray-500 transform transition-transform duration-300 ${openModal && selectedItem === item.label ? 'rotate-180' : ''}`}
+                />
               </Link>
+
+
+
+              <ShareModal isOpen={openModal} onClose={() => {
+                setOpenModal(false);
+                setSelectedItem(null);
+              }}>
+                {selectedItem === "Servicios" && (
+                  <div className="flex items-start gap-3 min-h-[480px]">
+                    <div className="flex flex-col gap-3">
+                      <CardLinkList
+                        title="Desarrollo de software a medida"
+                        items={[
+                          {
+                            icon: <LayoutTemplate />,
+                            title: "Desarrollo de sitios web a medida",
+                            description: "Creamos sitios únicos adaptados a tus objetivos de negocio.",
+                            highlight: true,
+                            badge: "Personalizado",
+                          },
+                          {
+                            icon: <MonitorSmartphone />,
+                            title: "Aplicaciones web progresivas (PWA)",
+                            description: "Apps web que funcionan sin conexión y se instalan como móviles.",
+                          },
+                          {
+                            icon: <Share2 />,
+                            title: "Integraciones con APIs",
+                            description: "Conectamos tu software con servicios externos y automatizaciones.",
+                          },
+                          {
+                            icon: <Sliders />,
+                            title: "Sistemas de gestión (CMS / ERP)",
+                            description: "Paneles administrativos personalizados para gestionar tu negocio.",
+                          },
+                          {
+                            icon: <Wrench />,
+                            title: "Optimización y mantenimiento",
+                            description: "Mejoramos rendimiento, seguridad y escalabilidad de tu proyecto.",
+                          },
+                        ]}
+                      />
+                      <CardLinkList
+                        title="Desarrollo de apps móviles"
+                        items={[
+                          {
+                            icon: <Smartphone />,
+                            title: "Desarrollo de apps móviles a medida",
+                            description: "Creamos apps nativas o híbridas adaptadas a tus necesidades.",
+                            highlight: true,
+                            badge: "Personalizado",
+                          },
+                          {
+                            icon: <MonitorSmartphone />,
+                            title: "Aplicaciones web progresivas (PWA)",
+                            description: "Apps web que funcionan sin conexión y se instalan como móviles.",
+                          },
+                          {
+                            icon: <Link2 />,
+                            title: "Integraciones con APIs",
+                            description: "Conectamos tu app con servicios externos y automatizaciones.",
+                          },
+                          {
+                            icon: <Settings />,
+                            title: "Sistemas de gestión móviles (CMS / ERP)",
+                            description: "Apps para administrar procesos desde cualquier dispositivo.",
+                          },
+                          {
+                            icon: <ShieldCheck />,
+                            title: "Optimización y mantenimiento",
+                            description: "Mejoramos rendimiento, seguridad y escalabilidad de tu app.",
+                          },
+                        ]}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <CardLinkList title="Análisis de datos y visualización"
+                        items={[
+                          {
+                            icon: <BarChart3 />,
+                            title: "Visualización de dashboards",
+                            description: "Creamos paneles interactivos para entender tus métricas en tiempo real.",
+                            highlight: true,
+                            badge: "Interactivo",
+                          },
+                          {
+                            icon: <PieChart />,
+                            title: "Informes personalizados",
+                            description: "Generamos reportes detallados con KPIs relevantes para tu negocio.",
+                          },
+                          {
+                            icon: <Database />,
+                            title: "Procesamiento de datos",
+                            description: "Transformamos datos en bruto en información útil para la toma de decisiones.",
+                          },
+                          {
+                            icon: <ActivitySquare />,
+                            title: "Modelos de predicción",
+                            description: "Utilizamos estadísticas y machine learning para anticipar comportamientos.",
+                          },
+                          {
+                            icon: <SearchCheck />,
+                            title: "Análisis exploratorio",
+                            description: "Detectamos patrones, tendencias y oportunidades ocultas en tus datos.",
+                          },
+                        ]}
+                      ></CardLinkList>
+                      <CardLinkList title="Arquitectura y gestión de bases de datos"
+                        items={[
+                          {
+                            icon: <Database />,
+                            title: "Diseño de bases de datos escalables",
+                            description: "Estructuramos tus datos para soportar crecimiento, consultas rápidas y seguridad.",
+                            highlight: true,
+                            badge: "Escalable",
+                          },
+                          {
+                            icon: <ServerCog />,
+                            title: "Administración y monitoreo",
+                            description: "Monitoreamos el rendimiento y aseguramos disponibilidad constante.",
+                          },
+                          {
+                            icon: <DatabaseBackup />,
+                            title: "Backups y recuperación de datos",
+                            description: "Implementamos estrategias de respaldo seguras y automatizadas.",
+                          },
+                          {
+                            icon: <Shield />,
+                            title: "Seguridad y control de acceso",
+                            description: "Gestionamos permisos, cifrado y protección ante amenazas.",
+                          },
+                          {
+                            icon: <DatabaseZap />,
+                            title: "Migración de datos",
+                            description: "Movemos tus datos entre sistemas sin pérdida ni interrupciones.",
+                          },
+                        ]}
+                      ></CardLinkList>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <CardLinkList title="Consultoría en transformación digital"
+                        items={[
+                          {
+                            icon: <Lightbulb />,
+                            title: "Estrategia digital personalizada",
+                            description: "Analizamos tu negocio y trazamos un plan digital enfocado en resultados.",
+                            highlight: true,
+                            badge: "Estrategia",
+                          },
+                          {
+                            icon: <ActivitySquare />,
+                            title: "Automatización de procesos",
+                            description: "Reducimos tareas manuales con herramientas digitales eficientes.",
+                          },
+                          {
+                            icon: <Layers />,
+                            title: "Integración de tecnología emergente",
+                            description: "Adoptamos IA, blockchain o IoT según tus necesidades y objetivos.",
+                          },
+                          {
+                            icon: <Users />,
+                            title: "Capacitación de equipos",
+                            description: "Entrenamos a tu equipo para adaptarse y aprovechar el cambio tecnológico.",
+                          },
+                          {
+                            icon: <TrendingUp />,
+                            title: "Medición de impacto digital",
+                            description: "Evaluamos resultados y adaptamos la estrategia continuamente.",
+                          },
+                        ]}
+                      ></CardLinkList>
+                      <CardLinkList title="Diseño UX/UI centrado en el usuario"
+                        items={[
+                          {
+                            icon: <Palette />,
+                            title: "Diseño de interfaces intuitivas",
+                            description: "Creamos experiencias limpias, accesibles y visualmente atractivas.",
+                            highlight: true,
+                            badge: "Usabilidad",
+                          },
+                          {
+                            icon: <MousePointerClick />,
+                            title: "Prototipado y validación",
+                            description: "Validamos ideas con prototipos navegables antes de desarrollarlas.",
+                          },
+                          {
+                            icon: <ScrollText />,
+                            title: "Arquitectura de la información",
+                            description: "Organizamos contenido de forma clara y lógica para los usuarios.",
+                          },
+                          {
+                            icon: <GaugeCircle />,
+                            title: "Optimización de experiencia",
+                            description: "Analizamos el comportamiento del usuario y mejoramos el recorrido.",
+                          },
+                          {
+                            icon: <Glasses />,
+                            title: "Accesibilidad digital",
+                            description: "Diseñamos interfaces inclusivas para todos los usuarios.",
+                          },
+                        ]}
+
+                      ></CardLinkList>
+                    </div>
+
+
+
+                  </div>
+                )}
+
+                {selectedItem === "Explorar" && (
+                  <div className="text-sm">
+                    <h4 className="font-semibold mb-2 text-gray-800">Explorar contenido</h4>
+                    <p className="text-gray-600">Aquí podrías poner un listado de blogs, casos de estudio, o recursos.</p>
+                  </div>
+                )}
+              </ShareModal>
+
 
               {/* Solo visible en móviles */}
               <ChevronRight className="w-5 h-5 text-[var(--color-primary)] lg:hidden" />

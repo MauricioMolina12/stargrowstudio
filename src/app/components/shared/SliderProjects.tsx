@@ -57,7 +57,7 @@ const SliderProjects = ({ items = [] }: Props) => {
 
       <div className="points absolute right-1 bottom-1 h-5 flex items-center justify-between px-2 gap-2">
          {items.map((_,index)=>(
-            <div className={`point w-2 h-2 bg-gray-700 rounded-[50%] ${index === currentIndex ? 'bg-white' : 'initial'}`}></div>
+            <div key={index} className={`point w-2 h-2 bg-gray-700 rounded-[50%] ${index === currentIndex ? 'bg-white' : 'initial'}`}></div>
          ))}
       </div>
     </main>

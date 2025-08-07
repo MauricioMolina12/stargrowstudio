@@ -335,7 +335,7 @@ const Plans = () => {
                             key={plan.name}
                             className={`parallax relative snap-start w-[340px] flex-shrink-0 rounded-2xl overflow-hidden border ${plan.tier === "Premium"
                                 ? "bg-[var(--color-primary)] text-white border-none"
-                                : "bg-white text-[var(--color-secondary)] border-gray-300"
+                                : "bg-[#FAFBFF] text-[var(--color-secondary)] border-gray-100 border-2"
                                 }`}>
                             <div className="relative p-6 flex flex-col justify-between h-full">
                                 {/* Cinta en la esquina */}

@@ -78,7 +78,6 @@ export default function OurServices() {
         "w-full lg:max-w-[70%] lg:mx-auto lg:my-0 py-12 px-4 transition-colors duration-500"
       )}
     >
-
       <div className="w-full flex justify-center mb-8"></div>
       <div className="max-w-5xl mx-auto flex flex-col items-center">
         <span className="text-[var(--color-primary-to-white)]">Nuestros servicios</span>

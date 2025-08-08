@@ -143,7 +143,7 @@
 .banner__description .banner__description--hero-subtitle {
   max-width: 90%;
   color: var(--color-dark-gray);
-  font-size: clamp(1rem, 2vw, 1.6rem);
+  font-size: clamp(.8rem, 1vw, 1.2rem);
 }
 
 .banner__description .banner__description--buttons-call-action {
@@ -153,7 +153,7 @@
 
   button {
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 10px;
     outline: none;
     border: none;
     background-color: #5656b5;
@@ -268,7 +268,7 @@
     max-width: 100%;
   }
   .banner__description .banner__description--hero-subtitle {
-    font-size: clamp(0.8rem, 2vw, 1.2rem);
+    font-size: clamp(0.8rem, 1vw, .9rem);
     text-align: start;
   }
 }

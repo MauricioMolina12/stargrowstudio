@@ -21,8 +21,8 @@ export default function ContentCard({contents}: ContentCardProps) {
                         <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
                     </figure>
                     <div className="p-4 flex flex-col gap-3">
-                        <h2 className="font-bold text-lg text-[var(--color-primary)]">{project.name}</h2>
-                        <p className="text-sm text-[var(--color-dark-gray)] leading-relaxed">{project.description}</p>
+                        <h2 className="font-bold text-[14px] text-[var(--color-primary)]">{project.name}</h2>
+                        <p className="text-[13px] text-[var(--color-dark-gray)] leading-relaxed">{project.description}</p>
                     </div>
                     {project.techs && (
                         <div className='px-4 pb-4 flex flex-col gap-2'>

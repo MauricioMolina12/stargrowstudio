@@ -1,38 +1,70 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useEffect, useState } from 'react'
+import { ChevronLeft } from 'lucide-react'
+import clsx from 'clsx'
 
 interface ShareModalProps {
-    isOpen: boolean
-    onClose: () => void
-    children: ReactNode
+  isOpen: boolean
+  onClose: () => void
+  children: ReactNode
 }
 
 export const ShareModal = ({ isOpen, onClose, children }: ShareModalProps) => {
-    const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [animateIn, setAnimateIn] = useState(false)
 
-    useEffect(() => {
-        setMounted(true)
-        isOpen ? document.body.classList.add('dark-body') : document.body.classList.remove('dark-body')
-        return () => {
-            document.body.classList.remove('dark-body')
-            setMounted(false)}
-    }, [])
+  useEffect(() => {
+    setMounted(true)
+    return () => setMounted(false)
+  }, [])
 
-    if (!mounted || !isOpen) return null
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true)
+      requestAnimationFrame(() => setAnimateIn(true))
+    } else {
+      setAnimateIn(false)
+      const timeout = setTimeout(() => setIsVisible(false), 300)
+      return () => clearTimeout(timeout)
+    }
+  }, [isOpen])
 
-    return createPortal(
-        <div className="fixed inset-0 z-50 flex items-start justify-center p-6 pt-18">
-            <div
-                className="absolute inset-0 z-0"
-                onClick={onClose}
-            />
-            <div className="relative z-10 bg-white rounded-xl shadow-xl p-6 w-full max-w-6xl overflow-y-auto max-h-[80vh]">
-                {children}
-            </div>
-        </div>,
-        document.body
-    )
+  if (!mounted || !isVisible) return null
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose()
+    }
+  }
+
+  return createPortal(
+    <div
+      onClick={handleBackdropClick}
+      className="fixed w-fit lg:mx-auto lg:my-0 inset-0 top-[50px] z-50 flex items-start justify-center lg:p-6 transition-opacity duration-200"
+    >
+      <div
+        className={clsx(
+          "border border-gray-100 relative z-10 bg-white lg:rounded-xl p-6 w-full max-w-6xl overflow-y-auto max-h-[100vh] lg:max-h-[80vh] transform transition-transform duration-300",
+          {
+            'translate-x-0 opacity-100': animateIn,
+            '-translate-x-full opacity-0': !animateIn,
+          }
+        )}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="flex items-center justify-start text-[12px] cursor-pointer bg-[var(--color-primary)] p-2 rounded-[10px] text-white mb-2.5 lg:hidden"
+        >
+          <ChevronLeft size={13} />
+          <span className="font-semibold">Atrás</span>
+        </button>
+        {children}
+      </div>
+    </div>,
+    document.body
+  )
 }

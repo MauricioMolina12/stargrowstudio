@@ -95,11 +95,11 @@ export default function Portfolio() {
 
 
     return (
-        <section className="w-full lg:w-[70%] lg:mx-auto lg:my-0 py-20 dark:bg-[#121245]">
+        <section className="w-full lg:w-[70%] lg:mx-auto lg:my-0 py-20">
             <div className="w-full max-w-6xl mx-auto">
                 <div className="text-center mb-10">
                     <span className="parallax text-[var(--color-primary)] text-lg font-medium">Nuestro portafolio</span>
-                    <h1 className="parallax text-2xl xl:text-3xl font-bold text-[var(--color-black)] dark:text-[var(--color-yellow)] mt-4">
+                    <h1 className="parallax text-2xl xl:text-3xl font-bold text-[var(--color-black)] mt-4">
                         <span className="text-[var(--color-primary)]">Proyectos que transforman ideas</span> en soluciones reales y efectivas 📁
                     </h1>
                 </div>

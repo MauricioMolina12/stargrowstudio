@@ -6,7 +6,7 @@ type PlansProps = {
     plansView: Plan[]
 };
 
-export default function Plans ({plansView}: PlansProps) {
+export default function Plans({ plansView }: PlansProps) {
     return (
         <>
             {plansView.map((plan) => (
@@ -27,11 +27,11 @@ export default function Plans ({plansView}: PlansProps) {
                         <h2 className="text-lg font-semibold mb-2">{plan.name}</h2>
 
                         {/* Precios */}
-                        <div className="flex flex-col items-center py-4">
+                        <div className="flex flex-col items-start py-4">
                             {plan.priceOld && (
                                 <p className={`text-xs line-through text-gray-400 ${plan.tier === "Premium" ? 'text-white' : 'initial'}`}>${plan.priceOld}</p>
                             )}
-                            <p className={`text-xl font-bold ${plan.tier === "Premium" ? 'text-[var(--color-yellow-light)]': 'text-[var(--color-primary)]'} `}>
+                            <p className={`text-[30px] font-bold ${plan.tier === "Premium" ? 'text-[var(--color-yellow-light)]' : 'text-[var(--color-primary)]'} `}>
                                 ${plan.priceNew}
                                 <span className="text-sm font-normal text-white"> <span className={`font-semibold ${plan.tier === 'Premium' ? 'text-white' : 'text-gray-700'}`}>(COP)</span></span>
                             </p>
@@ -39,16 +39,17 @@ export default function Plans ({plansView}: PlansProps) {
 
                         <p className="text-sm mb-4 text-justify leading-relaxed">{plan.description}</p>
 
+                        <hr className="text-gray-200 mb-3" />
 
                         <ul className="list-none text-left text-sm mb-6 space-y-1">
                             {plan.features.included.map((feature, i) => (
-                                <li key={`i-${i}`} className={`'flex items-center text-gray-700' ${plan.tier === 'premium' ? 'text-gray-50' : 'initial'}`}>
+                                <li key={`i-${i}`} className={`'flex items-center text-neutral-800' ${plan.tier === 'premium' ? 'text-gray-50' : 'initial'}`}>
                                     <span className="text-green-400 font-bold text-lg mr-2">✔</span>
                                     {feature}
                                 </li>
                             ))}
                             {plan.features.excluded.map((feature, i) => (
-                                <li key={`e-${i}`} className="flex items-center text-gray-400 line-through">
+                                <li key={`e-${i}`} className="flex items-center text-neutral-800 line-through">
                                     <span className="text-red-400 font-bold text-lg mr-2">✕</span>
                                     {feature}
                                 </li>
@@ -57,7 +58,7 @@ export default function Plans ({plansView}: PlansProps) {
 
                         <button
                             onClick={() => console.log("Solicitado", plan.name)}
-                            className="cursor-pointer bg-[var(--color-yellow-light)] text-black font-medium px-4 py-2 rounded-full mt-auto hover:bg-[#ffd76b] transition-colors"
+                            className="cursor-pointer bg-[var(--color-yellow-light)] text-black font-medium p-4 rounded-[10px] mt-auto hover:bg-[#ffd76b] transition-colors"
                         >
                             Solicitar este servicio
                         </button>

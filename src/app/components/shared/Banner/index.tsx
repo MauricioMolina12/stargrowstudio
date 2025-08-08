@@ -86,7 +86,7 @@ export default function Banner({
         <div key={currentIndex} className={`${styles.banner__content} ${animate ? styles.animated : ""}`} ref={bannerContentRef}>
           <div className={styles.banner__description} ref={parallaxTextRef}>
             <div className={styles["banner__description--hero"]}>
-              {currentBanner.service && !hideService &&(
+              {currentBanner.service && !hideService && (
                 <span className={styles["banner__description--hero-service"]}>
                   <img
                     ref={parallaxImageRef}
@@ -102,9 +102,6 @@ export default function Banner({
                 <br></br>
                 <span>{currentBanner.title.second}</span>
               </h1>
-              <p className={styles["banner__description--hero-subtitle"]}>
-                {currentBanner.subtitle}
-              </p>
               <div className={styles["banner__description--buttons-call-action"]}>
                 {Array.isArray(callActions) &&
                   callActions.map((button, index) => (
@@ -116,6 +113,9 @@ export default function Banner({
                     </button>
                   ))}
               </div>
+              <p className={styles["banner__description--hero-subtitle"]}>
+                {currentBanner.subtitle}
+              </p>
             </div>
           </div>
           <div className={styles.banner__image}>

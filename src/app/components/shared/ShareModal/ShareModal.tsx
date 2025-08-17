@@ -18,7 +18,9 @@ export const ShareModal = ({ isOpen, onClose, children }: ShareModalProps) => {
 
   useEffect(() => {
     setMounted(true)
-    return () => setMounted(false)
+    return () => {
+      setMounted(false)
+    }
   }, [])
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export const ShareModal = ({ isOpen, onClose, children }: ShareModalProps) => {
   return createPortal(
     <div
       onClick={handleBackdropClick}
-      className="fixed w-fit lg:mx-auto lg:my-0 inset-0 top-[50px] z-50 flex items-start justify-center lg:p-6 transition-opacity duration-200"
+      className="fixed w-full lg:mx-auto lg:my-0 inset-0 top-[40px] z-50 flex items-start justify-center lg:p-6 transition-opacity"
     >
       <div
         className={clsx(

@@ -114,7 +114,6 @@
 }
 .banner__description .banner__description--hero-service {
   border-radius: 10px;
-  padding: 10px;
   font-weight: 500;
   font-size: clamp(1rem, 2vw, 1.3rem);
   display: flex;
@@ -144,6 +143,15 @@
   max-width: 90%;
   color: var(--color-dark-gray);
   font-size: clamp(.8rem, 1vw, 1.2rem);
+}
+
+.banner__description .banner__description--list{
+  &-item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block: 5px;
+  }
 }
 
 .banner__description .banner__description--buttons-call-action {

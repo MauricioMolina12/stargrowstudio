@@ -10,6 +10,7 @@ export interface Services {
   subtitle: string;
   image: string;
   alt: string;
+  list?: string[],
   callAction?: CallAction[];
   techs?: {name: string; image: string}[];
   projects?: {image: string; title: string; description: string}[]; 

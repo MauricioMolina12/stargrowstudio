@@ -52,9 +52,9 @@ main {
   opacity: 0.5;
 }
 
-section {
+section:not(#contacto) {
   scroll-padding-top: 400px !important;
-  /* margin-bottom: 30px; */
+  margin-bottom: 30px;
 }
 
 .sticky-top-0 {
@@ -69,12 +69,12 @@ section {
 
 .fade-hidden {
   opacity: 0;
-  transform: translateY(40px) scale(0.9);
+  transform: translateX(40px) scale(0.9);
 }
 
 .fade-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateX(0) scale(1);
 }
 
 .no-scrollbar::-webkit-scrollbar {

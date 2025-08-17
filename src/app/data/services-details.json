@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "slug": "desarrollo-sitios-web",
+    "title": "Desarrollo de sitios web a medida",
+    "label": "Personalizado",
+    "description": "Creamos sitios únicos adaptados a tus objetivos de negocio.",
+    "icon": "web"
+  },
+  {
+    "id": 2,
+    "slug": "aplicaciones-web-progresivas",
+    "title": "Aplicaciones web progresivas (PWA)",
+    "description": "Apps web que funcionan sin conexión y se instalan como móviles.",
+    "icon": "pwa"
+  },
+  {
+    "id": 3,
+    "slug": "integraciones-apis",
+    "title": "Integraciones con APIs",
+    "description": "Conectamos tu software con servicios externos y automatizaciones.",
+    "icon": "api"
+  },
+  {
+    "id": 4,
+    "slug": "sistemas-gestion",
+    "title": "Sistemas de gestión (CMS / ERP)",
+    "description": "Paneles administrativos personalizados para gestionar tu negocio.",
+    "icon": "cms"
+  },
+  {
+    "id": 5,
+    "slug": "optimizacion-mantenimiento",
+    "title": "Optimización y mantenimiento",
+    "description": "Mejoramos rendimiento, seguridad y escalabilidad de tu proyecto.",
+    "icon": "maintenance"
+  }
+]

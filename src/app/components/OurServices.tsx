@@ -83,7 +83,7 @@ export default function OurServices() {
       <div className="w-full flex justify-center mb-8"></div>
       <div className="max-w-5xl mx-auto flex flex-col items-center">
         <span className="text-[var(--color-primary-to-white)]">Nuestros servicios</span>
-        <h1 className="text-3xl text-center font-bold lg:w-[70%] lg:text-4xl">Impulsa tu negocio con nuestros servicios <span className="text-[var(--color-primary-to-white)]"> estrella ✨</span></h1>
+        <h1 className="text-3xl text-center font-bold lg:w-[70%] lg:text-4xl">Impulsa tu negocio con nuestros servicios <span className="text-[var(--color-primary-to-white)]"> estrella</span></h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-1 w-full">
           {services.map((service) => (
             <div

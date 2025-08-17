@@ -40,6 +40,13 @@ export default function RootLayout({
           <SplashScreen />
           <NavBar />
           {children}
+
+          {/* <div className="options-container fixed right-4 bottom-16 w-[200px] h-[200px] bg-white border border-gray-200 z-50 rounded-xl"></div>
+          <button className="fixed bottom-4 right-4 bg-gray-800 w-[40px] h-[40px] rounded-full border border-gray-800 text-white cursor-pointer">
+            S
+          </button> */}
+          
+          
           <Footer />
         </AppProviders>
       </body>

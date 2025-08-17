@@ -16,14 +16,14 @@ import { useIsDesktop } from "@/app/hooks/useIsDesktop";
 import { useRouter } from "next/navigation";
 import ContentCard from "../shared/ContentCard";
 
-const navItems: { label: string, href: string, path?: string, isDropdown?: boolean }[] = [
-  { label: "Precios", href: "#servicios" },
-  { label: "Servicios", href: "#servicios", isDropdown: true },
-  { label: "Explorar", href: "#nosotros", isDropdown: true },
+const navItems: { label: string, path?: string, isDropdown?: boolean }[] = [
+  { label: "Precios" },
+  { label: "Servicios", isDropdown: true },
+  { label: "Explorar", isDropdown: true },
 ];
 
 const NavBar = () => {
-  const activeSection = useActiveSection(navItems);
+  // const activeSection = useActiveSection(navItems);
   const activeClassScroll = useActiveClassScroll()
   const pathname = usePathname();
 
@@ -64,7 +64,7 @@ const NavBar = () => {
                 alt="logo sgs"
               />
               <figcaption className="text-[var(--color-primary-to-white)] font-bold text-lg whitespace-nowrap">
-                Star Grow Studio
+                Star Grow
               </figcaption>
             </figure>
           </Link>
@@ -103,16 +103,23 @@ const NavBar = () => {
             gap-4 lg:mt-0 lg:w-[70%] lg:gap-6 overflow-hidden
           `}
         >
-          {navItems.map((item) => (
+          {navItems.map((item, idx) => (
             <li
-              key={item.href}
+              key={idx}
               className="mb-10 flex justify-between items-center w-full lg:w-auto lg:m-0"
-              onClick={() => {
+              onMouseEnter={() => {
                 if (item.isDropdown) {
                   setSelectedItem(item.label);
                   setOpenModal(prev => !prev);
-                } else {
-                  router.push(item.href);
+                } 
+                // else {
+                //   router.push(item.href);
+                // }
+              }}
+              onMouseLeave={() => {
+                if (item.isDropdown) {
+                  setSelectedItem(null);
+                  setOpenModal(false);
                 }
               }}
 
@@ -131,13 +138,13 @@ const NavBar = () => {
 
 
 
-              {(stateSideBar || isDesktop) && (
+              {(stateSideBar || isDesktop) && openModal && selectedItem === item.label && (
                 <ShareModal isOpen={openModal} onClose={() => {
                   setOpenModal(false);
                   setSelectedItem(null);
                 }}>
                   {selectedItem === "Servicios" && (
-                    <div className="flex flex-col lg:flex-row items-start gap-3 w-fit">
+                    <div className={`flex flex-col lg:flex-row items-start gap-3 w-fit`}>
                       <div className="flex flex-col gap-3 w-full lg:w-auto">
                         <CardLinkList
                           title="Desarrollo de software a medida"

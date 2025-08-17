@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from './Banner.module.scss';
 import useDarkMode from "@/app/hooks/useDarkMode";
 import { CallAction, Services } from "@/app/types/Services";
+import { Check } from "lucide-react";
 
 
 type Props = {
@@ -23,6 +24,7 @@ export default function Banner({
     subtitle: "",
     image: "",
     alt: "",
+    list: [],
     callAction: [],
   },
   hideService = false,
@@ -58,7 +60,13 @@ export default function Banner({
       intervalRef.current = setInterval(() => {
         setAnimate(true);
         setTimeout(() => setAnimate(false), 500);
-        setCurrentIndex((prev) => (prev + 1) % bannerList.length);
+        setCurrentIndex((prev) => {
+          const nextIndex = (prev + 1) % bannerList.length;
+          console.log("Banner actual:", bannerList[nextIndex]);
+          console.log("Lista:", bannerList[nextIndex].list);
+          return nextIndex;
+        });
+
       }, 10000);
     }
 
@@ -88,12 +96,6 @@ export default function Banner({
             <div className={styles["banner__description--hero"]}>
               {currentBanner.service && !hideService && (
                 <span className={styles["banner__description--hero-service"]}>
-                  <img
-                    ref={parallaxImageRef}
-                    src={currentBanner.icon}
-                    alt="icono 3D"
-                    className={styles["banner__icon-3d"]}
-                  />
                   {currentBanner.service}
                 </span>
               )}
@@ -102,6 +104,16 @@ export default function Banner({
                 <br></br>
                 <span>{currentBanner.title.second}</span>
               </h1>
+
+              <ul className={styles["banner__description--list"]}>
+                {currentBanner.list?.map((item, idx) => (
+                  <li key={idx} className={styles["banner__description--list-item"]}>
+                    <Check className="text-green-500"></Check>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
               <div className={styles["banner__description--buttons-call-action"]}>
                 {Array.isArray(callActions) &&
                   callActions.map((button, index) => (

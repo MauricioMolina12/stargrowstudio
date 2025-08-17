@@ -7,6 +7,6 @@ export type Plan = {
     description: string;
     features: {
         included: string[];
-        excluded: string[];
+        excluded?: string[];
     };
 };

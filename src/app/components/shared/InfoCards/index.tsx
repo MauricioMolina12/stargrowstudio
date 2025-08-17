@@ -38,7 +38,7 @@ export default function InfoCards ({cards, showSteps = true }: InfoCardsProps) {
               {card.icon && (
                   <img className="w-10 h-10 bg-gray-100 p-2 rounded-2xl" src={card.icon} alt={`Icono de: ${card.title}`} />
               )}
-              <h2 className="text-[1rem] font-[600] text-[var(--color-dark)] dark:text-white">{card.title}</h2>
+              <h2 className="text-[1rem] font-[600] text-[var(--color-primary)]">{card.title}</h2>
               {card.description && (
                   <p className="text-[var(--color-dark-gray)] text-[.9rem]">{card.description}</p>
               )}
@@ -51,7 +51,7 @@ export default function InfoCards ({cards, showSteps = true }: InfoCardsProps) {
               )}
 
               {card.slug && (
-                  <button onClick={() => detailsService(card)} className="cursor-pointer mt-2 text-[var(--color-primary)] flex items-center gap-1 font-medium transition-colors text-[0.9rem]">
+                  <button onClick={() => detailsService(card)} className="cursor-pointer mt-2 text-[var(--color-dark)] flex items-center gap-1 font-medium transition-colors text-[0.9rem]">
                       Leer más
                       {!loadingDetails[card.slug] ? (
                       <span className="material-symbols-outlined">arrow_forward</span>

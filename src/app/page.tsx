@@ -12,7 +12,7 @@ import Portfolio from "./components/Portfolio";
 import Contact from "./components/Contact";
 import InternetStatus from "./components/layout/InternetStatus";
 import ModalMessage from "./components/shared/modalMessage";
-import Grid from "./components/shared/Grid"; 
+import Grid from "./components/shared/Grid";
 
 // Interfaces 
 import { Services } from "./types/Services";
@@ -36,6 +36,11 @@ const banners: Services[] = [
       main: "Transforma tu idea en software real.",
       second: "Creamos soluciones que hacen la diferencia.",
     },
+    list: [
+      "Desarrollo a medida",
+      "Seguridad y escalabilidad",
+      "Entregas ágiles",
+    ],
     subtitle: "Desarrollamos tecnología con propósito, visión y estrategia.",
   },
   {
@@ -47,6 +52,11 @@ const banners: Services[] = [
       main: "Convierte tus datos en decisiones inteligentes.",
       second: "Te ayudamos a entender lo que importa.",
     },
+    list: [
+      "Dashboards interactivos",
+      "Reportes personalizados",
+      "Integración con múltiples fuentes de datos",
+    ],
     subtitle:
       "Diseñamos dashboards y reportes personalizados para impulsar tu crecimiento.",
   },
@@ -59,6 +69,11 @@ const banners: Services[] = [
       main: "Tu información siempre segura y accesible.",
       second: "Optimizamos el corazón de tu sistema.",
     },
+    list: [
+      "Modelado de bases de datos",
+      "Optimización de rendimiento",
+      "Alta disponibilidad y respaldo",
+    ],
     subtitle:
       "Diseñamos estructuras de datos eficientes, escalables y preparadas para el futuro.",
   },
@@ -71,6 +86,11 @@ const banners: Services[] = [
       main: "¿No sabes por dónde empezar?",
       second: "Te guiamos paso a paso.",
     },
+    list: [
+      "Diagnóstico tecnológico",
+      "Estrategia digital personalizada",
+      "Acompañamiento en implementación",
+    ],
     subtitle:
       "Analizamos, proponemos y ejecutamos estrategias tecnológicas adaptadas a tus objetivos.",
   },
@@ -83,10 +103,16 @@ const banners: Services[] = [
       main: "Haz que tu producto enamore a primera vista.",
       second: "Diseñamos experiencias memorables.",
     },
+    list: [
+      "Interfaces intuitivas",
+      "Experiencia de usuario optimizada",
+      "Diseño adaptable a todos los dispositivos",
+    ],
     subtitle:
       "Combinamos estética y funcionalidad para conectar con tu audiencia desde el primer clic.",
   },
 ];
+
 
 const steps = [
   {
@@ -170,267 +196,255 @@ const services = [
 // Tabs for Plans
 const plans: Plan[] = [
   {
-      category: "development",
-      name: "Plan Web Express",
-      tier: "Básico",
-      priceOld: "1.800.000",
-      priceNew: "1.600.000",
-      description:
-          "Pequeños negocios, emprendedores, freelancers que necesitan una presencia online rápida y profesional.",
-      features: {
-          included: [
-              "Diseño basado en plantilla responsiva.",
-              "Hasta 5 secciones/páginas estáticas.",
-              "Carga inicial de contenido proporcionado por el cliente.",
-              "Formulario de contacto básico.",
-              "Configuración de dominio y alojamiento (asesoramiento).",
-              "Optimización SEO básica y velocidad de carga inicial.",
-              "Una ronda de revisiones y garantía de 30 días post-lanzamiento.",
-          ],
-          excluded: [
-              "Diseño UI/UX a medida o identidad de marca.",
-              "Creación de contenido (textos, imágenes, videos).",
-              "Funcionalidades de e-commerce o gestión de usuarios.",
-              "Mantenimiento y actualizaciones continuas.",
-          ],
-      },
+    category: "development",
+    name: "Plan Web Express",
+    tier: "-78%",
+    priceOld: "1.800.000",
+    priceNew: "1.600.000",
+    description:
+      "Pequeños negocios, emprendedores, freelancers que necesitan una presencia online rápida y profesional.",
+    features: {
+      included: [
+        "Diseño basado en plantilla responsiva.",
+        "Hasta 5 secciones/páginas estáticas.",
+        "Carga inicial de contenido proporcionado por el cliente.",
+        "Formulario de contacto básico.",
+        "Configuración de dominio y alojamiento (asesoramiento).",
+        "Optimización SEO básica y velocidad de carga inicial.",
+        "Una ronda de revisiones y garantía de 30 días post-lanzamiento.",
+      ],
+    },
   },
   {
-      category: "development",
-      name: "Plan Web Pro",
-      tier: "Popular",
-      priceOld: "3.200.000",
-      priceNew: "2.700.000",
-      description:
-          "Empresas en crecimiento que buscan una web personalizada, optimizada y con funcionalidades avanzadas.",
-      features: {
-          included: [
-              "Diseño UI/UX personalizado y adaptado a tu marca.",
-              "Hasta 12 secciones/páginas dinámicas.",
-              "Carga y optimización de contenido inicial.",
-              "Formularios avanzados de contacto y cotización.",
-              "Integración con redes sociales y Google Analytics.",
-              "SEO avanzado y optimización de velocidad.",
-              "2 rondas de revisiones y garantía de 60 días post-lanzamiento.",
-              "Soporte técnico prioritario durante 2 meses.",
-          ],
-          excluded: [
-              "E-commerce completo o gestión de usuarios.",
-              "Creación de contenido multimedia profesional.",
-              "Mantenimiento anual incluido.",
-          ],
-      },
+    category: "development",
+    name: "Plan Web Pro",
+    tier: "-75%",
+    priceOld: "3.200.000",
+    priceNew: "2.700.000",
+    description:
+      "Empresas en crecimiento que buscan una web personalizada, optimizada y con funcionalidades avanzadas.",
+    features: {
+      included: [
+        "Diseño UI/UX personalizado y adaptado a tu marca.",
+        "Hasta 12 secciones/páginas dinámicas.",
+        "Carga y optimización de contenido inicial.",
+        "Formularios avanzados de contacto y cotización.",
+        "Integración con redes sociales y Google Analytics.",
+        "SEO avanzado y optimización de velocidad.",
+        "2 rondas de revisiones y garantía de 60 días post-lanzamiento.",
+        "Soporte técnico prioritario durante 2 meses.",
+      ],
+    },
   },
   {
-      category: "development",
-      name: "Plan Web Elite",
-      tier: "Premium",
-      priceOld: "6.000.000",
-      priceNew: "4.800.000",
-      description:
-          "Grandes empresas o proyectos que requieren soluciones a medida, integración de sistemas y soporte continuo.",
-      features: {
-          included: [
-              "Diseño UI/UX exclusivo y branding completo.",
-              "Sitio web ilimitado en secciones y funcionalidades.",
-              "Desarrollo de módulos personalizados (e-commerce, membresías, etc.).",
-              "Integración con APIs y sistemas externos.",
-              "Creación de contenido profesional (textos, imágenes, videos).",
-              "SEO profesional y campañas de marketing digital iniciales.",
-              "Soporte y mantenimiento durante 1 año.",
-              "Capacitación personalizada para tu equipo.",
-              "Actualizaciones y mejoras continuas.",
-              "Consultoría estratégica mensual.",
-              "Dominio y hosting premium incluidos el primer año.",
-          ],
-          excluded: [],
-      },
+    category: "development",
+    name: "Plan Web Elite",
+    tier: "Premium",
+    priceOld: "6.000.000",
+    priceNew: "4.800.000",
+    description:
+      "Grandes empresas o proyectos que requieren soluciones a medida, integración de sistemas y soporte continuo.",
+    features: {
+      included: [
+        "Diseño UI/UX exclusivo y branding completo.",
+        "Sitio web ilimitado en secciones y funcionalidades.",
+        "Desarrollo de módulos personalizados (e-commerce, membresías, etc.).",
+        "Integración con APIs y sistemas externos.",
+        "Creación de contenido profesional (textos, imágenes, videos).",
+        "SEO profesional y campañas de marketing digital iniciales.",
+        "Soporte y mantenimiento durante 1 año.",
+        "Capacitación personalizada para tu equipo.",
+        "Actualizaciones y mejoras continuas.",
+        "Consultoría estratégica mensual.",
+        "Dominio y hosting premium incluidos el primer año.",
+      ],
+    },
   },
 
   // DISEÑO
   {
-      category: "design",
-      name: "Branding Express",
-      tier: "Básico",
-      priceNew: "900.000",
-      description:
-          "Identidad visual básica para emprendimientos y marcas personales.",
-      features: {
-          included: [
-              "Logo básico (una versión).",
-              "Paleta de colores y tipografía recomendada.",
-              "Entrega en formato digital listo para uso.",
-          ],
-          excluded: [
-              "Manual de marca completo.",
-              "Diseño de piezas para redes sociales.",
-              "Identidad visual avanzada o storytelling visual.",
-          ],
-      },
+    category: "design",
+    name: "Branding Express",
+    tier: "Básico",
+    priceNew: "900.000",
+    description:
+      "Identidad visual básica para emprendimientos y marcas personales.",
+    features: {
+      included: [
+        "Logo básico (una versión).",
+        "Paleta de colores y tipografía recomendada.",
+        "Entrega en formato digital listo para uso.",
+      ],
+      excluded: [
+        "Manual de marca completo.",
+        "Diseño de piezas para redes sociales.",
+        "Identidad visual avanzada o storytelling visual.",
+      ],
+    },
   },
   {
-      category: "design",
-      name: "Branding Pro",
-      tier: "Popular",
-      priceNew: "1.800.000",
-      description:
-          "Branding profesional con entregables completos para negocios en crecimiento.",
-      features: {
-          included: [
-              "Diseño de logo profesional con variantes.",
-              "Manual de marca completo.",
-              "Tipografías, iconografía, patrones gráficos.",
-              "Diseño de tarjetas de presentación.",
-              "Diseño de piezas para redes sociales.",
-          ],
-          excluded: [
-              "Plantillas corporativas (pitch, presentaciones, etc).",
-              "Animaciones de logo o brand book interactivo.",
-          ],
-      },
+    category: "design",
+    name: "Branding Pro",
+    tier: "Popular",
+    priceNew: "1.800.000",
+    description:
+      "Branding profesional con entregables completos para negocios en crecimiento.",
+    features: {
+      included: [
+        "Diseño de logo profesional con variantes.",
+        "Manual de marca completo.",
+        "Tipografías, iconografía, patrones gráficos.",
+        "Diseño de tarjetas de presentación.",
+        "Diseño de piezas para redes sociales.",
+      ],
+      excluded: [
+        "Plantillas corporativas (pitch, presentaciones, etc).",
+        "Animaciones de logo o brand book interactivo.",
+      ],
+    },
   },
   {
-      category: "design",
-      name: "Branding Elite",
-      tier: "Premium",
-      priceNew: "3.200.000",
-      description: "Diseño de marca completo + material de marketing visual.",
-      features: {
-          included: [
-              "Todo lo del plan Pro.",
-              "Kit de marca digital e impreso.",
-              "Presentación corporativa editable.",
-              "Plantillas para pitch y redes sociales.",
-              "Storytelling visual y consultoría creativa.",
-          ],
-          excluded: [],
-      },
+    category: "design",
+    name: "Branding Elite",
+    tier: "Premium",
+    priceNew: "3.200.000",
+    description: "Diseño de marca completo + material de marketing visual.",
+    features: {
+      included: [
+        "Todo lo del plan Pro.",
+        "Kit de marca digital e impreso.",
+        "Presentación corporativa editable.",
+        "Plantillas para pitch y redes sociales.",
+        "Storytelling visual y consultoría creativa.",
+      ],
+      excluded: [],
+    },
   },
 
   // CONSULTORÍA
   {
-      category: "consulting",
-      name: "Consultoría Inicial",
-      tier: "Básico",
-      priceNew: "1.200.000",
-      description: "Diagnóstico digital y recomendaciones puntuales.",
-      features: {
-          included: [
-              "Análisis de presencia digital.",
-              "Benchmark con competidores.",
-              "Informe de recomendaciones.",
-          ],
-          excluded: ["Plan de acción detallado.", "Seguimiento posterior."],
-      },
+    category: "consulting",
+    name: "Consultoría Inicial",
+    tier: "Básico",
+    priceNew: "1.200.000",
+    description: "Diagnóstico digital y recomendaciones puntuales.",
+    features: {
+      included: [
+        "Análisis de presencia digital.",
+        "Benchmark con competidores.",
+        "Informe de recomendaciones.",
+      ],
+      excluded: ["Plan de acción detallado.", "Seguimiento posterior."],
+    },
   },
   {
-      category: "consulting",
-      name: "Consultoría Estratégica",
-      tier: "Popular",
-      priceNew: "2.400.000",
-      description: "Auditoría digital + roadmap estratégico.",
-      features: {
-          included: [
-              "Todo lo del plan básico.",
-              "Workshops de descubrimiento.",
-              "Plan de acción a 3-6 meses.",
-              "Reunión de seguimiento mensual.",
-          ],
-          excluded: [
-              "Implementación de herramientas.",
-              "Consultoría legal o financiera.",
-          ],
-      },
+    category: "consulting",
+    name: "Consultoría Estratégica",
+    tier: "Popular",
+    priceNew: "2.400.000",
+    description: "Auditoría digital + roadmap estratégico.",
+    features: {
+      included: [
+        "Todo lo del plan básico.",
+        "Workshops de descubrimiento.",
+        "Plan de acción a 3-6 meses.",
+        "Reunión de seguimiento mensual.",
+      ],
+      excluded: [
+        "Implementación de herramientas.",
+        "Consultoría legal o financiera.",
+      ],
+    },
   },
   {
-      category: "consulting",
-      name: "Consultoría Integral",
-      tier: "Premium",
-      priceNew: "4.800.000",
-      description: "Acompañamiento 360º en procesos tecnológicos y digitales.",
-      features: {
-          included: [
-              "Todo lo del plan estratégico.",
-              "Acompañamiento continuo.",
-              "Revisión y análisis de métricas.",
-              "Consultoría especializada mensual.",
-              "Soporte en implementación técnica.",
-          ],
-          excluded: [],
-      },
+    category: "consulting",
+    name: "Consultoría Integral",
+    tier: "Premium",
+    priceNew: "4.800.000",
+    description: "Acompañamiento 360º en procesos tecnológicos y digitales.",
+    features: {
+      included: [
+        "Todo lo del plan estratégico.",
+        "Acompañamiento continuo.",
+        "Revisión y análisis de métricas.",
+        "Consultoría especializada mensual.",
+        "Soporte en implementación técnica.",
+      ],
+      excluded: [],
+    },
   },
 
   // MARKETING
   {
-      category: "marketing",
-      name: "Marketing Starter",
-      tier: "Básico",
-      priceNew: "1.000.000",
-      description: "Lanzamiento digital con campañas base.",
-      features: {
-          included: [
-              "Configuración de redes y perfiles.",
-              "1 campaña publicitaria (meta o Google).",
-              "Diseño de 4 posts iniciales.",
-          ],
-          excluded: ["Manejo mensual de redes.", "Análisis y reportes de campaña."],
-      },
+    category: "marketing",
+    name: "Marketing Starter",
+    tier: "Básico",
+    priceNew: "1.000.000",
+    description: "Lanzamiento digital con campañas base.",
+    features: {
+      included: [
+        "Configuración de redes y perfiles.",
+        "1 campaña publicitaria (meta o Google).",
+        "Diseño de 4 posts iniciales.",
+      ],
+      excluded: ["Manejo mensual de redes.", "Análisis y reportes de campaña."],
+    },
   },
   {
-      category: "marketing",
-      name: "Marketing Pro",
-      tier: "Popular",
-      priceNew: "2.200.000",
-      description: "Gestión mensual de campañas y analítica.",
-      features: {
-          included: [
-              "Todo lo del Starter.",
-              "Gestión de redes sociales (hasta 2).",
-              "Campañas mensuales (meta/Google).",
-              "Informe mensual de resultados.",
-              "Optimización de campañas y segmentación.",
-          ],
-          excluded: [
-              "Creación de contenido audiovisual profesional.",
-              "Email marketing o CRM.",
-          ],
-      },
+    category: "marketing",
+    name: "Marketing Pro",
+    tier: "Popular",
+    priceNew: "2.200.000",
+    description: "Gestión mensual de campañas y analítica.",
+    features: {
+      included: [
+        "Todo lo del Starter.",
+        "Gestión de redes sociales (hasta 2).",
+        "Campañas mensuales (meta/Google).",
+        "Informe mensual de resultados.",
+        "Optimización de campañas y segmentación.",
+      ],
+      excluded: [
+        "Creación de contenido audiovisual profesional.",
+        "Email marketing o CRM.",
+      ],
+    },
   },
   {
-      category: "marketing",
-      name: "Marketing 360",
-      tier: "Premium",
-      priceNew: "4.000.000",
-      description: "Estrategia, contenido, pauta y reporting integral.",
-      features: {
-          included: [
-              "Todo lo del Pro.",
-              "Producción de contenido profesional (videos, fotos).",
-              "Email marketing, newsletters y automatización.",
-              "Consultoría y análisis mensual.",
-              "Optimización multicanal.",
-          ],
-          excluded: [],
-      },
+    category: "marketing",
+    name: "Marketing 360",
+    tier: "Premium",
+    priceNew: "4.000.000",
+    description: "Estrategia, contenido, pauta y reporting integral.",
+    features: {
+      included: [
+        "Todo lo del Pro.",
+        "Producción de contenido profesional (videos, fotos).",
+        "Email marketing, newsletters y automatización.",
+        "Consultoría y análisis mensual.",
+        "Optimización multicanal.",
+      ],
+      excluded: [],
+    },
   },
 ]
 
 const planTabs: { label: string; key: string }[] = [
   {
-      label: 'Desarrollo',
-      key: 'development'
+    label: 'Desarrollo',
+    key: 'development'
   },
   {
-      label: 'Diseño',
-      key: 'design'
+    label: 'Diseño',
+    key: 'design'
   },
   {
-      label: 'Consultoría',
-      key: 'consulting'
+    label: 'Consultoría',
+    key: 'consulting'
   },
   {
-      label: 'Marketing',
-      key: 'marketing'
+    label: 'Marketing',
+    key: 'marketing'
   }
 ]
 
@@ -445,7 +459,7 @@ export default function Home() {
   useEffect(() => {
     setTabActive('development');
   }, []);
-  
+
   function setTabActive(tab: string) {
     const filtered = plans.filter((plan) => plan.category === tab);
     setPlansView(filtered);
@@ -492,7 +506,7 @@ export default function Home() {
         </section>
         <section id="servicios">
           {/* <OurServices></OurServices> */}
-          <Grid subtitle="Nuestros Servicios" title={{ main: 'estrella', left: 'Impulsa tu negocio con nuestros servicios', right: '✨' }} showMeetingCall={false}>
+          <Grid subtitle="Nuestros Servicios" title={{ main: 'estrella', left: 'Impulsa tu negocio con nuestros servicios', right: '' }} showMeetingCall={false}>
             <InfoCards cards={services} showSteps={false} />
           </Grid>
         </section>
@@ -500,27 +514,33 @@ export default function Home() {
           <AboutUs />
         </section>
         <section id="progreso">
-          <Grid  subtitle="Como conectamos" title={{ main: 'camino', left: 'Nuestro', right: 'hacia proyectos que brillan 🛣️✨' }}>
+          <Grid subtitle="Como conectamos" title={{ main: 'camino', left: 'Nuestro', right: 'hacia proyectos que brillan' }}>
             <InfoCards cards={steps} />
           </Grid>
         </section>
         <section id="planes">
-           <main className="w-full min-h-[100vh] py-12 px-4 lg:w-4/5 lg:mx-auto lg:my-0">
-              <header className="w-full flex flex-col items-center justify-center">
-                  <span className="parallax text-[var(--color-primary-to-white)]">Planes a tu medida</span>
-                  <h1 className="parallax text-3xl text-center font-bold lg:w-[70%] lg:text-4xl"><span className="text-[var(--color-primary-to-white)]">Diseñamos el éxito juntos:</span> Explora nuestras soluciones flexibles 📈</h1>
-              </header>
-              
-              <TabsNav tabs={planTabs} tabActive={planTabActive} setTabActive={setTabActive} />
-              
-              <section className="w-full overflow-x-auto lg:overflow-y-hidden py-8">
-                  <div className="flex justify-start gap-4 px-4 min-w-full snap-x snap-mandatory scroll-smooth">                      
-                    <Plans plansView={plansView} />
-                  </div>
-              </section>
+          <main className="w-full min-h-[100vh] py-12 px-4 lg:w-4/5 lg:mx-auto lg:my-0">
+            <header className="w-full flex flex-col items-center justify-center">
+              <span className="parallax text-[var(--color-primary-to-white)]">Planes a tu medida</span>
+              <h1 className="parallax text-3xl text-center font-bold lg:w-[70%] lg:text-4xl"><span className="text-[var(--color-primary-to-white)]">Diseñamos el éxito juntos:</span> Explora nuestras soluciones flexibles</h1>
+            </header>
+
+            <TabsNav tabs={planTabs} tabActive={planTabActive} setTabActive={setTabActive} />
+
+            <section className="w-full overflow-x-auto lg:overflow-y-hidden py-8">
+              <div className="flex justify-start gap-4 px-4 min-w-full snap-x snap-mandatory scroll-smooth">
+                <Plans plansView={plansView} />
+              </div>
+            </section>
           </main>
         </section>
         <section id="portafolio">
+          <div className="text-center flex flex-col items-center">
+            <span className="parallax text-[var(--color-primary)] text-lg font-medium">Nuestro portafolio</span>
+            <h1 className="parallax text-2xl xl:text-3xl font-bold text-[var(--color-black)] mt-4 text-center max-w-[50%]">
+              <span className="text-[var(--color-primary)]">Proyectos que transforman ideas</span> en soluciones reales y efectivas
+            </h1>
+          </div>
           <Portfolio />
         </section>
         <section id="contacto" className="bg-[#5656b5] bg-ribbon">

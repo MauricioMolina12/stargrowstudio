@@ -96,6 +96,7 @@
   position: relative;
   overflow: hidden;
   width: 40%;
+  height: 100%;
 
   &::before,
   &::after {
@@ -157,13 +158,13 @@
   z-index: 3;
 
   @media (max-width: 768px) {
-    transform: translateX(0) scale(.8);
+    transform: translateX(0);
   }
 }
 
 .banner__slide.prev {
   opacity: 0.5;
-  transform: translateY(-120%) scale(.8);
+  transform: translateY(-120%);
   z-index: 2;
 
   @media (max-width: 768px) {
@@ -205,6 +206,7 @@
   gap: 25px;
   text-align: center;
 }
+
 .banner__description .banner__description--hero-service {
   border-radius: 10px;
   font-weight: 500;
@@ -228,6 +230,7 @@
   color: var(--color-dark-to-yellow);
   line-height: 22px;
 }
+
 .banner__description .banner__description--hero-title span {
   color: var(--color-primary-to-white);
 }
@@ -244,6 +247,11 @@
     align-items: center;
     gap: 10px;
     margin-block: 5px;
+    font-size: clamp(10px, 1vw, 12px);
+    
+    .text-green-500{
+      font-size: clamp(10px, 1vw, 12px);
+    }
   }
 }
 
@@ -278,6 +286,7 @@
   .banner__description .banner__description--hero-title {
     font-size: clamp(1.2rem, 2vw, 2rem);
   }
+
   .banner__description .banner__description--hero-subtitle,
   .banner__description .banner__description--hero-service {
     font-size: clamp(0.8rem, 2vw, 1.2rem);
@@ -289,26 +298,43 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
+  .banner__content {
+    flex-direction: row;
+    align-items: center;
+    padding-left: 30px;
+  }
+
+  .banner__description .banner__description--hero {
+    flex-direction: column;
+    align-items: start;
+  }
+
   .banner__description .banner__description--hero-service {
-    font-size: clamp(1.5rem, 2vw, 2rem);
+    font-size: clamp(1rem, 2vw, 1rem);
   }
 
   .banner__description .banner__description--hero-title {
     max-width: 80%;
-    line-height: 44px;
-    padding-inline: 10px;
-    font-size: clamp(3rem, 2.5vw, 3.5rem);
+    line-height: 40px;
+    text-align: start;
+    font-size: clamp(2.2rem, 2vw, 3.2rem);
+    padding: 0;
   }
 
   .banner__description .banner__description--hero-subtitle {
-    font-size: clamp(1.5rem, 2vw, 2rem);
+    font-size: clamp(.8rem, 1vw, 1rem);
     max-width: 80%;
   }
 
-  .banner__image img {
-    max-width: 100%;
+
+  .banner__image {
     height: 100%;
+  }
+
+  .banner__image img {
+    max-width: 70%;
+    height: 70%;
     object-fit: contain;
   }
 }
@@ -364,6 +390,7 @@
     text-align: start;
     max-width: 100%;
   }
+
   .banner__description .banner__description--hero-subtitle {
     font-size: clamp(0.8rem, 1vw, 0.9rem);
     text-align: start;
@@ -379,6 +406,7 @@
     transform: translateX(20px);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0px);
     opacity: 1;

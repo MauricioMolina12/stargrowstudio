@@ -64,7 +64,7 @@ const NavBar = () => {
                 alt="logo sgs"
               />
               <figcaption className="text-[var(--color-primary-to-white)] font-bold text-lg whitespace-nowrap">
-                Star Grow
+                Star Grow Studio
               </figcaption>
             </figure>
           </Link>

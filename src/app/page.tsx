@@ -1,6 +1,23 @@
 'use client'
 import Image from "next/image";
 
+// Icons
+import {
+  Search,
+  Calendar,
+  PenTool,
+  Laptop,
+  Rocket,
+  BarChart3,
+  Code,
+  Smartphone,
+  PieChart,
+  Database,
+  Megaphone,
+  Palette,
+} from "lucide-react";
+
+
 
 // Components
 import Banner from "./components/shared/Banner";
@@ -25,10 +42,12 @@ import { useMeeting } from "./context/MeetingContext";
 import { useEffect, useState } from "react";
 import TabsNav from "./components/shared/TabsNav";
 import InfoCards from "./components/shared/InfoCards";
+import DetailsPanel from "./components/shared/DetailsPanel";
+import ModernAppsSection from "./components/shared/ModernAppsSection";
 
 const banners: Services[] = [
   {
-    image: "img/software.png",
+    images: ["img/hero-banner/desarrollo/watch.png", "img/hero-banner/desarrollo/ecommerce.png", "img/hero-banner/desarrollo/airpods.jpg", "img/hero-banner/desarrollo/website-business.jpg"],
     alt: "Desarrollador",
     service: "Desarrollo de software a medida",
     icon: "/icons/computer.png",
@@ -44,7 +63,7 @@ const banners: Services[] = [
     subtitle: "Desarrollamos tecnología con propósito, visión y estrategia.",
   },
   {
-    image: "img/powerbi.png",
+    images: ["img/hero-banner/analisis-de-datos/dashboard-graphs.jpg", "img/hero-banner/analisis-de-datos/dashboard-graphs-2.jpg", "img/hero-banner/analisis-de-datos/dashboard-graphs-3.jpg", "img/hero-banner/analisis-de-datos/dashboard-graphs-4.jpg"],
     alt: "Analista de datos",
     service: "Análisis de datos y visualización",
     icon: "/icons/analisis.png",
@@ -78,7 +97,7 @@ const banners: Services[] = [
       "Diseñamos estructuras de datos eficientes, escalables y preparadas para el futuro.",
   },
   {
-    image: "img/consultoria.webp",
+    images: ["img/hero-banner/marketing-digital/mkting-digital-2.jpg", "img/hero-banner/marketing-digital/mkting-digital-2.jpg", "img/hero-banner/marketing-digital/mkting-digital.jpg"],
     alt: "Consultoría",
     service: "Consultoría en transformación digital",
     icon: "/icons/consultoria.png",
@@ -94,101 +113,95 @@ const banners: Services[] = [
     subtitle:
       "Analizamos, proponemos y ejecutamos estrategias tecnológicas adaptadas a tus objetivos.",
   },
-  {
-    image: "img/design.webp",
-    alt: "Diseño",
-    service: "Diseño UX/UI centrado en el usuario",
-    icon: "/icons/diseño.png",
-    title: {
-      main: "Haz que tu producto enamore a primera vista.",
-      second: "Diseñamos experiencias memorables.",
-    },
-    list: [
-      "Interfaces intuitivas",
-      "Experiencia de usuario optimizada",
-      "Diseño adaptable a todos los dispositivos",
-    ],
-    subtitle:
-      "Combinamos estética y funcionalidad para conectar con tu audiencia desde el primer clic.",
-  },
+  // {
+  //   image: "img/design.webp",
+  //   alt: "Diseño",
+  //   service: "Diseño UX/UI centrado en el usuario",
+  //   icon: "/icons/diseño.png",
+  //   title: {
+  //     main: "Haz que tu producto enamore a primera vista.",
+  //     second: "Diseñamos experiencias memorables.",
+  //   },
+  //   list: [
+  //     "Interfaces intuitivas",
+  //     "Experiencia de usuario optimizada",
+  //     "Diseño adaptable a todos los dispositivos",
+  //   ],
+  //   subtitle:
+  //     "Combinamos estética y funcionalidad para conectar con tu audiencia desde el primer clic.",
+  // },
 ];
 
 
 const steps = [
   {
-    icon: "icons/search.gif",
+    icon: { component: Search, color: "text-blue-500" },
     title: "Descubrimiento",
-    description:
-      "Analizamos tus necesidades, objetivos y público. Esta etapa es clave para entender tu marca y definir el rumbo correcto.",
+    description: "Analizamos tus necesidades, objetivos y público...",
   },
   {
-    icon: "icons/calendar.gif",
+    icon: { component: Calendar, color: "text-green-500" },
     title: "Estrategia y Planificación",
-    description:
-      "Definimos objetivos claros y un plan estratégico para guiar tu proyecto con éxito.",
+    description: "Definimos objetivos claros y un plan estratégico...",
   },
   {
-    icon: "icons/draw.gif",
+    icon: { component: PenTool, color: "text-purple-500" },
     title: "Diseño Creativo",
-    description:
-      "Nuestro equipo diseña piezas visuales impactantes: desde tu logotipo hasta contenido para redes.",
+    description: "Nuestro equipo diseña piezas visuales impactantes...",
   },
   {
-    icon: "icons/laptop-settings.gif",
+    icon: { component: Laptop, color: "text-orange-500" },
     title: "Desarrollo & Producción",
-    description:
-      "Construimos tu sitio web, e-commerce o app, y creamos contenido audiovisual de alta calidad.",
+    description: "Construimos tu sitio web, e-commerce o app...",
   },
   {
-    icon: "icons/rocket.gif",
+    icon: { component: Rocket, color: "text-pink-500" },
     title: "Lanzamiento y Activación",
-    description:
-      "Ponemos en marcha tu proyecto en redes, campañas publicitarias, mailing, SEO y más.",
+    description: "Ponemos en marcha tu proyecto en redes...",
   },
   {
-    icon: "icons/chart-rounded.gif",
+    icon: { component: BarChart3, color: "text-indigo-500" },
     title: "Medición y Optimización",
-    description:
-      "Monitorizamos resultados y ajustamos estrategias para lograr impacto y crecimiento constante.",
+    description: "Monitorizamos resultados y ajustamos estrategias...",
   },
-]
+];
 
 const services = [
   {
-    icon: "icons/code.gif",
+    icon: { component: Code, color: "text-cyan-500" },
     title: "Desarrollo de software a medida",
     slug: "desarrollo-software",
-    description: "Creamos aplicaciones web adaptadas a tus necesidades y objetivos.",
+    description: "Creamos aplicaciones web adaptadas...",
   },
   {
-    icon: "icons/mobile2.gif",
+    icon: { component: Smartphone, color: "text-green-600" },
     title: "Desarrollo de apps móviles",
     slug: "desarrollo-apps",
-    description: "Creamos aplicaciones móviles adaptadas a tus necesidades y objetivos.",
+    description: "Creamos aplicaciones móviles adaptadas...",
   },
   {
-    icon: "icons/chart.gif",
+    icon: { component: PieChart, color: "text-yellow-500" },
     title: "Análisis de datos y visualización",
     slug: "analisis-datos",
-    description: "Convierte tus datos en decisiones inteligentes con dashboards personalizados.",
+    description: "Convierte tus datos en decisiones inteligentes...",
   },
   {
-    icon: "icons/bdd.gif",
+    icon: { component: Database, color: "text-blue-700" },
     title: "Arquitectura y gestión de bases de datos",
     slug: "bases-datos",
-    description: "Optimizamos la estructura de datos para asegurar rendimiento y escalabilidad.",
+    description: "Optimizamos la estructura de datos...",
   },
   {
-    icon: "icons/megaphone.gif",
+    icon: { component: Megaphone, color: "text-red-500" },
     title: "Consultoría en transformación digital",
     slug: "consultoria-transformacion",
-    description: "Te guiamos paso a paso hacia una transformación tecnológica estratégica.",
+    description: "Te guiamos paso a paso hacia una transformación...",
   },
   {
-    icon: "icons/design.gif",
+    icon: { component: Palette, color: "text-purple-600" },
     title: "Diseño UX/UI centrado en el usuario",
     slug: "diseno-ux-ui",
-    description: "Creamos experiencias digitales memorables que conectan con tu audiencia.",
+    description: "Creamos experiencias digitales memorables...",
   },
 ];
 
@@ -275,11 +288,6 @@ const plans: Plan[] = [
         "Paleta de colores y tipografía recomendada.",
         "Entrega en formato digital listo para uso.",
       ],
-      excluded: [
-        "Manual de marca completo.",
-        "Diseño de piezas para redes sociales.",
-        "Identidad visual avanzada o storytelling visual.",
-      ],
     },
   },
   {
@@ -296,10 +304,6 @@ const plans: Plan[] = [
         "Tipografías, iconografía, patrones gráficos.",
         "Diseño de tarjetas de presentación.",
         "Diseño de piezas para redes sociales.",
-      ],
-      excluded: [
-        "Plantillas corporativas (pitch, presentaciones, etc).",
-        "Animaciones de logo o brand book interactivo.",
       ],
     },
   },
@@ -334,7 +338,6 @@ const plans: Plan[] = [
         "Benchmark con competidores.",
         "Informe de recomendaciones.",
       ],
-      excluded: ["Plan de acción detallado.", "Seguimiento posterior."],
     },
   },
   {
@@ -349,10 +352,6 @@ const plans: Plan[] = [
         "Workshops de descubrimiento.",
         "Plan de acción a 3-6 meses.",
         "Reunión de seguimiento mensual.",
-      ],
-      excluded: [
-        "Implementación de herramientas.",
-        "Consultoría legal o financiera.",
       ],
     },
   },
@@ -387,7 +386,6 @@ const plans: Plan[] = [
         "1 campaña publicitaria (meta o Google).",
         "Diseño de 4 posts iniciales.",
       ],
-      excluded: ["Manejo mensual de redes.", "Análisis y reportes de campaña."],
     },
   },
   {
@@ -403,10 +401,6 @@ const plans: Plan[] = [
         "Campañas mensuales (meta/Google).",
         "Informe mensual de resultados.",
         "Optimización de campañas y segmentación.",
-      ],
-      excluded: [
-        "Creación de contenido audiovisual profesional.",
-        "Email marketing o CRM.",
       ],
     },
   },
@@ -493,7 +487,7 @@ export default function Home() {
 
   return (
     <>
-      <main>
+      <main className="flex flex-col gap-12">
         <section id="inicio">
           <Banner
             banners={banners}
@@ -505,7 +499,6 @@ export default function Home() {
           />
         </section>
         <section id="servicios">
-          {/* <OurServices></OurServices> */}
           <Grid subtitle="Nuestros Servicios" title={{ main: 'estrella', left: 'Impulsa tu negocio con nuestros servicios', right: '' }} showMeetingCall={false}>
             <InfoCards cards={services} showSteps={false} />
           </Grid>
@@ -534,6 +527,25 @@ export default function Home() {
             </section>
           </main>
         </section>
+
+
+        <section id="support" className="flex mx-auto my-0 items-center justify-center bg-[var(--color-primary)]">
+          <div className="wrapper lg:pl-[3rem]">
+            <DetailsPanel content={{
+              styles: { colorTitle: "#fff", colorItems: "#d9d9d9" },
+              image: '/img/web-image-1.jpg',
+              title: 'Soluciones digitales completas para hacer crecer tu marca',
+              items: [
+                'Desarrollo web y móvil adaptado a tus necesidades.',
+                'Diseño UX/UI centrado en la experiencia del usuario.',
+                'Estrategias digitales que impulsan tu crecimiento.'
+              ]
+            }}></DetailsPanel>
+          </div>
+        </section>
+
+
+
         <section id="portafolio">
           <div className="text-center flex flex-col items-center">
             <span className="parallax text-[var(--color-primary)] text-lg font-medium">Nuestro portafolio</span>
@@ -543,6 +555,14 @@ export default function Home() {
           </div>
           <Portfolio />
         </section>
+
+        <section
+          id="section-mobile"
+          className="w-full h-fit flex flex-col gap-2.5 items-center justify-center pt-8 relative overflow-hidden">
+          <ModernAppsSection item={{ image: '/img/mockup-mobile.png', name: 'Apps que transforman tu día', gradient: true }}></ModernAppsSection>
+        </section>
+
+
         <section id="contacto" className="bg-[#5656b5] bg-ribbon">
           <Contact onFeedback={handleContactFeedback} />
         </section>

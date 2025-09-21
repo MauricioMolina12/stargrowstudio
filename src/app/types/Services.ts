@@ -8,7 +8,8 @@ export interface Services {
   service?: string;
   title: { main: string; second: string };
   subtitle: string;
-  image: string;
+  image?: string;
+  images?: string[];
   alt: string;
   list?: string[],
   callAction?: CallAction[];

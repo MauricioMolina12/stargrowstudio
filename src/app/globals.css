@@ -54,7 +54,7 @@ main {
 
 section:not(#contacto) {
   scroll-padding-top: 400px !important;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .sticky-top-0 {
@@ -145,4 +145,19 @@ section:not(#contacto) {
 
 .dark-body {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 1s ease-out forwards;
 }

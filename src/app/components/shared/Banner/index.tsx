@@ -33,8 +33,11 @@ export default function Banner({
   const { isDark } = useDarkMode();
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [animate, setAnimate] = useState(false);
+
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
 
   const bannerContentRef = useRef<HTMLDivElement>(null);
@@ -59,15 +62,13 @@ export default function Banner({
     if (isDynamic && bannerList.length > 1) {
       intervalRef.current = setInterval(() => {
         setAnimate(true);
-        setTimeout(() => setAnimate(false), 500);
+        setTimeout(() => setAnimate(false), 600000);
         setCurrentIndex((prev) => {
           const nextIndex = (prev + 1) % bannerList.length;
-          console.log("Banner actual:", bannerList[nextIndex]);
-          console.log("Lista:", bannerList[nextIndex].list);
           return nextIndex;
         });
 
-      }, 10000);
+      }, 80000);
     }
 
     const handleParallax = () => {
@@ -85,6 +86,16 @@ export default function Banner({
     };
   }, [isDynamic, bannerList.length]);
 
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) =>
+        prev + 1 >= (currentBanner?.images?.length ?? 0) ? 0 : prev + 1
+      );
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [currentBanner?.images]);
 
 
 
@@ -130,13 +141,30 @@ export default function Banner({
               </p>
             </div>
           </div>
-          <div className={styles.banner__image}>
-            <img
-              src={currentBanner.image}
-              alt={currentBanner.alt}
-              className={styles["banner-image"]}
-            />
+          <div className={styles.banner__sliderContainer}>
+            {currentBanner.images && currentBanner?.images!.map((image, index) => {
+              const isActive = index === currentSlide;
+              const isPrev = index === (currentSlide - 1 + currentBanner.images!.length) % currentBanner.images!.length;
+              const isNext = index === (currentSlide + 1) % currentBanner.images!.length;
+
+              return (
+                <div
+                  key={index}
+                  className={`${styles.banner__slide} 
+                              ${isActive ? styles.active : ""} 
+                              ${isPrev ? styles.prev : ""} 
+                              ${isNext ? styles.next : ""}`}
+                >
+                  <img src={image} alt={`imagen-${index}`} />
+                </div>
+              );
+            })}
           </div>
+
+
+
+
+
         </div>
       </div>
     </section>

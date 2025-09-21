@@ -15,7 +15,7 @@ export default function Plans({ plansView }: PlansProps) {
                 <div
                     key={plan.name}
                     className={`parallax relative snap-start bg-[#FAFBFF] w-[340px] flex-shrink-0 rounded-2xl overflow-hidden border-2  ${plan.tier === "Premium"
-                        ? "border-[var(--color-primary)]"
+                        ? "border-[var(--color-primary)] after:content-[''] after:absolute after:inset-0 after:bg-[var(--color-primary)] after:opacity-10 after:-z-10"
                         : "border-gray-100"
                         }`}>
                     <div className="relative p-6 flex flex-col justify-between h-full">
@@ -35,7 +35,7 @@ export default function Plans({ plansView }: PlansProps) {
                             )}
                             <p className={`text-[30px] font-bold text-[var(--color-primary)]`}>
                                 ${plan.priceNew}
-                                <span className="text-sm font-normal text-white"> <span className={`font-semibold ${plan.tier === 'Premium' ? 'text-white' : 'text-gray-700'}`}>(COP)</span></span>
+                                <span className="text-sm font-normal text-white"> <span className="text-black">(COP)</span></span>
                             </p>
                         </div>
 

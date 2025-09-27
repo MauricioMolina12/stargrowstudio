@@ -10,6 +10,7 @@ type Props = {
     subtitle: string;
     showMeetingCall?: boolean;
     children?: ReactNode; // <-- Add this line
+    showSteps?: boolean
 };
 
 const Grid = ({ title, subtitle, showMeetingCall = true, children}: Props) => {

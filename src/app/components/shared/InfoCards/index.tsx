@@ -57,7 +57,7 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
             </ul>
           )}
 
-          {card.slug && (
+          {/* {card.slug && (
             <button onClick={() => detailsService(card)} className="cursor-pointer mt-2 text-[var(--color-primary)] flex items-center gap-1 font-medium transition-colors text-[0.9rem]">
               Leer más
               {!loadingDetails[card.slug] ? (
@@ -65,7 +65,7 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
               ) : <div className="loader w-5 h-5 border border-white border-t-[var(--color-primary)] rounded-[50%] animate-spin"></div>
               }
             </button>
-          )}
+          )} */}
         </div>
       ))}
     </>

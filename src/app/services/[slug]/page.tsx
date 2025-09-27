@@ -3,6 +3,7 @@ import Banner from "@/app/components/shared/Banner";
 import Grid from "@/app/components/shared/Grid";
 import SliderAutomatic from "@/app/components/shared/SliderAutomatic";
 import SliderProjects from "@/app/components/shared/SliderProjects";
+import InfoCards from "@/app/components/shared/InfoCards";
 
 export default function ServiceSlugPage({ params, }: { params: { slug: string }; }) {
 
@@ -56,7 +57,9 @@ export default function ServiceSlugPage({ params, }: { params: { slug: string };
             <span>{service.service}</span>
           </aside>
         </div>
-        <Grid showSteps={false} showMeetingCall={false} cards={steps} title={{ main: 'brillar', left: 'Ventajas que harán', right: 'tu app' }} subtitle="Cómo conectamos" ></Grid>
+        <Grid showMeetingCall={false} title={{ main: 'brillar', left: 'Ventajas que harán', right: 'tu app' }} subtitle="Cómo conectamos" >
+          <InfoCards cards={steps} showSteps={false} />
+        </Grid>
 
         {/* Techs */}
         {service.techs && (

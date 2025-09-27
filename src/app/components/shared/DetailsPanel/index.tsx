@@ -16,9 +16,9 @@ type DetailsProps = {
 export default function DetailsPanel({ content }: DetailsProps) {
     return (
         <section className="flex flex-col lg:flex-row justify-between items-center w-full">
-            <div className="p-4 lg:w-1/2 lg:p-0">
+            <div className="p-4 lg:w-1/2 lg:p-0 flex flex-col gap-4">
                 <h2
-                    className="text-3xl font-bold mb-4"
+                    className="text-4xl font-bold mb-4"
                     style={{ color: content.styles?.colorTitle ?? "#222" }}
                 >
                     {content.title}
@@ -31,7 +31,7 @@ export default function DetailsPanel({ content }: DetailsProps) {
                     {content.items?.map((item, idx) => (
                         <li key={idx} className="flex items-center gap-2">
                             <Check className="text-green-500 w-[1rem] h-[1rem]" />
-                            <span className="text-[1rem]">{item}</span>
+                            <span className="text-xl">{item}</span>
                         </li>
                     ))}
                 </ul>

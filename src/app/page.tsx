@@ -79,23 +79,23 @@ const banners: Services[] = [
     subtitle:
       "Diseñamos dashboards y reportes personalizados para impulsar tu crecimiento.",
   },
-  {
-    image: "img/bases-de-datos.webp",
-    alt: "Bases de datos",
-    service: "Arquitectura y gestión de bases de datos",
-    icon: "/icons/basesdedatos.png",
-    title: {
-      main: "Tu información siempre segura y accesible.",
-      second: "Optimizamos el corazón de tu sistema.",
-    },
-    list: [
-      "Modelado de bases de datos",
-      "Optimización de rendimiento",
-      "Alta disponibilidad y respaldo",
-    ],
-    subtitle:
-      "Diseñamos estructuras de datos eficientes, escalables y preparadas para el futuro.",
-  },
+  // {
+  //   image: "img/bases-de-datos.webp",
+  //   alt: "Bases de datos",
+  //   service: "Arquitectura y gestión de bases de datos",
+  //   icon: "/icons/basesdedatos.png",
+  //   title: {
+  //     main: "Tu información siempre segura y accesible.",
+  //     second: "Optimizamos el corazón de tu sistema.",
+  //   },
+  //   list: [
+  //     "Modelado de bases de datos",
+  //     "Optimización de rendimiento",
+  //     "Alta disponibilidad y respaldo",
+  //   ],
+  //   subtitle:
+  //     "Diseñamos estructuras de datos eficientes, escalables y preparadas para el futuro.",
+  // },
   {
     images: ["img/hero-banner/marketing-digital/mkting-digital-2.jpg", "img/hero-banner/marketing-digital/mkting-digital-2.jpg", "img/hero-banner/marketing-digital/mkting-digital.jpg"],
     alt: "Consultoría",
@@ -137,71 +137,84 @@ const steps = [
   {
     icon: { component: Search, color: "text-blue-500" },
     title: "Descubrimiento",
-    description: "Analizamos tus necesidades, objetivos y público...",
+    description:
+      "Analizamos a fondo tus necesidades, objetivos y el perfil de tu público. En esta etapa recopilamos información clave que nos permitirá comprender el contexto de tu negocio y definir las oportunidades de crecimiento.",
   },
   {
     icon: { component: Calendar, color: "text-green-500" },
     title: "Estrategia y Planificación",
-    description: "Definimos objetivos claros y un plan estratégico...",
+    description:
+      "Definimos metas claras y construimos un plan estratégico a la medida de tu proyecto. Establecemos prioridades, recursos y tiempos para asegurar que cada acción esté orientada a alcanzar los resultados esperados.",
   },
   {
     icon: { component: PenTool, color: "text-purple-500" },
     title: "Diseño Creativo",
-    description: "Nuestro equipo diseña piezas visuales impactantes...",
+    description:
+      "Creamos piezas visuales atractivas y coherentes con tu identidad de marca. Nuestro equipo se enfoca en transmitir tus valores de manera impactante y generar experiencias memorables para tus usuarios.",
   },
   {
     icon: { component: Laptop, color: "text-orange-500" },
     title: "Desarrollo & Producción",
-    description: "Construimos tu sitio web, e-commerce o app...",
+    description:
+      "Transformamos las ideas en soluciones digitales funcionales. Ya sea un sitio web, un e-commerce o una aplicación, implementamos tecnologías modernas con un enfoque en calidad, usabilidad y escalabilidad.",
   },
   {
     icon: { component: Rocket, color: "text-pink-500" },
     title: "Lanzamiento y Activación",
-    description: "Ponemos en marcha tu proyecto en redes...",
+    description:
+      "Publicamos tu proyecto en los canales adecuados y activamos campañas para alcanzar a tu audiencia. Nos aseguramos de que la implementación sea fluida y que el impacto inicial sea fuerte y positivo.",
   },
   {
     icon: { component: BarChart3, color: "text-indigo-500" },
     title: "Medición y Optimización",
-    description: "Monitorizamos resultados y ajustamos estrategias...",
+    description:
+      "Evaluamos el rendimiento a través de métricas clave y analizamos los resultados obtenidos. Con base en los datos, realizamos ajustes estratégicos para optimizar el impacto y potenciar el crecimiento continuo.",
   },
 ];
+
 
 const services = [
   {
     icon: { component: Code, color: "text-cyan-500" },
     title: "Desarrollo de software a medida",
     slug: "desarrollo-software",
-    description: "Creamos aplicaciones web adaptadas...",
+    description:
+      "Diseñamos y desarrollamos aplicaciones web adaptadas a las necesidades de tu negocio, con tecnologías modernas, escalables y seguras.",
   },
   {
     icon: { component: Smartphone, color: "text-green-600" },
     title: "Desarrollo de apps móviles",
     slug: "desarrollo-apps",
-    description: "Creamos aplicaciones móviles adaptadas...",
+    description:
+      "Creamos aplicaciones móviles nativas e híbridas con un alto rendimiento y experiencia de usuario fluida, disponibles en iOS y Android.",
   },
   {
     icon: { component: PieChart, color: "text-yellow-500" },
     title: "Análisis de datos y visualización",
     slug: "analisis-datos",
-    description: "Convierte tus datos en decisiones inteligentes...",
+    description:
+      "Transformamos tus datos en información clara y accionable mediante dashboards interactivos, reportes inteligentes y visualizaciones atractivas.",
   },
   {
     icon: { component: Database, color: "text-blue-700" },
     title: "Arquitectura y gestión de bases de datos",
     slug: "bases-datos",
-    description: "Optimizamos la estructura de datos...",
+    description:
+      "Diseñamos, optimizamos y administramos bases de datos eficientes y seguras, garantizando integridad, escalabilidad y alto rendimiento.",
   },
   {
     icon: { component: Megaphone, color: "text-red-500" },
     title: "Consultoría en transformación digital",
     slug: "consultoria-transformacion",
-    description: "Te guiamos paso a paso hacia una transformación...",
+    description:
+      "Acompañamos a tu empresa en la adopción de nuevas tecnologías y procesos digitales, maximizando la productividad y la innovación.",
   },
   {
     icon: { component: Palette, color: "text-purple-600" },
     title: "Diseño UX/UI centrado en el usuario",
     slug: "diseno-ux-ui",
-    description: "Creamos experiencias digitales memorables...",
+    description:
+      "Creamos interfaces modernas, accesibles y enfocadas en el usuario, generando experiencias digitales memorables y funcionales.",
   },
 ];
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { cardGrid } from "@/app/types/cards"
+import  Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useIntersectionObserver } from "@/app/hooks/useIntersectionObserver";
@@ -43,6 +44,18 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
               />
             );
           })()}
+          {card.iconImg && (() => {
+            const icon = card.iconImg;
+            return (
+              <Image
+                src={icon}
+                alt={card.title}
+                width={40}
+                height={40}
+                className="w-10 h-10 bg-gray-100 p-2 rounded-2xl"
+              />
+            );
+          })()}
 
 
           <h2 className="text-[1rem] font-[600] text-[var(--color-dark)]">{card.title}</h2>
@@ -57,7 +70,7 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
             </ul>
           )}
 
-          {/* {card.slug && (
+          {card.slug && (
             <button onClick={() => detailsService(card)} className="cursor-pointer mt-2 text-[var(--color-primary)] flex items-center gap-1 font-medium transition-colors text-[0.9rem]">
               Leer más
               {!loadingDetails[card.slug] ? (
@@ -65,7 +78,7 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
               ) : <div className="loader w-5 h-5 border border-white border-t-[var(--color-primary)] rounded-[50%] animate-spin"></div>
               }
             </button>
-          )} */}
+          )}
         </div>
       ))}
     </>

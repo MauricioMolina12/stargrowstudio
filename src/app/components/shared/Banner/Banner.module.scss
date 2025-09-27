@@ -397,6 +397,13 @@
   }
 }
 
+
+@media (min-width: 1536px) {
+  .banner__description .banner__description--hero-title {
+    line-height: 1;
+  }
+}
+
 .animated {
   animation: slideFade 0.5s ease;
 }

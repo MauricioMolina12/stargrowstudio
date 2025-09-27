@@ -534,7 +534,7 @@ export default function Home() {
             <TabsNav tabs={planTabs} tabActive={planTabActive} setTabActive={setTabActive} />
 
             <section className="w-full overflow-x-auto lg:overflow-y-hidden py-8">
-              <div className="flex justify-start gap-4 px-4 min-w-full snap-x snap-mandatory scroll-smooth">
+              <div className="flex justify-start gap-4 px-4 min-w-full snap-x snap-mandatory scroll-smooth 2xl:justify-center 2xl:gap-10">
                 <Plans plansView={plansView} />
               </div>
             </section>

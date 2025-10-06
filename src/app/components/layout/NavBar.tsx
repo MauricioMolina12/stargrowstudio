@@ -16,11 +16,54 @@ import { useIsDesktop } from "@/app/hooks/useIsDesktop";
 import { useRouter } from "next/navigation";
 import ContentCard from "../shared/ContentCard";
 
+interface routeStyles {
+  navClass: string,
+  logo: string,
+  textClass: string
+  menuClass?: string
+  itemsMenuClass?: string
+  ctaClassText?: string
+  ctaClassBg?: string
+}
+
 const navItems: { label: string, path?: string, isDropdown?: boolean }[] = [
   { label: "Precios" },
   { label: "Servicios", isDropdown: true },
   { label: "Explorar", isDropdown: true },
 ];
+
+const routeStyles: Record<
+  string, routeStyles> = {
+  "/privacy-policy": {
+    navClass: "bg-[#5656B5] text-white",
+    logo: "/logo-white.png",
+    textClass: "text-white",
+    menuClass: "bg-[var(--color-primary)]",
+    itemsMenuClass: "text-white",
+    ctaClassBg: "bg-white",
+    ctaClassText: "text-[var(--color-primary)]"
+  },
+  "/terms": {
+    navClass: "bg-black text-white",
+    logo: "/logo-white.png",
+    textClass: "text-white",
+  },
+  "/about-us": {
+    navClass: "bg-gray-100 text-gray-900",
+    logo: "/logo.png",
+    textClass: "text-gray-900",
+  },
+};
+
+const defaultStyle = {
+  navClass: "bg-[var(--color-white-to-primary)] text-[var(--color-primary-to-white)]",
+  logo: "/logo.png",
+  textClass: "text-[var(--color-primary-to-white)]",
+  menuClass: "bg-transparent",
+  itemsMenuClass: "text-gray-500",
+  ctaClassBg: "bg-[var(--color-primary)]",
+  ctaClassText: "text-white"
+};
 
 const NavBar = () => {
   // const activeSection = useActiveSection(navItems);
@@ -32,7 +75,9 @@ const NavBar = () => {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  const currentStyle = routeStyles[pathname] ?? defaultStyle;
 
+  const navClass = `w-full sticky left-0 top-0 z-50 ${currentStyle.navClass}`;
   const { show, isVisible } = useMeeting();
   const isDesktop = useIsDesktop();
   const router = useRouter();
@@ -47,11 +92,13 @@ const NavBar = () => {
 
 
 
+
+
   const toggleSideBar = () => setStateSideBar((prev) => !prev);
 
 
   return (
-    <nav className="w-full sticky left-0 top-0 bg-[var(--color-white-to-primary)] z-50">
+    <nav className={navClass}>
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between px-6 py-3">
 
         {/* Logo y nombre */}
@@ -60,32 +107,35 @@ const NavBar = () => {
             <figure className="flex items-center gap-3">
               <img
                 className="h-8 w-auto object-contain"
-                src={"/logo.png"}
+                src={currentStyle.logo}
                 alt="logo sgs"
               />
-              <figcaption className="text-[var(--color-primary-to-white)] font-bold text-lg whitespace-nowrap">
+              <figcaption
+                className={`${currentStyle.textClass} font-bold text-lg whitespace-nowrap`}
+              >
                 Star Grow Studio
               </figcaption>
             </figure>
+
           </Link>
           <button
             className="w-[30px] h-[20px] flex flex-col justify-between lg:hidden group z-[60]" onClick={toggleSideBar}>
             <span
               className={`
-                w-full h-[4px] rounded-2xl transition-all duration-300 ease-in-out
+                w-full h-[4px] rounded-2xl  duration-300 ease-in-out
                 ${'bg-[var(--color-primary)]'}
                 ${stateSideBar ? 'rotate-45 translate-y-[8px]' : ''}
               `}></span>
 
             <span
               className={`
-                w-[70%] h-[4px] rounded-2xl transition-all duration-300 ease-in-out
+                w-[70%] h-[4px] rounded-2xl  duration-300 ease-in-out
                 ${'bg-[var(--color-primary)]'}
                 ${stateSideBar ? 'opacity-0 scale-0' : ''}`}></span>
 
             <span
               className={`
-                w-full h-[4px] rounded-2xl transition-all duration-300 ease-in-out
+                w-full h-[4px] rounded-2xl  duration-300 ease-in-out
                 ${'bg-[var(--color-primary)]'}
                 ${stateSideBar ? '-rotate-45 -translate-y-[8px]' : ''}`}></span>
           </button>
@@ -94,24 +144,27 @@ const NavBar = () => {
         {/* Navegación */}
         <ul
           className={`
-            absolute left-0 top-full z-40 w-full bg-[var(--color-white-to-primary)]
-            transition-all duration-500 ease-in-out
-            transform lg:transform-none
-            ${stateSideBar ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-5 pointer-events-none max-h-0'}
-            p-6 lg:p-0 flex-col lg:flex lg:flex-row lg:items-center lg:justify-center
-            lg:static lg:opacity-100 lg:translate-y-0 lg:pointer-events-auto lg:max-h-full
-            gap-4 lg:mt-0 lg:w-[70%] lg:gap-6 overflow-hidden
-          `}
+              absolute left-0 top-full z-40 w-full
+              ${currentStyle.menuClass} 
+              transform lg:transform-none
+              ${stateSideBar
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 -translate-y-5 pointer-events-none max-h-0"}
+              p-6 lg:p-0 flex-col lg:flex lg:flex-row lg:items-center lg:justify-center
+              lg:static lg:opacity-100 lg:translate-y-0 lg:pointer-events-auto lg:max-h-full
+              gap-4 lg:mt-0 lg:w-[70%] lg:gap-6 overflow-hidden
+            `}
         >
+
           {navItems.map((item, idx) => (
             <li
               key={idx}
-              className="mb-10 flex justify-between items-center w-full lg:w-auto lg:m-0"
+              className={`mb-10 flex justify-between items-center w-full lg:w-auto lg:m-0`}
               onMouseEnter={() => {
                 if (item.isDropdown) {
                   setSelectedItem(item.label);
                   setOpenModal(prev => !prev);
-                } 
+                }
                 // else {
                 //   router.push(item.href);
                 // }
@@ -126,12 +179,12 @@ const NavBar = () => {
             >
               <Link
                 href="#"
-                className="flex items-center gap-2 lg:text-[0.9rem] text-gray-500 transition-all"
+                className={`flex items-center gap-2 lg:text-[0.9rem] ${currentStyle.itemsMenuClass}`}
               >
                 {item.label}
                 {item.isDropdown && (
                   <ChevronDown
-                    className={`hidden lg:block w-5 h-5 text-gray-500 transform transition-transform duration-300 ${openModal && selectedItem === item.label ? 'rotate-180' : ''}`}
+                    className={`hidden lg:block w-5 h-5 ${currentStyle.itemsMenuClass} transform transition-transform duration-300 ${openModal && selectedItem === item.label ? 'rotate-180' : ''}`}
                   />
                 )}
               </Link>
@@ -367,6 +420,10 @@ const NavBar = () => {
                         index={6}
                         openIndex={openIndex}
                         setOpenIndex={setOpenIndex}
+                        onItemClick={() => {
+                          setOpenModal(false)
+                          setSelectedItem(null)
+                        }}
                         items={[
                           {
                             icon: <Pencil />,
@@ -382,6 +439,7 @@ const NavBar = () => {
                             icon: <Rocket />,
                             title: "Nuestra historia",
                             description: "Quienes somos.",
+                            cta: () => router.push('/our-history')
                           },
                         ]}
                       ></CardLinkList>
@@ -398,7 +456,7 @@ const NavBar = () => {
 
           {/* Botón */}
           <li className="w-full lg:w-auto lg:ml-auto">
-            <button onClick={show} className="cursor-pointer w-full lg:w-auto lg:ml-auto lg:p-3 lg:text-[.9rem] p-4 text-[1.1rem] font-medium text-white bg-[var(--color-primary)] rounded-[10px] text-nowrap">
+            <button onClick={show} className={`cursor-pointer w-full lg:w-auto lg:ml-auto lg:p-3 lg:text-[.9rem] p-4 text-[1.1rem] font-medium ${currentStyle.ctaClassText} ${currentStyle.ctaClassBg} rounded-[10px] text-nowrap`}>
               {!isVisible ?
                 <span>Cotizar ahora</span>
                 : <div className="loader w-5 h-5 border border-white border-t-[var(--color-primary)] rounded-[50%] animate-spin"></div>}

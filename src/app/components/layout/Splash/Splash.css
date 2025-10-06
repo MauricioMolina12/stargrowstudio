@@ -1,46 +1,107 @@
 .splash-container {
   position: fixed;
   inset: 0;
-  background-color: white;
-  z-index: 9999;
+  background: radial-gradient(circle at center, #fafaff 0%, #f0f1ff 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.3s ease-out;
+  z-index: 9999;
   overflow: hidden;
+  transition: opacity 2s ease-in-out;
 }
 
-.splash-container.hidden {
+.splash-container.fade-out {
   opacity: 0;
-  pointer-events: none;
 }
 
-.splash-logo {
-  width: 100px;
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: floatIn 2s ease-in-out;
+}
+
+.animated-logo {
+  width: 180px;
   height: auto;
-  transform-origin: center;
-  animation: scaleAndFade 2.8s ease forwards;
+  transform: scale(1);
+  animation: pulse 6s ease-in-out infinite alternate;
 }
 
-@keyframes scaleAndFade {
+.logo-path {
+  fill: none;
+  stroke: #5356a2;
+  stroke-width: 15px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: draw 1s ease forwards, fillLogo 1s ease forwards 3s;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fillLogo {
+  from {
+    fill: none;
+  }
+  to {
+    fill: #5356a2;
+  }
+}
+
+@keyframes floatIn {
   0% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
     opacity: 1;
   }
+}
 
-  25% {
-    opacity: 0.9;
+@keyframes pulse {
+  0% {
+    transform: scale(1);
   }
-
-  50% {
-    opacity: 0.6;
-  }
-
-  75% {
-    opacity: 0.3;
-  }
-
   100% {
-    transform: scale(3);
+    transform: scale(1.02);
+  }
+}
+
+.studio-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.9rem;
+  color: #5356a2;
+  margin-top: 1.5rem;
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  animation: fadeInText 2s ease-in-out forwards;
+}
+
+@keyframes fadeInText {
+  0% {
     opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .animated-logo {
+    width: 120px;
+  }
+
+  .studio-text {
+    font-size: 1.4rem;
   }
 }

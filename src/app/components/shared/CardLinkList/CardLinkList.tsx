@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import React from 'react'
 
 interface Item {
   icon: React.ReactNode
   title: string
   description: string
+  cta?: () => void
   highlight?: boolean
   badge?: string
 }
@@ -13,9 +14,10 @@ interface Item {
 interface CardLinkListProps {
   title?: string
   items: Item[]
-  index: number 
-  openIndex: number | null 
+  index: number
+  openIndex: number | null
   setOpenIndex: (index: number | null) => void
+  onItemClick?: () => void 
 }
 
 export const CardLinkList = ({
@@ -23,13 +25,19 @@ export const CardLinkList = ({
   items,
   index,
   openIndex,
-  setOpenIndex
+  setOpenIndex,
+  onItemClick
 }: CardLinkListProps) => {
   const isGrouped = !!title
   const isOpen = openIndex === index
 
   const handleToggle = () => {
     setOpenIndex(isOpen ? null : index)
+  }
+
+  const handleClick = (cta?: () => void) => {
+    cta?.()
+    onItemClick?.() // 🔥 cerrar modal
   }
 
   return (
@@ -46,6 +54,7 @@ export const CardLinkList = ({
           <li
             key={idx}
             className="p-3 rounded-md cursor-pointer hover:bg-indigo-50"
+            onClick={() => handleClick(item.cta)}
           >
             <div className="flex items-start gap-3">
               {item.icon}
@@ -87,6 +96,7 @@ export const CardLinkList = ({
                   <li
                     key={idx}
                     className="p-2 rounded-md cursor-pointer hover:bg-indigo-100"
+                    onClick={() => handleClick(item.cta)}
                   >
                     <div className="flex items-start gap-3">
                       {item.icon}
@@ -101,7 +111,9 @@ export const CardLinkList = ({
                             </span>
                           )}
                         </div>
-                        <p className="text-[12px] text-gray-500">{item.description}</p>
+                        <p className="text-[12px] text-gray-500">
+                          {item.description}
+                        </p>
                       </div>
                     </div>
                   </li>
@@ -115,19 +127,24 @@ export const CardLinkList = ({
               <li
                 key={idx}
                 className="p-3 rounded-md cursor-pointer hover:bg-indigo-50"
+                onClick={() => handleClick(item.cta)}
               >
                 <div className="flex items-start gap-3">
                   {item.icon}
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-[12px]">{item.title}</span>
+                      <span className="font-semibold text-[12px]">
+                        {item.title}
+                      </span>
                       {item.badge && (
                         <span className="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full">
                           {item.badge}
                         </span>
                       )}
                     </div>
-                    <p className="text-[12px] text-gray-500">{item.description}</p>
+                    <p className="text-[12px] text-gray-500">
+                      {item.description}
+                    </p>
                   </div>
                 </div>
               </li>

@@ -37,7 +37,7 @@ export default function RootLayout({
       </head>
       <body className={`${montserrat.variable} antialiased`}>
         <AppProviders>
-          <SplashScreen />
+          {/* <SplashScreen /> */}
           <NavBar />
           {children}
 

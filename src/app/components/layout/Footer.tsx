@@ -55,11 +55,11 @@ const Footer = () => {
     ]
 
     return (
-        <footer className="w-full bg-[var(--color-primary)] text-[var(--color-light)] relative flex flex-col justify-center pt-10 pb-24 xl:pb-16">
+        <footer className="w-full bg-[var(--color-primary)] text-[var(--color-light)] relative flex flex-col justify-center items-center pt-10 pb-24 xl:pb-16">
             <div className="w-[90%] mx-auto flex flex-col xl:flex-row gap-10">
 
                 {/* Branding */}
-                <div className="flex flex-col gap-4 w-full xl:w-1/4 border-b xl:border-none pb-6">
+                <div className="flex flex-col justify-center gap-4 w-full xl:w-1/4 border-b xl:border-none pb-6">
                     <figure className="flex items-center gap-3 w-fit h-fit">
                         <img src="/img/logo-white.png" alt="logo-stargrowstudio" width={30} height={30} />
                         <figcaption className="text-white font-semibold text-[.8rem] whitespace-nowrap">
@@ -126,12 +126,12 @@ const Footer = () => {
 
             {/* Copyright */}
             <div className="w-full bg-[var(--color-secondary)] py-4 absolute bottom-0 left-0">
-                <div className="w-[90%] mx-auto flex flex-col xl:flex-row items-center justify-between gap-3">
+                <div className="w-[90%] mx-auto flex flex-col xl:flex-row items-center justify-center gap-4">
                     <span className="text-[var(--color-white)] text-[12px] text-center">
                         © {today} Star Grow. Todos los derechos reservados.
                     </span>
                     <div className="flex gap-4">
-                        <a href="#" className="text-[12px] text-[var(--color-light)] hover:underline">Política de privacidad</a>
+                        <a href="#" onClick={ () => router.push('/privacy-policy')} className="text-[12px] text-[var(--color-light)] hover:underline">Política de privacidad</a>
                         <a href="#" className="text-[12px] text-[var(--color-light)] hover:underline">Términos de servicio</a>
                     </div>
                 </div>

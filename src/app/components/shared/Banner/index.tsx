@@ -97,6 +97,17 @@ export default function Banner({
     return () => clearInterval(interval);
   }, [currentBanner?.images]);
 
+  const [animateTitle, setAnimateTitle] = useState(false);
+
+  useEffect(() => {
+    if (currentBanner.animationTitle) {
+      setAnimateTitle(false);
+      const timeout = setTimeout(() => setAnimateTitle(true), 50);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, currentBanner.animationTitle]);
+
+
 
 
   return (
@@ -110,35 +121,60 @@ export default function Banner({
                   {currentBanner.service}
                 </span>
               )}
-              <h1 className={styles["banner__description--hero-title"]}>
-                {currentBanner.title.main}
-                <br></br>
-                <span>{currentBanner.title.second}</span>
+
+              <h1 className={`${styles["banner__description--hero-title"]} ${animateTitle ? styles.fadeInParent : ""}`}>
+                <span className={`title ${animateTitle ? styles["fadeInChildMain"] : ""}`}>
+                  {currentBanner.title.main}
+                </span>
+
+                {currentBanner.title.optional && (
+                  <br />
+                )}
+
+                {currentBanner.title.optional && (
+                  <span className={`title ${animateTitle ? styles["fadeInChildOptional"] : ""}`}>
+                    {currentBanner.title.optional}
+                  </span>
+                )}
+                <br />
+                <span className={`subtitle ${animateTitle ? styles["fadeInChildSecond"] : ""}`}>
+                  {currentBanner.title.second}
+                </span>
               </h1>
 
-              <ul className={styles["banner__description--list"]}>
-                {currentBanner.list?.map((item, idx) => (
-                  <li key={idx} className={styles["banner__description--list-item"]}>
-                    <Check className="text-green-500"></Check>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
 
-              <div className={styles["banner__description--buttons-call-action"]}>
-                {Array.isArray(callActions) &&
-                  callActions.map((button, index) => (
-                    <button
-                      key={index}
-                      onClick={() => actionMap[button.actionKey]?.()}
-                    >
-                      {button.label}
-                    </button>
+
+              {currentBanner.list && (
+                <ul className={styles["banner__description--list"]}>
+                  {currentBanner.list?.map((item, idx) => (
+                    <li key={idx} className={styles["banner__description--list-item"]}>
+                      <Check className="text-green-500"></Check>
+                      <span>{item}</span>
+                    </li>
                   ))}
-              </div>
-              <p className={styles["banner__description--hero-subtitle"]}>
-                {currentBanner.subtitle}
-              </p>
+                </ul>
+              )}
+              {currentBanner.callAction && (
+                <div className={styles["banner__description--buttons-call-action"]}>
+                  {Array.isArray(callActions) &&
+                    callActions.map((button, index) => (
+                      <button
+                        key={index}
+                        onClick={() => actionMap[button.actionKey]?.()}
+                      >
+                        {button.label}
+                      </button>
+                    ))}
+                </div>
+              )}
+
+              {currentBanner.subtitle && (
+
+                <p className={styles["banner__description--hero-subtitle"]}>
+                  {currentBanner.subtitle}
+                </p>
+              )}
+
             </div>
           </div>
           <div className={styles.banner__sliderContainer}>
@@ -159,6 +195,9 @@ export default function Banner({
                 </div>
               );
             })}
+            {currentBanner.image && (
+              <img src={currentBanner.image} alt="Image" />
+            )}
           </div>
 
 

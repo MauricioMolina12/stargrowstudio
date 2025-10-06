@@ -10,7 +10,7 @@ export default function ServiceSlugPage({ params, }: { params: { slug: string };
   const steps = [
     {
       title: "Tecnología Flexible",
-      icon: "/icons/flutter.png",
+      iconImg: "/icons/flutter.png",
       items: [
         'Nativas o Híbridas',
         'Swift, Kotlin, Flutter, Ionic, React Native',
@@ -20,7 +20,7 @@ export default function ServiceSlugPage({ params, }: { params: { slug: string };
     },
     {
       title: "Diseños Únicos",
-      icon: "/icons/pencil.gif",
+      iconImg: "/icons/pencil.gif",
       items: [
         'UI/UX intuitivo',
         'Diseño Prototipos',
@@ -30,7 +30,7 @@ export default function ServiceSlugPage({ params, }: { params: { slug: string };
     },
     {
       title: "Soporte Continuo",
-      icon: "/icons/settings.gif",
+      iconImg: "/icons/settings.gif",
       items: [
         'Mantenimiento',
         'Actualizaciones',

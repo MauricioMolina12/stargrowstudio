@@ -5,7 +5,7 @@ import NavBar from "./components/layout/NavBar";
 import { MeetingProvider } from "./context/MeetingContext";
 import { AppProviders } from "@/providers/AppProviders";
 import Footer from "./components/layout/Footer";
-import InternetStatus from "./components/layout/InternetStatus";
+// import InternetStatus from "./components/layout/InternetStatus";
 import SplashScreen from "./components/layout/Splash/Splash";
 
 const montserrat = Montserrat({
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <InternetStatus />
+      {/* <InternetStatus /> */}
       <head>
         <link rel="icon" href="/logo.png" type="image/png" />
         <link

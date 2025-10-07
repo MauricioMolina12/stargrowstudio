@@ -5,7 +5,9 @@ import SliderAutomatic from "@/app/components/shared/SliderAutomatic";
 import SliderProjects from "@/app/components/shared/SliderProjects";
 import InfoCards from "@/app/components/shared/InfoCards";
 
-export default function ServiceSlugPage({ params, }: { params: { slug: string }; }) {
+type Params = Promise<{ slug: string }>
+
+export default async function ServiceSlugPage(props: { params: Params }) {
 
   const steps = [
     {
@@ -40,7 +42,7 @@ export default function ServiceSlugPage({ params, }: { params: { slug: string };
     },
   ]
 
-
+  const params = await props.params
 
   const service = services.find((s) => s.slug === params.slug);
 

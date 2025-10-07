@@ -16,7 +16,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Star Grow Studio",
   description:
-    "Star grow studio es una agencia de desarrollo, diseño y marketing digital",
+    "Star Grow Studio es una agencia de desarrollo, diseño y marketing digital",
 };
 
 

@@ -44,6 +44,8 @@ import TabsNav from "./components/shared/TabsNav";
 import InfoCards from "./components/shared/InfoCards";
 import DetailsPanel from "./components/shared/DetailsPanel";
 import ModernAppsSection from "./components/shared/ModernAppsSection";
+import TitleBox from "./components/shared/TitleBox";
+import ScrollStackSection from "./components/shared/ScrollStackSection";
 
 const banners: Services[] = [
   {
@@ -62,23 +64,23 @@ const banners: Services[] = [
     ],
     subtitle: "Desarrollamos tecnología con propósito, visión y estrategia.",
   },
-  {
-    images: ["img/hero-banner/analisis-de-datos/dashboard-graphs.jpg", "img/hero-banner/analisis-de-datos/dashboard-graphs-2.jpg", "img/hero-banner/analisis-de-datos/dashboard-graphs-3.jpg", "img/hero-banner/analisis-de-datos/dashboard-graphs-4.jpg"],
-    alt: "Analista de datos",
-    service: "Análisis de datos y visualización",
-    icon: "/icons/analisis.png",
-    title: {
-      main: "Convierte tus datos en decisiones inteligentes.",
-      second: "Te ayudamos a entender lo que importa.",
-    },
-    list: [
-      "Dashboards interactivos",
-      "Reportes personalizados",
-      "Integración con múltiples fuentes de datos",
-    ],
-    subtitle:
-      "Diseñamos dashboards y reportes personalizados para impulsar tu crecimiento.",
-  },
+  // {
+  //   images: ["img/hero-banner/analisis-de-datos/dashboard-graphs.jpg", "img/hero-banner/analisis-de-datos/dashboard-graphs-2.jpg", "img/hero-banner/analisis-de-datos/dashboard-graphs-3.jpg", "img/hero-banner/analisis-de-datos/dashboard-graphs-4.jpg"],
+  //   alt: "Analista de datos",
+  //   service: "Análisis de datos y visualización",
+  //   icon: "/icons/analisis.png",
+  //   title: {
+  //     main: "Convierte tus datos en decisiones inteligentes.",
+  //     second: "Te ayudamos a entender lo que importa.",
+  //   },
+  //   list: [
+  //     "Dashboards interactivos",
+  //     "Reportes personalizados",
+  //     "Integración con múltiples fuentes de datos",
+  //   ],
+  //   subtitle:
+  //     "Diseñamos dashboards y reportes personalizados para impulsar tu crecimiento.",
+  // },
   // {
   //   image: "img/bases-de-datos.webp",
   //   alt: "Bases de datos",
@@ -96,23 +98,23 @@ const banners: Services[] = [
   //   subtitle:
   //     "Diseñamos estructuras de datos eficientes, escalables y preparadas para el futuro.",
   // },
-  {
-    images: ["img/hero-banner/marketing-digital/mkting-digital-2.jpg", "img/hero-banner/marketing-digital/mkting-digital-2.jpg", "img/hero-banner/marketing-digital/mkting-digital.jpg"],
-    alt: "Consultoría",
-    service: "Consultoría en transformación digital",
-    icon: "/icons/consultoria.png",
-    title: {
-      main: "¿No sabes por dónde empezar?",
-      second: "Te guiamos paso a paso.",
-    },
-    list: [
-      "Diagnóstico tecnológico",
-      "Estrategia digital personalizada",
-      "Acompañamiento en implementación",
-    ],
-    subtitle:
-      "Analizamos, proponemos y ejecutamos estrategias tecnológicas adaptadas a tus objetivos.",
-  },
+  // {
+  //   images: ["img/hero-banner/marketing-digital/mkting-digital-2.jpg", "img/hero-banner/marketing-digital/mkting-digital-2.jpg", "img/hero-banner/marketing-digital/mkting-digital.jpg"],
+  //   alt: "Consultoría",
+  //   service: "Consultoría en transformación digital",
+  //   icon: "/icons/consultoria.png",
+  //   title: {
+  //     main: "¿No sabes por dónde empezar?",
+  //     second: "Te guiamos paso a paso.",
+  //   },
+  //   list: [
+  //     "Diagnóstico tecnológico",
+  //     "Estrategia digital personalizada",
+  //     "Acompañamiento en implementación",
+  //   ],
+  //   subtitle:
+  //     "Analizamos, proponemos y ejecutamos estrategias tecnológicas adaptadas a tus objetivos.",
+  // },
   // {
   //   image: "img/design.webp",
   //   alt: "Diseño",
@@ -526,10 +528,7 @@ export default function Home() {
         </section>
         <section id="planes">
           <main className="w-full min-h-[100vh] py-12 px-4 lg:w-4/5 lg:mx-auto lg:my-0">
-            <header className="w-full flex flex-col items-center justify-center">
-              <span className="parallax text-[var(--color-primary-to-white)]">Planes a tu medida</span>
-              <h1 className="parallax text-3xl text-center font-bold lg:w-[70%] lg:text-4xl"><span className="text-[var(--color-primary-to-white)]">Diseñamos el éxito juntos:</span> Explora nuestras soluciones flexibles</h1>
-            </header>
+            <TitleBox title={{ left: 'Diseñamos el éxito juntos:', main: 'Explora nuestras soluciones flexibles', right: '' }} tag="Planes a tu medida" description="''" ></TitleBox>
 
             <TabsNav tabs={planTabs} tabActive={planTabActive} setTabActive={setTabActive} />
 
@@ -557,15 +556,48 @@ export default function Home() {
           </div>
         </section>
 
+        <ScrollStackSection>
+          <div className="relative flex-1 flex justify-center items-center w-full bg-white">
+            <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4">
+              <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
+                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/hero-banner/desarrollo/watch.png" alt="imagen dev" />
+              </figure>
+              <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
+                <span className="bg-[var(--meteorite--400)] text-white p-1 px-2 rounded-2xl w-fit">Creador de página web</span>
+                <h2 className="text-6xl">Crea tu sitio web en minutos</h2>
+                <p>Tan solo describe tu idea y el Creador de páginas web con IA se encargará del diseño, de las imágenes y del texto. Después, utiliza el editor de arrastrar y soltar para personalizar. Ya tengas una tienda online o un blog, estarás online en un abrir y cerrar de ojos.</p>
+              </div>
+            </div>
+          </div>
+          <div className="relative flex-1 flex justify-center items-center w-full bg-white">
+            <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4">
+              <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
+                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/hero-banner/desarrollo/ecommerce.png" alt="imagen dev" />
+              </figure>
+              <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
+                <span className="bg-[var(--meteorite--400)] text-white p-1 px-2 rounded-2xl w-fit">Creador de página web</span>
+                <h2 className="text-6xl">Crea tu sitio web en minutos</h2>
+                <p>Tan solo describe tu idea y el Creador de páginas web con IA se encargará del diseño, de las imágenes y del texto. Después, utiliza el editor de arrastrar y soltar para personalizar. Ya tengas una tienda online o un blog, estarás online en un abrir y cerrar de ojos.</p>
+              </div>
+            </div>
+          </div>
+          <div className="relative flex-1 flex justify-center items-center w-full bg-white">
+            <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4">
+              <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
+                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/hero-banner/desarrollo/airpods.jpg" alt="imagen dev" />
+              </figure>
+              <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
+                <span className="bg-[var(--meteorite--400)] text-white p-1 px-2 rounded-2xl w-fit">Creador de página web</span>
+                <h2 className="text-6xl">Crea tu sitio web en minutos</h2>
+                <p>Tan solo describe tu idea y el Creador de páginas web con IA se encargará del diseño, de las imágenes y del texto. Después, utiliza el editor de arrastrar y soltar para personalizar. Ya tengas una tienda online o un blog, estarás online en un abrir y cerrar de ojos.</p>
+              </div>
+            </div>
+          </div>
+        </ScrollStackSection>
 
 
         <section id="portafolio">
-          <div className="text-center flex flex-col items-center">
-            <span className="parallax text-[var(--color-primary)] text-lg font-medium">Nuestro portafolio</span>
-            <h1 className="parallax text-2xl xl:text-3xl font-bold text-[var(--color-black)] mt-4 text-center max-w-[50%]">
-              <span className="text-[var(--color-primary)]">Proyectos que transforman ideas</span> en soluciones reales y efectivas
-            </h1>
-          </div>
+          <TitleBox title={{ left: 'Resultados que', main: 'hablan', right: 'por nosotros' }} tag="Nuestro portafolio" description="''" ></TitleBox>
           <Portfolio />
         </section>
 

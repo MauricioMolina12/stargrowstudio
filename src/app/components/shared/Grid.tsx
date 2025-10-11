@@ -2,26 +2,25 @@
 
 import { ReactNode } from "react";
 import { useMeeting } from "../../context/MeetingContext";
-
+import TitleBox from "./TitleBox";
 
 
 type Props = {
-    title: { main: string; left: string; right: string };
+    title?: { main: string; left: string; right: string };
     subtitle: string;
     showMeetingCall?: boolean;
-    children?: ReactNode; // <-- Add this line
+    children?: ReactNode;
     showSteps?: boolean
 };
 
-const Grid = ({ title, subtitle, showMeetingCall = true, children}: Props) => {
+const Grid = ({ title, subtitle, showMeetingCall = true, children }: Props) => {
     const { show } = useMeeting();
 
     return (
         <div className="w-full h-auto lg:max-w-[70%] lg:mx-auto lg:my-0 lg:py-6">
-            <aside className="w-full h-1/2 flex flex-col items-center justify-center gap-2.5 p-4 parallax">
-                <span className="text-[var(--color-primary-to-white)]">{subtitle}</span>
-                <h1 className="text-3xl text-center font-bold lg:w-[70%] lg:text-4xl">{title.left} <span className="text-[var(--color-primary-to-white)]">{title.main} </span>{title.right}</h1>
-            </aside>
+            <TitleBox tag="Nuestros Servicios"
+                title={{ left: title?.left || '', main: title?.main || '', right: title?.right || '' }}
+                description=""></TitleBox>
             <main className="w-full mx-auto h-1/2 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] p-4 2xl:w-6xl ">
                 {children}
             </main>

@@ -12,7 +12,7 @@ const AboutUs = () => {
 
     return (
         <>
-            <section className="w-full lg:py-16 flex flex-col items-center lg:flex-row">
+            <section className="w-full lg:w-4/5 lg:mx-auto lg:my-0 lg:py-16 flex flex-col items-center lg:flex-row">
                 <figure className="w-full h-1/2 flex items-center justify-center parallax">
                     <img className="w-[250px] h-[250px] object-cover lg:w-[400px] lg:h-[400px] rounded-2xl" src="https://img.freepik.com/foto-gratis/gente-negocios-trabajando-equipo-oficina_1303-22863.jpg?semt=ais_hybrid&w=740&q=80" alt="team image" />
                 </figure>

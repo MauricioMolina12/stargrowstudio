@@ -17,7 +17,7 @@
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    background: linear-gradient(#f6f6ff 10%, #fefeff 80%);
+    background-color: var(--color-primary-to-white);
   }
 
   .banner--inner {
@@ -88,6 +88,7 @@
   justify-content: center;
   gap: 10px;
 }
+
 .banner__sliderContainer {
   display: flex;
   justify-content: center;
@@ -111,20 +112,16 @@
 
   &::before {
     top: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0)
-    );
+    // background: linear-gradient(to bottom,
+    //     rgba(255, 255, 255, 1),
+    //     rgba(255, 255, 255, 0));
   }
 
   &::after {
     bottom: 0;
-    background: linear-gradient(
-      to top,
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 0)
-    );
+    // background: linear-gradient(to top,
+    //     rgba(255, 255, 255, 1),
+    //     rgba(255, 255, 255, 0));
   }
 
   @media (max-width: 768px) {
@@ -164,7 +161,7 @@
 
 .banner__slide.prev {
   opacity: 0.3;
-  transform: translateY(-120%);
+  transform: translateY(-120%) scale(.8);
   z-index: 2;
 
   @media (max-width: 768px) {
@@ -174,7 +171,7 @@
 
 .banner__slide.next {
   opacity: 0.3;
-  transform: translateY(120%);
+  transform: translateY(120%) scale(.8);
   z-index: 2;
 
   @media (max-width: 768px) {
@@ -208,12 +205,14 @@
 }
 
 .banner__description .banner__description--hero-service {
-  border-radius: 10px;
+  border-radius: 14px;
   font-weight: 500;
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-size: clamp(10px, 1vw, 14px);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: var(--color-white);
+  padding: 4px;
   gap: 10px;
 }
 
@@ -223,21 +222,22 @@
 }
 
 .banner__description .banner__description--hero-title {
-  font-weight: 700;
+  font-weight: 300;
   padding-inline: 10px;
   max-width: 90%;
   font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  color: var(--color-dark-to-yellow);
-  line-height: 22px;
+  color: var(--color-white);
+  line-height: 30px;
 }
 
 .banner__description .banner__description--hero-title span:last-of-type {
-  color: var(--color-primary-to-white);
+  font-weight: 700;
+  color: var(--color-white);
 }
 
 .banner__description .banner__description--hero-subtitle {
   max-width: 90%;
-  color: var(--color-dark-gray);
+  color: var(--color-gray-300);
   font-size: clamp(0.8rem, 1vw, 1.2rem);
 }
 
@@ -266,6 +266,7 @@
     opacity: 0.4;
     transform: translateX(-30%) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -279,6 +280,8 @@
     gap: 10px;
     margin-block: 5px;
     font-size: clamp(14px, 1vw, 16px);
+    color: var(--color-gray-300);
+
 
     .text-green-500 {
       font-size: clamp(12px, 1vw, 14px);
@@ -347,7 +350,7 @@
 
   .banner__description .banner__description--hero-title {
     max-width: 80%;
-    line-height: 40px;
+    line-height: 50px;
     text-align: start;
     font-size: clamp(2.2rem, 2vw, 3.2rem);
     padding: 0;
@@ -433,7 +436,7 @@
 
 @media (min-width: 1536px) {
   .banner__description .banner__description--hero-title {
-    line-height: 1;
+    line-height: 50px;
   }
 }
 

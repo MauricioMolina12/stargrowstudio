@@ -1,0 +1,201 @@
+[
+  {
+    "category": "development",
+    "name": "Plan Web Express",
+    "tier": "-78%",
+    "priceOld": "1.800.000",
+    "priceNew": "1.600.000",
+    "description": "Ideal para emprendedores o pequeños negocios que necesitan una web profesional en poco tiempo.",
+    "features": {
+      "included": [
+        "Diseño basado en plantilla responsiva moderna.",
+        "Hasta 5 secciones/páginas estáticas.",
+        "Carga inicial de contenido proporcionado por el cliente.",
+        "Formulario de contacto básico.",
+        "Asesoramiento en dominio y alojamiento.",
+        "Optimización SEO básica y velocidad inicial.",
+        "1 ronda de revisión y garantía de 30 días post-lanzamiento."
+      ]
+    }
+  },
+  {
+    "category": "development",
+    "name": "Plan Web Pro",
+    "tier": "-75%",
+    "priceOld": "3.200.000",
+    "priceNew": "2.700.000",
+    "description": "Para empresas en crecimiento que buscan una web personalizada, optimizada y escalable.",
+    "features": {
+      "included": [
+        "Diseño UI/UX a medida, alineado con tu marca.",
+        "Hasta 12 secciones/páginas dinámicas.",
+        "Optimización de contenido y carga inicial.",
+        "Formularios avanzados de contacto o cotización.",
+        "Integración con redes sociales y Google Analytics.",
+        "SEO avanzado y mejora de velocidad.",
+        "2 rondas de revisión y garantía de 60 días.",
+        "Soporte técnico prioritario por 2 meses."
+      ]
+    }
+  },
+  {
+    "category": "development",
+    "name": "Plan Web Elite",
+    "tier": "Premium",
+    "priceOld": "6.000.000",
+    "priceNew": "4.800.000",
+    "description": "Para marcas consolidadas que requieren soluciones a medida y soporte continuo.",
+    "features": {
+      "included": [
+        "Diseño UI/UX exclusivo y branding integral.",
+        "Sitio web con secciones y funcionalidades ilimitadas.",
+        "Desarrollo de módulos personalizados (e-commerce, membresías, etc.).",
+        "Integración con APIs y sistemas empresariales.",
+        "Creación de contenido profesional (texto, foto, video).",
+        "SEO profesional + campañas iniciales de marketing digital.",
+        "Soporte y mantenimiento durante 1 año.",
+        "Capacitación personalizada para tu equipo.",
+        "Actualizaciones y mejoras continuas.",
+        "Consultoría estratégica mensual.",
+        "Dominio y hosting premium incluidos (1 año)."
+      ]
+    }
+  },
+  {
+    "category": "design",
+    "name": "Branding Express",
+    "tier": "Básico",
+    "priceNew": "900.000",
+    "description": "Perfecto para marcas personales o emprendimientos que necesitan una identidad visual sólida.",
+    "features": {
+      "included": [
+        "Diseño de logo básico (una versión).",
+        "Paleta de colores y tipografía recomendada.",
+        "Entrega de archivos digitales listos para uso inmediato."
+      ]
+    }
+  },
+  {
+    "category": "design",
+    "name": "Branding Pro",
+    "tier": "Popular",
+    "priceNew": "1.800.000",
+    "description": "Pensado para negocios en expansión que buscan un branding profesional y coherente.",
+    "features": {
+      "included": [
+        "Diseño de logo profesional con variantes.",
+        "Manual de marca completo.",
+        "Tipografías, iconografía y patrones gráficos.",
+        "Diseño de tarjetas de presentación.",
+        "Piezas gráficas para redes sociales."
+      ]
+    }
+  },
+  {
+    "category": "design",
+    "name": "Branding Elite",
+    "tier": "Premium",
+    "priceNew": "3.200.000",
+    "description": "Branding completo con materiales visuales y estrategia de comunicación integral.",
+    "features": {
+      "included": [
+        "Todo lo del plan Pro.",
+        "Kit de marca digital e impreso.",
+        "Presentación corporativa editable.",
+        "Plantillas para pitch y redes sociales.",
+        "Storytelling visual y consultoría creativa."
+      ]
+    }
+  },
+  {
+    "category": "consulting",
+    "name": "Consultoría Inicial",
+    "tier": "Básico",
+    "priceNew": "1.200.000",
+    "description": "Diagnóstico de presencia digital y plan de mejora puntual para tu negocio.",
+    "features": {
+      "included": [
+        "Análisis de presencia digital actual.",
+        "Benchmark competitivo del sector.",
+        "Informe detallado de recomendaciones."
+      ]
+    }
+  },
+  {
+    "category": "consulting",
+    "name": "Consultoría Estratégica",
+    "tier": "Popular",
+    "priceNew": "2.400.000",
+    "description": "Auditoría completa + hoja de ruta estratégica personalizada.",
+    "features": {
+      "included": [
+        "Todo lo del plan Básico.",
+        "Workshops de descubrimiento.",
+        "Plan de acción a 3-6 meses.",
+        "Reunión mensual de seguimiento."
+      ]
+    }
+  },
+  {
+    "category": "consulting",
+    "name": "Consultoría Integral",
+    "tier": "Premium",
+    "priceNew": "4.800.000",
+    "description": "Acompañamiento 360º en procesos tecnológicos y digitales.",
+    "features": {
+      "included": [
+        "Todo lo del plan Estratégico.",
+        "Acompañamiento continuo.",
+        "Revisión y análisis de métricas.",
+        "Consultoría especializada mensual.",
+        "Soporte en implementación técnica."
+      ]
+    }
+  },
+  {
+    "category": "marketing",
+    "name": "Marketing Starter",
+    "tier": "Básico",
+    "priceNew": "1.000.000",
+    "description": "Lanzamiento digital con campañas base para impulsar tu presencia online.",
+    "features": {
+      "included": [
+        "Configuración de redes y perfiles.",
+        "1 campaña publicitaria (Meta o Google).",
+        "Diseño de 4 posts iniciales."
+      ]
+    }
+  },
+  {
+    "category": "marketing",
+    "name": "Marketing Pro",
+    "tier": "Popular",
+    "priceNew": "2.200.000",
+    "description": "Gestión mensual de campañas, contenido y analítica de resultados.",
+    "features": {
+      "included": [
+        "Todo lo del plan Starter.",
+        "Gestión de redes sociales (hasta 2).",
+        "Campañas mensuales (Meta/Google).",
+        "Informe mensual de resultados.",
+        "Optimización de campañas y segmentación."
+      ]
+    }
+  },
+  {
+    "category": "marketing",
+    "name": "Marketing 360",
+    "tier": "Premium",
+    "priceNew": "4.000.000",
+    "description": "Estrategia completa: contenido, pauta, email marketing y reporting integral.",
+    "features": {
+      "included": [
+        "Todo lo del plan Pro.",
+        "Producción de contenido profesional (videos, fotos).",
+        "Email marketing, newsletters y automatización.",
+        "Consultoría y análisis mensual.",
+        "Optimización multicanal."
+      ]
+    }
+  }
+]

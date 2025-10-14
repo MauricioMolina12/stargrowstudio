@@ -12,9 +12,9 @@ export default function ScrollStackSection({ children }: Props) {
             {sections.map((child, index) => (
                 <div
                     key={index}
-                    className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden"
+                    className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden rounded-r-2xl rounded-l-2xl"
                     style={{
-                        zIndex: index + 6, boxShadow: index !== 0 ? '0 -4px 10px -4px rgba(0,0,0,0.3)' : ''
+                        zIndex: index + 6, boxShadow: index !== 0 ? '0 -4px 10px -4px rgba(0,0,0,0.15)' : ''
                     }}
                 >
                     <div

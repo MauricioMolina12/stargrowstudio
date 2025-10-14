@@ -1,0 +1,38 @@
+[
+  {
+    "icon": "Search",
+    "color": "text-blue-500",
+    "title": "Descubrimiento",
+    "description": "Analizamos a fondo tus necesidades, objetivos y el perfil de tu público. En esta etapa recopilamos información clave que nos permitirá comprender el contexto de tu negocio y definir las oportunidades de crecimiento."
+  },
+  {
+    "icon": "Calendar",
+    "color": "text-green-500",
+    "title": "Estrategia y Planificación",
+    "description": "Definimos metas claras y construimos un plan estratégico a la medida de tu proyecto. Establecemos prioridades, recursos y tiempos para asegurar que cada acción esté orientada a alcanzar los resultados esperados."
+  },
+  {
+    "icon": "PenTool",
+    "color": "text-purple-500",
+    "title": "Diseño Creativo",
+    "description": "Creamos piezas visuales atractivas y coherentes con tu identidad de marca. Nuestro equipo se enfoca en transmitir tus valores de manera impactante y generar experiencias memorables para tus usuarios."
+  },
+  {
+    "icon": "Laptop",
+    "color": "text-orange-500",
+    "title": "Desarrollo & Producción",
+    "description": "Transformamos las ideas en soluciones digitales funcionales. Ya sea un sitio web, un e-commerce o una aplicación, implementamos tecnologías modernas con un enfoque en calidad, usabilidad y escalabilidad."
+  },
+  {
+    "icon": "Rocket",
+    "color": "text-pink-500",
+    "title": "Lanzamiento y Activación",
+    "description": "Publicamos tu proyecto en los canales adecuados y activamos campañas para alcanzar a tu audiencia. Nos aseguramos de que la implementación sea fluida y que el impacto inicial sea fuerte y positivo."
+  },
+  {
+    "icon": "BarChart3",
+    "color": "text-indigo-500",
+    "title": "Medición y Optimización",
+    "description": "Evaluamos el rendimiento a través de métricas clave y analizamos los resultados obtenidos. Con base en los datos, realizamos ajustes estratégicos para optimizar el impacto y potenciar el crecimiento continuo."
+  }
+]

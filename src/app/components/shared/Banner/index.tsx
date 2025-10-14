@@ -124,21 +124,21 @@ export default function Banner({
 
               <h1 className={`${styles["banner__description--hero-title"]} ${animateTitle ? styles.fadeInParent : ""}`}>
                 <span className={`title ${animateTitle ? styles["fadeInChildMain"] : ""}`}>
-                  {currentBanner.title.main}
+                  {currentBanner?.title.main}
                 </span>
 
-                {currentBanner.title.optional && (
+                {currentBanner?.title.optional && (
                   <br />
                 )}
 
-                {currentBanner.title.optional && (
+                {currentBanner?.title.optional && (
                   <span className={`title ${animateTitle ? styles["fadeInChildOptional"] : ""}`}>
                     {currentBanner.title.optional}
                   </span>
                 )}
                 <br />
                 <span className={`subtitle ${animateTitle ? styles["fadeInChildSecond"] : ""}`}>
-                  {currentBanner.title.second}
+                  {currentBanner?.title.second}
                 </span>
               </h1>
 

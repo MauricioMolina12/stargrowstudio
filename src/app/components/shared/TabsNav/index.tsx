@@ -12,7 +12,7 @@ type TabsNavProps = {
 
 export default function TabsNav({ tabs, tabActive, setTabActive }: TabsNavProps) {
     return(
-        <nav className="tabs w-full h-20 overflow-x-auto flex items-center gap-4 p-2">
+        <nav className="tabs w-full h-20 overflow-x-auto flex items-center justify-center gap-4 p-2">
                 {tabs.map((tab) => (
                     <button key={tab.key} onClick={() => setTabActive(tab.key)} className="parallax relative cursor-pointer text-gray-600 text-[1rem]" style={{
                         color: tabActive === tab.key ? 'var(--color-primary)' : 'initial',

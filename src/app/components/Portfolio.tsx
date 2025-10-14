@@ -102,9 +102,15 @@ export default function Portfolio() {
 
                 {/* Slider */}
                 <div className="relative px-4">
-                    <div ref={sliderRef} className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth">
-                        <ContentCard contents={filteredProjects} ></ContentCard>
+                    <div
+                        ref={sliderRef}
+                        className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth"
+                    >
+                        {filteredProjects.map((project, index) => (
+                            <ContentCard key={index} content={project} />
+                        ))}
                     </div>
+
 
                     {/* Slider Buttons */}
                     <button

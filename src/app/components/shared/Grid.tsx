@@ -17,7 +17,7 @@ const Grid = ({ title, subtitle, showMeetingCall = true, children }: Props) => {
     const { show } = useMeeting();
 
     return (
-        <div className="w-full h-auto lg:max-w-[70%] lg:mx-auto lg:my-0 lg:py-6">
+        <div className="w-full h-auto lg:max-w-[70%] lg:mx-auto lg:my-0 lg:py-6 flex flex-col gap-2.5">
             <TitleBox tag="Nuestros Servicios"
                 title={{ left: title?.left || '', main: title?.main || '', right: title?.right || '' }}
                 description=""></TitleBox>

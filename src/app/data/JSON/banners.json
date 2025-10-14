@@ -1,0 +1,95 @@
+[
+    {
+        "image": "img/hero-banner/BANNER-LANDING.png",
+        "alt": "Desarrollador",
+        "service": "Desarrollo de software a medida",
+        "icon": "/icons/computer.png",
+        "title": {
+            "main": "Transforma tu idea en software real y escalable.",
+            "second": "Creamos soluciones que hacen la diferencia."
+        },
+        "list": [
+            "Desarrollo a medida",
+            "Seguridad y escalabilidad",
+            "Entregas ágiles"
+        ],
+        "subtitle": "Desarrollamos tecnología con propósito, visión y estrategia."
+    },
+    {
+        "images": [
+            "img/hero-banner/analisis-de-datos/dashboard-graphs.jpg",
+            "img/hero-banner/analisis-de-datos/dashboard-graphs-2.jpg",
+            "img/hero-banner/analisis-de-datos/dashboard-graphs-3.jpg",
+            "img/hero-banner/analisis-de-datos/dashboard-graphs-4.jpg"
+        ],
+        "alt": "Analista de datos",
+        "service": "Análisis de datos y visualización",
+        "icon": "/icons/analisis.png",
+        "title": {
+            "main": "Convierte tus datos en decisiones inteligentes.",
+            "second": "Te ayudamos a entender lo que importa."
+        },
+        "list": [
+            "Dashboards interactivos",
+            "Reportes personalizados",
+            "Integración con múltiples fuentes de datos"
+        ],
+        "subtitle": "Diseñamos dashboards y reportes personalizados para impulsar tu crecimiento."
+    },
+    {
+        "images": [
+            "img/bases-de-datos.webp"
+        ],
+        "alt": "Bases de datos",
+        "service": "Arquitectura y gestión de bases de datos",
+        "icon": "/icons/basesdedatos.png",
+        "title": {
+            "main": "Tu información siempre segura y accesible.",
+            "second": "Optimizamos el corazón de tu sistema."
+        },
+        "list": [
+            "Modelado de bases de datos",
+            "Optimización de rendimiento",
+            "Alta disponibilidad y respaldo"
+        ],
+        "subtitle": "Diseñamos estructuras de datos eficientes, escalables y preparadas para el futuro."
+    },
+    {
+        "images": [
+            "img/hero-banner/marketing-digital/mkting-digital-2.jpg",
+            "img/hero-banner/marketing-digital/mkting-digital-2.jpg",
+            "img/hero-banner/marketing-digital/mkting-digital.jpg"
+        ],
+        "alt": "Consultoría",
+        "service": "Consultoría en transformación digital",
+        "icon": "/icons/consultoria.png",
+        "title": {
+            "main": "¿No sabes por dónde empezar?",
+            "second": "Te guiamos paso a paso."
+        },
+        "list": [
+            "Diagnóstico tecnológico",
+            "Estrategia digital personalizada",
+            "Acompañamiento en implementación"
+        ],
+        "subtitle": "Analizamos, proponemos y ejecutamos estrategias tecnológicas adaptadas a tus objetivos."
+    },
+    {
+        "images": [
+            "img/design.webp"
+        ],
+        "alt": "Diseño",
+        "service": "Diseño UX/UI centrado en el usuario",
+        "icon": "/icons/diseño.png",
+        "title": {
+            "main": "Haz que tu producto enamore a primera vista.",
+            "second": "Diseñamos experiencias memorables."
+        },
+        "list": [
+            "Interfaces intuitivas",
+            "Experiencia de usuario optimizada",
+            "Diseño adaptable a todos los dispositivos"
+        ],
+        "subtitle": "Combinamos estética y funcionalidad para conectar con tu audiencia desde el primer clic."
+    }
+]

@@ -34,6 +34,15 @@ const navItems: { label: string, path?: string, isDropdown?: boolean }[] = [
 
 const routeStyles: Record<
   string, routeStyles> = {
+  "/": {
+    navClass: "bg-[#5656B5] text-white",
+    logo: "/logo-white.png",
+    textClass: "text-white",
+    menuClass: "bg-[var(--color-primary)]",
+    itemsMenuClass: "text-white",
+    ctaClassBg: "bg-white",
+    ctaClassText: "text-[var(--color-primary)]"
+  },
   "/privacy-policy": {
     navClass: "bg-[#5656B5] text-white",
     logo: "/logo-white.png",
@@ -82,13 +91,12 @@ const NavBar = () => {
   const isDesktop = useIsDesktop();
   const router = useRouter();
 
-  const projects = [
-    {
-      name: '¿Como hacer una página web?',
-      image: '/img/how-create-website.png',
-      description: 'Renta Go es un proyecto innovador de renta de autos diseñado para ofrecer una experiencia rápida, confiable y 100% digital. La plataforma permite a los usuarios alquilar vehículos de forma sencilla y rápida.',
-    },
-  ];
+  const project = {
+    name: '¿Como hacer una página web?',
+    image: '/img/how-create-website.png',
+    description: 'Renta Go es un proyecto innovador de renta de autos diseñado para ofrecer una experiencia rápida, confiable y 100% digital. La plataforma permite a los usuarios alquilar vehículos de forma sencilla y rápida.',
+  }
+
 
 
 
@@ -443,7 +451,7 @@ const NavBar = () => {
                           },
                         ]}
                       ></CardLinkList>
-                      <ContentCard contents={projects}></ContentCard>
+                      <ContentCard content={project}></ContentCard>
                     </div>
                   )}
                 </ShareModal>

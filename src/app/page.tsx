@@ -244,7 +244,7 @@ export default function Home() {
               </ul>
 
               <figure className="w-full">
-                <img src="/img/hero-banner/Figma-cap.png" alt="figma view" className="object-cover w-full h-full" />
+                <img src="/img/hero-banner/Ilustrator-cap.png" alt="ilustrator view" className="object-cover w-full h-full" />
 
               </figure>
 

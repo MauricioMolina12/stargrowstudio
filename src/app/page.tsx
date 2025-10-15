@@ -200,7 +200,7 @@ export default function Home() {
               title={{ label: 'Crea experiencias digitales que enamoran', color: 'var(--color-dark)', fontSize: 'text-4xl' }}
               description={{ label: 'Diseñamos interfaces intuitivas y funcionales que hacen que tus usuarios disfruten cada interacción con tu producto.', color: 'var(--color-dark)', fontSize: 'text-[clamp(12px, 1vw, 14px)]' }}
             >
-              <ul className="flex flex-col p-2 gap-2">
+              <ul className="flex flex-col p-6 gap-2 text-[.8rem]">
                 <li className="flex gap-2">
                   <Check className="text-[var(--color-primary-to-white)]"></Check>
                   <span>Investigación y arquitectura de información</span>
@@ -223,23 +223,24 @@ export default function Home() {
 
             </ServiceCard>
             <ServiceCard
-              tag={{ label: 'Producto digital', color: 'var(--color-dark)', fontSize: 'text-[.8rem]' }}
-              title={{ label: 'Crea experiencias digitales que enamoran', color: 'var(--color-dark)', fontSize: 'text-4xl' }}
-              description={{ label: 'Diseñamos interfaces intuitivas y funcionales que hacen que tus usuarios disfruten cada interacción con tu producto.', color: 'var(--color-dark)', fontSize: 'text-[clamp(12px, 1vw, 14px)]' }}
+              tag={{ label: 'Identidad visual', color: 'var(--color-dark)', fontSize: 'text-[.8rem]' }}
+              title={{ label: 'Construye una marca que deje huella', color: 'var(--color-white)', fontSize: 'text-4xl' }}
+              description={{ label: 'Desde el logotipo hasta los colores y la tipografía, damos vida a una identidad visual coherente que refleje la esencia de tu marca.', color: 'var(--color-white)', fontSize: 'text-[clamp(12px, 1vw, 14px)]' }}
+              bgCard="var(--color-primary-to-white)"
             >
-              <ul className="flex flex-col p-2 gap-2">
+              <ul className="flex flex-col p-6 gap-2  text-[.8rem]">
                 <li className="flex gap-2">
-                  <Check className="text-[var(--color-primary-to-white)]"></Check>
-                  <span>Investigación y arquitectura de información</span>
+                  <Check className="text-[var(--color-white)]"></Check>
+                  <span className="text-white">Creación de logotipo y sistema visual</span>
                 </li>
                 <li className="flex gap-2">
-                  <Check className="text-[var(--color-primary-to-white)]"></Check>
-                  <span>Diseño centrado en el usuario (UX/UI)</span>
+                  <Check className="text-[var(--color-white)]"></Check>
+                  <span className="text-white">Manual de marca y paleta cromática</span>
                 </li>
 
                 <li className="flex gap-2">
-                  <Check className="text-[var(--color-primary-to-white)]"></Check>
-                  <span>Prototipado y pruebas de usabilidad</span>
+                  <Check className="text-[var(--color-white)]"></Check>
+                  <span className="text-white">Diseño para redes, web y presentaciones</span>
                 </li>
               </ul>
 

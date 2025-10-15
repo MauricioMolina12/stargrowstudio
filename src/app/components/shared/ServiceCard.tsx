@@ -24,17 +24,17 @@ type Props = {
 }
 const ServiceCard = ({ tag, title, description, items, bgCard = '#FFFFFF', children }: Props) => {
     return (
-        <main className="w-full h-full flex flex-col p-4 rounded-2xl gap-4" style={{ background: bgCard }}>
+        <main className="w-full h-full flex flex-col rounded-2xl gap-4" style={{ background: bgCard }}>
 
-            <header className="header w-full flex items-center justify-between">
+            <header className="header w-full flex items-center justify-between p-6 pb-0">
                 {tag && (
                     <span className={`p-2 rounded-3xl bg-[var(--neutral--100)] ${tag.fontSize}`} style={{ color: tag.color }}>{tag.label}</span>
                 )}
             </header>
 
-            <h4 className={`${title?.fontSize}`} style={{ color: title?.color }}>{title?.label}</h4>
+            <h4 className={`${title?.fontSize} px-6`} style={{ color: title?.color }}>{title?.label}</h4>
 
-            <p className={`${description?.fontSize}`} style={{ color: description?.color }}>{description?.label}</p>
+            <p className={`${description?.fontSize} px-6`} style={{ color: description?.color }}>{description?.label}</p>
 
             {children}
         </main>

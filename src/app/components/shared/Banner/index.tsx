@@ -116,11 +116,6 @@ export default function Banner({
         <div key={currentIndex} className={`${styles.banner__content} ${animate ? styles.animated : ""}`} ref={bannerContentRef}>
           <div className={styles.banner__description} ref={parallaxTextRef}>
             <div className={styles["banner__description--hero"]}>
-              {currentBanner.service && !hideService && (
-                <span className={styles["banner__description--hero-service"]}>
-                  {currentBanner.service}
-                </span>
-              )}
 
               <h1 className={`${styles["banner__description--hero-title"]} ${animateTitle ? styles.fadeInParent : ""}`}>
                 <span className={`title ${animateTitle ? styles["fadeInChildMain"] : ""}`}>

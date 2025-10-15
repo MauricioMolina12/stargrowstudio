@@ -194,7 +194,7 @@ export default function Home() {
 
         <section id="cards" className="bg-[var(--meteorite--50)] py-4">
           <TitleBox title={{ left: 'Haz que tu marca hable por ti', main: '', right: '' }} tag="Creatividad" description="''" ></TitleBox>
-          <div className="cards__content flex items-center justify-between p-4 gap-6">
+          <div className="cards__content flex flex-col lg:flex-row items-center justify-between p-4 gap-6">
             <ServiceCard
               tag={{ label: 'Producto digital', color: 'var(--color-dark)', fontSize: 'text-[.8rem]' }}
               title={{ label: 'Crea experiencias digitales que enamoran', color: 'var(--color-dark)', fontSize: 'text-4xl' }}

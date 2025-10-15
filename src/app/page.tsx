@@ -187,6 +187,34 @@ export default function Home() {
           />
         </section>
 
+        <section id="HighlightCards" className="p-8 flex flex-col gap-2">
+          <div className="cards__content flex flex-col lg:flex-row items-center justify-between p-4 gap-6 lg:max-w-[70%] lg:mx-auto">
+            <ServiceCard
+              title={{label: 'Planes y precios', fontSize: 'text-3xl', color: 'var(--color-white)', fontWeight: 'font-semibold'}}
+              description={{label: 'Diseñamos y desarrollamos aplicaciones web adaptadas a las necesidades de tu negocio.', fontSize: 'text-xl', color: 'var(--color-white)', fontWeight: 'font-light'}}
+              bgCard="linear-gradient(110deg, var(--color-primary) 60%, var(--primary--700) 60%);"
+            >
+              <div className="px-8 pb-9 font-light text-[var(--color-white)]">
+                <p className="">Desde</p>
+                <p><span className="font-medium">COP $490.000</span>/mes</p>
+              </div>
+
+            </ServiceCard>
+            <ServiceCard
+              title={{label: 'Da vida a tu idea digital', fontSize: 'text-3xl', color: 'var(--color-white)', fontWeight: 'font-semibold'}}
+              description={{label: 'Cuéntanos qué quieres crear: un sitio web, una app, una marca o una plataforma completa.', fontSize: 'text-xl', color: 'var(--color-white)', fontWeight: 'font-light'}}
+              bgCard="var(--color-primary)"
+            >
+              <div className="px-8 pb-9 font-light text-[var(--color-white)] italic">
+                <p>Desde una idea, hasta un producto real.</p>
+              </div>
+
+            </ServiceCard>
+            
+          </div>
+
+        </section>
+
 
 
 
@@ -194,8 +222,8 @@ export default function Home() {
 
         <section id="cards" className="bg-[var(--meteorite--50)] p-8 flex flex-col gap-2">
           <TitleBox title={{ left: 'Haz que tu marca hable por ti', main: '', right: '' }} tag="Creatividad" description="''" ></TitleBox>
-          <div className="cards__content flex flex-col lg:flex-row items-center justify-between p-4 gap-6">
-            <ServiceCard
+          <div className="cards__content flex flex-col lg:flex-row items-center justify-between p-4 gap-6 lg:max-w-[70%] lg:mx-auto">
+            <ServiceCard            
               tag={{ label: 'Producto digital', color: 'var(--color-dark)', fontSize: 'text-[.8rem]' }}
               title={{ label: 'Crea experiencias digitales que enamoran', color: 'var(--color-dark)', fontSize: 'text-4xl' }}
               description={{ label: 'Diseñamos interfaces intuitivas y funcionales que hacen que tus usuarios disfruten cada interacción con tu producto.', color: 'var(--color-dark)', fontSize: 'text-[clamp(12px, 1vw, 14px)]' }}
@@ -216,9 +244,14 @@ export default function Home() {
                 </li>
               </ul>
 
-              <figure className="w-full">
-                <img src="/img/hero-banner/Figma-cap.png" alt="figma view" className="object-cover w-full h-full" />
-
+              <figure className="relative w-full 
+                    before:absolute before:bottom-0 before:right-0 before:top-30 before:left-0 before:rounded-xl before:bg-[var(--color-primary)]
+                    after:absolute after:bottom-0 after:top-0 after:right-0 after:w-[60%] after:rounded-xl after:bg-[linear-gradient(110deg,_var(--color-primary)_60%,_var(--meteorite--400)_60%)]">
+                <img
+                  src="/img/hero-banner/Figma-cap.png"
+                  alt="figma view"
+                  className="object-cover ml-auto mt-10 w-4/5 h-full rounded-xl relative z-30"
+                />
               </figure>
 
             </ServiceCard>
@@ -244,9 +277,10 @@ export default function Home() {
                 </li>
               </ul>
 
-              <figure className="w-full">
-                <img src="/img/hero-banner/Ilustrator-cap.png" alt="ilustrator view" className="object-cover w-full h-full" />
-
+              <figure className="relative w-full 
+                    before:absolute before:bottom-0 before:right-0 before:top-30 before:left-0 before:rounded-xl before:bg-[var(--primary--700)]
+                    after:absolute after:bottom-0 after:top-0 after:right-0 after:w-[60%] after:rounded-xl after:bg-[linear-gradient(110deg,_var(--primary--700)_60%,_var(--meteorite--200)_60%)]">
+                <img src="/img/hero-banner/Ilustrator-cap.png" alt="ilustrator view" className="object-cover ml-auto mt-10 w-4/5 h-full rounded-xl relative z-30" />
               </figure>
 
             </ServiceCard>
@@ -282,10 +316,10 @@ export default function Home() {
           </main>
         </section>
 
-        <section id="support" className="flex mx-auto my-0 items-center justify-center bg-[var(--light-blue--200)]">
+        <section id="support" className="bg-dark flex mx-auto my-0 items-center justify-center bg-[var(--light-blue--200)]">
           <div className="wrapper lg:pl-[3rem]">
             <DetailsPanel content={{
-              styles: { colorTitle: "var(--color-primary-to-white)", colorItems: "var(--color-primary-to-white)" },
+              styles: { colorTitle: "var(--color-light)", colorItems: "var(--color-primary-tint)" },
               image: '/img/web-image-1.jpg',
               title: 'Soluciones digitales completas para hacer crecer tu marca',
               items: [

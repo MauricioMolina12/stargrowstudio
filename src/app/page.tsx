@@ -15,6 +15,8 @@ import {
   Database,
   Megaphone,
   Palette,
+  Check,
+  CheckCheck,
 } from "lucide-react";
 
 // Data JSON
@@ -52,6 +54,7 @@ import ModernAppsSection from "./components/shared/ModernAppsSection";
 import TitleBox from "./components/shared/TitleBox";
 import ScrollStackSection from "./components/shared/ScrollStackSection";
 import ContentCard from "./components/shared/ContentCard";
+import ServiceCard from "./components/shared/ServiceCard";
 
 
 // STEPS MAP DATA
@@ -123,7 +126,7 @@ const projects = [
 
 export default function Home() {
 
-  
+
   // State for active tab and plans view
   const [planTabActive, setPlanTab] = useState('development');
   const [plansView, setPlansView] = useState<Plan[]>([]);
@@ -173,7 +176,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex flex-col gap-12">
+      <main className="flex flex-col">
         <section id="inicio">
           <Banner
             fallbackBanner={banners[0]}
@@ -183,6 +186,74 @@ export default function Home() {
             ]}
           />
         </section>
+
+
+
+
+
+
+        <section id="cards" className="bg-[var(--meteorite--50)] py-4">
+          <TitleBox title={{ left: 'Haz que tu marca hable por ti', main: '', right: '' }} tag="Creatividad" description="''" ></TitleBox>
+          <div className="cards__content flex items-center justify-between p-4 gap-6">
+            <ServiceCard
+              tag={{ label: 'Producto digital', color: 'var(--color-dark)', fontSize: 'text-[.8rem]' }}
+              title={{ label: 'Crea experiencias digitales que enamoran', color: 'var(--color-dark)', fontSize: 'text-4xl' }}
+              description={{ label: 'Diseñamos interfaces intuitivas y funcionales que hacen que tus usuarios disfruten cada interacción con tu producto.', color: 'var(--color-dark)', fontSize: 'text-[clamp(12px, 1vw, 14px)]' }}
+            >
+              <ul className="flex flex-col p-2 gap-2">
+                <li className="flex gap-2">
+                  <Check className="text-[var(--color-primary-to-white)]"></Check>
+                  <span>Investigación y arquitectura de información</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="text-[var(--color-primary-to-white)]"></Check>
+                  <span>Diseño centrado en el usuario (UX/UI)</span>
+                </li>
+
+                <li className="flex gap-2">
+                  <Check className="text-[var(--color-primary-to-white)]"></Check>
+                  <span>Prototipado y pruebas de usabilidad</span>
+                </li>
+              </ul>
+
+              <figure className="w-full">
+                <img src="/img/hero-banner/Figma-cap.png" alt="figma view" className="object-cover w-full h-full" />
+
+              </figure>
+
+            </ServiceCard>
+            <ServiceCard
+              tag={{ label: 'Producto digital', color: 'var(--color-dark)', fontSize: 'text-[.8rem]' }}
+              title={{ label: 'Crea experiencias digitales que enamoran', color: 'var(--color-dark)', fontSize: 'text-4xl' }}
+              description={{ label: 'Diseñamos interfaces intuitivas y funcionales que hacen que tus usuarios disfruten cada interacción con tu producto.', color: 'var(--color-dark)', fontSize: 'text-[clamp(12px, 1vw, 14px)]' }}
+            >
+              <ul className="flex flex-col p-2 gap-2">
+                <li className="flex gap-2">
+                  <Check className="text-[var(--color-primary-to-white)]"></Check>
+                  <span>Investigación y arquitectura de información</span>
+                </li>
+                <li className="flex gap-2">
+                  <Check className="text-[var(--color-primary-to-white)]"></Check>
+                  <span>Diseño centrado en el usuario (UX/UI)</span>
+                </li>
+
+                <li className="flex gap-2">
+                  <Check className="text-[var(--color-primary-to-white)]"></Check>
+                  <span>Prototipado y pruebas de usabilidad</span>
+                </li>
+              </ul>
+
+              <figure className="w-full">
+                <img src="/img/hero-banner/Figma-cap.png" alt="figma view" className="object-cover w-full h-full" />
+
+              </figure>
+
+            </ServiceCard>
+          </div>
+        </section>
+
+
+
         <section id="servicios">
           <Grid subtitle="Nuestros Servicios" title={{ main: 'estrella', left: 'Impulsa tu negocio con nuestros servicios', right: '' }} showMeetingCall={false}>
             <InfoCards cards={services} showSteps={false} />
@@ -209,7 +280,7 @@ export default function Home() {
             </section>
           </main>
         </section>
-          
+
         <section id="support" className="flex mx-auto my-0 items-center justify-center bg-[var(--light-blue--200)]">
           <div className="wrapper lg:pl-[3rem]">
             <DetailsPanel content={{
@@ -295,8 +366,9 @@ export default function Home() {
           </div>
         </ScrollStackSection>
 
-                  
-        <section id="portafolio">
+
+
+        <section id="portafolio" className="py-4">
           <TitleBox title={{ left: 'Resultados que', main: 'hablan', right: 'por nosotros' }} tag="Nuestro portafolio" description="''" ></TitleBox>
           <Portfolio />
         </section>

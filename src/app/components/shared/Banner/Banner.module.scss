@@ -74,6 +74,10 @@
   z-index: 10;
   position: relative;
   padding-block: 14px;
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 }
 
 .banner__description,
@@ -99,6 +103,13 @@
   overflow: hidden;
   width: 40%;
   height: 100%;
+
+  img{
+    max-width: 100%;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
 
   &::before,
   &::after {
@@ -129,6 +140,10 @@
     width: 100%;
     height: 100%;
     flex-direction: row;
+
+    img {
+      align-self: flex-end;
+    }
   }
 }
 
@@ -203,6 +218,30 @@
   flex-direction: column;
   gap: 25px;
   text-align: center;
+
+  @media (max-width: 768px) {
+    align-items: start;
+    text-align: start;
+    padding: 12px;
+
+    h1 {
+      padding: 0;
+      font-size: clamp(1.8rem, 2vw, 2rem);
+
+      .title {
+        margin-bottom: 10px;
+      }
+
+    }
+
+  }
+
+  @media (max-width: 420px) {
+    h1 {
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+    }
+  }
+
 }
 
 .banner__description .banner__description--hero-service {
@@ -220,6 +259,7 @@
 .banner__description .banner__description--hero-service img {
   width: 20px;
   height: 20px;
+
 }
 
 .banner__description .banner__description--hero-title {
@@ -286,6 +326,14 @@
 
     .text-green-500 {
       font-size: clamp(12px, 1vw, 14px);
+    }
+
+    @media (max-width: 420px) {
+      font-size: clamp(12px, 1vw, 14px);
+
+      .text-green-500 {
+        font-size: clamp(12px, 1vw, 14px);
+      }
     }
   }
 }

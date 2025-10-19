@@ -131,20 +131,20 @@ const NavBar = () => {
             <span
               className={`
                 w-full h-[4px] rounded-2xl  duration-300 ease-in-out
-                ${'bg-[var(--color-primary)]'}
+                ${'bg-white'}
                 ${stateSideBar ? 'rotate-45 translate-y-[8px]' : ''}
               `}></span>
 
             <span
               className={`
                 w-[70%] h-[4px] rounded-2xl  duration-300 ease-in-out
-                ${'bg-[var(--color-primary)]'}
+                ${'bg-white'}
                 ${stateSideBar ? 'opacity-0 scale-0' : ''}`}></span>
 
             <span
               className={`
                 w-full h-[4px] rounded-2xl  duration-300 ease-in-out
-                ${'bg-[var(--color-primary)]'}
+                ${'bg-white'}
                 ${stateSideBar ? '-rotate-45 -translate-y-[8px]' : ''}`}></span>
           </button>
         </header>

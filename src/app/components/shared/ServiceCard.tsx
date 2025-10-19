@@ -34,9 +34,9 @@ const ServiceCard = ({ tag, title, description, items, bgCard = '#FFFFFF', child
                 </header>
             )}
 
-            <h4 className={`${title?.fontSize} px-8 ${title?.fontWeight}`} style={{ color: title?.color }}>{title?.label}</h4>
+            <h4 className={`${title?.fontSize} px-8 flex-1/2 ${title?.fontWeight}`} style={{ color: title?.color }}>{title?.label}</h4>
 
-            <p className={`${description?.fontSize} px-8 ${description?.fontWeight}`} style={{ color: description?.color }}>{description?.label}</p>
+            <p className={`${description?.fontSize} px-8 flex-1/2 ${description?.fontWeight}`} style={{ color: description?.color }}>{description?.label}</p>
 
             {children}
         </main>

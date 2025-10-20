@@ -17,6 +17,27 @@
     },
     {
         "images": [
+            "/img/hero-banner/desarrollo/airpods.jpg",
+            "/img/hero-banner/desarrollo/ecommerce.png",
+            "/img/hero-banner/desarrollo/watch.png",
+            "/img/hero-banner/desarrollo/website-business.jpg"
+        ],
+        "alt": "Desarrollador",
+        "service": "Desarrollo de software a medida",
+        "icon": "/icons/computer.png",
+        "title": {
+            "main": "Transforma tu idea en software real y escalable.",
+            "second": "Creamos soluciones que hacen la diferencia."
+        },
+        "list": [
+            "Desarrollo a medida",
+            "Seguridad y escalabilidad",
+            "Entregas ágiles"
+        ],
+        "subtitle": "Desarrollamos tecnología con propósito, visión y estrategia."
+    },
+    {
+        "images": [
             "img/hero-banner/analisis-de-datos/dashboard-graphs.jpg",
             "img/hero-banner/analisis-de-datos/dashboard-graphs-2.jpg",
             "img/hero-banner/analisis-de-datos/dashboard-graphs-3.jpg",

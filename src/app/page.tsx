@@ -174,10 +174,14 @@ export default function Home() {
     { top: "-80px", left: "30px" },
   ];
 
+
+  const newBanner = banners.filter((_, index)=> index != 0);
+
   return (
     <>
       <main className="flex flex-col">
-        <section id="inicio">
+
+        <section id="hero-banner">
           <Banner
             fallbackBanner={banners[0]}
             defaultCallActions={[
@@ -214,7 +218,6 @@ export default function Home() {
           </div>
 
         </section>
-
 
         <section id="cards" className="bg-[var(--meteorite--50)] lg:p-8 flex flex-col gap-2">
           <TitleBox title={{ left: 'Haz que tu marca hable por ti', main: '', right: '' }} tag="Creatividad" description="''" ></TitleBox>
@@ -283,22 +286,33 @@ export default function Home() {
           </div>
         </section>
 
-
-
         <section id="servicios">
           <Grid subtitle="Nuestros Servicios" title={{ main: 'estrella', left: 'Impulsa tu negocio con nuestros servicios', right: '' }} showMeetingCall={false}>
             <InfoCards cards={services} showSteps={false} />
           </Grid>
         </section>
-        <section id="nosotros">
-          <AboutUs />
+
+        <section id="banner">
+          <Banner
+            banners={newBanner}
+            defaultCallActions={[
+              { label: "Contactar", actionKey: "contactar" },
+              { label: "Más info", actionKey: "info" },
+            ]}
+          />
         </section>
-        <section id="progreso">
+
+        {/* <section id="nosotros">
+          <AboutUs />
+        </section> */}
+
+        {/* <section id="progreso">
           <Grid subtitle="Como conectamos" title={{ main: 'camino', left: 'Nuestro', right: 'hacia proyectos que brillan' }}>
             <InfoCards cards={steps} />
           </Grid>
-        </section>
-        <section id="planes">
+        </section> */}
+
+        {/* <section id="planes">
           <main className="w-full min-h-[100vh] py-12 px-4 lg:w-4/5 lg:mx-auto lg:my-0">
             <TitleBox title={{ left: 'Diseñamos el éxito juntos:', main: 'Explora nuestras soluciones flexibles', right: '' }} tag="Planes a tu medida" description="''" ></TitleBox>
 
@@ -310,9 +324,9 @@ export default function Home() {
               </div>
             </section>
           </main>
-        </section>
+        </section> */}
 
-        <section id="support" className="bg-dark flex mx-auto my-0 items-center justify-center bg-[var(--light-blue--200)]">
+        {/* <section id="support" className="bg-dark flex mx-auto my-0 items-center justify-center bg-[var(--light-blue--200)]">
           <div className="wrapper lg:pl-[3rem]">
             <DetailsPanel content={{
               styles: { colorTitle: "var(--color-light)", colorItems: "var(--color-primary-tint)" },
@@ -325,9 +339,9 @@ export default function Home() {
               ]
             }}></DetailsPanel>
           </div>
-        </section>
+        </section> */}
 
-        <ScrollStackSection>
+        {/* <ScrollStackSection>
           <div className="relative flex-1 flex justify-center items-center w-full bg-white">
             <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4">
               <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
@@ -377,7 +391,6 @@ export default function Home() {
 
 
               <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
-                {/* <span className="bg-[var(--meteorite--400)] text-white p-1 px-2 rounded-2xl w-fit">Creador de página web</span> */}
                 <h2 className="text-6xl">Servicios que impulsan tu crecimiento</h2>
                 <p>Desde la idea hasta el lanzamiento, te acompañamos en cada paso con soluciones digitales que destacan.</p>
               </div>
@@ -395,20 +408,20 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </ScrollStackSection>
+        </ScrollStackSection> */}
 
 
 
-        <section id="portafolio" className="py-4">
+        {/* <section id="portafolio" className="py-4">
           <TitleBox title={{ left: 'Resultados que', main: 'hablan', right: 'por nosotros' }} tag="Nuestro portafolio" description="''" ></TitleBox>
           <Portfolio />
-        </section>
-
+        </section> */}
+        {/* 
         <section
           id="section-mobile"
           className="w-full h-fit flex flex-col gap-2.5 items-center justify-center pt-8 relative overflow-hidden">
           <ModernAppsSection item={{ image: '/img/mockup-mobile.png', name: 'Apps que transforman tu día', gradient: true }}></ModernAppsSection>
-        </section>
+        </section> */}
 
 
         <section id="contacto" className="bg-[#5656b5] bg-ribbon">

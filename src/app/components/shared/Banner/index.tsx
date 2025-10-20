@@ -78,11 +78,11 @@ export default function Banner({
       bannerContentRef.current?.style.setProperty("transform", `translateY(${scrollY * 0.02}px)`);
     };
 
-    window.addEventListener("scroll", handleParallax);
+    // window.addEventListener("scroll", handleParallax);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
-      window.removeEventListener("scroll", handleParallax);
+      // window.removeEventListener("scroll", handleParallax);
     };
   }, [isDynamic, bannerList.length]);
 

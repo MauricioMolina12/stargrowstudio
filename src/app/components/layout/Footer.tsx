@@ -55,15 +55,16 @@ const Footer = () => {
     ]
 
     return (
-        <footer className="w-full bg-[var(--color-primary)] text-[var(--color-light)] relative flex flex-col justify-center items-center pt-10 pb-24 xl:pb-16">
-            <div className="w-[90%] mx-auto flex flex-col xl:flex-row gap-10">
+        <footer className="w-full bg-[var(--color-secondary)] text-[var(--color-light)] relative flex flex-col justify-center items-center p-4">
+            <div className="w-full mx-auto flex flex-col xl:flex-row gap-10">
 
                 {/* Branding */}
                 <div className="flex flex-col justify-center gap-4 w-full xl:w-1/4 border-b xl:border-none pb-6">
-                    <figure className="flex items-center gap-3 w-fit h-fit">
+                    <figure className="flex items-start gap-3 w-fit h-fit">
                         <img src="/img/logo-white.png" alt="logo-stargrowstudio" width={30} height={30} />
-                        <figcaption className="text-white font-semibold text-[.8rem] whitespace-nowrap">
+                        <figcaption className="text-white font-semibold text-xl flex flex-col items-start">
                             Star Grow Studio
+                            <p className='text-[.8rem] font-light'>Diseñamos y desarrollamos soluciones digitales que impulsan tu crecimiento.</p>
                         </figcaption>
                     </figure>
                     {/* <div className="payments-methods flex items-center gap-2">

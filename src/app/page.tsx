@@ -55,6 +55,7 @@ import TitleBox from "./components/shared/TitleBox";
 import ScrollStackSection from "./components/shared/ScrollStackSection";
 import ContentCard from "./components/shared/ContentCard";
 import ServiceCard from "./components/shared/ServiceCard";
+import ImpactMetrics from "./components/shared/ImpactMetrics";
 
 
 // STEPS MAP DATA
@@ -175,7 +176,7 @@ export default function Home() {
   ];
 
 
-  const newBanner = banners.filter((_, index)=> index != 0);
+  const newBanner = banners.filter((_, index) => index != 0);
 
   return (
     <>
@@ -292,13 +293,28 @@ export default function Home() {
           </Grid>
         </section>
 
-        <section id="banner">
+        {/* <section id="banner">
           <Banner
             banners={newBanner}
             defaultCallActions={[
               { label: "Contactar", actionKey: "contactar" },
               { label: "Más info", actionKey: "info" },
             ]}
+          />
+        </section> */}
+
+        <section id="metrics-software" className="my-5">
+          <ImpactMetrics
+            Config={{
+              imageBg: "/img/computer.png",
+              title: "¿Por qué un buen software optimiza la eficiencia de tu empresa?",
+              metrics: [
+                { value: "70%", description: "Productividad al implementar software empresarial" },
+                { value: "30%", description: "Costos operativos con ERP (Gartner)" },
+                { value: "50%", description: "Gastos de infraestructura IT con software en la nube (Forrester)" },
+                { value: "200%", description: "Velocidad en entregas con automatización CI/CD" }
+              ]
+            }}
           />
         </section>
 

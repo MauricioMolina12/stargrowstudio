@@ -13,6 +13,7 @@ export const MeetingProvider = ({ children }: { children: React.ReactNode }) => 
       {children}
     </MeetingContext.Provider>
   );
+  
 };
 
 export const useMeeting = () => {

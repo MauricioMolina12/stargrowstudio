@@ -25,7 +25,6 @@ import servicesData from "@/app/data/JSON/services.json";
 /*** COMPONENTS ***/
 import Banner from "./components/shared/Banner";
 import MeetingModal from "./components/shared/MeetingModal";
-import ModalMessage from "./components/shared/ModalMessage";
 import Grid from "./components/shared/Grid/Grid";
 import InfoCards from "./components/shared/InfoCards";
 import TitleBox from "./components/shared/TitleBox/TitleBox";

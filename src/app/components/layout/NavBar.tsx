@@ -115,7 +115,7 @@ const NavBar = () => {
                 alt="logo sgs"
               />
               <figcaption
-                className={`${currentStyle.textClass} font-bold text-lg whitespace-nowrap`}
+                className={`${currentStyle.textClass} font-bold text-lg whitespace-nowrap hidden sm:block `}
               >
                 Star Grow Studio
               </figcaption>
@@ -127,20 +127,20 @@ const NavBar = () => {
             <span
               className={`
                 w-full h-[4px] rounded-2xl  duration-300 ease-in-out
-                ${'bg-white'}
+                ${'bg-[var(--color-primary)]'}
                 ${stateSideBar ? 'rotate-45 translate-y-[8px]' : ''}
               `}></span>
 
             <span
               className={`
                 w-[70%] h-[4px] rounded-2xl  duration-300 ease-in-out
-                ${'bg-white'}
+                ${'bg-[var(--color-primary)]'}
                 ${stateSideBar ? 'opacity-0 scale-0' : ''}`}></span>
 
             <span
               className={`
                 w-full h-[4px] rounded-2xl  duration-300 ease-in-out
-                ${'bg-white'}
+                ${'bg-[var(--color-primary)]'}
                 ${stateSideBar ? '-rotate-45 -translate-y-[8px]' : ''}`}></span>
           </button>
         </header>

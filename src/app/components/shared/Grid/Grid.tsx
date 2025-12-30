@@ -1,8 +1,8 @@
 'use client';
 
 import { ReactNode } from "react";
-import { useMeeting } from "../../context/MeetingContext";
-import TitleBox from "./TitleBox";
+import { useMeeting } from "@/app/context/MeetingContext";
+import TitleBox from "../TitleBox/TitleBox";
 
 
 type Props = {

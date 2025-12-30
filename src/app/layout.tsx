@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import './styles/typography.css';
+
 import NavBar from "./components/layout/NavBar";
-import { MeetingProvider } from "./context/MeetingContext";
 import { AppProviders } from "@/providers/AppProviders";
 import Footer from "./components/layout/Footer";
-// import InternetStatus from "./components/layout/InternetStatus";
-import SplashScreen from "./components/layout/Splash/Splash";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -27,7 +26,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* <InternetStatus /> */}
       <head>
         <link rel="icon" href="/logo.png" type="image/png" />
         <link
@@ -37,16 +35,8 @@ export default function RootLayout({
       </head>
       <body className={`${montserrat.variable} antialiased`}>
         <AppProviders>
-          {/* <SplashScreen /> */}
           <NavBar />
           {children}
-
-          {/* <div className="options-container fixed right-4 bottom-16 w-[200px] h-[200px] bg-white border border-gray-200 z-50 rounded-xl"></div>
-          <button className="fixed bottom-4 right-4 bg-gray-800 w-[40px] h-[40px] rounded-full border border-gray-800 text-white cursor-pointer">
-            S
-          </button> */}
-          
-          
           <Footer />
         </AppProviders>
       </body>

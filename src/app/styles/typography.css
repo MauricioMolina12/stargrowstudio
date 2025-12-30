@@ -1,0 +1,65 @@
+
+
+.fs-10 {
+  /* Mín: 10px, Escala: 0.5vw, Máx: 12px */
+  font-size: clamp(10px, 0.5vw, 12px); 
+}
+
+.fs-12 {
+  /* Mín: 12px, Escala: 0.7vw, Máx: 14px */
+  font-size: clamp(12px, 0.7vw, 14px);
+}
+
+.fs-14 {
+  /* Mín: 14px, Escala: 1vw, Máx: 16px */
+  font-size: clamp(14px, 1vw, 16px);
+}
+
+.fs-16 {
+  /* Mín: 16px, Escala: 1.2vw, Máx: 18px */
+  font-size: clamp(16px, 1.2vw, 18px);
+}
+
+.fs-18 {
+  /* Mín: 18px, Escala: 1.5vw, Máx: 20px */
+  font-size: clamp(18px, 1.5vw, 20px);
+}
+
+/* --- TAMAÑOS MEDIANOS (20px a 24px) --- */
+
+.fs-20 {
+  /* Mín: 20px, Escala: 2vw, Máx: 22px */
+  font-size: clamp(20px, 2vw, 22px);
+}
+
+.fs-22 {
+  /* Mín: 22px, Escala: 2.2vw, Máx: 24px */
+  font-size: clamp(22px, 2.2vw, 24px);
+}
+
+.fs-24 {
+  /* Mín: 24px, Escala: 2.5vw, Máx: 26px */
+  font-size: clamp(24px, 2.5vw, 26px);
+}
+
+/* --- TAMAÑOS GRANDES (26px a 30px) --- */
+
+.fs-26 {
+  /* Mín: 26px, Escala: 2.8vw, Máx: 28px */
+  font-size: clamp(26px, 2.8vw, 28px);
+}
+
+.fs-28 {
+  /* Mín: 28px, Escala: 3vw, Máx: 30px */
+  font-size: clamp(28px, 3vw, 30px);
+}
+
+.fs-30 {
+  /* Mín: 30px, Escala: 3.5vw, Máx: 35px */
+  font-size: clamp(30px, 3.5vw, 35px);
+}
+
+.fs-32 {
+  /* Mín: 32px, Escala: 4vw, Máx: 40px */
+  font-size: clamp(32px, 4vw, 40px);
+}

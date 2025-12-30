@@ -1,4 +1,4 @@
-import { Services } from "@/app/types/Services";
+import { Services } from "@/app/types/banner";
 
 type Service = Omit<Services, "callAction"> & {
   slug: string;
@@ -9,7 +9,7 @@ export const services: Service[] = [
   {
     slug: "desarrollo-software",
     icon: "/icons/computer.png",
-    service: "Desarrollo de software a tu medida",
+    tag: "Desarrollo de software a tu medida",
     title: {
       main: "Impulsa tu negocio",
       second: " con un software hecho a tu medida",
@@ -41,7 +41,7 @@ export const services: Service[] = [
   {
     slug: "desarrollo-apps",
     icon: "/icons/mobile.webp",
-    service: "Desarrollo de apps móviles",
+    tag: "Desarrollo de apps móviles",
     title: {
       main: "Apps que Impulsan tu Negocio",
       second: "Diseñadas para Crecer Contigo.",
@@ -80,7 +80,7 @@ export const services: Service[] = [
   },
   {
     slug: "analisis-datos",
-    service: "Análisis de datos y visualización",
+    tag: "Análisis de datos y visualización",
     icon: "/icons/analisis.png",
     title: {
       main: "Convierte tus datos en decisiones inteligentes.",
@@ -99,7 +99,7 @@ export const services: Service[] = [
   },
   {
     slug: "diseno-ux-ui",
-    service: "Diseño ui/ux",
+    tag: "Diseño ui/ux",
     icon: "/icons/diseño.png",
     title: {
       main: "Haz que tu producto enamore a primera vista.",

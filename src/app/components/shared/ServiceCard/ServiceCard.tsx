@@ -30,7 +30,9 @@ const ServiceCard = ({ tag, title, description, items, bgCard = '#FFFFFF', child
             {tag && (
                 <header className="header w-full flex items-center justify-between pb-2 px-8">
                         <span className={`py-1 px-3 rounded-3xl bg-[var(--neutral--100)] ${tag.fontSize}`} style={{ color: tag.color }}>{tag.label}</span>
-                        <ArrowUpRight className={`text-[${title?.color}]`}/>
+                        <button className="cursor-pointer">
+                            <ArrowUpRight className={`text-[${title?.color}]`}/>
+                        </button>
                 </header>
             )}
 

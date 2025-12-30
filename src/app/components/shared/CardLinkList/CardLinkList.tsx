@@ -37,7 +37,7 @@ export const CardLinkList = ({
 
   const handleClick = (cta?: () => void) => {
     cta?.()
-    onItemClick?.() // 🔥 cerrar modal
+    onItemClick?.()
   }
 
   return (

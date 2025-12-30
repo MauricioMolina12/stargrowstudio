@@ -3,42 +3,36 @@
     "icon": "Code",
     "color": "text-cyan-500",
     "title": "Desarrollo de software a medida",
-    "slug": "desarrollo-software",
     "description": "Diseñamos y desarrollamos aplicaciones web adaptadas a las necesidades de tu negocio, con tecnologías modernas, escalables y seguras."
   },
   {
     "icon": "Smartphone",
     "color": "text-green-600",
     "title": "Desarrollo de apps móviles",
-    "slug": "desarrollo-apps",
     "description": "Creamos aplicaciones móviles nativas e híbridas con un alto rendimiento y experiencia de usuario fluida, disponibles en iOS y Android."
   },
   {
     "icon": "PieChart",
     "color": "text-yellow-500",
     "title": "Análisis de datos y visualización",
-    "slug": "analisis-datos",
     "description": "Transformamos tus datos en información clara y accionable mediante dashboards interactivos, reportes inteligentes y visualizaciones atractivas."
   },
   {
     "icon": "Database",
     "color": "text-blue-700",
     "title": "Arquitectura y gestión de bases de datos",
-    "slug": "bases-datos",
     "description": "Diseñamos, optimizamos y administramos bases de datos eficientes y seguras, garantizando integridad, escalabilidad y alto rendimiento."
   },
   {
     "icon": "Megaphone",
     "color": "text-red-500",
     "title": "Consultoría en transformación digital",
-    "slug": "consultoria-transformacion",
     "description": "Acompañamos a tu empresa en la adopción de nuevas tecnologías y procesos digitales, maximizando la productividad y la innovación."
   },
   {
     "icon": "Palette",
     "color": "text-purple-600",
     "title": "Diseño UX/UI centrado en el usuario",
-    "slug": "diseno-ux-ui",
     "description": "Creamos interfaces modernas, accesibles y enfocadas en el usuario, generando experiencias digitales memorables y funcionales."
   }
 ]

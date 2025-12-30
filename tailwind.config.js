@@ -25,9 +25,19 @@ module.exports = {
           "0%": { opacity: 0, transform: "translateY(60px) scale(0.98)" },
           "100%": { opacity: 1, transform: "translateY(0) scale(1)" },
         },
+        slideFade: {
+          '0%': { transform: 'translateX(20px)', opacity: '0' },
+          '100%': { transform: 'translateX(0px)', opacity: '1' },
+        },
+        fadeUp: {
+          '0%': { opacity: '0.4', transform: 'translateX(-30%) scale(0.9)' },
+          '100%': { opacity: '1', transform: 'translateX(0) scale(1)' },
+        },
       },
       animation: {
         reveal: "reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        slideFade: 'slideFade 0.5s ease',
+        fadeUp: 'fadeUp 0.8s forwards',
       },
       fontFamily: {
         montserrat: ['var(--font-main)', 'sans-serif'],

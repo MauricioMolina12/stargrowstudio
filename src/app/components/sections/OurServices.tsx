@@ -4,8 +4,8 @@
 
 import { useState } from "react";
 import clsx from "clsx";
-import useDarkMode from "../hooks/useDarkMode";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import useDarkMode from "../../hooks/useDarkMode";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { useRouter } from "next/navigation";
 
 interface Service {

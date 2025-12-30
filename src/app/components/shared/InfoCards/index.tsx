@@ -31,19 +31,22 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
     <>
       {cards.map((card, index) => (
         <div key={index} className="item parallax bg-[var(--color-white)] w-full rounded-2xl relative flex flex-col justify-center gap-4 p-4">
+          
           {showSteps && (
             <span className="absolute top-[-10px] left-[-10px] bg-[var(--color-primary)] text-white p-3 [clip-path:circle()]">
               {index + 1}
             </span>
           )}
+          
           {card.icon && (() => {
             const Icon = card.icon.component;
             return (
               <Icon
-                className={`w-10 h-10 bg-gray-100 p-2 rounded-2xl ${card.icon.color}`}
+                className={`w-14 h-14 bg-gray-100 p-4 rounded-4xl ${card.icon.color}`}
               />
             );
           })()}
+
           {card.iconImg && (() => {
             const icon = card.iconImg;
             return (
@@ -52,16 +55,21 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
                 alt={card.title}
                 width={40}
                 height={40}
-                className="w-10 h-10 bg-gray-100 p-2 rounded-2xl"
+                className="w-10 h-10 bg-gray-100 p-2 rounded-4xl"
               />
             );
           })()}
 
 
-          <h2 className="text-[1rem] font-[600] text-[var(--color-dark)]">{card.title}</h2>
           {card.description && (
             <p className="text-[var(--color-dark-gray)] text-[.9rem]">{card.description}</p>
           )}
+
+          <hr className="text-gray-300" />
+
+          <h2 className="text-[.9rem] font-[600] text-[var(--color-dark)]">{card.title}</h2>
+
+
           {card.items && (
             <ul className="flex flex-col gap-2">
               {card.items.map((item) => (

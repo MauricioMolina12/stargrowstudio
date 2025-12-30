@@ -1,9 +1,9 @@
 import { services } from "@/app/data/services";
 import Banner from "@/app/components/shared/Banner";
-import Grid from "@/app/components/shared/Grid";
-import SliderAutomatic from "@/app/components/shared/SliderAutomatic";
-import SliderProjects from "@/app/components/shared/SliderProjects";
+import SliderAutomatic from "@/app/components/shared/SliderAutomatic/SliderAutomatic";
+import SliderProjects from "@/app/components/shared/SliderProjects/SliderProjects";
 import InfoCards from "@/app/components/shared/InfoCards";
+import Grid from "@/app/components/shared/Grid/Grid";
 
 type Params = Promise<{ slug: string }>
 

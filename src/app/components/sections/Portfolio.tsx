@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import TabsNav from './shared/TabsNav';
-import ContentCard from './shared/ContentCard';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+import TabsNav from '../shared/TabsNav';
+import ContentCard from '../shared/ContentCard';
 
 interface Project {
     name: string;

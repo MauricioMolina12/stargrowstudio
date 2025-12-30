@@ -1,8 +1,9 @@
+import { urlFor } from "@/sanity/lib/image";
+
 type Content = {
   name: string;
   image: string;
   description: string;
-  techs?: { image: string; name: string }[];
 };
 
 type ContentCardProps = {
@@ -11,44 +12,25 @@ type ContentCardProps = {
 
 export default function ContentCard({ content }: ContentCardProps) {
   return (
-    <div className="parallax min-w-[350px] max-w-[350px] flex-shrink-0 rounded-xl overflow-hidden bg-white border border-[var(--color-gray)]">
-      <figure className="h-[200px] overflow-hidden">
+    <div className="parallax w-full h-full flex-shrink-0 rounded-xl overflow-hidden bg-white border border-[var(--color-gray)]">
+      <figure className="aspect-square w-full overflow-hidden">
         <img
-          src={content?.image}
+          src={typeof content?.image === 'string'
+            ? content?.image
+            : urlFor(content?.image).width(1200).url()
+          }
           alt={content?.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center"
         />
       </figure>
       <div className="p-4 flex flex-col gap-3">
-        <h2 className="font-bold text-[14px] text-[var(--color-primary)]">
+        <h2 className="font-semibold text-[16px] text-[var(--color-primary)]">
           {content?.name}
         </h2>
         <p className="text-[13px] text-[var(--color-dark-gray)] leading-relaxed">
           {content?.description}
         </p>
       </div>
-
-      {content?.techs && (
-        <div className="px-4 pb-4 flex flex-col gap-2">
-          <h4 className="text-[var(--color-dark)] font-semibold text-[.95rem]">
-            Tecnologías usadas
-          </h4>
-          <div className="flex items-center gap-2 flex-wrap">
-            {content?.techs.map((tech, idx) => (
-              <figure key={idx} className="flex flex-col items-center gap-2">
-                <img
-                  className="bg-gray-50 rounded-[10px] p-[2px] w-7 object-cover"
-                  src={tech.image}
-                  alt={`Imagen de ${tech.name}`}
-                />
-                <figcaption className="text-[var(--color-dark-gray)] text-[.8rem]">
-                  {tech.name}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

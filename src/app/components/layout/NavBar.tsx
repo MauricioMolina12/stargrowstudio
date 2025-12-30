@@ -32,16 +32,15 @@ const navItems: { label: string, path?: string, isDropdown?: boolean }[] = [
   { label: "Explorar", isDropdown: true },
 ];
 
-const routeStyles: Record<
-  string, routeStyles> = {
+const routeStyles: Record<string, routeStyles> = {
   "/": {
-    navClass: "bg-[#5656B5] text-white",
-    logo: "/logo-white.png",
-    textClass: "text-white",
-    menuClass: "bg-[var(--color-primary)]",
-    itemsMenuClass: "text-white",
-    ctaClassBg: "bg-white",
-    ctaClassText: "text-[var(--color-primary)]"
+    navClass: "bg-[#ffffff] text-[#5656B5]",
+    logo: "/logo.png",
+    textClass: "text-[#5656B5]",
+    menuClass: "bg-white",
+    itemsMenuClass: "text-[#5656B5]",
+    ctaClassBg: "bg-[var(--color-primary)]",
+    ctaClassText: "text-[var(--color-white)]"
   },
   "/privacy-policy": {
     navClass: "bg-[#5656B5] text-white",
@@ -99,15 +98,12 @@ const NavBar = () => {
 
 
 
-
-
-
   const toggleSideBar = () => setStateSideBar((prev) => !prev);
 
 
   return (
     <nav className={navClass}>
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between px-6 py-3">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between px-6 py-3 max-w-11/12 my-0 mx-auto">
 
         {/* Logo y nombre */}
         <header className="w-full lg:w-fit flex justify-between items-center">
@@ -451,7 +447,7 @@ const NavBar = () => {
                           },
                         ]}
                       ></CardLinkList>
-                      <ContentCard content={project}></ContentCard>
+                      {/* <ContentCard content={project}></ContentCard> */}
                     </div>
                   )}
                 </ShareModal>

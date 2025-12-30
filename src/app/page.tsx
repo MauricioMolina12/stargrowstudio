@@ -1,7 +1,5 @@
-'use client'
-import Image from "next/image";
 
-// Icons
+/*** ICONS ***/
 import {
   Search,
   Calendar,
@@ -16,47 +14,43 @@ import {
   Megaphone,
   Palette,
   Check,
-  CheckCheck,
 } from "lucide-react";
 
-// Data JSON
+
+/*** DATA ***/
 import banners from "@/app/data/JSON/banners.json";
-import stepsData from "@/app/data/JSON/steps.json";
 import servicesData from "@/app/data/JSON/services.json";
-import plans from "@/app/data/JSON/plans.json";
 
 
-// Components
+/*** COMPONENTS ***/
 import Banner from "./components/shared/Banner";
-import OurServices from "./components/OurServices";
-import AboutUs from "./components/shared/AboutUs/index"
-import Plans from "./components/shared/Plans";
 import MeetingModal from "./components/shared/MeetingModal";
-import Portfolio from "./components/Portfolio";
-import Contact from "./components/Contact";
-import InternetStatus from "./components/layout/InternetStatus";
-import ModalMessage from "./components/shared/modalMessage";
-import Grid from "./components/shared/Grid";
+import ModalMessage from "./components/shared/ModalMessage";
+import Grid from "./components/shared/Grid/Grid";
+import InfoCards from "./components/shared/InfoCards";
+import TitleBox from "./components/shared/TitleBox/TitleBox";
+import ServiceCard from "./components/shared/ServiceCard/ServiceCard";
+import Accordion from "./components/shared/Accordion/Accordion";
+import ScrollStackSection from "./components/shared/ScrollStackSection/ScrollStackSection";
 
-// Interfaces 
-import { Plan } from "./types/plans";
 
 
-// Hooks
-import { useComponentMeeting } from "./hooks/useComponentMeeting";
+/*** HOOKS ***/
 import { useIntersectionObserver } from "@/app/hooks/useIntersectionObserver";
 import { useMeeting } from "./context/MeetingContext";
-import { useEffect, useState } from "react";
-import TabsNav from "./components/shared/TabsNav";
-import InfoCards from "./components/shared/InfoCards";
-import DetailsPanel from "./components/shared/DetailsPanel";
-import ModernAppsSection from "./components/shared/ModernAppsSection";
-import TitleBox from "./components/shared/TitleBox";
-import ScrollStackSection from "./components/shared/ScrollStackSection";
-import ContentCard from "./components/shared/ContentCard";
-import ServiceCard from "./components/shared/ServiceCard";
-import ImpactMetrics from "./components/shared/ImpactMetrics";
+import { sanityFetch } from "@/sanity/lib/sanity.fetch";
+import { BannerTypes } from "./types/banner";
 
+
+/*** QUERIES ***/
+import { HOME_BANNER, HOME_SERVICES } from "@/sanity/lib/queries/banner.queries";
+import { Faqs } from "./types/faqs";
+import { FAQS_HOME } from "@/sanity/lib/queries/faqs.queries";
+import Contact from "./components/sections/Contact";
+import ContentCard from "./components/shared/ContentCard";
+import { Employee } from "./types/empleoyees";
+import { ACTIVE_EMPLOYEES } from "@/sanity/lib/queries/employees.queries";
+import Carousel from "./components/shared/Carousel/Carousel";
 
 // STEPS MAP DATA
 const iconMap: Record<string, any> = {
@@ -67,11 +61,6 @@ const iconMap: Record<string, any> = {
   Rocket,
   BarChart3,
 };
-
-const steps = stepsData.map((step) => ({
-  ...step,
-  icon: { component: iconMap[step.icon], color: step.color },
-}));
 
 
 // SERVICES MAP DATA
@@ -91,91 +80,31 @@ const services = servicesData.map(service => ({
 
 
 
+export default async function Home() {
 
-const planTabs: { label: string; key: string }[] = [
-  {
-    label: 'Desarrollo',
-    key: 'development'
-  },
-  {
-    label: 'Diseño',
-    key: 'design'
-  },
-  {
-    label: 'Consultoría',
-    key: 'consulting'
-  },
-  {
-    label: 'Marketing',
-    key: 'marketing'
-  }
-]
+  /*** BANNER QUERIES ***/
+  const banner = await sanityFetch<BannerTypes>({
+    query: HOME_BANNER,
+  })
+  const banners_services = await sanityFetch<BannerTypes>({
+    query: HOME_SERVICES
+  })
 
 
-const projects = [
-  {
-    name: '🚀 Desarrollo web a medida',
-    image: '/img/how-create-website.png',
-    description: 'Creamos sitios y apps web potentes, rápidos y listos para escalar tu negocio.'
-  },
-  {
-    name: '📱 Apps móviles modernas',
-    image: '/img/how-create-website.png',
-    description: 'Diseñamos experiencias nativas e híbridas que conectan con tus usuarios.'
-  },
-];
-
-export default function Home() {
+  /*** FAQS QUERIES ***/
+  const faqs = await sanityFetch<Faqs[]>({
+    query: FAQS_HOME
+  })
 
 
-  // State for active tab and plans view
-  const [planTabActive, setPlanTab] = useState('development');
-  const [plansView, setPlansView] = useState<Plan[]>([]);
-  const [order, setOrder] = useState([0, 1, 2, 3]);
 
+  /*** EMPLEOYEES QUERIES ***/
+  const employees = await sanityFetch<Employee[]>({
+    query: ACTIVE_EMPLOYEES
+  });
 
-  useIntersectionObserver('.parallax', { threshold: 0.4 }, 'all');
-
-  useEffect(() => {
-    setTabActive('development');
-  }, []);
-
-  function setTabActive(tab: string) {
-    const filtered = plans.filter((plan) => plan.category === tab);
-    setPlansView(filtered);
-    setPlanTab(tab);
-  }
-
-  const [modalInfo, setModalInfo] = useState<{ message: string; isSuccess: boolean } | null>(null);
-  const { isVisible } = useMeeting();
-
-
-  const handleContactFeedback = (message: string, isSuccess: boolean) => {
-    setModalInfo({ message, isSuccess });
-    setTimeout(() => setModalInfo(null), 4000);
-  };
-  const handleClick = (clickedIndex?: number) => {
-    setOrder((prev) => {
-      if (typeof clickedIndex === "number") {
-        const newOrder = [...prev];
-        const [clicked] = newOrder.splice(clickedIndex, 1);
-        newOrder.push(clicked);
-        return newOrder;
-      }
-      const [first, ...rest] = prev;
-      return [...rest, first];
-    });
-  };
-
-
-  const positions = [
-    { top: "0px", left: "0px" },
-    { top: "-10px", left: "10px" },
-    { top: "-40px", left: "20px" },
-    { top: "-80px", left: "30px" },
-  ];
-
-
+  const empleoyeesOrdered = employees.sort((a, b) => a.order - b.order);
+  
   const newBanner = banners.filter((_, index) => index != 0);
 
   return (
@@ -184,11 +113,8 @@ export default function Home() {
 
         <section id="hero-banner">
           <Banner
-            fallbackBanner={banners[0]}
-            defaultCallActions={[
-              { label: "Contactar", actionKey: "contactar" },
-              { label: "Más info", actionKey: "info" },
-            ]}
+            bgColor={banner.bgColor}
+            banners={banner}
           />
         </section>
 
@@ -197,7 +123,7 @@ export default function Home() {
             <ServiceCard
               title={{ label: 'Planes y precios', fontSize: 'text-3xl', color: 'var(--color-white)', fontWeight: 'font-semibold' }}
               description={{ label: 'Diseñamos y desarrollamos aplicaciones web adaptadas a las necesidades de tu negocio.', fontSize: 'text-[1rem]', color: 'var(--color-white)', fontWeight: 'font-light' }}
-              bgCard="linear-gradient(110deg, var(--color-primary) 60%, var(--primary--700) 60%);"
+              bgCard="var(--color-primary)"
             >
               <div className="px-8 pb-9 font-light text-[var(--color-white)] flex-1/2">
                 <p className="">Desde</p>
@@ -221,8 +147,9 @@ export default function Home() {
         </section>
 
         <section id="cards" className="bg-[var(--meteorite--50)] lg:p-8 flex flex-col gap-2">
-          <TitleBox title={{ left: 'Haz que tu marca hable por ti', main: '', right: '' }} tag="Creatividad" description="''" ></TitleBox>
+          <TitleBox title={{ left: 'Haz que tu marca', main: 'hable', right: 'por ti' }} tag="Creatividad"></TitleBox>
           <div className="cards__content grid lg:grid-cols-2 lg:max-w-11/12 p-4 gap-6 lg:mx-auto">
+
             <ServiceCard
               tag={{ label: 'Producto digital', color: 'var(--color-dark)', fontSize: 'text-[.8rem]' }}
               title={{ label: 'Crea experiencias digitales que enamoran', color: 'var(--color-dark)', fontSize: 'text-4xl' }}
@@ -255,6 +182,7 @@ export default function Home() {
               </figure>
 
             </ServiceCard>
+
             <ServiceCard
               tag={{ label: 'Identidad visual', color: 'var(--color-dark)', fontSize: 'text-[.8rem]' }}
               title={{ label: 'Construye una marca que deje huella', color: 'var(--color-white)', fontSize: 'text-4xl' }}
@@ -284,174 +212,81 @@ export default function Home() {
               </figure>
 
             </ServiceCard>
+
           </div>
         </section>
 
-        <section id="servicios">
-          <Grid subtitle="Nuestros Servicios" title={{ main: 'estrella', left: 'Impulsa tu negocio con nuestros servicios', right: '' }} showMeetingCall={false}>
-            <InfoCards cards={services} showSteps={false} />
-          </Grid>
-        </section>
-
-        {/* <section id="banner">
+        <section id="banner">
           <Banner
-            banners={newBanner}
-            defaultCallActions={[
-              { label: "Contactar", actionKey: "contactar" },
-              { label: "Más info", actionKey: "info" },
-            ]}
-          />
-        </section> */}
-
-        <section id="metrics-software" className="my-5">
-          <ImpactMetrics
-            Config={{
-              imageBg: "/img/computer.png",
-              title: "¿Por qué un buen software optimiza la eficiencia de tu empresa?",
-              metrics: [
-                { value: "70%", description: "Productividad al implementar software empresarial" },
-                { value: "30%", description: "Costos operativos con ERP (Gartner)" },
-                { value: "50%", description: "Gastos de infraestructura IT con software en la nube (Forrester)" },
-                { value: "200%", description: "Velocidad en entregas con automatización CI/CD" }
-              ]
-            }}
+            banners={banners_services}
           />
         </section>
 
-        {/* <section id="nosotros">
-          <AboutUs />
-        </section> */}
-
-        {/* <section id="progreso">
-          <Grid subtitle="Como conectamos" title={{ main: 'camino', left: 'Nuestro', right: 'hacia proyectos que brillan' }}>
-            <InfoCards cards={steps} />
-          </Grid>
-        </section> */}
-
-        {/* <section id="planes">
-          <main className="w-full min-h-[100vh] py-12 px-4 lg:w-4/5 lg:mx-auto lg:my-0">
-            <TitleBox title={{ left: 'Diseñamos el éxito juntos:', main: 'Explora nuestras soluciones flexibles', right: '' }} tag="Planes a tu medida" description="''" ></TitleBox>
-
-            <TabsNav tabs={planTabs} tabActive={planTabActive} setTabActive={setTabActive} />
-
-            <section className="w-full overflow-x-auto lg:overflow-y-hidden">
-              <div className="flex justify-start gap-4 px-4 min-w-full snap-x snap-mandatory scroll-smooth 2xl:justify-center 2xl:gap-10">
-                <Plans plansView={plansView} />
-              </div>
-            </section>
-          </main>
-        </section> */}
-
-        {/* <section id="support" className="bg-dark flex mx-auto my-0 items-center justify-center bg-[var(--light-blue--200)]">
-          <div className="wrapper lg:pl-[3rem]">
-            <DetailsPanel content={{
-              styles: { colorTitle: "var(--color-light)", colorItems: "var(--color-primary-tint)" },
-              image: '/img/web-image-1.jpg',
-              title: 'Soluciones digitales completas para hacer crecer tu marca',
-              items: [
-                'Desarrollo web y móvil adaptado a tus necesidades.',
-                'Diseño UX/UI centrado en la experiencia del usuario.',
-                'Estrategias digitales que impulsan tu crecimiento.'
-              ]
-            }}></DetailsPanel>
-          </div>
-        </section> */}
-
-        {/* <ScrollStackSection>
-          <div className="relative flex-1 flex justify-center items-center w-full bg-white">
+        <ScrollStackSection>
+          <div className="relative flex-1 flex justify-center items-center w-full bg-white h-screen border border-gray-200">
             <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4">
               <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
                 <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/hero-banner/desarrollo/watch.png" alt="imagen dev" />
               </figure>
               <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
                 <span className="bg-[var(--meteorite--400)] text-white p-1 px-2 rounded-2xl w-fit">Impulsa tu presencia digital con Star Grow Studio</span>
-                <h2 className="text-6xl">Creamos experiencias que hacen crecer tu negocio.</h2>
+                <h2 className="text-4xl lg:text-6xl">Creamos experiencias que hacen crecer tu negocio.</h2>
                 <p>Tan solo describe tu idea y el Creador de páginas web con IA se encargará del diseño, de las imágenes y del texto. Después, utiliza el editor de arrastrar y soltar para personalizar. Ya tengas una tienda online o un blog, estarás online en un abrir y cerrar de ojos.</p>
               </div>
             </div>
           </div>
-          <div className="relative flex-1 flex justify-center items-center w-full bg-white">
-            <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4">
-              <div className="w-full lg:w-1/2 h-full flex items-center justify-center">
-                <div className="relative w-1/2 h-1/2 [perspective:1000px]">
-                  {order.map((cardIndex, i) => {
-                    const project = projects[cardIndex];
-                    if (!project) return null;
-
-                    const isFront = i === 0;
-                    const rotateY = isFront ? 0 : (i % 2 === 0 ? -6 : 6);
-                    const translateY = (i - 1) * -10;
-
-                    return (
-                      <div
-                        key={`${cardIndex}-${i}`}
-                        className="absolute transition-all duration-800 ease-[cubic-bezier(0.33,1,0.68,1)] cursor-pointer"
-                        style={{
-                          transform: `
-                            translateY(${translateY}px)
-                            rotateY(${rotateY}deg)
-                            scale(${isFront ? 1 : 0.92})
-                          `,
-                          zIndex: order.length - i,
-                        }}
-                        onClick={() => handleClick(i)}
-                      >
-                        <ContentCard content={project} />
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-
-
-
-              <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
-                <h2 className="text-6xl">Servicios que impulsan tu crecimiento</h2>
-                <p>Desde la idea hasta el lanzamiento, te acompañamos en cada paso con soluciones digitales que destacan.</p>
-              </div>
-            </div>
-          </div>
-          <div className="relative flex-1 flex justify-center items-center w-full bg-white">
+          <div className="relative flex-1 flex justify-center items-center w-full bg-white h-screen border border-gray-200">
             <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4">
               <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
                 <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/hero-banner/desarrollo/airpods.jpg" alt="imagen dev" />
               </figure>
               <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
                 <span className="bg-[var(--meteorite--400)] text-white p-1 px-2 rounded-2xl w-fit">Creador de página web</span>
-                <h2 className="text-6xl">Crea tu sitio web en minutos</h2>
+                <h2 className="text-4xl lg:text-6xl">Crea tu sitio web en minutos</h2>
                 <p>Tan solo describe tu idea y el Creador de páginas web con IA se encargará del diseño, de las imágenes y del texto. Después, utiliza el editor de arrastrar y soltar para personalizar. Ya tengas una tienda online o un blog, estarás online en un abrir y cerrar de ojos.</p>
               </div>
             </div>
           </div>
-        </ScrollStackSection> */}
+        </ScrollStackSection>
 
 
+        <section id="our-team" className="p-4">
+          <TitleBox title={{ left: "Nuestra gente" }} tag="Trabajo en equipo" />
 
-        {/* <section id="portafolio" className="py-4">
-          <TitleBox title={{ left: 'Resultados que', main: 'hablan', right: 'por nosotros' }} tag="Nuestro portafolio" description="''" ></TitleBox>
-          <Portfolio />
-        </section> */}
-        {/* 
-        <section
-          id="section-mobile"
-          className="w-full h-fit flex flex-col gap-2.5 items-center justify-center pt-8 relative overflow-hidden">
-          <ModernAppsSection item={{ image: '/img/mockup-mobile.png', name: 'Apps que transforman tu día', gradient: true }}></ModernAppsSection>
-        </section> */}
+          <div className="lg:w-[90%] lg:mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+              {empleoyeesOrdered.map((emp, idx) => (
 
-
-        <section id="contacto" className="bg-[#5656b5] bg-ribbon">
-          <Contact onFeedback={handleContactFeedback} />
+                <div className="rounded-2xl" key={idx}>
+                  <ContentCard content={{ name: emp?.alias ?? '', image: emp?.avatar ?? '', description: emp?.job ?? '' }}></ContentCard>
+                </div>
+              ))
+              }
+            </div>
+          </div>
         </section>
 
-        {modalInfo && (
-          <ModalMessage
-            message={modalInfo.message}
-            isSuccess={modalInfo.isSuccess}
-          />
-        )}
 
-        {isVisible && <MeetingModal />}
+        <section id="faqs" className="bg-white w-full min-h-[fit-content] py-[50px] flex flex-col items-center justify-center gap-3">
+          <TitleBox title={{ left: 'Preguntas frecuentes' }} tag="Atención al cliente"></TitleBox>
+          <div className="dropdowns flex flex-col gap-6 lg:max-w-1/2 px-4">
+            {faqs.map((faq, idx) => (
+              <Accordion key={idx} title={faq.question}>
+                <p className="text-[1rem]">
+                  {faq.answer}
+                </p>
+              </Accordion>
+            ))}
+          </div>
+        </section>
+
+
+
+
+        <section id="contacto" className="grid-bg-diagonal">
+          <Contact />
+        </section>
+
       </main>
     </>
   );

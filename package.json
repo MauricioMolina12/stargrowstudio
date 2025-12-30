@@ -10,12 +10,18 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@sanity/image-url": "^1.2.0",
+    "@sanity/vision": "^4.22.0",
     "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^0.525.0",
     "next": "15.3.4",
+    "next-sanity": "^11.6.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sass": "^1.89.2"
+    "sanity": "^4.22.0",
+    "sass": "^1.89.2",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

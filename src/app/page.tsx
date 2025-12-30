@@ -109,7 +109,7 @@ export default async function Home() {
 
   return (
     <>
-      <main className="flex flex-col gap-6">
+      <main className="flex flex-col gap-12">
 
         <section id="hero-banner">
           <Banner

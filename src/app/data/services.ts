@@ -1,6 +1,6 @@
-import { Services } from "@/app/types/banner";
+import { BannerTypes } from "@/app/types/banner";
 
-type Service = Omit<Services, "callAction"> & {
+type Service = Omit<BannerTypes, "callAction"> & {
   slug: string;
   callAction: { label: string; actionKey: string }[];
 };

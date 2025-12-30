@@ -108,7 +108,7 @@ export default function Banner({
                 <div className="py-[10px] flex flex-col items-center justify-center gap-[25px] text-center md:items-start md:text-start md:p-[12px] xl:h-full xl:items-start xl:pl-[6%]">
 
                   <h1
-                    className={`font-light px-[10px] max-w-[90%] leading-[30px] fs-32 md:p-0 lg:max-w-[80%] lg:leading-[50px] text-start xl:px-0 xl:max-w-full 2xl:leading-[50px] ${banner.animationTitle ? 'inline-block' : ''} ${isDark ? 'dark:text-[var(--color-yellow)]' : ''}`}
+                    className={`font-light px-[10px] max-w-[90%] leading-[35px] text-3xl lg:text-5xl md:p-0 lg:max-w-[80%] lg:leading-[50px] text-start xl:px-0 xl:max-w-full 2xl:leading-[50px] ${banner.animationTitle ? 'inline-block' : ''} ${isDark ? 'dark:text-[var(--color-yellow)]' : ''}`}
                     style={{ color: textColor }}
                   >
                     <span

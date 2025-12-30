@@ -54,10 +54,10 @@ export default async function ServiceSlugPage(props: { params: Params }) {
     <>
       <main className="w-full flex flex-col gap-16">
         <div className="banner-wrapper">
-          <Banner hideService banners={[service]} />
+          {/* <Banner hideService banners={[service]} />
           <aside className="w-full h-5 bg-[var(--color-primary)] my-4 py-6 flex gap-2 items-center justify-center text-white text-[1.2rem]">
             <span>{service.service}</span>
-          </aside>
+          </aside> */}
         </div>
         <Grid showMeetingCall={false} title={{ main: 'brillar', left: 'Ventajas que harán', right: 'tu app' }} subtitle="Cómo conectamos" >
           <InfoCards cards={steps} showSteps={false} />

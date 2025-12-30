@@ -132,7 +132,7 @@ const Footer = () => {
                 <div className="networks">
                     <div className="flex items-center">
                         {payments_methods.map((pay, idx) => (
-                            <figure className="w-16 h-10 flex items-center justify-center">
+                            <figure key={idx} className="w-16 h-10 flex items-center justify-center">
                                 <img
                                     src={pay}
                                     alt="payment-method"

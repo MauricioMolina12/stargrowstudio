@@ -82,6 +82,7 @@ const services = servicesData.map(service => ({
 
 export default async function Home() {
 
+
   /*** BANNER QUERIES ***/
   const banner = await sanityFetch<BannerTypes>({
     query: HOME_BANNER,
@@ -97,11 +98,11 @@ export default async function Home() {
   })
 
 
-
   /*** EMPLEOYEES QUERIES ***/
   const employees = await sanityFetch<Employee[]>({
     query: ACTIVE_EMPLOYEES
   });
+
 
   const empleoyeesOrdered = employees.sort((a, b) => a.order - b.order);
   
@@ -109,7 +110,7 @@ export default async function Home() {
 
   return (
     <>
-      <main className="flex flex-col">
+      <main className="flex flex-col gap-6">
 
         <section id="hero-banner">
           <Banner
@@ -266,8 +267,7 @@ export default async function Home() {
           </div>
         </section>
 
-
-        <section id="faqs" className="bg-white w-full min-h-[fit-content] py-[50px] flex flex-col items-center justify-center gap-3">
+        <section id="faqs" className="w-full min-h-[fit-content] py-[50px] flex flex-col items-center justify-center gap-3">
           <TitleBox title={{ left: 'Preguntas frecuentes' }} tag="Atención al cliente"></TitleBox>
           <div className="dropdowns flex flex-col gap-6 lg:max-w-1/2 px-4">
             {faqs.map((faq, idx) => (
@@ -279,9 +279,6 @@ export default async function Home() {
             ))}
           </div>
         </section>
-
-
-
 
         <section id="contacto" className="grid-bg-diagonal">
           <Contact />

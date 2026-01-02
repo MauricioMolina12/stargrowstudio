@@ -7,12 +7,12 @@ import Breadcrumbs from '@/app/components/shared/Breadcrumbs/Breadcrumbs';
 import { ARTICLE_BY_SLUG } from '@/sanity/lib/queries/articles.queries';
 import Markdown from '@/app/components/shared/Markdown/Markdown';
 
-type Props = {
-    params: { slug: string | string[] }; 
-};
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
+export async function generateMetadata({
+    params
+}: { params: Promise<Record<string, string | string[]>> }): Promise<Metadata> {
+    const resolvedParams = await params;
+    const slug = Array.isArray(resolvedParams.slug) ? resolvedParams.slug[0] : resolvedParams.slug;
 
     const article = await sanityFetch<ArticlesType>({
         query: ARTICLE_BY_SLUG,
@@ -41,8 +41,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default async function ArticleDetails({ params }: Props) {
-    const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
+export default async function ArticleDetails({
+    params
+}: { params: Promise<Record<string, string | string[]>> }) {
+    const resolvedParams = await params; 
+    const slug = Array.isArray(resolvedParams.slug) ? resolvedParams.slug[0] : resolvedParams.slug;
 
     const article = await sanityFetch<ArticlesType>({
         query: ARTICLE_BY_SLUG,
@@ -85,3 +88,4 @@ export default async function ArticleDetails({ params }: Props) {
         </main>
     );
 }
+

@@ -8,13 +8,15 @@ import { ARTICLE_BY_SLUG } from '@/sanity/lib/queries/articles.queries';
 import Markdown from '@/app/components/shared/Markdown/Markdown';
 
 type Props = {
-    params: { slug: string };
+    params: { slug: string | string[] }; 
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
+
     const article = await sanityFetch<ArticlesType>({
         query: ARTICLE_BY_SLUG,
-        params: { slug: params.slug }
+        params: { slug }
     });
 
     if (!article) return { title: 'Artículo no encontrado' };
@@ -40,10 +42,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ArticleDetails({ params }: Props) {
+    const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
 
     const article = await sanityFetch<ArticlesType>({
         query: ARTICLE_BY_SLUG,
-        params: { slug: params.slug }
+        params: { slug }
     });
 
     if (!article) {
@@ -52,11 +55,9 @@ export default async function ArticleDetails({ params }: Props) {
 
     return (
         <main className="w-full min-h-screen flex flex-col justify-start gap-6 p-6 max-w-4xl mx-auto">
-
             <Breadcrumbs />
 
             <article className="flex flex-col gap-6">
-
                 <h1 className="text-3xl font-bold">{article.title}</h1>
 
                 <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
@@ -80,7 +81,6 @@ export default async function ArticleDetails({ params }: Props) {
                 )}
 
                 <Markdown content={article.content} />
-
             </article>
         </main>
     );

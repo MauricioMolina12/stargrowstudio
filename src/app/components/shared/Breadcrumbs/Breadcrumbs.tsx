@@ -4,6 +4,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
 
+function formatSlug(slug: string) {
+  const decoded = decodeURIComponent(slug).replace(/-/g, ' ');
+  return decoded.charAt(0).toUpperCase() + decoded.slice(1).toLowerCase();
+}
+
+
 export default function Breadcrumbs() {
   const pathname = usePathname();
 
@@ -26,20 +32,22 @@ export default function Breadcrumbs() {
         const href = '/' + segments.slice(0, index + 1).join('/');
         const isLast = index === segments.length - 1;
 
+        const displayName = formatSlug(segment);
+
         return (
           <div key={href} className="flex items-center gap-2">
             <ChevronRight size={16} />
 
             {isLast ? (
-              <span className="font-medium capitalize text-[var(--color-primary)]">
-                {decodeURIComponent(segment)}
+              <span className="font-medium text-[var(--color-primary)]">
+                {displayName}
               </span>
             ) : (
               <Link
                 href={href}
-                className="capitalize hover:text-black transition-colors"
+                className="hover:text-black transition-colors"
               >
-                {decodeURIComponent(segment)}
+                {displayName}
               </Link>
             )}
           </div>

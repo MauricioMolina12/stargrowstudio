@@ -86,6 +86,7 @@ export default async function Home() {
   const banner = await sanityFetch<BannerTypes>({
     query: HOME_BANNER,
   })
+  
   const banners_services = await sanityFetch<BannerTypes>({
     query: HOME_SERVICES
   })
@@ -248,7 +249,6 @@ export default async function Home() {
             </div>
           </div>
         </ScrollStackSection>
-
 
         <section id="our-team" className="p-4">
           <TitleBox title={{ left: "Nuestra gente" }} tag="Trabajo en equipo" />

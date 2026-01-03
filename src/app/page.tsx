@@ -112,7 +112,7 @@ export default async function Home() {
     <>
       <main className="flex flex-col gap-6">
 
-        <section id="hero-banner">
+        <section id="hero-banner" className="h-screen">
           <Banner
             bgColor={banner.bgColor}
             banners={banner}
@@ -217,7 +217,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="banner">
+        <section id="banner" className="h-screen">
           <Banner
             banners={banners_services}
           />

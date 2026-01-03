@@ -103,7 +103,7 @@ const NavBar = () => {
 
   return (
     <nav className={navClass}>
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between px-6 py-3 max-w-11/12 my-0 mx-auto">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between px-3 lg:px-6 py-3 max-w-11/12 my-0 mx-auto">
 
         {/* Logo y nombre */}
         <header className="w-full lg:w-fit flex justify-between items-center">

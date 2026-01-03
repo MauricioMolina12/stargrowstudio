@@ -9,7 +9,6 @@ function formatSlug(slug: string) {
   return decoded.charAt(0).toUpperCase() + decoded.slice(1).toLowerCase();
 }
 
-
 export default function Breadcrumbs() {
   const pathname = usePathname();
 
@@ -18,41 +17,46 @@ export default function Breadcrumbs() {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="flex items-center gap-2 text-sm text-[var(--color-dark-gray)]"
+      className="overflow-x-auto max-w-full no-scrollbar relative"
+      style={{
+        WebkitMaskImage: 'linear-gradient(to right, black 85%, transparent 100%)',
+        maskImage: 'linear-gradient(to right, black 85%, transparent 100%)',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+      }}
     >
-      <Link
-        href="/"
-        className="flex items-center gap-1 hover:text-black transition-colors"
-        aria-label="Home"
-      >
-        <Home size={16} className='text-[var(--color-primary)]' />
-      </Link>
+      <div className="flex items-center gap-2 whitespace-nowrap text-sm text-[var(--color-dark-gray)]">
+        <Link
+          href="/"
+          className="flex items-center gap-1 hover:text-black transition-colors"
+          aria-label="Home"
+        >
+          <Home size={16} className="text-[var(--color-primary)]" />
+        </Link>
 
-      {segments.map((segment, index) => {
-        const href = '/' + segments.slice(0, index + 1).join('/');
-        const isLast = index === segments.length - 1;
+        {segments.map((segment, index) => {
+          const href = '/' + segments.slice(0, index + 1).join('/');
+          const isLast = index === segments.length - 1;
 
-        const displayName = formatSlug(segment);
+          const displayName = formatSlug(segment);
 
-        return (
-          <div key={href} className="flex items-center gap-2">
-            <ChevronRight size={16} />
+          return (
+            <div key={href} className="flex items-center gap-2">
+              <ChevronRight size={16} />
 
-            {isLast ? (
-              <span className="font-medium text-[var(--color-primary)]">
-                {displayName}
-              </span>
-            ) : (
-              <Link
-                href={href}
-                className="hover:text-black transition-colors"
-              >
-                {displayName}
-              </Link>
-            )}
-          </div>
-        );
-      })}
+              {isLast ? (
+                <span className="font-medium text-[var(--color-primary)]">
+                  {displayName}
+                </span>
+              ) : (
+                <Link href={href} className="hover:text-black transition-colors">
+                  {displayName}
+                </Link>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </nav>
   );
 }

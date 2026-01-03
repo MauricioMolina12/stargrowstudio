@@ -71,7 +71,7 @@ export default function Banner({
 
   return (
     <section
-      className={`w-full h-[92vh] relative overflow-hidden flex flex-col justify-center gap-[30px] ${isDark ? 'dark-theme-styles' : 'light-theme-styles'}`}
+      className={`w-full h-full relative overflow-hidden flex flex-col justify-center gap-[30px] ${isDark ? 'dark-theme-styles' : 'light-theme-styles'}`}
       style={{
         background: resolvedBgColor,
         transition: "background 0.5s ease-in-out",
@@ -98,7 +98,7 @@ export default function Banner({
           >
 
             <div
-              className={`w-full h-full flex flex-col justify-around z-10 relative py-[14px] md:p-[15px] lg:flex-row lg:items-center lg:pl-[30px] xl:p-0 xl:w-full transition-transform duration-200 ease-out will-change-transform`}
+              className={`w-full h-full flex flex-col justify-center z-10 relative py-[14px] md:p-[15px] lg:flex-row lg:items-center lg:pl-[30px] xl:p-0 xl:w-full transition-transform duration-200 ease-out will-change-transform`}
               ref={index === currentIndex ? bannerContentRef : null}
             >
               <div
@@ -108,7 +108,7 @@ export default function Banner({
                 <div className="py-[10px] flex flex-col items-center justify-center gap-[25px] text-center md:items-start md:text-start md:p-[12px] xl:h-full xl:items-start xl:pl-[6%]">
 
                   <h1
-                    className={`font-light px-[10px] max-w-[90%] leading-[35px] text-3xl lg:text-5xl md:p-0 lg:max-w-[80%] lg:leading-[50px] text-start xl:px-0 xl:max-w-full 2xl:leading-[50px] ${banner.animationTitle ? 'inline-block' : ''} ${isDark ? 'dark:text-[var(--color-yellow)]' : ''}`}
+                    className={`font-light px-[10px] max-w-[90%] leading-[35px] text-2xl lg:text-4xl md:p-0 lg:max-w-[80%] lg:leading-[50px] text-start xl:px-0 xl:max-w-full 2xl:leading-[50px] ${banner.animationTitle ? 'inline-block' : ''} ${isDark ? 'dark:text-[var(--color-yellow)]' : ''}`}
                     style={{ color: textColor }}
                   >
                     <span
@@ -174,6 +174,7 @@ export default function Banner({
                 </div>
               </div>
 
+              
               <div className="relative overflow-hidden lg:w-1/2 lg:h-full h-1/2 flex items-center justify-center">
 
                 {banner.images && banner?.images!.map((image, index) => {

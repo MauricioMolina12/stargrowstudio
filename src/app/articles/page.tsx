@@ -6,6 +6,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Breadcrumbs from "../components/shared/Breadcrumbs/Breadcrumbs";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Banner from "../components/shared/Banner";
 
 export default async function Articles() {
 
@@ -30,10 +31,13 @@ export default async function Articles() {
 
 
   return (
-    <main className="w-full min-h-screen flex flex-col justify-center gap-5 p-6 lg:max-w-11/12 lg:my-0 lg:mx-auto">
+    <main className="w-full min-h-screen flex flex-col justify-center gap-5">
       <h1 className="sr-only">Artículos y publicaciones</h1>
-      <Breadcrumbs></Breadcrumbs>
-      <div className="articles lg:max-w-[80%] space-y-8 border-red-500">
+      <header className="banner h-[50vh] grid-bg-diagonal w-full flex flex-col gap-3">
+        <Banner banners={{ title: { main: 'Insights' , second: 'estratégicos para decisiones de negocio' },  }}></Banner>
+      </header>
+      <div className="articles max-w-11/12 my-0 mx-auto space-y-8 border-red-500">
+        <Breadcrumbs></Breadcrumbs>
         {Object.entries(articlesByTopic).map(([topic, topicArticles]) => (
           <section key={topic} className="flex flex-col gap-3">
             <h2 className="text-2xl font-bold mb-4">{topic}</h2>

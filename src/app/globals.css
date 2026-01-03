@@ -216,7 +216,7 @@ section:not(#contacto) {
 
 .bg-ribbon {
   background-image: url('/img/ribbon.png');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   backdrop-filter: opacity(40px);

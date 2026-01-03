@@ -57,20 +57,27 @@ export const ARTICLE_BY_SLUG = `
 `;
 
 
-
-export const RELATED_ARTICLES = `
-*[_type == "article" && slug.current == $slug][0]{
-  "related": *[_type == "article" && references(^.topics[]._ref) && slug.current != $slug]{
+export const RELATED_ARTICLES_QUERY = `*[
+  _type == "article" 
+  && references($topics) 
+  && _id != $id
+  && status == "published"
+] | order(publishedAt desc)[0...3]{
+  _id,
+  title,
+  slug,
+  excerpt,
+  coverImage,
+  publishedAt,
+  "topics": topics[]->{
     _id,
     title,
-    slug,
-    excerpt,
-    coverImage,
-    publishedAt,
-    status
+    slug
   }
-}
-`;
+}`;
+
+
+
 
 export const TOPIC_DETAILS = `
 *[_type == "topic" && slug == $slug][0]{

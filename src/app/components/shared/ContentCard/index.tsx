@@ -25,7 +25,7 @@ export default function ContentCard({ content }: ContentCardProps) {
         ) : null}
       </figure>
       <div className="p-4 flex flex-col gap-3">
-        <h2 className="font-semibold text-[16px] text-[var(--color-primary)]">
+        <h2 className="font-semibold text-[16px] text-[var(--neutral--400)]">
           {content?.name}
         </h2>
         <p className="max-w-[260px] overflow-hidden text-ellipsis whitespace-nowrap text-[13px] text-[var(--color-dark-gray)] leading-relaxed">

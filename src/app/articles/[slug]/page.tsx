@@ -59,7 +59,7 @@ export default async function ArticleDetails({
         query: RELATED_ARTICLES_QUERY,
         params: {
             id: article._id,
-            topics: article.topics.map(t => t.title)
+            topics: article.topics.map(t => t._id)
         }
     });
 

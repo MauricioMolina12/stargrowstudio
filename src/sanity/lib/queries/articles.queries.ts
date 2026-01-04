@@ -57,24 +57,28 @@ export const ARTICLE_BY_SLUG = `
 `;
 
 
-export const RELATED_ARTICLES_QUERY = `*[
-  _type == "article" 
-  && references($topics) 
-  && _id != $id
+export const RELATED_ARTICLES_QUERY = `
+*[
+  _type == "article"
   && status == "published"
-] | order(publishedAt desc)[0...3]{
+  && _id != $id
+  && count(topics[@._ref in $topics]) > 0
+]
+| order(publishedAt desc)[0...3]{
   _id,
   title,
-  slug,
+  "slug": slug.current,
   excerpt,
   coverImage,
   publishedAt,
   "topics": topics[]->{
     _id,
     title,
-    slug
+    "slug": slug.current
   }
-}`;
+}
+`;
+
 
 
 

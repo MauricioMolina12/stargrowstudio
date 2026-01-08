@@ -42,7 +42,25 @@ const routeStyles: Record<string, routeStyles> = {
     ctaClassBg: "bg-[var(--color-primary)]",
     ctaClassText: "text-[var(--color-white)]"
   },
-  "/privacy-policy": {
+  "/legal/privacy-policy": {
+    navClass: "bg-[#5656B5] text-white",
+    logo: "/logo-white.png",
+    textClass: "text-white",
+    menuClass: "bg-[var(--color-primary)]",
+    itemsMenuClass: "text-white",
+    ctaClassBg: "bg-white",
+    ctaClassText: "text-[var(--color-primary)]"
+  },
+  "/legal/terms-of-service": {
+    navClass: "bg-[#5656B5] text-white",
+    logo: "/logo-white.png",
+    textClass: "text-white",
+    menuClass: "bg-[var(--color-primary)]",
+    itemsMenuClass: "text-white",
+    ctaClassBg: "bg-white",
+    ctaClassText: "text-[var(--color-primary)]"
+  },
+  "/legal/cookies-policy": {
     navClass: "bg-[#5656B5] text-white",
     logo: "/logo-white.png",
     textClass: "text-white",

@@ -157,7 +157,7 @@ const Footer = () => {
                     <a href="" className="text-xs">
                         Términos y condiciones
                     </a>
-                    <a href="" className="text-xs">
+                    <a href="/legal/privacy-policy" className="text-xs">
                         Politica de privacidad
                     </a>
                 </div>

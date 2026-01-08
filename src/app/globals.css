@@ -30,17 +30,17 @@
   --neutral--700: #161718;
   --neutral--800: #0c0d0d !important;
   --neutral--900: #000;
-  --primary--50: #ebe4ff;
-  --primary--100: #e2dbfc;
-  --primary--200: #c5b8f8;
-  --primary--300: #b39ef3;
-  --primary--400: #7253ee;
-  --primary--500: #673de6;
-  --primary--600: #5025d1;
-  --primary--700: #49499F;
-  --primary--800: #2f1c6a;
-  --primary--900: #261559;
-  --primary--1000: #1f1346;
+  --primary--50:  #ededfb;
+  --primary--100: #e0e0f8;
+  --primary--200: #c2c2f0;
+  --primary--300: #a3a3e8;
+  --primary--400: #7777d9;
+  --primary--500: #5656b5; /* color base */
+  --primary--600: #4b4ba3;
+  --primary--700: #3f3f8f;
+  --primary--800: #30306b;
+  --primary--900: #262655;
+  --primary--1000:#1d1d42;
   --meteorite--50: #f5f5ff;
   --meteorite--100: #eaeaff;
   --meteorite--200: #cbc8ff;

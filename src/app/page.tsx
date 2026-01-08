@@ -230,7 +230,7 @@ export default async function Home() {
                 <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/hero-banner/desarrollo/watch.png" alt="imagen dev" />
               </figure>
               <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
-                <span className="bg-[var(--meteorite--400)] text-white p-1 px-2 rounded-2xl w-fit">Impulsa tu presencia digital con Star Grow Studio</span>
+                <span className="bg-[var(--primary--100)] text-[var(--color-primary-to-white)] font-medium p-1 px-3 rounded-2xl w-fit">Impulsa tu presencia digital con Star Grow Studio</span>
                 <h2 className="text-4xl lg:text-6xl">Creamos experiencias que hacen crecer tu negocio.</h2>
                 <p>Tan solo describe tu idea y el Creador de páginas web con IA se encargará del diseño, de las imágenes y del texto. Después, utiliza el editor de arrastrar y soltar para personalizar. Ya tengas una tienda online o un blog, estarás online en un abrir y cerrar de ojos.</p>
               </div>
@@ -242,7 +242,7 @@ export default async function Home() {
                 <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/hero-banner/desarrollo/airpods.jpg" alt="imagen dev" />
               </figure>
               <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
-                <span className="bg-[var(--meteorite--400)] text-white p-1 px-2 rounded-2xl w-fit">Creador de página web</span>
+                <span className="bg-[var(--primary--100)] text-[var(--color-primary-to-white)] font-medium p-1 px-3 rounded-2xl w-fit">Creador de página web</span>
                 <h2 className="text-4xl lg:text-6xl">Crea tu sitio web en minutos</h2>
                 <p>Tan solo describe tu idea y el Creador de páginas web con IA se encargará del diseño, de las imágenes y del texto. Después, utiliza el editor de arrastrar y soltar para personalizar. Ya tengas una tienda online o un blog, estarás online en un abrir y cerrar de ojos.</p>
               </div>

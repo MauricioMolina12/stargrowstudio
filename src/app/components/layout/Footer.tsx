@@ -42,7 +42,7 @@ const Footer = () => {
             links: [
                 { label: 'Sobre Star Grow', href: '' },
                 { label: 'Nuestra historia', href: '' },
-                { label: 'Artículos', href: '' },
+                { label: 'Artículos', href: '/articles' },
                 { label: 'Empleos', href: '' },
                 { label: 'Testimonios', href: '' },
             ]
@@ -107,21 +107,25 @@ const Footer = () => {
                                 {col.links.map((link, index) => {
                                     const Icon = link.icon;
 
+                                    const isInternal = link.href.startsWith("/");
+
                                     return (
-                                        <li
-                                            key={index}
-                                            className="text-sm text-gray-500 cursor-pointer flex items-center gap-2">
+                                        <li key={index} className="text-sm text-gray-500 cursor-pointer flex items-center gap-2">
                                             {Icon && (
                                                 <div className="p-2 bg-white rounded-xl">
-                                                    <Icon
-                                                        size={16}
-                                                        className="text-[var(--color-primary)] flex-shrink-0"
-                                                    />
+                                                    <Icon size={16} className="text-[var(--color-primary)] flex-shrink-0" />
                                                 </div>
                                             )}
-                                            <a href={link.href} className="hover:underline">
-                                                {link.label}
-                                            </a>
+
+                                            {isInternal ? (
+                                                <Link href={link.href} className="hover:underline">
+                                                    {link.label}
+                                                </Link>
+                                            ) : (
+                                                <a href={link.href} className="hover:underline">
+                                                    {link.label}
+                                                </a>
+                                            )}
                                         </li>
                                     );
                                 })}

@@ -86,6 +86,7 @@ export default async function Home() {
   const banner = await sanityFetch<BannerTypes>({
     query: HOME_BANNER,
   })
+  
   const banners_services = await sanityFetch<BannerTypes>({
     query: HOME_SERVICES
   })
@@ -111,7 +112,7 @@ export default async function Home() {
     <>
       <main className="flex flex-col gap-12">
 
-        <section id="hero-banner">
+        <section id="hero-banner" className="h-screen">
           <Banner
             bgColor={banner.bgColor}
             banners={banner}
@@ -216,7 +217,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="banner">
+        <section id="banner" className="h-screen">
           <Banner
             banners={banners_services}
           />
@@ -248,7 +249,6 @@ export default async function Home() {
             </div>
           </div>
         </ScrollStackSection>
-
 
         <section id="our-team" className="p-4">
           <TitleBox title={{ left: "Nuestra gente" }} tag="Trabajo en equipo" />

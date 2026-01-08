@@ -6,7 +6,7 @@ export type CallAction = {
 export interface BannerTypes {
   icon?: string;
   tag?: string;
-  title: { main: string; second: string, optional?: string };
+  title: { main: string; second?: string, optional?: string };
   subtitle?: string;
   image?: string;
   images?: string[];

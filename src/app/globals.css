@@ -216,7 +216,7 @@ section:not(#contacto) {
 
 .bg-ribbon {
   background-image: url('/img/ribbon.png');
-  background-size: contain;
+  background-size: cove;
   background-repeat: no-repeat;
   background-position: center;
   backdrop-filter: opacity(40px);
@@ -281,9 +281,9 @@ section:not(#contacto) {
   top: 0;
 
   transition:
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.7s ease,
-    opacity 0.7s ease;
+    transform 0.3s cubic-bezier(0.05, 1, 0.36, 1),
+    filter 0.3s ease,
+    opacity 0.3s ease;
 }
 
 

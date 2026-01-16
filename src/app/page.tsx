@@ -147,6 +147,8 @@ export default async function Home() {
 
         </section>
 
+        
+
         <section id="cards" className="bg-[var(--meteorite--50)] lg:p-8 flex flex-col gap-2">
           <TitleBox title={{ left: 'Haz que tu marca', main: 'hable', right: 'por ti' }} tag="Creatividad"></TitleBox>
           <div className="cards__content grid lg:grid-cols-2 lg:max-w-11/12 p-4 gap-6 lg:mx-auto">

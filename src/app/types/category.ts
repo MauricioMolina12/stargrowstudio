@@ -1,10 +1,13 @@
+import { IconName } from "../utils/icons";
+
 export interface Category {
+    _id: string;
     title: string;
     slug: string;
     description: string;
-    icon?: string;
+    icon?: IconName;
     images?: string[];
-    parentCategory: string;
+    parent: { _ref: string } | null;
     order: number;
     badge?: string;
 }

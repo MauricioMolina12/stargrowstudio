@@ -1,5 +1,6 @@
 export const CATEGORIES = `
-*[_type == "category"{
+*[_type == "category"]{
+    _id,
     title,
     slug,
     description,

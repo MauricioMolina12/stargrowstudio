@@ -7,6 +7,10 @@ import NavBar from "./components/layout/NavBar";
 import { AppProviders } from "@/providers/AppProviders";
 import Footer from "./components/layout/Footer";
 
+import { Category } from "./types/category";
+import { sanityFetch } from "@/sanity/lib/sanity.fetch";
+import { CATEGORIES } from "@/sanity/lib/queries/category.queries";
+
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
@@ -19,11 +23,14 @@ export const metadata: Metadata = {
 };
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+    const categories = await sanityFetch<Category[]>({
+      query: CATEGORIES
+    });
   return (
     <html lang="en">
       <head>
@@ -35,7 +42,7 @@ export default function RootLayout({
       </head>
       <body className={`${montserrat.variable} antialiased`}>
         <AppProviders>
-          <NavBar />
+          <NavBar servicesList={categories}/>
           {children}
           <Footer />
         </AppProviders>

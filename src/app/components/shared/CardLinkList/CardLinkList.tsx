@@ -1,12 +1,14 @@
 'use client'
 
+import Link from 'next/link'
 import React from 'react'
 
-interface Item {
+export interface Item {
   icon: React.ReactNode
   title: string
   description: string
   cta?: () => void
+  href?: string
   highlight?: boolean
   badge?: string
 }
@@ -54,9 +56,11 @@ export const CardLinkList = ({
           <li
             key={idx}
             className="p-3 rounded-md cursor-pointer hover:bg-indigo-50"
-            onClick={() => handleClick(item.cta)}
           >
-            <div className="flex items-start gap-3">
+            <Link 
+              className="flex items-start gap-3"
+              href={item.href || '#'}
+              >
               {item.icon}
               <div>
                 <div className="flex items-center gap-2">
@@ -71,7 +75,8 @@ export const CardLinkList = ({
                 </div>
                 <p className="text-[12px] text-gray-500">{item.description}</p>
               </div>
-            </div>
+
+            </Link>
           </li>
         ))}
       </ul>

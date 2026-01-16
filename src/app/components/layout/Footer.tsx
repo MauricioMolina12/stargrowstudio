@@ -40,11 +40,11 @@ const Footer = () => {
         {
             title: 'Sobre nosotros',
             links: [
-                { label: 'Sobre Star Grow', href: '' },
-                { label: 'Nuestra historia', href: '' },
+                // { label: 'Sobre Star Grow', href: '' },
+                // { label: 'Nuestra historia', href: '' },
                 { label: 'Artículos', href: '/articles' },
-                { label: 'Empleos', href: '' },
-                { label: 'Testimonios', href: '' },
+                // { label: 'Empleos', href: '' },
+                // { label: 'Testimonios', href: '' },
             ]
         },
         {
@@ -153,13 +153,16 @@ const Footer = () => {
                 <span className="text-xs">
                     © {today} Star Grow Studio. Todos los derechos reservados.
                 </span>
-                <div className="grid grid-cols-2 gap-3">
-                    <a href="" className="text-xs">
-                        Términos y condiciones
-                    </a>
-                    <a href="/legal/privacy-policy" className="text-xs">
+                <div className="grid grid-cols-3 gap-3">
+                    <Link href="/legal/cookies-policy" className="text-xs">
+                        Política de cookies
+                    </Link>
+                    <Link href="/legal/terms-of-service" className="text-xs">
+                        Términos de servicio
+                    </Link>
+                    <Link href="/legal/privacy-policy" className="text-xs">
                         Politica de privacidad
-                    </a>
+                    </Link>
                 </div>
             </div>
         </footer>

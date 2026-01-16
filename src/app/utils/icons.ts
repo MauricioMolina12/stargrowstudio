@@ -1,3 +1,5 @@
+//Patron Icon Registry / Icon Map
+
 import {
   MonitorSmartphone,
   Code,
@@ -9,6 +11,7 @@ import {
   Wrench,
 } from "lucide-react";
 
+//Esto es shorthand de JavaScript
 export const ICONS = {
   MonitorSmartphone,
   Code,
@@ -18,6 +21,6 @@ export const ICONS = {
   Share2,
   Sliders,
   Wrench,
-} as const;
+} as const; // el as const asegura que las propiedades son de solo lectura - ejemplo: "readonly MonitorSmartphone: typeof MonitorSmartphone;"
 
 export type IconName = keyof typeof ICONS;

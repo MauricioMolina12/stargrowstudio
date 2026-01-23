@@ -90,53 +90,15 @@ Teléfono: +57 123 456 7890
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <main className="w-full min-h-screen bg-white px-6 sm:px-15 xl:px-6">
 
-      
-
-      {/* <div className="relative bg-[var(--color-primary)] text-[var(--primary--800)] clip-path-[polygon(0_0,_100%_0%,_100%_78%,_0%_100%)]">
-        <div className="max-w-4xl mx-auto py-15 px-6 text-center">
-          <h1 className="text-4xl font-bold">Política de privacidad</h1>
-          <p className="mt-2">Por favor, lee este acuerdo detenidamente, ya que contiene información importante sobre tus derechos y recursos legales.</p>
+      <main className="w-full min-h-screen bg-white max-w-4xl space-y-8 leading-relaxed pb-15 rounded-lg shadow-md px-10">
+        <div className="relative">
+          <div className="max-w-4xl py-8">     
+            <p className="font-medium mb-6 text-[var(--primary--800)] text-[12px]">ACTUALIZADO OCTUBRE 8, 2026</p>
+            <h1 className="text-4xl font-bold text-[var(--color-primary)] mb-5 sm:text-5xl xl:text-6xl">Política de Privacidad</h1>
+            <p className="mt-2">Por favor, lee este acuerdo detenidamente, ya que contiene información importante sobre tus derechos y recursos legales.</p>
+          </div>
         </div>
-      </div> */}
-      <div className="relative ">
-        <div className="max-w-4xl mx-auto py-15">     
-          <p className="font-medium mb-6 text-[var(--primary--800)] text-[12px]">ACTUALIZADO OCTUBRE 8, 2026</p>
-          <h1 className="text-4xl font-bold text-[var(--color-primary)] mb-5 sm:text-5xl xl:text-6xl">Política de Privacidad</h1>
-          <p className="mt-2">Por favor, lee este acuerdo detenidamente, ya que contiene información importante sobre tus derechos y recursos legales.</p>
-        </div>
-      </div>
-
-
-      <div className="w-full bg-white max-w-4xl mx-auto space-y-8 leading-relaxed pb-15 ">
-       
-        {/* <div className="mx-auto grid grid-cols-1 md:grid-cols-[20%_80%] border-t border-gray-200">
-          <aside className="border-r border-gray-300 p-4 bg-gray-50 sticky top-20 h-fit">
-            <ul className="space-y-2">
-              {items.map((item, index) => (
-                <li
-                key={index}
-                className={`cursor-pointer text-sm p-2 hover:bg-gray-200 transition ${activeIndex === index ? "text-[var(--color-primary)] font-semibold border-b-2 border-b-[var(--color-primary)]" : "text-black"
-                }`}
-                onClick={() => setActiveIndex(index)}
-                >
-                  {item.title}
-                </li>
-              ))}
-            </ul>
-          </aside>
-
-          <main className="p-6">
-            <header className="flex justify-between mb-4">
-              <h2 className="text-2xl font-bold text-[var(--primary--800)]">{items[activeIndex].title}</h2>
-              <p className="font-medium mb-6 text-[var(--primary--800)] text-[12px]">ACTUALIZADO OCTUBRE 8, 2026</p>
-            </header>
-            <div className="whitespace-pre-line text-base leading-relaxed">
-              {items[activeIndex].description}
-            </div>
-          </main>
-        </div> */}
 
         <section>
           <h2 className="text-2xl font-bold mb-4">1. Introducción</h2>
@@ -309,7 +271,6 @@ Teléfono: +57 123 456 7890
         </section>
 
 
-      </div>
-    </main>
+      </main>
   );
 }

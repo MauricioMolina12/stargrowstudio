@@ -3,19 +3,14 @@
 export default function TermsService() {
 
   return (
-    <main className="w-full min-h-screen bg-white px-6 sm:px-15 xl:px-6">
-      
-
-      <div className="relative ">
-          <div className="max-w-4xl mx-auto py-15">     
-          <p className="font-medium mb-6 text-[var(--primary--800)] text-[12px]">ACTUALIZADO OCTUBRE 8, 2026</p>
-          <h1 className="text-4xl font-bold text-[var(--color-primary)] mb-5 xl:text-6xl">Términos de Servicio</h1>
-          <p className="mt-2">Por favor, lee este acuerdo detenidamente, ya que contiene información importante sobre tus derechos y recursos legales.</p>
-          </div>
-      </div>
-
-      <div className="w-full bg-white max-w-4xl mx-auto space-y-8 leading-relaxed pb-15 ">
-       
+    <main className="w-full min-h-screen bg-white max-w-4xl space-y-8 leading-relaxed pb-15 rounded-lg shadow-md px-10">      
+        <div className="relative ">
+            <div className="max-w-4xl py-8">     
+            <p className="font-medium mb-6 text-[var(--primary--800)] text-[12px]">ACTUALIZADO OCTUBRE 8, 2026</p>
+            <h1 className="text-4xl font-bold text-[var(--color-primary)] mb-5 sm:text-5xl xl:text-6xl">Términos de Servicio</h1>
+            <p className="mt-2">Por favor, lee este acuerdo detenidamente, ya que contiene información importante sobre tus derechos y recursos legales.</p>
+            </div>
+        </div>
        <section>
         <h2 className="text-2xl font-bold  mb-4">1. Aceptación de los Términos</h2>
         <p>
@@ -208,9 +203,6 @@ export default function TermsService() {
             <p>Colombia</p>
           </div>
       </section>
-
-
-      </div>
     </main>
   );
 }

@@ -79,7 +79,19 @@ export const RELATED_ARTICLES_QUERY = `
 }
 `;
 
-
+export const LAST_ARTICLES = `*[_type == "article" && status == "published"] 
+| order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  excerpt,
+  publishedAt,
+  coverImage,
+  topics[]->{
+    _id,
+    title
+  }
+}[0...5]`;
 
 
 
@@ -96,6 +108,38 @@ export const TOPIC_DETAILS = `
     excerpt,
     coverImage,
     publishedAt
+  }
+}
+`;
+
+
+export const SEARCH_ARTICLES = `
+*[
+  _type == "article"
+  && status == "published"
+  && (
+    title match $search
+    || excerpt match $search
+    || pt::text(content) match $search
+    || $search in topics[]->title
+  )
+]
+| order(_score desc, publishedAt desc){
+  _id,
+  title,
+  "slug": slug.current,
+  excerpt,
+  publishedAt,
+  coverImage{
+    asset->{
+      _id,
+      url
+    }
+  },
+  "topics": topics[]->{
+    _id,
+    title,
+    "slug": slug.current
   }
 }
 `;

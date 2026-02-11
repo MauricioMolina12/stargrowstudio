@@ -5,7 +5,8 @@ import { Category } from './category'
 import { Employee } from './employee'
 import { Topic } from './topic'
 import { Article } from './article'
+import { Sector } from './sectors'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [Banner, Faqs, Category, Employee, Topic, Article],
+  types: [Banner, Faqs, Category, Employee, Topic, Article, Sector],
 }

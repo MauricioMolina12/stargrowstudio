@@ -50,6 +50,8 @@ import ContentCard from "./components/shared/ContentCard";
 import { Employee } from "./types/empleoyees";
 import { ACTIVE_EMPLOYEES } from "@/sanity/lib/queries/employees.queries";
 import Carousel from "./components/shared/Carousel/Carousel";
+import { Sector } from "./types/sectors";
+import { SECTORS_QUERY } from "@/sanity/lib/queries/sectors.queries";
 
 // STEPS MAP DATA
 const iconMap: Record<string, any> = {
@@ -77,6 +79,41 @@ const services = servicesData.map(service => ({
   icon: { component: icons[service.icon], color: service.color }
 }));
 
+const SECTORS = [
+  {
+    name: "Startup",
+    image: "/img/sectors/startup.jpg",
+    description: "Soluciones ágiles para negocios en crecimiento.",
+  },
+  {
+    name: "Empresa de servicios",
+    image: "/img/sectors/services.jpg",
+    description: "Digitalización de procesos y experiencia cliente.",
+  },
+  {
+    name: "Ecommerce",
+    image: "/img/sectors/ecommerce.jpg",
+    description: "Plataformas optimizadas para conversión.",
+  },
+  {
+    name: "Educación",
+    image: "/img/sectors/education.jpg",
+    description: "Experiencias de aprendizaje digitales.",
+  },
+  {
+    name: "Inmobiliario y construcción",
+    image: "/img/sectors/construction.jpg",
+    description: "Gestión, visibilidad y ventas digitales.",
+  },
+  {
+    name: "Salud",
+    image: "/img/sectors/health.jpg",
+    description:
+      "Soluciones digitales claras, confiables y enfocadas en el usuario.",
+  },
+];
+
+
 
 
 export default async function Home() {
@@ -86,7 +123,7 @@ export default async function Home() {
   const banner = await sanityFetch<BannerTypes>({
     query: HOME_BANNER,
   })
-  
+
   const banners_services = await sanityFetch<BannerTypes>({
     query: HOME_SERVICES
   })
@@ -103,20 +140,35 @@ export default async function Home() {
     query: ACTIVE_EMPLOYEES
   });
 
+  const sectors = await sanityFetch<Sector[]>({
+    query: SECTORS_QUERY
+  });
+
+
 
   const empleoyeesOrdered = employees.sort((a, b) => a.order - b.order);
-  
+
   const newBanner = banners.filter((_, index) => index != 0);
 
   return (
     <>
       <main className="flex flex-col gap-12">
 
-        <section id="hero-banner" className="h-screen">
-          <Banner
+        <section id="hero-banner" className="h-screen bg-white">
+          <div className="wrapper w-full h-full flex flex-col items-center justify-center lg:justify-between lg:gap-0 p-4 pb-0">
+            <div className="titles h-1/2 w-full flex flex-col items-center justify-center gap-6">
+              <h2 className="text-5xl max-w-[60%] text-center text-[#5656b5]">Construimos productos digitales que <span className="font-semibold">impulsan tu negocio</span></h2>
+              <span className="text-[#666666]">Creamos soluciones integrales a medida que simplifican tus procesos y potencian tu crecimiento digital.</span>
+              <button className="px-6 py-3 bg-[#5656b5] text-white rounded-lg hover:bg-[#4a4ab0] transition-colors duration-300 cursor-pointer">Solicitar asesoría</button>
+            </div>
+            <div className="image h-1/2 oveflow-hidden w-full">
+              <img className="w-full h-full object-contain" src="img/hero-banner/mockup mac.png" alt="macbook-mockup" />
+            </div>
+          </div>
+          {/* <Banner
             bgColor={banner.bgColor}
             banners={banner}
-          />
+          /> */}
         </section>
 
         <section id="HighlightCards" className="flex flex-col gap-2 lg:p-6">
@@ -147,7 +199,7 @@ export default async function Home() {
 
         </section>
 
-        
+
 
         <section id="cards" className="bg-[var(--meteorite--50)] lg:p-8 flex flex-col gap-2">
           <TitleBox title={{ left: 'Haz que tu marca', main: 'hable', right: 'por ti' }} tag="Creatividad"></TitleBox>
@@ -251,6 +303,49 @@ export default async function Home() {
             </div>
           </div>
         </ScrollStackSection>
+
+        <section id="our-sectors" className="p-4">
+          <TitleBox
+            title={{ left: "Creamos productos digitales para distintos tipos de negocio" }}
+            tag="Adaptabilidad"
+          />
+
+          <div
+            className="flex flex-col lg:flex-rowgap-4px-4 lg:px-16h-auto lg:h-[420px][&:hover>div]:flex-1"
+          >
+            {sectors.map((sector) => (
+
+              <div
+                key={sector._id}
+                className="relative flex-1transition-all duration-500 ease-outhover:flex-[2.5]group cursor-pointer overflow-hidden rounded-xl"
+                style={{
+                  backgroundImage: `url(${sector.coverImage.asset.url})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}>
+
+                {/* Overlay */}
+                <div
+                  className="absolute inset-0bg-black/40opacity-0 group-hover:opacity-100transition-opacity duration-300z-10"
+                />
+
+                {/* Text */}
+                <div
+                  className="absolute bottom-4 left-4 right-4opacity-0 group-hover:opacity-100transition-opacity duration-300z-20">
+                  
+                    <h3 className="text-white font-semibold text-sm">
+                      {sector.name}
+                    </h3>
+
+                    <p className="text-xs text-gray-200 leading-snug">
+                      {sector.shortDescription}
+                    </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
 
         <section id="our-team" className="p-4">
           <TitleBox title={{ left: "Nuestra gente" }} tag="Trabajo en equipo" />

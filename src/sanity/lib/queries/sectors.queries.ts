@@ -1,4 +1,5 @@
-export const SECTORS_QUERY = `*[_type == "sector" && status == "published"]
+export const SECTORS_QUERY = `
+*[_type == "sector" && status == "published"]
 | order(order asc) {
   _id,
   name,
@@ -6,8 +7,11 @@ export const SECTORS_QUERY = `*[_type == "sector" && status == "published"]
 
   shortDescription,
   highlight,
-
   themeColor,
+
+  problem,
+  solution,
+  services,
 
   coverImage {
     asset->{
@@ -17,22 +21,21 @@ export const SECTORS_QUERY = `*[_type == "sector" && status == "published"]
     hotspot
   },
 
+  hoverImage {
+    asset->{
+      _id,
+      url
+    },
+    hotspot
+  },
+
   seo {
     metaTitle,
-    metaDescription,
-    ogTitle,
-    ogDescription,
-    canonicalUrl,
-    noIndex,
-    ogImage {
-      asset->{
-        _id,
-        url
-      }
-    }
+    metaDescription
   }
 }
 `;
+
 
 
 export const SECTOR_BY_SLUG_QUERY = `

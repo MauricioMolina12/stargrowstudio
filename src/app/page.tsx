@@ -31,6 +31,7 @@ import TitleBox from "./components/shared/TitleBox/TitleBox";
 import ServiceCard from "./components/shared/ServiceCard/ServiceCard";
 import Accordion from "./components/shared/Accordion/Accordion";
 import ScrollStackSection from "./components/shared/ScrollStackSection/ScrollStackSection";
+import TestimonialForm from "./components/shared/Testimonials/TestimonialForm";
 
 
 
@@ -52,6 +53,9 @@ import { ACTIVE_EMPLOYEES } from "@/sanity/lib/queries/employees.queries";
 import Carousel from "./components/shared/Carousel/Carousel";
 import { Sector } from "./types/sectors";
 import { SECTORS_QUERY } from "@/sanity/lib/queries/sectors.queries";
+import { TESTIMONIALS_QUERY } from "@/sanity/lib/queries/testimonials.queries";
+import TestimonialsSection from "./components/shared/Testimonials/TestimonialsSection";
+import { Testimonial } from "./types/testimonials";
 
 // STEPS MAP DATA
 const iconMap: Record<string, any> = {
@@ -140,8 +144,14 @@ export default async function Home() {
     query: ACTIVE_EMPLOYEES
   });
 
+
+  /*** SECTORS QUERIES ***/
   const sectors = await sanityFetch<Sector[]>({
     query: SECTORS_QUERY
+  });
+
+  const testimonials = await sanityFetch<Testimonial[]>({
+    query: TESTIMONIALS_QUERY
   });
 
 
@@ -154,21 +164,17 @@ export default async function Home() {
     <>
       <main className="flex flex-col gap-12">
 
-        <section id="hero-banner" className="h-screen bg-white">
+        <section id="hero-banner" className="h-[70dvh] bg-white lg:h-[calc(100vh-56px)] border-b border-[#E4E4E4]">
           <div className="wrapper w-full h-full flex flex-col items-center justify-center lg:justify-between lg:gap-0 p-4 pb-0">
-            <div className="titles h-1/2 w-full flex flex-col items-center justify-center gap-6">
-              <h2 className="text-5xl max-w-[60%] text-center text-[#5656b5]">Construimos productos digitales que <span className="font-semibold">impulsan tu negocio</span></h2>
+            <div className="titles h-[90%] lg:h-1/2 w-full flex flex-col lg:items-center justify-center gap-6">
+              <h2 className="text-4xl lg:text-5xl lg:max-w-[60%] lg:text-center text-[#5656b5]">Construimos productos digitales que <span className="font-semibold">impulsan tu negocio</span></h2>
               <span className="text-[#666666]">Creamos soluciones integrales a medida que simplifican tus procesos y potencian tu crecimiento digital.</span>
-              <button className="px-6 py-3 bg-[#5656b5] text-white rounded-lg hover:bg-[#4a4ab0] transition-colors duration-300 cursor-pointer">Solicitar asesoría</button>
+              <button className="px-6 py-5 lg:py-3 bg-[#5656b5] text-white rounded-lg hover:bg-[#4a4ab0] transition-colors duration-300 cursor-pointer">Solicitar asesoría</button>
             </div>
-            <div className="image h-1/2 oveflow-hidden w-full">
-              <img className="w-full h-full object-contain" src="img/hero-banner/mockup mac.png" alt="macbook-mockup" />
+            <div className="image h-1/2 oveflow-hidden w-full flex flex-col justify-end">
+              <img className="w-full h-fit lg:h-full object-contain" src="img/hero-banner/mockup mac.png" alt="macbook-mockup" />
             </div>
           </div>
-          {/* <Banner
-            bgColor={banner.bgColor}
-            banners={banner}
-          /> */}
         </section>
 
         <section id="HighlightCards" className="flex flex-col gap-2 lg:p-6">
@@ -279,30 +285,47 @@ export default async function Home() {
 
         <ScrollStackSection>
           <div className="relative flex-1 flex justify-center items-center w-full bg-white h-screen border border-gray-200">
-            <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4">
+            <div className="absolute inset-0 flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4 lg:max-w-11/12 lg:mx-auto">
               <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
-                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/hero-banner/desarrollo/watch.png" alt="imagen dev" />
+                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/process_methodology.png" alt="imagen dev" />
               </figure>
               <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
-                <span className="bg-[var(--primary--100)] text-[var(--color-primary-to-white)] font-medium p-1 px-3 rounded-2xl w-fit">Impulsa tu presencia digital con Star Grow Studio</span>
-                <h2 className="text-4xl lg:text-6xl">Creamos experiencias que hacen crecer tu negocio.</h2>
-                <p>Tan solo describe tu idea y el Creador de páginas web con IA se encargará del diseño, de las imágenes y del texto. Después, utiliza el editor de arrastrar y soltar para personalizar. Ya tengas una tienda online o un blog, estarás online en un abrir y cerrar de ojos.</p>
+                <span className="bg-[var(--primary--100)] text-[var(--color-primary-to-white)] font-medium p-1 px-3 rounded-2xl w-fit">Proceso claro y eficiente</span>
+                <h2 className="text-4xl">Un método simple que garantiza resultados</h2>
+                <p>Trabajamos con un proceso probado de 3 pasos: <strong>estrategia, diseño y desarrollo, seguido de lanzamiento y optimización.</strong>Esto nos permite entregar proyectos rápidos, sin errores y alineados con tus objetivos comerciales, con comunicación constante y transparencia total.</p>
               </div>
             </div>
           </div>
           <div className="relative flex-1 flex justify-center items-center w-full bg-white h-screen border border-gray-200">
-            <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4">
+            <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-4 p-4">
               <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
-                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/hero-banner/desarrollo/airpods.jpg" alt="imagen dev" />
+                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/process_methodology.png" alt="imagen dev" />
               </figure>
               <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
-                <span className="bg-[var(--primary--100)] text-[var(--color-primary-to-white)] font-medium p-1 px-3 rounded-2xl w-fit">Creador de página web</span>
-                <h2 className="text-4xl lg:text-6xl">Crea tu sitio web en minutos</h2>
-                <p>Tan solo describe tu idea y el Creador de páginas web con IA se encargará del diseño, de las imágenes y del texto. Después, utiliza el editor de arrastrar y soltar para personalizar. Ya tengas una tienda online o un blog, estarás online en un abrir y cerrar de ojos.</p>
+                <span className="bg-[var(--primary--100)] text-[var(--color-primary-to-white)] font-medium p-1 px-3 rounded-2xl w-fit">Resultados que se notan</span>
+                <h2 className="text-4xl">Tu crecimiento digital empieza aquí</h2>
+                <p>Somos el equipo digital que tu empresa necesita: diseño + desarrollo + estrategia + contenido visual. Con nosotros tendrás una marca sólida, una plataforma funcional y una presencia digital profesional que genera confianza, conversiones y crecimiento real.</p>
+              </div>
+            </div>
+          </div>
+          <div className="relative flex-1 flex justify-center items-center w-full bg-white h-screen border border-gray-200">
+            <div className="absolute inset-0 flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4 lg:max-w-11/12 lg:mx-auto">
+              <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
+                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/img_lx2p5lx2p5lx2p5l 1.png" alt="imagen dev" />
+              </figure>
+              <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
+                <span className="bg-[var(--primary--100)] text-[var(--color-primary-to-white)] font-medium p-1 px-3 rounded-2xl w-fit">Productos digitales completos</span>
+                <h2 className="text-4xl">Construimos tu producto digital desde la idea hasta el lanzamiento</h2>
+                <p>Creamos soluciones digitales integrales para empresas: desarrollo de software, diseño de landing pages, branding, consultoría estratégica y fotografía profesional. Te acompañamos en cada etapa para convertir tu visión en un producto real, funcional y rentable.</p>
               </div>
             </div>
           </div>
         </ScrollStackSection>
+
+        <section id="testimonials">
+          <TitleBox title={{ left: 'Lo que dicen nuestros clientes', right: 'es nuestra mejor carta' }} tag="Testimonios"></TitleBox>
+          <TestimonialsSection testimonials={testimonials}></TestimonialsSection>
+        </section>
 
         <section id="our-sectors" className="p-4">
           <TitleBox
@@ -311,35 +334,72 @@ export default async function Home() {
           />
 
           <div
-            className="flex flex-col lg:flex-rowgap-4px-4 lg:px-16h-auto lg:h-[420px][&:hover>div]:flex-1"
+            className="
+              flex 
+              flex-col 
+              lg:flex-row 
+              gap-4 
+              px-4 
+              lg:px-16 
+              h-auto 
+              lg:h-[420px]
+            "
           >
             {sectors.map((sector) => (
-
               <div
                 key={sector._id}
-                className="relative flex-1transition-all duration-500 ease-outhover:flex-[2.5]group cursor-pointer overflow-hidden rounded-xl"
+                className="
+                  relative 
+                  flex-1 
+                  transition-all 
+                  duration-500 
+                  ease-out 
+                  hover:flex-[2.5] 
+                  group 
+                  cursor-pointer 
+                  overflow-hidden 
+                  rounded-xl
+                "
                 style={{
-                  backgroundImage: `url(${sector.coverImage.asset.url})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}>
+                  backgroundImage: `url(${sector.coverImage?.asset?.url})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
 
-                {/* Overlay */}
                 <div
-                  className="absolute inset-0bg-black/40opacity-0 group-hover:opacity-100transition-opacity duration-300z-10"
+                  className="
+                    absolute 
+                    inset-0 
+                    bg-black/40 
+                    opacity-0 
+                    group-hover:opacity-100 
+                    transition-opacity 
+                    duration-300 
+                    z-10
+                  "
                 />
 
-                {/* Text */}
                 <div
-                  className="absolute bottom-4 left-4 right-4opacity-0 group-hover:opacity-100transition-opacity duration-300z-20">
-                  
-                    <h3 className="text-white font-semibold text-sm">
-                      {sector.name}
-                    </h3>
+                  className="
+                    absolute 
+                    bottom-4 
+                    left-4 
+                    right-4 
+                    opacity-0 
+                    group-hover:opacity-100 
+                    transition-opacity 
+                    duration-300 
+                    z-20
+                  "
+                >
+                  <h3 className="text-white font-semibold text-2xl">
+                    {sector.name}
+                  </h3>
 
-                    <p className="text-xs text-gray-200 leading-snug">
-                      {sector.shortDescription}
-                    </p>
+                  <p className="text-xs text-gray-200 leading-snug">
+                    {sector.shortDescription}
+                  </p>
                 </div>
               </div>
             ))}
@@ -347,7 +407,8 @@ export default async function Home() {
         </section>
 
 
-        <section id="our-team" className="p-4">
+
+        {/* <section id="our-team" className="p-4">
           <TitleBox title={{ left: "Nuestra gente" }} tag="Trabajo en equipo" />
 
           <div className="lg:w-[90%] lg:mx-auto">
@@ -361,6 +422,10 @@ export default async function Home() {
               }
             </div>
           </div>
+        </section> */}
+
+        <section id="testimonials-form">
+          <TestimonialForm></TestimonialForm>
         </section>
 
         <section id="faqs" className="w-full min-h-[fit-content] py-[50px] flex flex-col items-center justify-center gap-3">

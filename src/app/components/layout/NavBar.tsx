@@ -166,7 +166,7 @@ const NavBar = ({ servicesList }: { servicesList: Category[] }) => {
 
             <span
               className={`
-                w-[70%] h-[4px] rounded-2xl  duration-300 ease-in-out
+                w-full h-[4px] rounded-2xl  duration-300 ease-in-out
                 ${'bg-[var(--color-primary)]'}
                 ${stateSideBar ? 'opacity-0 scale-0' : ''}`}></span>
 

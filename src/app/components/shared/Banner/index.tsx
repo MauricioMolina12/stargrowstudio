@@ -28,6 +28,7 @@ export default function Banner({
   const bannerContentRef = useRef<HTMLDivElement>(null);
   const parallaxTextRef = useRef<HTMLDivElement>(null);
   const parallaxImageRef = useRef<HTMLImageElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   const bannerList: BannerTypes[] = Array.isArray(banners) ? banners.length > 0 ? banners : [] : banners ? [banners] : [];
 
@@ -68,33 +69,45 @@ export default function Banner({
     }
   }, [currentIndex, currentBanner.animationTitle]);
 
+  useEffect(() => {
+    // Smooth color transition: fade overlay out, change color, fade in
+    const el = overlayRef.current;
+    if (!el) return;
+
+    el.style.opacity = '0';
+    const t = setTimeout(() => {
+      el.style.backgroundColor = resolvedBgColor || 'transparent';
+      el.style.opacity = '1';
+    }, 260);
+
+    return () => clearTimeout(t);
+  }, [resolvedBgColor]);
+
 
   return (
     <section
       className={`w-full h-full relative overflow-hidden flex flex-col justify-center gap-[30px] ${isDark ? 'dark-theme-styles' : 'light-theme-styles'}`}
-      style={{
-        background: resolvedBgColor,
-        transition: "background 0.5s ease-in-out",
-      }}
     >
       <div
-        className={`absolute left-0 top-0 w-full h-full pointer-events-none z-0 ${isDark ? 'opacity-100 blur-0 bg-transparent' : 'filter blur-[1000px]'}`}
+        ref={overlayRef}
+        className="absolute left-0 top-0 w-full h-full pointer-events-none z-0"
+        style={{
+          backgroundColor: resolvedBgColor || 'transparent',
+          transition: 'opacity 250ms ease',
+          willChange: 'opacity',
+          opacity: 1,
+        }}
       />
 
       <div className="w-full h-full relative overflow-hidden">
         {bannerList.map((banner, index) => (
           <div
             key={index}
-            className={`
-              absolute inset-0
-              transition-all duration-[900ms]
-              ease-[cubic-bezier(0.4,0,0.2,1)]
-              will-change-[opacity,transform,filter]
-
-              ${index === currentIndex
-                ? 'opacity-100 scale-100 blur-0 z-20'
-                : 'opacity-0 scale-[0.96] blur-[2px] z-10 pointer-events-none'}
-            `}
+            className={
+              `absolute inset-0 transition duration-[900ms] ease-[cubic-bezier(0.4,0,0.2,1)] ` +
+              `${index === currentIndex ? 'opacity-100 scale-100 z-20' : 'opacity-0 scale-[0.96] z-10 pointer-events-none'}`
+            }
+            style={{ willChange: 'opacity, transform' }}
           >
 
             <div
@@ -185,7 +198,7 @@ export default function Banner({
                   return (
                     <div
                       key={index}
-                      className={`absolute transition-all duration-600 ease-in opacity-0 flex justify-center lg:block
+                      className={`absolute transition-opacity transition-transform duration-600 ease-in opacity-0 flex justify-center lg:block
 
                           ${isActive ? 'opacity-100 translate-x-0 lg:translate-x-0 lg:translate-y-0 scale-100 z-30' : ''}
                           
@@ -198,6 +211,8 @@ export default function Banner({
                           src={typeof image === 'string' ? image : urlFor(image).width(1200).url()}
                           alt={banner.title?.main || 'Banner image'}
                           className="object-cover rounded-[10px]"
+                          loading="lazy"
+                          decoding="async"
                         />
                       </div>
                     </div>
@@ -212,6 +227,8 @@ export default function Banner({
                       alt={banner.title?.main || 'Banner image'}
                       className="lg:max-w-[90%] lg:h-[90%] object-contain rounded-[10px]"
                       ref={index === currentIndex ? parallaxImageRef : null}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 )}

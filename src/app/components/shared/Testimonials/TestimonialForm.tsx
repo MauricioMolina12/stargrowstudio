@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
 import { getInitialsAvatar } from "@/app/utils/functions/getInitialsAvatar";
 import { stringToColor } from "@/app/utils/functions/stringToColor";
 import { useState } from "react";
+import { useToast } from "../Toast/ToastProvider";
 
 
 export default function TestimonialForm() {
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [namePreview, setNamePreview] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -32,15 +33,20 @@ export default function TestimonialForm() {
     setLoading(false);
 
     if (res.ok) {
-      setSuccess(true);
+      showToast("¡Gracias por compartir tu experiencia! 🙌", "success", 4000);
       setNamePreview("");
       e.currentTarget.reset();
+    } else {
+      showToast("Hubo un error al enviar tu testimonio. Intenta nuevamente.", "error", 4000);
     }
   }
 
-  const initials = getInitialsAvatar(namePreview);
-  const backgroundColor = stringToColor(namePreview || "User");
+  const defaultName = "Tu Nombre";
 
+  const displayName = namePreview.trim() || defaultName;
+  const initials = getInitialsAvatar(displayName);
+  const backgroundColor = stringToColor(displayName);
+  
   return (
     <section className="w-full bg-[#5656B5] py-25 px-6">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -97,17 +103,19 @@ export default function TestimonialForm() {
             />
 
             <button
+              type="submit"
               disabled={loading}
-              className="bg-[#5656B5] text-white py-3 rounded-lg hover:opacity-90 transition disabled:opacity-60 font-medium"
+              className="bg-[#5656B5] text-white py-3 rounded-lg hover:opacity-90 transition disabled:opacity-60 font-medium cursor-pointer flex items-center justify-center gap-2"
             >
-              {loading ? "Enviando..." : "Enviar testimonio"}
+              {loading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span>Enviando...</span>
+                </>
+              ) : (
+                'Enviar testimonio'
+              )}
             </button>
-
-            {success && (
-              <p className="text-green-600 text-sm text-center">
-                Gracias por compartir tu experiencia 🙌
-              </p>
-            )}
           </form>
         </div>
 

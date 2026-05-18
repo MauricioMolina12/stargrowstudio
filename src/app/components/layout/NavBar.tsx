@@ -29,13 +29,21 @@ interface routeStyles {
 }
 
 const navItems: { label: string, path?: string, isDropdown?: boolean }[] = [
-  // { label: "Precios" },
-  { label: "Servicios", isDropdown: true },
-  { label: "Explorar", isDropdown: true },
+  { label: "Inicio", path: "/" },
+  { label: "Articulos", path: "/articles" },
 ];
 
 const routeStyles: Record<string, routeStyles> = {
   "/": {
+    navClass: "bg-[#ffffff] text-[#5656B5]",
+    logo: "/logo.png",
+    textClass: "text-[#5656B5]",
+    menuClass: "bg-white",
+    itemsMenuClass: "text-[#5656B5]",
+    ctaClassBg: "bg-[var(--color-primary)]",
+    ctaClassText: "text-[var(--color-white)]"
+  },
+  "/articles": {
     navClass: "bg-[#ffffff] text-[#5656B5]",
     logo: "/logo.png",
     textClass: "text-[#5656B5]",
@@ -181,16 +189,16 @@ const NavBar = ({ servicesList }: { servicesList: Category[] }) => {
         {/* Navegación */}
         <ul
           className={`
-              absolute left-0 top-full z-40 w-full
-              ${currentStyle.menuClass} 
-              transform lg:transform-none
-              ${stateSideBar
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 -translate-y-5 pointer-events-none max-h-0"}
-              p-6 lg:p-0 flex-col lg:flex lg:flex-row lg:items-center lg:justify-center
-              lg:static lg:opacity-100 lg:translate-y-0 lg:pointer-events-auto lg:max-h-full
-              gap-4 lg:mt-0 lg:w-[70%] lg:gap-6 
-            `}
+                absolute left-0 top-full z-40 w-full
+                ${currentStyle.menuClass} 
+                transform lg:transform-none
+                ${stateSideBar
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 -translate-y-5 pointer-events-none max-h-0"}
+                p-6 lg:p-0 flex-col lg:flex lg:flex-row lg:items-center lg:justify-end
+                lg:static lg:opacity-100 lg:translate-y-0 lg:pointer-events-auto lg:max-h-full
+                gap-4 lg:mt-0 lg:w-auto lg:gap-6 
+              `}
         >
 
           {navItems.map((item, idx) => (
@@ -214,82 +222,21 @@ const NavBar = ({ servicesList }: { servicesList: Category[] }) => {
               }}
 
             >
-              <Link
-                href="#"
-                className={`flex items-center gap-2 lg:text-[0.9rem] ${currentStyle.itemsMenuClass}`}
-              >
-                {item.label}
-                {item.isDropdown && (
-                  <ChevronDown
-                    className={`hidden lg:block w-5 h-5 ${currentStyle.itemsMenuClass} transform transition-transform duration-300 ${openModal && selectedItem === item.label ? 'rotate-180' : ''}`}
-                  />
-                )}
-              </Link>
+              {(() => {
+                const isActive = item.path === '/' ? pathname === '/' : pathname?.startsWith(item.path ?? '') ;
+                return (
+                  <Link
+                    href={item.path ?? '#'}
+                    className={`flex items-center gap-2 lg:text-[0.9rem] ${currentStyle.itemsMenuClass} ${isActive ? 'active font-semibold underline' : ''}`}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              })()}
 
 
 
-              {(stateSideBar || isDesktop) && openModal && selectedItem === item.label && (
-                <ShareModal isOpen={openModal} onClose={() => {
-                  setOpenModal(false);
-                  setSelectedItem(null);
-                }}>
-                  {selectedItem === "Servicios" && (
-                    <div className={`flex flex-col lg:flex-row items-start gap-3 w-fit`}>
-                      {services.map((service) => (
-                        <CardLinkList 
-                          title={service.title}
-                          key={service.order}
-                          index={parseInt(service._id)}
-                          items={service.children as Item[]}
-                          setOpenIndex={setOpenIndex}
-                          openIndex={openIndex}
-                        />
-                      ))}
-
-                      
-                    </div>
-                  )}
-
-                  {selectedItem === "Explorar" && (
-                    <div className="flex flex-col lg:flex-row gap-3 w-fit">
-                      <CardLinkList
-                        index={6}
-                        openIndex={openIndex}
-                        setOpenIndex={setOpenIndex}
-                        onItemClick={() => {
-                          setOpenModal(false)
-                          setSelectedItem(null)
-                        }}
-                        items={[
-                          {
-                            icon: <BookOpen/>,
-                            title: "Articulos",
-                            description: "Explora nuestros artículos sobre desarrollo web, apps móviles y más.",
-                            href: '/articles'
-                          }
-                          // {
-                          //   icon: <Pencil />,
-                          //   title: "Blog",
-                          //   description: "Nuestras últimas noticias y actualizaciones.",
-                          // },
-                          // {
-                          //   icon: <Settings2 />,
-                          //   title: "Funciones y herramientas",
-                          //   description: "Últimos lanzamientos y funciones de productos.",
-                          // },
-                          // {
-                          //   icon: <Rocket />,
-                          //   title: "Nuestra historia",
-                          //   description: "Quienes somos.",
-                          //   cta: () => router.push('/our-history')
-                          // },
-                        ]}
-                      ></CardLinkList>
-                      {/* <ContentCard content={project}></ContentCard> */}
-                    </div>
-                  )}
-                </ShareModal>
-              )}
+              {/* Dropdowns for "Servicios" and "Explorar" are disabled per request */}
 
               {/* Solo visible en móviles */}
               <ChevronRight className="w-5 h-5 text-[var(--color-primary)] lg:hidden" />
@@ -297,8 +244,8 @@ const NavBar = ({ servicesList }: { servicesList: Category[] }) => {
           ))}
 
           {/* Botón */}
-          <li className="w-full lg:w-auto lg:ml-auto">
-            <Link href={'#contacto'} className={`cursor-pointer w-full lg:w-auto lg:ml-auto lg:p-3 lg:text-[.9rem] p-4 text-[1.1rem] font-medium ${currentStyle.ctaClassText} ${currentStyle.ctaClassBg} rounded-[10px] text-nowrap`}>  
+          <li className="w-full lg:w-auto">
+            <Link href={'#contacto'} className={`cursor-pointer w-full lg:w-auto lg:p-3 lg:text-[.9rem] p-4 text-[1.1rem] font-medium ${currentStyle.ctaClassText} ${currentStyle.ctaClassBg} rounded-[10px] text-nowrap`}>  
               Cotizar ahora
                 
             </Link>

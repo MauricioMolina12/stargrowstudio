@@ -30,7 +30,7 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
   return (
     <>
       {cards.map((card, index) => (
-        <div key={index} className="item parallax bg-[var(--color-white)] w-full rounded-2xl relative flex flex-col justify-center gap-4 p-4">
+        <div key={index} className="item parallax bg-[var(--color-white)] w-full rounded-2xl relative flex flex-col justify-center gap-4 p-6">
           
           {showSteps && (
             <span className="absolute top-[-10px] left-[-10px] bg-[var(--color-primary)] text-white p-3 [clip-path:circle()]">

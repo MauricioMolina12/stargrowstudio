@@ -169,7 +169,7 @@ export default async function Home() {
             <div className="titles h-[90%] lg:h-1/2 w-full flex flex-col lg:items-center justify-center gap-6">
               <h2 className="text-4xl lg:text-5xl lg:max-w-[60%] lg:text-center text-[#5656b5]">Construimos productos digitales que <span className="font-semibold">impulsan tu negocio</span></h2>
               <span className="text-[#666666]">Creamos soluciones integrales a medida que simplifican tus procesos y potencian tu crecimiento digital.</span>
-              <button className="px-6 py-5 lg:py-3 bg-[#5656b5] text-white rounded-lg hover:bg-[#4a4ab0] transition-colors duration-300 cursor-pointer">Solicitar asesoría</button>
+              <a href="https://wa.me/573003856084?text=Hola, %20me%20interesa%20recibir%20asesor%C3%ADa%20profesional%20sobre%20sus%20servicios.%20%C2%BFPodr%C3%ADan%20contactarme%20para%20agendar%20una%20reuni%C3%B3n%3F%20Muchas%20gracias." target="_blank" rel="noopener noreferrer" className="px-6 py-5 lg:py-3 bg-[#5656b5] text-white rounded-lg hover:bg-[#4a4ab0] transition-colors duration-300 inline-block">Solicitar asesoría</a>
             </div>
             <div className="image h-1/2 oveflow-hidden w-full flex flex-col justify-end">
               <img className="w-full h-fit lg:h-full object-contain" src="img/hero-banner/mockup mac.png" alt="macbook-mockup" />
@@ -239,6 +239,8 @@ export default async function Home() {
                   src="/img/hero-banner/Figma-cap.png"
                   alt="figma view"
                   className="object-cover ml-auto w-4/5 h-full rounded-xl relative z-30"
+                  loading="lazy"
+                  decoding="async"
                 />
               </figure>
 
@@ -269,12 +271,38 @@ export default async function Home() {
               <figure className="relative w-full 
                     before:absolute before:bottom-0 before:right-0 before:top-30 before:left-0 before:rounded-xl before:bg-[var(--primary--700)]
                     after:absolute after:bottom-0 after:top-[-20px] after:right-0 after:w-[60%] after:rounded-xl after:bg-[linear-gradient(110deg,_var(--primary--700)_60%,_var(--meteorite--200)_60%)]">
-                <img src="/img/hero-banner/Ilustrator-cap.png" alt="ilustrator view" className="object-cover ml-auto w-4/5 h-full rounded-xl relative z-30" />
+                <img src="/img/hero-banner/Ilustrator-cap.png" alt="ilustrator view" className="object-cover ml-auto w-4/5 h-full rounded-xl relative z-30" loading="lazy" decoding="async" />
               </figure>
 
             </ServiceCard>
 
           </div>
+        </section>
+
+        <section id="process" className="lg:p-8 p-4">
+          <TitleBox title={{ left: 'Nuestro camino hacia', main: 'proyectos que', right: 'brillan' }} tag="Planificación"></TitleBox>
+
+          <div className="lg:max-w-11/12 lg:mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+            <InfoCards cards={[
+              { title: 'Descubrimiento 🔍', description: 'Analizamos tus necesidades, objetivos y público. Esta etapa es clave para entender tu marca y definir el rumbo correcto.' },
+              { title: 'Estrategia y planificación 📅', description: 'Definimos alcance, requisitos y roadmap del proyecto para asegurar entregables claros y medibles.' },
+              { title: 'Diseño creativo 🎨', description: 'Diseñamos interfaces centradas en la experiencia que conectan con tus usuarios y refuerzan la marca.' },
+              { title: 'Desarrollo & producción 💻', description: 'Construimos la solución con buenas prácticas, pruebas y atención a la performance.' },
+              { title: 'Lanzamiento 🚀', description: 'Desplegamos y acompañamos la puesta en marcha con monitoreo inicial y soporte.' },
+              { title: 'Medición y optimización 📊', description: 'Analizamos resultados y optimizamos para mejorar conversiones y retener usuarios.' },
+            ]} />
+          </div>
+
+          <div className="mt-8 lg:mt-12 bg-[var(--color-primary)] text-white rounded-xl p-6 lg:p-8 lg:max-w-11/12 lg:mx-auto flex flex-col lg:flex-row items-start justify-between gap-4">
+            <div>
+              <h3 className="font-semibold text-lg">¿Estás listo para llevar tu proyecto al siguiente nivel?</h3>
+              <p className="text-sm text-white/90">Contáctanos hoy mismo y comencemos a trabajar juntos en tu próximo proyecto.</p>
+            </div>
+            <div>
+              <a href="#contacto" className="inline-block bg-white text-[var(--color-primary)] px-6 py-3 rounded-lg font-medium">Cotizar ahora →</a>
+            </div>
+          </div>
+
         </section>
 
         <section id="banner" className="h-screen">
@@ -287,7 +315,7 @@ export default async function Home() {
           <div className="relative flex-1 flex justify-center items-center w-full bg-white h-screen border border-gray-200">
             <div className="absolute inset-0 flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4 lg:max-w-11/12 lg:mx-auto">
               <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
-                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/process_methodology.png" alt="imagen dev" />
+                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/process_methodology.png" alt="imagen dev" loading="lazy" decoding="async" />
               </figure>
               <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
                 <span className="bg-[var(--primary--100)] text-[var(--color-primary-to-white)] font-medium p-1 px-3 rounded-2xl w-fit">Proceso claro y eficiente</span>
@@ -296,10 +324,10 @@ export default async function Home() {
               </div>
             </div>
           </div>
-          <div className="relative flex-1 flex justify-center items-center w-full bg-white h-screen border border-gray-200">
+          {/* <div className="relative flex-1 flex justify-center items-center w-full bg-white h-screen border border-gray-200">
             <div className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 lg:gap-4 p-4">
               <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
-                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/process_methodology.png" alt="imagen dev" />
+                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/process_methodology.png" alt="imagen dev" loading="lazy" decoding="async" />
               </figure>
               <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
                 <span className="bg-[var(--primary--100)] text-[var(--color-primary-to-white)] font-medium p-1 px-3 rounded-2xl w-fit">Resultados que se notan</span>
@@ -307,11 +335,11 @@ export default async function Home() {
                 <p>Somos el equipo digital que tu empresa necesita: diseño + desarrollo + estrategia + contenido visual. Con nosotros tendrás una marca sólida, una plataforma funcional y una presencia digital profesional que genera confianza, conversiones y crecimiento real.</p>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="relative flex-1 flex justify-center items-center w-full bg-white h-screen border border-gray-200">
             <div className="absolute inset-0 flex flex-col lg:flex-row-reverse items-center justify-center lg:justify-between gap-6 lg:gap-0 p-4 lg:max-w-11/12 lg:mx-auto">
               <figure className="w-full lg:w-1/2 lg:h-full flex items-center justify-center rounded-2xl">
-                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/img_lx2p5lx2p5lx2p5l 1.png" alt="imagen dev" />
+                <img className="w-full h-full  lg:h-3/5 lg:w-4/5 object-cover lg:object-contain aspect-video" src="img/img_lx2p5lx2p5lx2p5l 1.png" alt="imagen dev" loading="lazy" decoding="async" />
               </figure>
               <div className="flex flex-col justify-center gap-3 lg:w-1/2 lg:h-full">
                 <span className="bg-[var(--primary--100)] text-[var(--color-primary-to-white)] font-medium p-1 px-3 rounded-2xl w-fit">Productos digitales completos</span>

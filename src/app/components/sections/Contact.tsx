@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import emailjs from '@emailjs/browser';
 import { SendHorizontal } from "lucide-react";
+import { useToast } from "../shared/Toast/ToastProvider";
 
 type ContactProps = {
     onFeedback?: (message: string, isSuccess: boolean) => void;
@@ -11,6 +12,7 @@ type ContactProps = {
 
 
 export default function Contact({ onFeedback }: ContactProps) {
+    const { showToast } = useToast();
 
     useIntersectionObserver('.parallax', { threshold: 0.4 }, 'all');
     const [loading, setLoading] = useState(false);
@@ -27,11 +29,11 @@ export default function Contact({ onFeedback }: ContactProps) {
 
         const name = form['user_name']?.value?.trim();
         const email = form['user_email']?.value?.trim();
-        const message = form['message']?.value?.trim();
+        const message = form['user_message']?.value?.trim();
         const company = form['user_company']?.value?.trim();
 
         if (!name || !email || !message) {
-            onFeedback?.('Por favor, completa todos los campos.', false);
+            showToast('Por favor, completa todos los campos requeridos.', 'warning', 3000);
             setLoading(false);
             return;
         }
@@ -46,14 +48,13 @@ export default function Contact({ onFeedback }: ContactProps) {
             .then(
                 () => {
                     formRef.current?.reset();
-                    setLoading(false)
-                    onFeedback?.('Mensaje enviado correctamente', true);
-
+                    setLoading(false);
+                    showToast('¡Mensaje enviado correctamente! Nos contactaremos en 24 horas.', 'success', 4000);
                 },
                 (error) => {
                     console.error('Error:', error);
-                    onFeedback?.('Hubo un error al enviar el mensaje', false);
-                    setLoading(false)
+                    setLoading(false);
+                    showToast('Hubo un error al enviar el mensaje. Intenta de nuevo.', 'error', 4000);
                 },
             );
     };
@@ -101,15 +102,17 @@ export default function Contact({ onFeedback }: ContactProps) {
                         </div>
                     </div>
                     <div className="button-submit w-full">
-                        <button type="submit" className="flex justify-center items-center w-full h-full bg-[var(--color-primary)] text-[var(--color-white)] font-medium py-4 rounded-[6px] cursor-pointer hover:bg-[var(--color-secondary)]">
-                            {loading && (
-                                <div className="loader w-5 h-5 border border-white border-t-[var(--color-primary)] rounded-[50%] animate-spin"></div>
-                            )}
-                            {!loading && (
-                                <span className="flex items-center gap-2">
-                                    Enviar
+                        <button type="submit" disabled={loading} className="flex justify-center items-center w-full h-full bg-[var(--color-primary)] text-[var(--color-white)] font-medium py-4 rounded-[6px] cursor-pointer hover:bg-[var(--color-secondary)] disabled:opacity-70 transition gap-2">
+                            {loading ? (
+                                <>
+                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                    <span>Enviando...</span>
+                                </>
+                            ) : (
+                                <>
+                                    <span>Enviar</span>
                                     <SendHorizontal size={18} />
-                                </span>
+                                </>
                             )}
                         </button>
                     </div>

@@ -1,209 +1,216 @@
 'use client';
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from './Banner.module.scss';
 import useDarkMode from "@/app/hooks/useDarkMode";
-import { CallAction, Services } from "@/app/types/Services";
 import { Check } from "lucide-react";
 
+const WHATSAPP_NUMBER = "573003856084";
 
+/* ─────────────────────────────────────────────
+   Single banner data – one slide with hero content
+   ───────────────────────────────────────────── */
+const SINGLE_BANNER = {
+  title: {
+    main: "El crecimiento que buscas",
+    second: "empieza con tecnología que transforma",
+  },
+  images: [
+    "/img/hero-banner/desarrollo/website-business.jpg",
+    "/img/hero-banner/desarrollo/ecommerce.png",
+    "/img/hero-banner/analisis-de-datos/dashboard-graphs.jpg",
+    "/img/hero-banner/desarrollo/watch.png",
+  ],
+  list: [
+    "Calidad garantizada en cada proyecto",
+    "Soporte técnico continuo y personalizado",
+    "Tecnologías modernas, escalables y seguras",
+    "Resultados medibles orientados a tu crecimiento",
+  ],
+};
+
+/* Nombres de servicios que rotan en el badge */
+const SERVICE_NAMES = [
+  "Desarrollo Web",
+  "Apps Móviles",
+  "Diseño UI/UX",
+  "Consultoría Digital",
+  "Marketing Online",
+];
+
+/* ─────────────────────────────────────────────
+   Props (mantenemos la interfaz para no romper
+   posibles usos externos, pero internamente
+   ignoramos banners y usamos el dato fijo)
+   ───────────────────────────────────────────── */
 type Props = {
-  banners?: Services[];
+  banners?: never[];
   isDynamic?: boolean;
-  fallbackBanner?: Services;
-  defaultCallActions?: CallAction[]
+  fallbackBanner?: never;
+  defaultCallActions?: never[];
   hideService?: boolean;
 };
 
-export default function Banner({
-  banners = [],
-  isDynamic = true,
-  fallbackBanner = {
-    icon: "",
-    service: "",
-    title: { main: "", second: "" },
-    subtitle: "",
-    image: "",
-    alt: "",
-    list: [],
-    callAction: [],
-  },
-  hideService = false,
-  defaultCallActions = []
-}: Props) {
+export default function Banner({}: Props) {
   const { isDark } = useDarkMode();
+  const router = useRouter();
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  /* ── Imágenes: carrusel (misma animación) ── */
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [animate, setAnimate] = useState(false);
 
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  /* ── Badge de servicios: animación rotativa ── */
+  const [serviceIndex, setServiceIndex] = useState(0);
+  const [serviceVisible, setServiceVisible] = useState(true);
+
+  /* ── Refs ── */
   const sliderRef = useRef<HTMLDivElement>(null);
-
-
   const bannerContentRef = useRef<HTMLDivElement>(null);
   const parallaxTextRef = useRef<HTMLDivElement>(null);
-  const parallaxImageRef = useRef<HTMLImageElement>(null);
 
-  const bannerList = banners.length > 0 ? banners : [fallbackBanner];
-  const currentBanner = bannerList[currentIndex];
-
-
-  const callActions: CallAction[] =
-    currentBanner.callAction && currentBanner.callAction.length > 0
-      ? currentBanner.callAction
-      : defaultCallActions;
-
-  const actionMap: Record<string, () => void> = {
-    contact: () => console.log("Contacto desde banner"),
-  };
-
-
+  /* ─────────────────────────────────────────────
+     Ciclo del badge – cambia cada 4 s con fade
+     ───────────────────────────────────────────── */
   useEffect(() => {
-    if (isDynamic && bannerList.length > 1) {
-      intervalRef.current = setInterval(() => {
-        setAnimate(true);
-        setTimeout(() => setAnimate(false), 600000);
-        setCurrentIndex((prev) => {
-          const nextIndex = (prev + 1) % bannerList.length;
-          return nextIndex;
-        });
+    const interval = setInterval(() => {
+      setServiceVisible(false);               // desaparece
+      setTimeout(() => {                       // cambia texto
+        setServiceIndex((prev) => (prev + 1) % SERVICE_NAMES.length);
+        setServiceVisible(true);               // aparece
+      }, 400);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
 
-      }, 80000);
-    }
-
-    const handleParallax = () => {
-      const scrollY = window.scrollY;
-      parallaxTextRef.current?.style.setProperty("transform", `translateY(${scrollY * 0.1}px)`);
-      parallaxImageRef.current?.style.setProperty("transform", `translateY(${scrollY * 0.05}px)`);
-      bannerContentRef.current?.style.setProperty("transform", `translateY(${scrollY * 0.02}px)`);
-    };
-
-    window.addEventListener("scroll", handleParallax);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      window.removeEventListener("scroll", handleParallax);
-    };
-  }, [isDynamic, bannerList.length]);
-
-
+  /* ─────────────────────────────────────────────
+     Carrusel de imágenes (misma lógica original)
+     ───────────────────────────────────────────── */
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) =>
-        prev + 1 >= (currentBanner?.images?.length ?? 0) ? 0 : prev + 1
+        prev + 1 >= SINGLE_BANNER.images.length ? 0 : prev + 1
       );
     }, 4000);
-
     return () => clearInterval(interval);
-  }, [currentBanner?.images]);
+  }, []);
 
-  const [animateTitle, setAnimateTitle] = useState(false);
-
+  /* ─────────────────────────────────────────────
+     Parallax en scroll
+     ───────────────────────────────────────────── */
   useEffect(() => {
-    if (currentBanner.animationTitle) {
-      setAnimateTitle(false);
-      const timeout = setTimeout(() => setAnimateTitle(true), 50);
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, currentBanner.animationTitle]);
+    const handleParallax = () => {
+      const scrollY = window.scrollY;
+      parallaxTextRef.current?.style.setProperty(
+        "transform",
+        `translateY(${scrollY * 0.1}px)`
+      );
+      bannerContentRef.current?.style.setProperty(
+        "transform",
+        `translateY(${scrollY * 0.02}px)`
+      );
+    };
+    window.addEventListener("scroll", handleParallax);
+    return () => window.removeEventListener("scroll", handleParallax);
+  }, []);
 
+  /* ─────────────────────────────────────────────
+     CTA – Cotizar
+     ───────────────────────────────────────────── */
+  const requestQuote = () => {
+    const text =
+      "Hola Star Grow Studio 👋, quiero impulsar mi empresa con transformación digital y solicitar una cotización.";
+    window.open(
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,
+      "_blank"
+    );
+  };
 
-
-
+  /* ─────────────────────────────────────────────
+     Render
+     ───────────────────────────────────────────── */
   return (
-    <section className={`${styles.banner} ${isDark ? styles.dark : styles.light}`}>
+    <section
+      className={`${styles.banner} ${isDark ? styles.dark : styles.light}`}
+    >
       <div className={styles["banner--inner"]}>
-        <div key={currentIndex} className={`${styles.banner__content} ${animate ? styles.animated : ""}`} ref={bannerContentRef}>
+        <div className={styles.banner__content} ref={bannerContentRef}>
+          {/* ── Texto / Hero ── */}
           <div className={styles.banner__description} ref={parallaxTextRef}>
             <div className={styles["banner__description--hero"]}>
-              {currentBanner.service && !hideService && (
-                <span className={styles["banner__description--hero-service"]}>
-                  {currentBanner.service}
-                </span>
-              )}
+              {/* Badge animado con nombres de servicio */}
+              <span
+                className={`${styles["banner__description--hero-service"]} ${
+                  serviceVisible
+                    ? styles["badge-visible"]
+                    : styles["badge-hidden"]
+                }`}
+              >
+                {SERVICE_NAMES[serviceIndex]}
+              </span>
 
-              <h1 className={`${styles["banner__description--hero-title"]} ${animateTitle ? styles.fadeInParent : ""}`}>
-                <span className={`title ${animateTitle ? styles["fadeInChildMain"] : ""}`}>
-                  {currentBanner.title.main}
-                </span>
-
-                {currentBanner.title.optional && (
-                  <br />
-                )}
-
-                {currentBanner.title.optional && (
-                  <span className={`title ${animateTitle ? styles["fadeInChildOptional"] : ""}`}>
-                    {currentBanner.title.optional}
-                  </span>
-                )}
+              {/* Título con dos colores (main / second) */}
+              <h1 className={styles["banner__description--hero-title"]}>
+                <span>{SINGLE_BANNER.title.main}</span>
                 <br />
-                <span className={`subtitle ${animateTitle ? styles["fadeInChildSecond"] : ""}`}>
-                  {currentBanner.title.second}
-                </span>
+                <span>{SINGLE_BANNER.title.second}</span>
               </h1>
 
-
-
-              {currentBanner.list && (
+              {/* Lista de calidad / garantía */}
+              {SINGLE_BANNER.list && (
                 <ul className={styles["banner__description--list"]}>
-                  {currentBanner.list?.map((item, idx) => (
-                    <li key={idx} className={styles["banner__description--list-item"]}>
-                      <Check className="text-green-500"></Check>
+                  {SINGLE_BANNER.list.map((item, idx) => (
+                    <li
+                      key={idx}
+                      className={styles["banner__description--list-item"]}
+                    >
+                      <Check className="text-green-500" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               )}
-              {currentBanner.callAction && (
-                <div className={styles["banner__description--buttons-call-action"]}>
-                  {Array.isArray(callActions) &&
-                    callActions.map((button, index) => (
-                      <button
-                        key={index}
-                        onClick={() => actionMap[button.actionKey]?.()}
-                      >
-                        {button.label}
-                      </button>
-                    ))}
-                </div>
-              )}
 
-              {currentBanner.subtitle && (
-
-                <p className={styles["banner__description--hero-subtitle"]}>
-                  {currentBanner.subtitle}
-                </p>
-              )}
-
+              {/* Botones CTA */}
+              <div
+                className={styles["banner__description--buttons-call-action"]}
+              >
+                <button type="button" onClick={requestQuote}>
+                  Solicitar cotización
+                </button>
+                <button
+                  type="button"
+                  onClick={() => router.push("/cotizar")}
+                >
+                  Agendar reunión
+                </button>
+              </div>
             </div>
           </div>
-          <div className={styles.banner__sliderContainer}>
-            {currentBanner.images && currentBanner?.images!.map((image, index) => {
+
+          {/* ── Carrusel de imágenes (mismo estilo) ── */}
+          <div className={styles.banner__sliderContainer} ref={sliderRef}>
+            {SINGLE_BANNER.images.map((image, index) => {
               const isActive = index === currentSlide;
-              const isPrev = index === (currentSlide - 1 + currentBanner.images!.length) % currentBanner.images!.length;
-              const isNext = index === (currentSlide + 1) % currentBanner.images!.length;
+              const isPrev =
+                index ===
+                (currentSlide - 1 + SINGLE_BANNER.images.length) %
+                  SINGLE_BANNER.images.length;
+              const isNext =
+                index ===
+                (currentSlide + 1) % SINGLE_BANNER.images.length;
 
               return (
                 <div
                   key={index}
                   className={`${styles.banner__slide} 
-                              ${isActive ? styles.active : ""} 
-                              ${isPrev ? styles.prev : ""} 
-                              ${isNext ? styles.next : ""}`}
+                    ${isActive ? styles.active : ""} 
+                    ${isPrev ? styles.prev : ""} 
+                    ${isNext ? styles.next : ""}`}
                 >
                   <img src={image} alt={`imagen-${index}`} />
                 </div>
               );
             })}
-            {currentBanner.image && (
-              <img src={currentBanner.image} alt="Image" />
-            )}
           </div>
-
-
-
-
-
         </div>
       </div>
     </section>

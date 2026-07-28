@@ -17,7 +17,7 @@ const Grid = ({ title, subtitle, showMeetingCall = true, children}: Props) => {
     const { show } = useMeeting();
 
     return (
-        <div className="w-full h-auto lg:max-w-[70%] lg:mx-auto lg:my-0 lg:py-6">
+        <div className="container-app h-auto lg:my-0 lg:py-6">
             <aside className="w-full h-1/2 flex flex-col items-center justify-center gap-2.5 p-4 parallax">
                 <span className="text-[var(--color-primary-to-white)]">{subtitle}</span>
                 <h1 className="text-3xl text-center font-bold lg:w-[70%] lg:text-4xl">{title.left} <span className="text-[var(--color-primary-to-white)]">{title.main} </span>{title.right}</h1>

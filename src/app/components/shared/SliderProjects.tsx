@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Props = {
   items?: { title: string; description: string; image: string }[];
@@ -35,8 +36,8 @@ const SliderProjects = ({ items = [] }: Props) => {
 
   return (
     <main className="w-full p-4 bg-[var(--color-primary)] relative overflow-hidden lg:min-h-[70vh] flex items-center">
-      <button onClick={goToPrevious} className="cursor-pointer absolute left-3 top-1/2 -translate-y-1/2 z-10">
-        <span className="material-symbols-outlined text-white text-5xl">arrow_back_ios</span>
+      <button onClick={goToPrevious} className="cursor-pointer absolute left-3 top-1/2 -translate-y-1/2 z-10 text-white">
+        <ChevronLeft size={48} />
       </button>
 
       {currentBanner && (
@@ -51,8 +52,8 @@ const SliderProjects = ({ items = [] }: Props) => {
         </div>
       )}
 
-      <button onClick={goToNext} className="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 z-10">
-        <span className="material-symbols-outlined text-white text-5xl">arrow_forward_ios</span>
+      <button onClick={goToNext} className="cursor-pointer absolute right-3 top-1/2 -translate-y-1/2 z-10 text-white">
+        <ChevronRight size={48} />
       </button>
 
       <div className="points absolute right-1 bottom-1 h-5 flex items-center justify-between px-2 gap-2">

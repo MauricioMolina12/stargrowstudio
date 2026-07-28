@@ -14,7 +14,7 @@ export default function Plans({ plansView }: PlansProps) {
             {plansView.map((plan) => (
                 <div
                     key={plan.name}
-                    className={`parallax relative snap-start bg-[#FAFBFF] w-[340px] flex-shrink-0 rounded-2xl overflow-hidden border-2  ${plan.tier === "Premium"
+                    className={`parallax relative snap-start bg-[#FAFBFF] w-full max-w-[340px] md:w-[340px] flex-shrink-0 rounded-2xl overflow-hidden border-2  ${plan.tier === "Premium"
                         ? "border-[var(--color-primary)] after:content-[''] after:absolute after:inset-0 after:bg-[var(--color-primary)] after:opacity-10 after:-z-10"
                         : "border-gray-100"
                         }`}>
@@ -66,7 +66,7 @@ export default function Plans({ plansView }: PlansProps) {
 
                         <button
                             onClick={() => console.log("Solicitado", plan.name)}
-                            className="cursor-pointer bg-[var(--color-primary)] text-white font-medium p-4 rounded-2xl mt-auto  transition-colors"
+                            className="cursor-pointer bg-[var(--color-primary)] text-white font-medium p-4 rounded-2xl mt-auto min-h-[48px] transition-colors active:scale-[0.97]"
                         >
                             Solicitar este servicio
                         </button>

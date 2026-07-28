@@ -8,7 +8,7 @@
   --color-yellow-light: #ffe08a;
   --color-black: #000000;
   --color-dark: #1e1e1e;
-  --color-dark-gray: #929292;
+  --color-dark-gray: #6b6b6b;
   --color-gray: rgb(236, 236, 236);
   --color-light: #fafafa;
   --color-white: #ffffff;
@@ -18,6 +18,41 @@
   --color-primary-to-white: var(--color-primary);
   --color-dark-to-yellow: #1e1e1e;
   --color-white-to-primary: white;
+
+  /* Título de sección unificado para todo el sitio */
+  --section-heading-size: clamp(1.5rem, 3vw, 2rem);
+
+  /* Ancho máximo compartido para alinear todo el sitio en desktop */
+  --container-max: 1390px;
+  --container-padding: clamp(1rem, 3vw, 2rem);
+}
+
+/* Fondo con textura diagonal sutil (sección de contacto) */
+.bg-hatch {
+  background-color: var(--color-light);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(86, 86, 181, 0.05) 0,
+    rgba(86, 86, 181, 0.05) 1px,
+    transparent 1px,
+    transparent 14px
+  );
+}
+
+/* Título de sección reutilizable en todas las secciones del sitio */
+.section-heading {
+  font-size: var(--section-heading-size);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+/* Contenedor central: mismo ancho y alineación para nav, banner, secciones, etc. */
+.container-app {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
 }
 
 .dark {
@@ -45,16 +80,22 @@ body {
 }
 
 main {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 
 .opacity-50 {
   opacity: 0.5;
 }
 
+/* Scroll padding responsivo: 80px en móvil, 120px en desktop */
 section:not(#contacto) {
-  scroll-padding-top: 400px !important;
-  /* margin-bottom: 30px; */
+  scroll-padding-top: 80px !important;
+}
+
+@media (min-width: 768px) {
+  section:not(#contacto) {
+    scroll-padding-top: 120px !important;
+  }
 }
 
 .sticky-top-0 {
@@ -160,4 +201,28 @@ section:not(#contacto) {
 
 .animate-slide-up {
   animation: slideUp 1s ease-out forwards;
+}
+
+/* ============================================
+   MOBILE UX IMPROVEMENTS
+   ============================================ */
+
+/* Touch target mínimo universal: todos los elementos interactivos deben ser ≥ 44px */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Active states para feedback táctil en móvil */
+@media (hover: none) and (pointer: coarse) {
+  a, button, [role="button"], input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Easing premium consistente */
+*,
+*::before,
+*::after {
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }

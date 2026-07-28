@@ -6,16 +6,27 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npm run dev",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migrate:services": "node --env-file=.env.local --import tsx scripts/migrate-services.ts",
+    "migrate:projects": "node --env-file=.env.local --import tsx scripts/migrate-projects.ts",
+    "seed:opera": "node --env-file=.env.local --import tsx scripts/seed-opera.ts",
+    "seed:brisa": "node --env-file=.env.local --import tsx scripts/seed-brisa.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@portabletext/react": "^6.2.0",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^3.99.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.42.2",
     "lucide-react": "^0.525.0",
     "next": "15.3.4",
+    "next-sanity": "^9.12.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sass": "^1.89.2"
+    "sanity": "^3.99.0",
+    "sass": "^1.89.2",
+    "styled-components": "^6.4.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -28,6 +39,7 @@
     "eslint-config-next": "15.3.4",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.11",
+    "tsx": "^4.23.1",
     "typescript": "^5"
   }
 }

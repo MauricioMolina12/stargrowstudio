@@ -1,469 +1,251 @@
 'use client';
 
-import { useActiveSection } from "@/app/hooks/useActiveSection";
-import useDarkMode from "@/app/hooks/useDarkMode";
 import Link from "next/link";
-import { ActivitySquare, BarChart3, ChevronRight, Database, DatabaseBackup, DatabaseZap, GaugeCircle, Glasses, Layers, LayoutTemplate, Lightbulb, Link2, MonitorSmartphone, MousePointerClick, Palette, Pencil, PieChart, Rocket, ScrollText, SearchCheck, ServerCog, Settings, Settings2, Share2, Shield, ShieldCheck, Sliders, Smartphone, TrendingUp, Users, Wrench } from "lucide-react";
-import { ChevronDown } from "lucide-react";
-import { WorkflowIcon } from "lucide-react";
-import { useActiveClassScroll } from "@/app/hooks/useScrollNav";
-import { usePathname } from 'next/navigation';
-import { useState } from "react";
-import { useMeeting } from "@/app/context/MeetingContext";
-import { ShareModal } from "../shared/ShareModal/ShareModal";
-import { CardLinkList } from "../shared/CardLinkList/CardLinkList";
+import { usePathname } from "next/navigation";
+import { useCallback, useRef, useState } from "react";
+import { ChevronDown, ChevronRight, FolderKanban, HelpCircle, Rocket, ArrowRight, Search } from "lucide-react";
+
 import { useIsDesktop } from "@/app/hooks/useIsDesktop";
-import { useRouter } from "next/navigation";
-import ContentCard from "../shared/ContentCard";
+import type { ServiceNavGroup } from "@/sanity/types/service";
+import { getIcon } from "./nav/iconMap";
+import { useKeyboardShortcut } from "@/app/hooks/useKeyboardShortcut";
+import SearchModal from "@/app/components/search/SearchModal";
 
-interface routeStyles {
-  navClass: string,
-  logo: string,
-  textClass: string
-  menuClass?: string
-  itemsMenuClass?: string
-  ctaClassText?: string
-  ctaClassBg?: string
-}
+type Props = {
+  services?: ServiceNavGroup[];
+};
 
-const navItems: { label: string, path?: string, isDropdown?: boolean }[] = [
-  { label: "Precios" },
-  { label: "Servicios", isDropdown: true },
-  { label: "Explorar", isDropdown: true },
+const EXPLORE_LINKS = [
+  { icon: FolderKanban, title: "Portafolio", description: "Proyectos y casos que hemos hecho realidad.", href: "/portafolio" },
+  { icon: HelpCircle, title: "Preguntas frecuentes", description: "Resolvemos las dudas más comunes.", href: "/faq" },
+  { icon: Rocket, title: "Nuestra historia", description: "Quiénes somos y cómo trabajamos.", href: "/our-history" },
 ];
 
-const routeStyles: Record<
-  string, routeStyles> = {
+const EXPLORE_FEATURED = {
+  title: "¿Cómo hacer una página web?",
+  description: "Guía práctica con todo lo que debes saber antes de lanzar tu sitio.",
+  image: "/img/how-create-website.png",
+  href: "/blog/como-hacer-una-pagina-web",
+};
+
+const SERVICE_ACCENTS: Record<string, string> = {
+  "desarrollo-de-software": "#5656b5",
+  "diseno": "#c026d3",
+  "fotografia": "#ea580c",
+  "consultoria": "#0d9488",
+};
+const DEFAULT_ACCENT = "#5656b5";
+
+const routeStyles: Record<string, { nav: string; logo: string; text: string }> = {
   "/privacy-policy": {
-    navClass: "bg-[#5656B5] text-white",
+    nav: "bg-[var(--color-primary)] border-transparent",
     logo: "/logo-white.png",
-    textClass: "text-white",
-    menuClass: "bg-[var(--color-primary)]",
-    itemsMenuClass: "text-white",
-    ctaClassBg: "bg-white",
-    ctaClassText: "text-[var(--color-primary)]"
-  },
-  "/terms": {
-    navClass: "bg-black text-white",
-    logo: "/logo-white.png",
-    textClass: "text-white",
-  },
-  "/about-us": {
-    navClass: "bg-gray-100 text-gray-900",
-    logo: "/logo.png",
-    textClass: "text-gray-900",
+    text: "text-white",
   },
 };
 
 const defaultStyle = {
-  navClass: "bg-[var(--color-white-to-primary)] text-[var(--color-primary-to-white)]",
+  nav: "bg-[var(--color-white-to-primary)]/80 backdrop-blur-md border-[var(--color-gray)]",
   logo: "/logo.png",
-  textClass: "text-[var(--color-primary-to-white)]",
-  menuClass: "bg-transparent",
-  itemsMenuClass: "text-gray-500",
-  ctaClassBg: "bg-[var(--color-primary)]",
-  ctaClassText: "text-white"
+  text: "text-[var(--color-primary-to-white)]",
 };
 
-const NavBar = () => {
-  // const activeSection = useActiveSection(navItems);
-  const activeClassScroll = useActiveClassScroll()
+const NavBar = ({ services }: Props) => {
   const pathname = usePathname();
-
-  const [stateSideBar, setStateSideBar] = useState(false);
-  const [openModal, setOpenModal] = useState(false)
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const currentStyle = routeStyles[pathname] ?? defaultStyle;
-
-  const navClass = `w-full sticky left-0 top-0 z-50 ${currentStyle.navClass}`;
-  const { show, isVisible } = useMeeting();
   const isDesktop = useIsDesktop();
-  const router = useRouter();
 
-  const projects = [
-    {
-      name: '¿Como hacer una página web?',
-      image: '/img/how-create-website.png',
-      description: 'Renta Go es un proyecto innovador de renta de autos diseñado para ofrecer una experiencia rápida, confiable y 100% digital. La plataforma permite a los usuarios alquilar vehículos de forma sencilla y rápida.',
-    },
-  ];
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
 
+  const openSearch = useCallback(() => setSearchOpen(true), []);
+  const closeSearch = useCallback(() => setSearchOpen(false), []);
+  useKeyboardShortcut(openSearch);
 
+  const style = routeStyles[pathname] ?? defaultStyle;
+  const menuServices = services ?? [];
 
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const openOn = (key: string) => {
+    if (!isDesktop) return;
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpenDropdown(key);
+  };
+  const closeOn = () => {
+    if (!isDesktop) return;
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpenDropdown(null), 200);
+  };
+  const toggleMobile = (key: string) => {
+    if (!isDesktop) setOpenDropdown((prev) => (prev === key ? null : key));
+  };
 
-  const toggleSideBar = () => setStateSideBar((prev) => !prev);
+  const closeAll = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpenDropdown(null);
+    setMobileOpen(false);
+  };
 
+  const isActive = (href: string) => pathname === href;
+
+  const linkClass = (active = false) =>
+    `flex w-full items-center justify-between gap-1 rounded-lg px-3 py-2.5 text-[0.92rem] font-medium transition-colors min-h-[44px] lg:w-auto ${
+      active
+        ? "text-[var(--color-primary)] lg:bg-[var(--color-primary-tint)]"
+        : `${style.text} hover:bg-[var(--color-primary-tint)] hover:text-[var(--color-primary)]`
+    }`;
 
   return (
-    <nav className={navClass}>
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between px-6 py-3">
+    <nav className={`w-full sticky top-0 left-0 z-50 border-b ${style.nav}`}>
+      <div className="container-app flex h-16 items-center">
+        {/* Logo - left */}
+        <Link href="/" onClick={closeAll} className="flex shrink-0 items-center gap-2.5">
+          <img src={style.logo} alt="Star Grow Studio" className="h-8 w-auto object-contain" />
+          <span className={`hidden whitespace-nowrap text-lg font-bold tracking-tight sm:inline ${style.text}`}>
+            Star Grow Studio
+          </span>
+        </Link>
 
-        {/* Logo y nombre */}
-        <header className="w-full lg:w-fit flex justify-between items-center">
-          <Link href={'/'}>
-            <figure className="flex items-center gap-3">
-              <img
-                className="h-8 w-auto object-contain"
-                src={currentStyle.logo}
-                alt="logo sgs"
-              />
-              <figcaption
-                className={`${currentStyle.textClass} font-bold text-lg whitespace-nowrap`}
-              >
-                Star Grow Studio
-              </figcaption>
-            </figure>
+        {/* Search input - center (desktop only) */}
+        <button
+          onClick={openSearch}
+          className="mx-auto hidden h-9 w-full max-w-md items-center gap-2.5 rounded-full border border-black/[0.08] bg-black/[0.03] px-4 text-left text-[0.85rem] text-[var(--color-dark-gray)] transition-colors hover:border-black/[0.15] hover:bg-black/[0.05] lg:flex"
+          aria-label="Abrir buscador (Ctrl+K)"
+        >
+          <Search className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+          <span className="flex-1 truncate">Buscar servicios, proyectos...</span>
+          <kbd className="shrink-0 rounded-md border border-black/[0.08] px-1.5 py-0.5 text-[10px] font-medium text-[var(--color-dark-gray)]">
+            Ctrl+K
+          </kbd>
+        </button>
 
-          </Link>
-          <button
-            className="w-[30px] h-[20px] flex flex-col justify-between lg:hidden group z-[60]" onClick={toggleSideBar}>
-            <span
-              className={`
-                w-full h-[4px] rounded-2xl  duration-300 ease-in-out
-                ${'bg-[var(--color-primary)]'}
-                ${stateSideBar ? 'rotate-45 translate-y-[8px]' : ''}
-              `}></span>
+        {/* Mobile menu + hamburger */}
+        <button
+          aria-label="Abrir menú"
+          onClick={() => setMobileOpen((p) => !p)}
+          className="ml-auto flex min-h-[44px] min-w-[44px] items-center justify-center lg:hidden"
+        >
+          <div className="flex h-5 w-7 flex-col justify-between">
+            <span className={`h-[3px] w-full rounded bg-[var(--color-primary)] transition-all duration-300 ${mobileOpen ? "translate-y-[8px] rotate-45" : ""}`} />
+            <span className={`h-[3px] w-full rounded bg-[var(--color-primary)] transition-all duration-300 ${mobileOpen ? "scale-0 opacity-0" : ""}`} />
+            <span className={`h-[3px] w-full rounded bg-[var(--color-primary)] transition-all duration-300 ${mobileOpen ? "-translate-y-[8px] -rotate-45" : ""}`} />
+          </div>
+        </button>
 
-            <span
-              className={`
-                w-[70%] h-[4px] rounded-2xl  duration-300 ease-in-out
-                ${'bg-[var(--color-primary)]'}
-                ${stateSideBar ? 'opacity-0 scale-0' : ''}`}></span>
-
-            <span
-              className={`
-                w-full h-[4px] rounded-2xl  duration-300 ease-in-out
-                ${'bg-[var(--color-primary)]'}
-                ${stateSideBar ? '-rotate-45 -translate-y-[8px]' : ''}`}></span>
-          </button>
-        </header>
-
-        {/* Navegación */}
+        {/* Desktop nav links + mobile dropdown */}
         <ul
           className={`
-              absolute left-0 top-full z-40 w-full
-              ${currentStyle.menuClass} 
-              transform lg:transform-none
-              ${stateSideBar
-              ? "opacity-100 translate-y-0 pointer-events-auto"
-              : "opacity-0 -translate-y-5 pointer-events-none max-h-0"}
-              p-6 lg:p-0 flex-col lg:flex lg:flex-row lg:items-center lg:justify-center
-              lg:static lg:opacity-100 lg:translate-y-0 lg:pointer-events-auto lg:max-h-full
-              gap-4 lg:mt-0 lg:w-[70%] lg:gap-6 overflow-hidden
-            `}
+            absolute left-0 top-full max-h-[calc(100vh-4rem)] w-full flex-col gap-1 overflow-y-auto border-b border-[var(--color-gray)] bg-[var(--color-white-to-primary)] p-4
+            lg:static lg:flex lg:max-h-none lg:w-auto lg:flex-row lg:items-center lg:gap-1 lg:overflow-visible lg:border-0 lg:bg-transparent lg:p-0 lg:ml-4
+            ${mobileOpen ? "flex" : "hidden"}
+            lg:flex
+          `}
         >
-
-          {navItems.map((item, idx) => (
-            <li
-              key={idx}
-              className={`mb-10 flex justify-between items-center w-full lg:w-auto lg:m-0`}
-              onMouseEnter={() => {
-                if (item.isDropdown) {
-                  setSelectedItem(item.label);
-                  setOpenModal(prev => !prev);
-                }
-                // else {
-                //   router.push(item.href);
-                // }
-              }}
-              onMouseLeave={() => {
-                if (item.isDropdown) {
-                  setSelectedItem(null);
-                  setOpenModal(false);
-                }
-              }}
-
+          {/* Mobile search button (visible only in mobile menu) */}
+          <li className="lg:hidden">
+            <button
+              onClick={openSearch}
+              className="flex w-full items-center gap-2.5 rounded-lg px-3 py-3 text-[0.92rem] font-medium text-[var(--color-primary-to-white)] min-h-[44px] transition-colors hover:bg-[var(--color-primary-tint)]"
             >
-              <Link
-                href="#"
-                className={`flex items-center gap-2 lg:text-[0.9rem] ${currentStyle.itemsMenuClass}`}
-              >
-                {item.label}
-                {item.isDropdown && (
-                  <ChevronDown
-                    className={`hidden lg:block w-5 h-5 ${currentStyle.itemsMenuClass} transform transition-transform duration-300 ${openModal && selectedItem === item.label ? 'rotate-180' : ''}`}
-                  />
-                )}
-              </Link>
-
-
-
-              {(stateSideBar || isDesktop) && openModal && selectedItem === item.label && (
-                <ShareModal isOpen={openModal} onClose={() => {
-                  setOpenModal(false);
-                  setSelectedItem(null);
-                }}>
-                  {selectedItem === "Servicios" && (
-                    <div className={`flex flex-col lg:flex-row items-start gap-3 w-fit`}>
-                      <div className="flex flex-col gap-3 w-full lg:w-auto">
-                        <CardLinkList
-                          title="Desarrollo de software a medida"
-                          index={0}
-                          openIndex={openIndex}
-                          setOpenIndex={setOpenIndex}
-                          items={[
-                            {
-                              icon: <LayoutTemplate />,
-                              title: "Desarrollo de sitios web a medida",
-                              description: "Creamos sitios únicos adaptados a tus objetivos de negocio.",
-                              highlight: true,
-                              badge: "Personalizado",
-                            },
-                            {
-                              icon: <MonitorSmartphone />,
-                              title: "Aplicaciones web progresivas (PWA)",
-                              description: "Apps web que funcionan sin conexión y se instalan como móviles.",
-                            },
-                            {
-                              icon: <Share2 />,
-                              title: "Integraciones con APIs",
-                              description: "Conectamos tu software con servicios externos y automatizaciones.",
-                            },
-                            {
-                              icon: <Sliders />,
-                              title: "Sistemas de gestión (CMS / ERP)",
-                              description: "Paneles administrativos personalizados para gestionar tu negocio.",
-                            },
-                            {
-                              icon: <Wrench />,
-                              title: "Optimización y mantenimiento",
-                              description: "Mejoramos rendimiento, seguridad y escalabilidad de tu proyecto.",
-                            },
-                          ]}
-                        />
-                        <CardLinkList
-                          title="Desarrollo de apps móviles"
-                          index={1}
-                          openIndex={openIndex}
-                          setOpenIndex={setOpenIndex}
-                          items={[
-                            {
-                              icon: <Smartphone />,
-                              title: "Desarrollo de apps móviles a medida",
-                              description: "Creamos apps nativas o híbridas adaptadas a tus necesidades.",
-                              highlight: true,
-                              badge: "Personalizado",
-                            },
-                            {
-                              icon: <MonitorSmartphone />,
-                              title: "Aplicaciones web progresivas (PWA)",
-                              description: "Apps web que funcionan sin conexión y se instalan como móviles.",
-                            },
-                            {
-                              icon: <Link2 />,
-                              title: "Integraciones con APIs",
-                              description: "Conectamos tu app con servicios externos y automatizaciones.",
-                            },
-                            {
-                              icon: <Settings />,
-                              title: "Sistemas de gestión móviles (CMS / ERP)",
-                              description: "Apps para administrar procesos desde cualquier dispositivo.",
-                            },
-                            {
-                              icon: <ShieldCheck />,
-                              title: "Optimización y mantenimiento",
-                              description: "Mejoramos rendimiento, seguridad y escalabilidad de tu app.",
-                            },
-                          ]}
-                        />
-                      </div>
-                      <div className="flex flex-col gap-3 w-full lg:w-auto">
-                        <CardLinkList title="Análisis de datos y visualización"
-                          index={2}
-                          openIndex={openIndex}
-                          setOpenIndex={setOpenIndex}
-                          items={[
-                            {
-                              icon: <BarChart3 />,
-                              title: "Visualización de dashboards",
-                              description: "Creamos paneles interactivos para entender tus métricas en tiempo real.",
-                              highlight: true,
-                              badge: "Interactivo",
-                            },
-                            {
-                              icon: <PieChart />,
-                              title: "Informes personalizados",
-                              description: "Generamos reportes detallados con KPIs relevantes para tu negocio.",
-                            },
-                            {
-                              icon: <Database />,
-                              title: "Procesamiento de datos",
-                              description: "Transformamos datos en bruto en información útil para la toma de decisiones.",
-                            },
-                            {
-                              icon: <ActivitySquare />,
-                              title: "Modelos de predicción",
-                              description: "Utilizamos estadísticas y machine learning para anticipar comportamientos.",
-                            },
-                            {
-                              icon: <SearchCheck />,
-                              title: "Análisis exploratorio",
-                              description: "Detectamos patrones, tendencias y oportunidades ocultas en tus datos.",
-                            },
-                          ]}
-                        ></CardLinkList>
-                        <CardLinkList title="Arquitectura y gestión de bases de datos"
-                          index={3}
-                          openIndex={openIndex}
-                          setOpenIndex={setOpenIndex}
-                          items={[
-                            {
-                              icon: <Database />,
-                              title: "Diseño de bases de datos escalables",
-                              description: "Estructuramos tus datos para soportar crecimiento, consultas rápidas y seguridad.",
-                              highlight: true,
-                              badge: "Escalable",
-                            },
-                            {
-                              icon: <ServerCog />,
-                              title: "Administración y monitoreo",
-                              description: "Monitoreamos el rendimiento y aseguramos disponibilidad constante.",
-                            },
-                            {
-                              icon: <DatabaseBackup />,
-                              title: "Backups y recuperación de datos",
-                              description: "Implementamos estrategias de respaldo seguras y automatizadas.",
-                            },
-                            {
-                              icon: <Shield />,
-                              title: "Seguridad y control de acceso",
-                              description: "Gestionamos permisos, cifrado y protección ante amenazas.",
-                            },
-                            {
-                              icon: <DatabaseZap />,
-                              title: "Migración de datos",
-                              description: "Movemos tus datos entre sistemas sin pérdida ni interrupciones.",
-                            },
-                          ]}
-                        ></CardLinkList>
-                      </div>
-                      <div className="flex flex-col gap-3 w-full lg:w-auto">
-                        <CardLinkList title="Consultoría en transformación digital"
-                          index={4}
-                          openIndex={openIndex}
-                          setOpenIndex={setOpenIndex}
-                          items={[
-                            {
-                              icon: <Lightbulb />,
-                              title: "Estrategia digital personalizada",
-                              description: "Analizamos tu negocio y trazamos un plan digital enfocado en resultados.",
-                              highlight: true,
-                              badge: "Estrategia",
-                            },
-                            {
-                              icon: <ActivitySquare />,
-                              title: "Automatización de procesos",
-                              description: "Reducimos tareas manuales con herramientas digitales eficientes.",
-                            },
-                            {
-                              icon: <Layers />,
-                              title: "Integración de tecnología emergente",
-                              description: "Adoptamos IA, blockchain o IoT según tus necesidades y objetivos.",
-                            },
-                            {
-                              icon: <Users />,
-                              title: "Capacitación de equipos",
-                              description: "Entrenamos a tu equipo para adaptarse y aprovechar el cambio tecnológico.",
-                            },
-                            {
-                              icon: <TrendingUp />,
-                              title: "Medición de impacto digital",
-                              description: "Evaluamos resultados y adaptamos la estrategia continuamente.",
-                            },
-                          ]}
-                        ></CardLinkList>
-                        <CardLinkList title="Diseño UX/UI centrado en el usuario"
-                          index={5}
-                          openIndex={openIndex}
-                          setOpenIndex={setOpenIndex}
-                          items={[
-                            {
-                              icon: <Palette />,
-                              title: "Diseño de interfaces intuitivas",
-                              description: "Creamos experiencias limpias, accesibles y visualmente atractivas.",
-                              highlight: true,
-                              badge: "Usabilidad",
-                            },
-                            {
-                              icon: <MousePointerClick />,
-                              title: "Prototipado y validación",
-                              description: "Validamos ideas con prototipos navegables antes de desarrollarlas.",
-                            },
-                            {
-                              icon: <ScrollText />,
-                              title: "Arquitectura de la información",
-                              description: "Organizamos contenido de forma clara y lógica para los usuarios.",
-                            },
-                            {
-                              icon: <GaugeCircle />,
-                              title: "Optimización de experiencia",
-                              description: "Analizamos el comportamiento del usuario y mejoramos el recorrido.",
-                            },
-                            {
-                              icon: <Glasses />,
-                              title: "Accesibilidad digital",
-                              description: "Diseñamos interfaces inclusivas para todos los usuarios.",
-                            },
-                          ]}
-
-                        ></CardLinkList>
-                      </div>
-                    </div>
-                  )}
-
-                  {selectedItem === "Explorar" && (
-                    <div className="flex flex-col lg:flex-row gap-3 w-fit">
-                      <CardLinkList
-                        index={6}
-                        openIndex={openIndex}
-                        setOpenIndex={setOpenIndex}
-                        onItemClick={() => {
-                          setOpenModal(false)
-                          setSelectedItem(null)
-                        }}
-                        items={[
-                          {
-                            icon: <Pencil />,
-                            title: "Blog",
-                            description: "Nuestras últimas noticias y actualizaciones.",
-                          },
-                          {
-                            icon: <Settings2 />,
-                            title: "Funciones y herramientas",
-                            description: "Últimos lanzamientos y funciones de productos.",
-                          },
-                          {
-                            icon: <Rocket />,
-                            title: "Nuestra historia",
-                            description: "Quienes somos.",
-                            cta: () => router.push('/our-history')
-                          },
-                        ]}
-                      ></CardLinkList>
-                      <ContentCard contents={projects}></ContentCard>
-                    </div>
-                  )}
-                </ShareModal>
-              )}
-
-              {/* Solo visible en móviles */}
-              <ChevronRight className="w-5 h-5 text-[var(--color-primary)] lg:hidden" />
-            </li>
-          ))}
-
-          {/* Botón */}
-          <li className="w-full lg:w-auto lg:ml-auto">
-            <button onClick={show} className={`cursor-pointer w-full lg:w-auto lg:ml-auto lg:p-3 lg:text-[.9rem] p-4 text-[1.1rem] font-medium ${currentStyle.ctaClassText} ${currentStyle.ctaClassBg} rounded-[10px] text-nowrap`}>
-              {!isVisible ?
-                <span>Cotizar ahora</span>
-                : <div className="loader w-5 h-5 border border-white border-t-[var(--color-primary)] rounded-[50%] animate-spin"></div>}
+              <Search className="h-4 w-4" strokeWidth={1.5} />
+              Buscar servicios, proyectos...
             </button>
+          </li>
+
+          <li className="lg:static" onMouseEnter={() => openOn("servicios")} onMouseLeave={closeOn}>
+            <button onClick={() => toggleMobile("servicios")} className={linkClass(openDropdown === "servicios")}>
+              Servicios
+              <ChevronDown size={16} className={`transition-transform duration-300 ${openDropdown === "servicios" ? "rotate-180" : ""}`} />
+            </button>
+            {openDropdown === "servicios" && (
+              <div onMouseEnter={() => openOn("servicios")} onMouseLeave={closeOn} className="lg:fixed lg:inset-x-0 lg:top-16 lg:border-y lg:border-[var(--color-gray)] lg:bg-[var(--color-white-to-primary)]">
+                <div className="container-app grid grid-cols-1 gap-x-8 gap-y-6 py-4 sm:grid-cols-2 lg:grid-cols-4 lg:py-8">
+                  {menuServices.map((svc) => {
+                    const accent = SERVICE_ACCENTS[svc.slug] ?? DEFAULT_ACCENT;
+                    return (
+                      <div key={svc.slug}>
+                        <Link href={`/services/${svc.path}`} onClick={closeAll} className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide" style={{ color: accent }}>
+                          {svc.service}
+                        </Link>
+                        <ul className="space-y-0.5">
+                          {svc.children?.map((child) => {
+                            const Icon = getIcon(child.iconName ?? undefined);
+                            return (
+                              <li key={child.slug}>
+                                <Link href={`/services/${child.path}`} onClick={closeAll} className="flex items-start gap-3 rounded-lg p-2 transition-colors hover:bg-black/[0.04]">
+                                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: `${accent}1a`, color: accent }}>
+                                    <Icon size={16} />
+                                  </span>
+                                  <span>
+                                    <span className="flex items-center gap-2">
+                                      <span className="text-[13px] font-semibold text-[var(--color-primary-to-white)]">{child.service}</span>
+                                      {child.badge && <span className="rounded-full px-2 py-0.5 text-[10px] font-medium" style={{ backgroundColor: `${accent}1a`, color: accent }}>{child.badge}</span>}
+                                    </span>
+                                    <span className="block text-[12px] leading-snug text-[var(--color-dark-gray)]">{child.shortDescription}</span>
+                                  </span>
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </li>
+
+          <li className="relative" onMouseEnter={() => openOn("explorar")} onMouseLeave={closeOn}>
+            <button onClick={() => toggleMobile("explorar")} className={linkClass(openDropdown === "explorar")}>
+              Explorar
+              <ChevronDown size={16} className={`transition-transform duration-300 ${openDropdown === "explorar" ? "rotate-180" : ""}`} />
+            </button>
+            {openDropdown === "explorar" && (
+              <div onMouseEnter={() => openOn("explorar")} onMouseLeave={closeOn} className="lg:absolute lg:right-0 lg:top-full lg:pt-3">
+                <div className="flex flex-col gap-4 rounded-xl border border-[var(--color-gray)] bg-[var(--color-white-to-primary)] p-4 lg:w-[560px] lg:flex-row">
+                  <ul className="flex-1 space-y-1">
+                    {EXPLORE_LINKS.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <li key={item.href}>
+                          <Link href={item.href} onClick={closeAll} className="flex items-start gap-3 rounded-lg p-2 transition-colors hover:bg-[var(--color-primary-tint)]">
+                            <Icon size={18} className="mt-0.5 shrink-0 text-[var(--color-primary)]" />
+                            <span>
+                              <span className="block text-[13px] font-semibold text-[var(--color-primary-to-white)]">{item.title}</span>
+                              <span className="block text-[12px] leading-snug text-[var(--color-dark-gray)]">{item.description}</span>
+                            </span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <Link href={EXPLORE_FEATURED.href} onClick={closeAll} className="group flex flex-col overflow-hidden rounded-xl border border-[var(--color-gray)] transition-colors hover:border-[var(--color-primary)] lg:w-[240px]">
+                    <figure className="h-28 overflow-hidden bg-[var(--color-gray)]">
+                      <img src={EXPLORE_FEATURED.image} alt={EXPLORE_FEATURED.title} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                    </figure>
+                    <div className="flex flex-col gap-1 p-3">
+                      <span className="text-[13px] font-semibold text-[var(--color-primary-to-white)]">{EXPLORE_FEATURED.title}</span>
+                      <span className="text-[12px] leading-snug text-[var(--color-dark-gray)]">{EXPLORE_FEATURED.description}</span>
+                      <span className="mt-1 flex items-center gap-1 text-[12px] font-medium text-[var(--color-primary)]">Leer más <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" /></span>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </li>
+
+          <li className="mt-3 lg:mt-0 lg:ml-3">
+            <Link href="/cotizar" onClick={closeAll} className="flex items-center justify-center gap-1.5 rounded-full bg-[var(--color-primary)] px-6 py-3 text-[0.9rem] font-semibold text-white min-h-[44px] transition-colors hover:bg-[var(--color-secondary)] active:scale-[0.97] lg:py-2">
+              Cotizar ahora
+              <ChevronRight size={16} />
+            </Link>
           </li>
         </ul>
       </div>
+
+      {searchOpen && <SearchModal onClose={closeSearch} />}
     </nav>
   );
 };

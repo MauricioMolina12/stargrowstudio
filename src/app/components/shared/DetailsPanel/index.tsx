@@ -19,14 +19,14 @@ export default function DetailsPanel({ content }: DetailsProps) {
             <div className="p-4 lg:w-1/2 lg:p-0 flex flex-col gap-4">
                 <h2
                     className="text-4xl font-bold mb-4"
-                    style={{ color: content.styles?.colorTitle ?? "#222" }}
+                    style={{ color: content.styles?.colorTitle ?? "var(--color-dark)" }}
                 >
                     {content.title}
                 </h2>
 
                 <ul
                     className="space-y-3 flex flex-col gap-3"
-                    style={{ color: content.styles?.colorItems ?? "text-gray-700" }}
+                    style={{ color: content.styles?.colorItems ?? "var(--color-dark-gray)" }}
                 >
                     {content.items?.map((item, idx) => (
                         <li key={idx} className="flex items-center gap-2">

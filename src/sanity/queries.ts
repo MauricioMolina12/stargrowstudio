@@ -23,6 +23,20 @@ export const servicesQuery = groq`
   }
 `;
 
+/** Servicios HIJOS para el carrusel del Banner del Home (los padres se excluyen). */
+export const childServicesQuery = groq`
+  *[_type == "service" && defined(parent)] | order(parent->order asc, order asc, service asc){
+    "slug": slug.current,
+    "path": parent->slug.current + "/" + slug.current,
+    "name": service,
+    "shortDescription": coalesce(shortDescription, subtitle, ""),
+    // Misma resolución de imagen que la página individual: hero.image || mainImage || legacy
+    "image": coalesce(hero.image.asset->url, mainImage.asset->url, image.asset->url),
+    "alt": coalesce(hero.image.alt, mainImage.alt, alt),
+    "benefits": benefits[]{ title }
+  }
+`;
+
 /** Mega-menú y footer: padres con sus hijos (referencias reales). */
 export const navServicesQuery = groq`
   *[_type == "service" && !defined(parent)] | order(order asc, service asc){
@@ -105,8 +119,11 @@ export const postsQuery = groq`
     excerpt,
     mainImage,
     publishedAt,
+    instagramUrl,
     "author": author->{ name, "slug": slug.current, avatar, role },
-    "categories": categories[]->{ title, "slug": slug.current }
+    "categories": categories[]->{ title, "slug": slug.current },
+    // Tiempo estimado de lectura: ~1000 caracteres/minuto (≈200 palabras en español)
+    "readingTime": round(length(pt::text(body)) / 1000) + 1
   }
 `;
 
@@ -118,6 +135,7 @@ export const postBySlugQuery = groq`
     excerpt,
     mainImage,
     publishedAt,
+    instagramUrl,
     body,
     seo,
     "author": author->{ name, "slug": slug.current, avatar, role, bio },
@@ -217,6 +235,7 @@ export const projectBySlugQuery = groq`
     visibility,
     year,
     url,
+    instagramUrl,
     durationStart,
     durationEnd,
     team[]{ name, role, "image": image.asset->url, linkedin },

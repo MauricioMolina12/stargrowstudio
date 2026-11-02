@@ -15,8 +15,11 @@ type FetchParams = {
  * Usa el sistema de caché de Next (tags + revalidate) sobre el cliente de Sanity.
  *
  * - `cache()` de React deduplica llamadas dentro del mismo render.
- * - Tags activos → next.revalidate = false para usar webhooks + revalidateTag.
- * - Sin tags     → ISR cada `revalidate` segundos (default 60).
+ * - Tags activos → revalidación bajo demanda vía webhook / `revalidateTag`.
+ * - Con tags Y `revalidate` → ISR en background cada `revalidate` segundos,
+ *   de modo que el sitio se auto-refresca aunque el webhook no dispare
+ *   (evita servir imágenes/datos obsoletos "para siempre", como ocurrió
+ *   con las imágenes SEO de los proyectos en el home).
  */
 export async function sanityFetch<T>({
   query,
@@ -26,7 +29,7 @@ export async function sanityFetch<T>({
 }: FetchParams): Promise<T> {
   return client.fetch<T>(query, params, {
     next: {
-      revalidate: tags ? false : revalidate,
+      revalidate,
       tags,
     },
   });

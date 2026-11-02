@@ -30,7 +30,7 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
   return (
     <>
       {cards.map((card, index) => (
-        <div key={index} className="item parallax bg-[var(--color-white)] w-full rounded-2xl relative flex flex-col justify-center gap-4 p-4">
+        <div key={index} className="item parallax bg-[var(--color-surface)] w-full rounded-2xl relative flex flex-col justify-center gap-4 p-4">
           {showSteps && (
             <span className="absolute top-[-10px] left-[-10px] bg-[var(--color-primary)] text-white p-3 [clip-path:circle()]">
               {index + 1}
@@ -40,7 +40,7 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
             const Icon = card.icon.component;
             return (
               <Icon
-                className={`w-10 h-10 bg-gray-100 p-2 rounded-2xl ${card.icon.color}`}
+                className={`w-10 h-10 bg-[var(--color-input)] p-2 rounded-2xl ${card.icon.color}`}
               />
             );
           })()}
@@ -52,7 +52,7 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
                 alt={card.title}
                 width={40}
                 height={40}
-                className="w-10 h-10 bg-gray-100 p-2 rounded-2xl"
+                className="w-10 h-10 bg-[var(--color-input)] p-2 rounded-2xl"
               />
             );
           })()}
@@ -71,7 +71,7 @@ export default function InfoCards({ cards, showSteps = true }: InfoCardsProps) {
           )}
 
           {card.slug && (
-            <button onClick={() => detailsService(card)} className="cursor-pointer mt-2 text-[var(--color-primary)] flex items-center gap-1 font-medium transition-colors text-[0.9rem]">
+            <button onClick={() => detailsService(card)} className="cursor-pointer mt-2 text-[var(--color-primary-bright)] flex items-center gap-1 font-medium transition-colors text-[0.9rem]">
               Leer más
               {!loadingDetails[card.slug] ? (
                 <span className="material-symbols-outlined">arrow_forward</span>

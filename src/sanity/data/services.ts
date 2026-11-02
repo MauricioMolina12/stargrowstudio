@@ -2,6 +2,7 @@ import { cache } from "react";
 import { sanityFetch } from "@/sanity/fetch";
 import {
   servicesQuery,
+  childServicesQuery,
   serviceByPathQuery,
   serviceSlugsQuery,
   navServicesQuery,
@@ -10,6 +11,7 @@ import type {
   ServiceSummary,
   ServiceNavGroup,
   ServiceDetail,
+  BannerService,
 } from "@/sanity/types/service";
 
 const TAG = "service";
@@ -17,6 +19,11 @@ const TAG = "service";
 /** Servicios de primer nivel para el bento del home. */
 export const getServices = cache(() =>
   sanityFetch<ServiceSummary[]>({ query: servicesQuery, tags: [TAG] })
+);
+
+/** Servicios hijos para el carrusel del Banner del Home (una sola consulta). */
+export const getChildServices = cache(() =>
+  sanityFetch<BannerService[]>({ query: childServicesQuery, tags: [TAG] })
 );
 
 /** Padres con sus hijos para el mega-menú y el footer. */

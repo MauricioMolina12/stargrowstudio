@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ChevronRight, CalendarClock, Building2, Tag, Briefcase, User } from "lucide-react";
+import { ArrowRight, ChevronRight, CalendarClock, Building2, Briefcase, User } from "lucide-react";
 import ScrollGallery from "@/app/components/projects/ScrollGallery";
 import { getProjectBySlug, getProjectSlugs } from "@/sanity/data/projects";
 import SectionRenderer from "@/app/components/projects/SectionRenderer";
+import {
+  InstagramPostShowcase,
+  InstagramQuickBadge,
+} from "@/app/components/shared/InstagramPostShowcase";
+import { resolveInstagramUrl } from "@/app/components/shared/instagramUtils";
 
 /** Desactivar caché para que los datos de Sanity (imágenes, etc.) se vean siempre frescos. */
 export const revalidate = 0;
@@ -30,7 +35,8 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
   const project = await getProjectBySlug(slug);
   if (!project) notFound();
 
-  const accent = "var(--color-primary)";
+  const accent = "var(--color-primary-bright)";
+  const instagramUrl = resolveInstagramUrl(project.slug ?? slug, project.instagramUrl);
 
   // Duration
   let durationLabel = "";
@@ -69,7 +75,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       )}
 
       {/* Contexto del proyecto — editorial composition */}
-      <section className="w-full border-t border-black/[0.06] bg-white">
+      <section className="w-full border-t border-[var(--color-border-subtle)] bg-[var(--color-surface)]">
         <div className="container-app py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
             {/* Cliente — protagonista */}
@@ -83,16 +89,21 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
                     <img
                       src={project.seo.ogImage}
                       alt={project.client.name}
-                      className="h-14 w-14 rounded-xl object-contain bg-white border border-black/[0.06] p-2"
+                      className="h-20 w-20 rounded-xl object-cover bg-[var(--color-surface)] border border-[var(--color-border-subtle)]"
                     />
                   ) : (
                     <div className="h-14 w-14 rounded-xl bg-[var(--color-primary)]/10 flex items-center justify-center">
-                      <Building2 className="h-6 w-6 text-[var(--color-primary)]" strokeWidth={1.5} />
+                      <Building2 className="h-6 w-6 text-[var(--color-primary-bright)]" strokeWidth={1.5} />
                     </div>
                   )}
                   <div>
-                    <p className="text-lg font-bold text-[var(--color-dark)]">{project.client.name}</p>
+                    <p className="text-lg font-bold text-[var(--color-primary-to-white)]">{project.client.name}</p>
                     {project.industry && <p className="text-sm text-[var(--color-dark-gray)]">{project.industry.name}</p>}
+                    {instagramUrl && (
+                      <div className="mt-2.5">
+                        <InstagramQuickBadge instagramUrl={instagramUrl} label="Ver post en Instagram" />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -105,19 +116,19 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
                 {project.year && (
                   <div className="flex items-center gap-3">
                     <CalendarClock className="h-4 w-4 text-[var(--color-dark-gray)]" strokeWidth={1.5} />
-                    <span className="text-sm font-medium text-[var(--color-dark)]">{project.year}</span>
+                    <span className="text-sm font-medium text-[var(--color-primary-to-white)]">{project.year}</span>
                   </div>
                 )}
                 {durationLabel && (
                   <div className="flex items-center gap-3">
                     <CalendarClock className="h-4 w-4 text-[var(--color-dark-gray)]" strokeWidth={1.5} />
-                    <span className="text-sm font-medium text-[var(--color-dark)]">{durationLabel}</span>
+                    <span className="text-sm font-medium text-[var(--color-primary-to-white)]">{durationLabel}</span>
                   </div>
                 )}
                 {/* Rol — siempre presente aunque el equipo sea pequeño */}
                 <div className="flex items-center gap-3">
                   <User className="h-4 w-4 text-[var(--color-dark-gray)]" strokeWidth={1.5} />
-                  <span className="text-sm font-medium text-[var(--color-dark)]">
+                  <span className="text-sm font-medium text-[var(--color-primary-to-white)]">
                     {project.team?.length === 1
                       ? `Liderado por ${project.team[0].name}`
                       : project.team?.length
@@ -133,13 +144,13 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
               <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--color-dark-gray)]">Etiquetas</span>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {project.tags?.map((tag, i) => (
-                  <span key={i} className="rounded-full border border-black/[0.08] px-2.5 py-1 text-[11px] font-medium text-[var(--color-dark-gray)]">{tag}</span>
+                  <span key={i} className="rounded-full border border-[var(--color-border-subtle)] px-2.5 py-1 text-[11px] font-medium text-[var(--color-dark-gray)]">{tag}</span>
                 ))}
               </div>
               {project.services && project.services.length > 0 && (
                 <div className="mt-4 flex flex-wrap gap-1.5">
                   {project.services.filter((s): s is NonNullable<typeof s> => s != null && !!s.path).map((svc) => (
-                    <Link key={svc._id} href={`/services/${svc.path}`} className="inline-flex items-center gap-1 rounded-full border border-[var(--color-primary)]/20 px-3 py-1 text-[11px] font-medium text-[var(--color-primary)] transition-colors hover:bg-[var(--color-primary)]/5">
+                    <Link key={svc._id} href={`/services/${svc.path}`} className="inline-flex items-center gap-1 rounded-full border border-[var(--color-primary-bright)]/20 px-3 py-1 text-[11px] font-medium text-[var(--color-primary-bright)] transition-colors hover:bg-[var(--color-primary-bright)]/5">
                       <Briefcase className="h-3 w-3" strokeWidth={1.5} />
                       {svc.service}
                     </Link>
@@ -153,7 +164,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
       {/* Deliverables — timeline / project journey */}
       {project.deliverables && project.deliverables.length > 0 && (
-        <section className="w-full border-t border-black/[0.06] bg-[var(--color-light)] py-16 md:py-20">
+        <section className="w-full border-t border-[var(--color-border-subtle)] bg-[var(--color-surface)] py-16 md:py-20">
           <div className="container-app">
             <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-dark-gray)] mb-10">
               Entregables del proyecto
@@ -162,12 +173,12 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
               {project.deliverables.map((d, i) => (
                 <div
                   key={i}
-                  className="group relative rounded-2xl border border-black/[0.06] bg-white p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_-12px_rgba(0,0,0,0.15)]"
+                  className="group relative rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_-12px_rgba(0,0,0,0.15)]"
                 >
                   <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-dark-gray)]">
                     {"· "}{(i + 1).toString().padStart(2, "0")}
                   </span>
-                  <h3 className="mt-2 text-base font-bold text-[var(--color-dark)]">{d.title}</h3>
+                  <h3 className="mt-2 text-base font-bold text-[var(--color-primary-to-white)]">{d.title}</h3>
                   {d.description && (
                     <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-dark-gray)]">{d.description}</p>
                   )}
@@ -180,26 +191,39 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
       {/* Technologies — con logos */}
       {project.stack && project.stack.length > 0 && (
-        <section className="w-full border-t border-black/[0.06] bg-white py-14">
+        <section className="w-full border-t border-[var(--color-border-subtle)] bg-[var(--color-surface)] py-14">
           <div className="container-app">
             <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-dark-gray)] mb-6">
               Tecnologías utilizadas
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3">
               {project.stack.map((tech) => (
-                <div key={tech._id} className="flex flex-col items-center gap-2 rounded-xl border border-black/[0.06] bg-[var(--color-light)] p-4">
+                <div key={tech._id} className="flex flex-col items-center gap-2 rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-4">
                   {tech.logo ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={tech.logo} alt={tech.name} className="h-8 w-8 object-contain" />
                   ) : (
                     <div className="h-8 w-8 rounded-lg bg-[var(--color-primary)]/10 flex items-center justify-center">
-                      <span className="text-[10px] font-bold text-[var(--color-primary)]">{tech.name.charAt(0)}</span>
+                      <span className="text-[10px] font-bold text-[var(--color-primary-bright)]">{tech.name.charAt(0)}</span>
                     </div>
                   )}
-                  <span className="text-[11px] font-medium text-[var(--color-dark)] text-center">{tech.name}</span>
+                  <span className="text-[11px] font-medium text-[var(--color-primary-to-white)] text-center">{tech.name}</span>
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+      )}
+
+      {/* Showcase interactivo de Instagram para el proyecto */}
+      {instagramUrl && (
+        <section className="w-full bg-[var(--color-surface)] py-14 md:py-20">
+          <div className="container-app">
+            <InstagramPostShowcase
+              instagramUrl={instagramUrl}
+              title={project.name}
+              context="project"
+            />
           </div>
         </section>
       )}
@@ -211,9 +235,6 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
             ¿Tu empresa necesita una<br />
             <span className="text-white/80">transformación digital similar?</span>
           </h2>
-          <p className="mt-5 text-base md:text-lg text-white/60 max-w-xl mx-auto leading-relaxed">
-            El caso de Opera demuestra que una transformación digital completa es posible en plazos ajustados y con resultados profesionales. Si tu empresa está lista para dar el siguiente paso, conversemos sobre cómo podemos ayudarte a construir tu propio ecosistema digital.
-          </p>
           <Link
             href="/cotizar"
             className="mt-10 inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 text-sm font-semibold text-[var(--color-primary)] transition-all duration-300 hover:bg-white/90 hover:shadow-lg"

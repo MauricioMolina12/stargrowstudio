@@ -61,6 +61,17 @@ export type ServiceSummary = {
   list: string[] | null;
 };
 
+/** Slide del carrusel del Banner del Home: un servicio hijo con su contenido. */
+export type BannerService = {
+  slug: string;
+  path: string;
+  name: string;
+  shortDescription: string;
+  image: string | null;
+  alt: string | null;
+  benefits: { title: string }[] | null;
+};
+
 /** Item hijo en el mega-menú / footer. */
 export type ServiceNavChild = {
   slug: string;

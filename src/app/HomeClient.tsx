@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 
 // Components
-import Banner from "./components/shared/Banner";
 import AboutUs from "./components/shared/AboutUs/index"
 import Plans from "./components/shared/Plans";
 import MeetingModal from "./components/shared/MeetingModal";
@@ -24,6 +23,7 @@ import Contact from "./components/Contact";
 import ModalMessage from "./components/shared/modalMessage";
 import Grid from "./components/shared/Grid";
 import TrustSection from "./components/shared/TrustSection";
+import ComparisonSection from "./components/shared/ComparisonSection";
 import OurHistory from "./components/shared/OurHistory";
 
 // Interfaces
@@ -360,7 +360,7 @@ const planTabs: { label: string; key: string }[] = [
   }
 ]
 
-export default function HomeClient({ servicesSection, galleryWalk }: { servicesSection: React.ReactNode; galleryWalk: React.ReactNode }) {
+export default function HomeClient({ banner, servicesSection, galleryWalk }: { banner: React.ReactNode; servicesSection: React.ReactNode; galleryWalk: React.ReactNode }) {
 
   // State for active tab and plans view
   const [planTabActive, setPlanTab] = useState('development');
@@ -407,7 +407,7 @@ export default function HomeClient({ servicesSection, galleryWalk }: { servicesS
     <>
       <main className="flex flex-col gap-8 md:gap-12">
         <section id="inicio">
-          <Banner />
+          {banner}
         </section>
         
         <section id="services">
@@ -418,11 +418,11 @@ export default function HomeClient({ servicesSection, galleryWalk }: { servicesS
           {galleryWalk}
         </section>
 
-        <OurHistory />
-
         <section id="why-star-grow-studio">
           <TrustSection />
         </section>
+
+        <ComparisonSection />
 
         <section id="contacto">
           <Contact onFeedback={handleContactFeedback} />

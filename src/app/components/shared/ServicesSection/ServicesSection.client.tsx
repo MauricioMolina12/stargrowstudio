@@ -45,7 +45,7 @@ export default function ServicesSectionClient({ services }: { services: ServiceS
           data-visible={header.inView}
           className="mb-16 max-w-2xl translate-y-6 opacity-0 transition-all duration-700 ease-out data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 md:mb-20"
         >
-          <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)]">
+          <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary-bright)]">
             Nuestros servicios
           </span>
           <h2
@@ -53,7 +53,7 @@ export default function ServicesSectionClient({ services }: { services: ServiceS
             className="section-heading text-[var(--color-dark)]"
           >
             No entregamos servicios sueltos.{' '}
-            <span className="text-[var(--color-primary)]">Resolvemos retos de negocio.</span>
+            <span className="text-[var(--color-primary-bright)]">Resolvemos retos de negocio.</span>
           </h2>
           <p className="mt-5 max-w-xl text-[clamp(0.95rem,1.2vw,1.1rem)] leading-relaxed text-[var(--color-dark-gray)]">
             Del software a la estrategia: un solo equipo que cubre todo tu ecosistema digital y

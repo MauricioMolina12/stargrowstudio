@@ -9,7 +9,7 @@ type ContactProps = {
 };
 
 const inputClass =
-    "w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3.5 text-sm text-[var(--color-dark)] outline-none transition placeholder:text-gray-400 focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/20 min-h-[48px]";
+    "w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-input)] px-4 py-3.5 text-sm text-[var(--color-dark)] outline-none transition placeholder:text-[var(--color-muted)] focus:border-[var(--color-primary-bright)] focus:ring-2 focus:ring-[var(--color-primary-bright)]/20 min-h-[48px]";
 const labelClass = "mb-1.5 block text-sm font-semibold text-[var(--color-dark)]";
 
 const WhatsAppIcon = ({ size = 18 }: { size?: number }) => (
@@ -65,10 +65,10 @@ export default function Contact({ onFeedback }: ContactProps) {
         <div className="bg-hatch w-full overflow-hidden">
             <div className="container-app py-20">
                 {/* Encabezado */}
-                <p className="text-sm font-bold uppercase tracking-[0.25em] text-[var(--color-primary)]">
+                <p className="text-sm font-bold uppercase tracking-[0.25em] text-[var(--color-primary-bright)]">
                     Contacto
                 </p>
-                <h2 className="mt-3 text-3xl font-[600] text-[var(--color-primary)] lg:text-3xl">
+                <h2 className="section-heading mt-3 text-3xl font-[600] text-[var(--color-primary-bright)] lg:text-3xl">
                     Nos encantaría poder impulsarte
                 </h2>
                 <p className="mt-3 max-w-xl text-[var(--color-dark-gray)]">
@@ -77,7 +77,7 @@ export default function Contact({ onFeedback }: ContactProps) {
 
                 <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
                     {/* Información de contacto */}
-                    <div className="rounded-2xl border border-[var(--color-gray)] bg-white p-6 lg:p-8">
+                    <div className="rounded-2xl border border-[var(--color-gray)] bg-[var(--color-surface)] p-6 lg:p-8">
                         <h3 className="text-xl font-bold text-[var(--color-dark)]">Información de contacto</h3>
                         <p className="mt-3 text-sm leading-relaxed text-[var(--color-dark-gray)]">
                             Disponible para nuevos proyectos, colaboraciones y alianzas.
@@ -95,7 +95,7 @@ export default function Contact({ onFeedback }: ContactProps) {
                                             rel="noopener noreferrer"
                                             className="group flex items-center gap-4"
                                         >
-                                            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] transition-colors group-hover:bg-[var(--color-primary)]/20">
+                                            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary-bright)] transition-colors group-hover:bg-[var(--color-primary)]/20">
                                                 <Icon size={18} />
                                             </span>
                                             <span>
@@ -113,7 +113,7 @@ export default function Contact({ onFeedback }: ContactProps) {
                     <form
                         ref={formRef}
                         onSubmit={sendEmail}
-                        className="rounded-2xl border border-[var(--color-gray)] bg-white p-6 lg:col-span-2 lg:p-8"
+                        className="rounded-2xl border border-[var(--color-gray)] bg-[var(--color-surface)] p-6 lg:col-span-2 lg:p-8"
                     >
                         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                             <div>

@@ -75,12 +75,12 @@ export default function EditorialPortfolio() {
     <section
       ref={ref}
       aria-labelledby="portfolio-heading"
-      className="w-full bg-white py-20 md:py-28 overflow-hidden"
+      className="w-full bg-[var(--color-surface)] py-20 md:py-28 overflow-hidden"
     >
       <div className="container-app">
         {/* Header */}
         <header className="mb-12 md:mb-16">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)] mb-3">
+          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary-bright)] mb-3">
             Proyectos destacados
           </span>
           <h2
@@ -88,11 +88,10 @@ export default function EditorialPortfolio() {
             className="section-heading text-[var(--color-dark)] max-w-2xl"
           >
             Casos de éxito que{' '}
-            <span className="text-[var(--color-primary)]">transforman negocios</span>
+            <span className="text-[var(--color-primary-bright)]">transforman negocios</span>
           </h2>
         </header>
 
-        {/* ── DESKTOP: Grid editorial asimétrico (lg+) ── */}
         <div className="hidden lg:grid lg:grid-cols-4 lg:gap-5 lg:auto-rows-[minmax(220px,auto)]">
           {projects.map((project, i) => (
             <div
@@ -113,7 +112,6 @@ export default function EditorialPortfolio() {
           ))}
         </div>
 
-        {/* ── MOBILE/TABLET: Lista editorial vertical (< lg) ── */}
         <div className="flex flex-col gap-6 lg:hidden">
           {projects.map((project, i) => (
             <div
@@ -128,7 +126,6 @@ export default function EditorialPortfolio() {
           ))}
         </div>
 
-        {/* CTA final */}
         <div className="mt-14 md:mt-20 text-center">
           <Link
             href="/portafolio"
@@ -197,15 +194,15 @@ function EditorialBlockDesktop({
     return (
       <button
         onClick={handleClick}
-        className="group relative w-full min-h-[210px] rounded-2xl overflow-hidden bg-white border border-black/[0.06] text-left flex items-stretch focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] hover:shadow-[0_8px_25px_-12px_rgba(0,0,0,0.12)] transition-all duration-500"
+        className="group relative w-full min-h-[210px] rounded-2xl overflow-hidden bg-[var(--color-surface)] border border-[var(--color-border-subtle)] text-left flex items-stretch focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-bright)] hover:shadow-[0_8px_25px_-12px_rgba(0,0,0,0.12)] transition-all duration-500"
       >
         <div className="flex-1 p-6 flex flex-col justify-center">
-          <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--color-primary)] mb-1.5">
+          <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--color-primary-bright)] mb-1.5">
             {project.category === 'web' ? 'Desarrollo Web' : 'Diseño UX/UI'}
           </span>
           <h3 className="text-lg font-bold text-[var(--color-dark)] leading-snug">{project.name}</h3>
           <p className="mt-1 text-sm text-[var(--color-dark-gray)] line-clamp-2">{project.description}</p>
-          <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-primary)] transition-all duration-300 group-hover:gap-2.5">
+          <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-primary-bright)] transition-all duration-300 group-hover:gap-2.5">
             Ver caso
             <ArrowRight className="h-3.5 w-3.5" />
           </span>

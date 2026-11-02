@@ -91,7 +91,7 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
       {/* Modal centrado horizontalmente, debajo del navbar */}
       <div className="fixed inset-x-0 top-16 z-[101] flex justify-center px-4">
         <div
-          className="w-full max-w-[680px] bg-white rounded-xl shadow-[0_25px_60px_-12px_rgba(0,0,0,0.3)] border border-black/[0.06] overflow-hidden"
+          className="w-full max-w-[680px] bg-[var(--color-surface-elevated)] rounded-xl shadow-[0_25px_60px_-12px_rgba(0,0,0,0.3)] border border-[var(--color-border-subtle)] overflow-hidden"
           onKeyDown={handleKeyDown}
         >
           {/* Input row */}
@@ -106,15 +106,15 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
               className="flex-1 bg-transparent text-[0.95rem] text-[var(--color-dark)] placeholder:text-[var(--color-dark-gray)] outline-none"
               aria-label="Buscar"
             />
-            {loading && <Loader2 className="h-4 w-4 animate-spin text-[var(--color-primary)]" strokeWidth={2} />}
-            <kbd className="hidden shrink-0 rounded-md border border-black/[0.08] px-2 py-0.5 text-[11px] font-medium text-[var(--color-dark-gray)] sm:inline-block">
+            {loading && <Loader2 className="h-4 w-4 animate-spin text-[var(--color-primary-bright)]" strokeWidth={2} />}
+            <kbd className="hidden shrink-0 rounded-md border border-[var(--color-border-subtle)] px-2 py-0.5 text-[11px] font-medium text-[var(--color-dark-gray)] sm:inline-block">
               ESC
             </kbd>
           </div>
 
           {/* Separator */}
           {flatItems.length > 0 || query.trim() ? (
-            <div className="border-t border-black/[0.06]" />
+            <div className="border-t border-[var(--color-border-subtle)]" />
           ) : null}
 
           {/* Results */}
@@ -130,7 +130,7 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
                     </span>
                     <button
                       onClick={clearRecent}
-                      className="text-[11px] text-[var(--color-dark-gray)] hover:text-[var(--color-primary)] transition-colors"
+                      className="text-[11px] text-[var(--color-dark-gray)] hover:text-[var(--color-primary-bright)] transition-colors"
                     >
                       Limpiar
                     </button>
@@ -139,7 +139,7 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
                     <button
                       key={i}
                       onClick={() => setQuery(r)}
-                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[0.9rem] text-[var(--color-dark)] transition-colors hover:bg-black/[0.03]"
+                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[0.9rem] text-[var(--color-dark)] transition-colors hover:bg-[var(--color-hover)]"
                     >
                       <Search className="h-4 w-4 shrink-0 text-[var(--color-dark-gray)]" strokeWidth={1.5} />
                       <span className="truncate">{r}</span>
@@ -159,7 +159,7 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
             {/* Loading state */}
             {loading && flatItems.length === 0 && (
               <div className="flex flex-col items-center gap-3 py-14 text-center">
-                <Loader2 className="h-6 w-6 animate-spin text-[var(--color-primary)]" strokeWidth={2} />
+                <Loader2 className="h-6 w-6 animate-spin text-[var(--color-primary-bright)]" strokeWidth={2} />
                 <p className="text-sm text-[var(--color-dark-gray)]">Buscando...</p>
               </div>
             )}
@@ -202,15 +202,15 @@ export default function SearchModal({ onClose }: { onClose: () => void }) {
           </div>
 
           {/* Footer hints */}
-          <div className="flex items-center gap-4 border-t border-black/[0.06] px-5 py-2.5 text-[11px] text-[var(--color-dark-gray)]">
+          <div className="flex items-center gap-4 border-t border-[var(--color-border-subtle)] px-5 py-2.5 text-[11px] text-[var(--color-dark-gray)]">
             <span className="flex items-center gap-1.5">
-              <kbd className="rounded border border-black/[0.08] px-1.5 py-0.5 text-[10px] font-medium">↑↓</kbd> Navegar
+              <kbd className="rounded border border-[var(--color-border-subtle)] px-1.5 py-0.5 text-[10px] font-medium">↑↓</kbd> Navegar
             </span>
             <span className="flex items-center gap-1.5">
-              <kbd className="rounded border border-black/[0.08] px-1.5 py-0.5 text-[10px] font-medium">↵</kbd> Abrir
+              <kbd className="rounded border border-[var(--color-border-subtle)] px-1.5 py-0.5 text-[10px] font-medium">↵</kbd> Abrir
             </span>
             <span className="flex items-center gap-1.5">
-              <kbd className="rounded border border-black/[0.08] px-1.5 py-0.5 text-[10px] font-medium">Esc</kbd> Cerrar
+              <kbd className="rounded border border-[var(--color-border-subtle)] px-1.5 py-0.5 text-[10px] font-medium">Esc</kbd> Cerrar
             </span>
           </div>
         </div>
@@ -237,14 +237,14 @@ function SearchItem({ item, isActive, index, onSelect }: {
       aria-selected={isActive}
       onClick={() => { router.push(`/${item.path}`); onSelect(); }}
       className={`flex w-full items-start gap-3 rounded-xl px-3 py-2.5 text-left transition-colors ${
-        isActive ? 'bg-[var(--color-primary)]/8' : 'hover:bg-black/[0.03]'
+        isActive ? 'bg-[var(--color-primary)]/8' : 'hover:bg-[var(--color-hover)]'
       }`}
     >
       <span
         className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
         style={{
-          backgroundColor: isActive ? 'color-mix(in srgb, var(--color-primary) 14%, transparent)' : 'rgba(0,0,0,0.04)',
-          color: isActive ? 'var(--color-primary)' : 'var(--color-dark-gray)',
+          backgroundColor: isActive ? 'color-mix(in srgb, var(--color-primary) 14%, transparent)' : 'var(--color-hover)',
+          color: isActive ? 'var(--color-primary-bright)' : 'var(--color-dark-gray)',
         }}
       >
         <Icon className="h-4 w-4" strokeWidth={1.5} />

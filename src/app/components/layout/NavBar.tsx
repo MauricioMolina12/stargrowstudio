@@ -10,6 +10,7 @@ import type { ServiceNavGroup } from "@/sanity/types/service";
 import { getIcon } from "./nav/iconMap";
 import { useKeyboardShortcut } from "@/app/hooks/useKeyboardShortcut";
 import SearchModal from "@/app/components/search/SearchModal";
+import ThemeToggle from "@/app/components/layout/ThemeToggle";
 
 type Props = {
   services?: ServiceNavGroup[];
@@ -36,13 +37,7 @@ const SERVICE_ACCENTS: Record<string, string> = {
 };
 const DEFAULT_ACCENT = "#5656b5";
 
-const routeStyles: Record<string, { nav: string; logo: string; text: string }> = {
-  "/privacy-policy": {
-    nav: "bg-[var(--color-primary)] border-transparent",
-    logo: "/logo-white.png",
-    text: "text-white",
-  },
-};
+const routeStyles: Record<string, { nav: string; logo: string; text: string }> = {};
 
 const defaultStyle = {
   nav: "bg-[var(--color-white-to-primary)]/80 backdrop-blur-md border-[var(--color-gray)]",
@@ -92,8 +87,8 @@ const NavBar = ({ services }: Props) => {
   const linkClass = (active = false) =>
     `flex w-full items-center justify-between gap-1 rounded-lg px-3 py-2.5 text-[0.92rem] font-medium transition-colors min-h-[44px] lg:w-auto ${
       active
-        ? "text-[var(--color-primary)] lg:bg-[var(--color-primary-tint)]"
-        : `${style.text} hover:bg-[var(--color-primary-tint)] hover:text-[var(--color-primary)]`
+        ? "text-[var(--color-primary-bright)] lg:bg-[var(--color-primary-tint)]"
+        : `${style.text} hover:bg-[var(--color-primary-tint)] hover:text-[var(--color-primary-bright)]`
     }`;
 
   return (
@@ -101,7 +96,8 @@ const NavBar = ({ services }: Props) => {
       <div className="container-app flex h-16 items-center">
         {/* Logo - left */}
         <Link href="/" onClick={closeAll} className="flex shrink-0 items-center gap-2.5">
-          <img src={style.logo} alt="Star Grow Studio" className="h-8 w-auto object-contain" />
+          <img src={style.logo} alt="Star Grow Studio" className="h-8 w-auto object-contain dark:hidden" />
+          <img src="/logo-white.png" alt="Star Grow Studio" className="hidden h-8 w-auto object-contain dark:block" />
           <span className={`hidden whitespace-nowrap text-lg font-bold tracking-tight sm:inline ${style.text}`}>
             Star Grow Studio
           </span>
@@ -110,26 +106,29 @@ const NavBar = ({ services }: Props) => {
         {/* Search input - center (desktop only) */}
         <button
           onClick={openSearch}
-          className="mx-auto hidden h-9 w-full max-w-md items-center gap-2.5 rounded-full border border-black/[0.08] bg-black/[0.03] px-4 text-left text-[0.85rem] text-[var(--color-dark-gray)] transition-colors hover:border-black/[0.15] hover:bg-black/[0.05] lg:flex"
+          className="mx-auto hidden h-9 w-full max-w-md items-center gap-2.5 rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-hover)] px-4 text-left text-[0.85rem] text-[var(--color-dark-gray)] transition-colors hover:border-[var(--color-border-subtle)] hover:bg-[var(--color-hover)] lg:flex"
           aria-label="Abrir buscador (Ctrl+K)"
         >
           <Search className="h-4 w-4 shrink-0" strokeWidth={1.5} />
           <span className="flex-1 truncate">Buscar servicios, proyectos...</span>
-          <kbd className="shrink-0 rounded-md border border-black/[0.08] px-1.5 py-0.5 text-[10px] font-medium text-[var(--color-dark-gray)]">
+          <kbd className="shrink-0 rounded-md border border-[var(--color-border-subtle)] px-1.5 py-0.5 text-[10px] font-medium text-[var(--color-dark-gray)]">
             Ctrl+K
           </kbd>
         </button>
+
+        {/* Theme toggle */}
+        <ThemeToggle className="ml-auto lg:ml-3" />
 
         {/* Mobile menu + hamburger */}
         <button
           aria-label="Abrir menú"
           onClick={() => setMobileOpen((p) => !p)}
-          className="ml-auto flex min-h-[44px] min-w-[44px] items-center justify-center lg:hidden"
+          className="ml-1 flex min-h-[44px] min-w-[44px] items-center justify-center lg:hidden"
         >
           <div className="flex h-5 w-7 flex-col justify-between">
-            <span className={`h-[3px] w-full rounded bg-[var(--color-primary)] transition-all duration-300 ${mobileOpen ? "translate-y-[8px] rotate-45" : ""}`} />
-            <span className={`h-[3px] w-full rounded bg-[var(--color-primary)] transition-all duration-300 ${mobileOpen ? "scale-0 opacity-0" : ""}`} />
-            <span className={`h-[3px] w-full rounded bg-[var(--color-primary)] transition-all duration-300 ${mobileOpen ? "-translate-y-[8px] -rotate-45" : ""}`} />
+            <span className={`h-[3px] w-full rounded bg-[var(--color-primary-bright)] transition-all duration-300 ${mobileOpen ? "translate-y-[8px] rotate-45" : ""}`} />
+            <span className={`h-[3px] w-full rounded bg-[var(--color-primary-bright)] transition-all duration-300 ${mobileOpen ? "scale-0 opacity-0" : ""}`} />
+            <span className={`h-[3px] w-full rounded bg-[var(--color-primary-bright)] transition-all duration-300 ${mobileOpen ? "-translate-y-[8px] -rotate-45" : ""}`} />
           </div>
         </button>
 
@@ -165,15 +164,15 @@ const NavBar = ({ services }: Props) => {
                     const accent = SERVICE_ACCENTS[svc.slug] ?? DEFAULT_ACCENT;
                     return (
                       <div key={svc.slug}>
-                        <Link href={`/services/${svc.path}`} onClick={closeAll} className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide" style={{ color: accent }}>
+                        <span onClick={closeAll} className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide" style={{ color: accent }}>
                           {svc.service}
-                        </Link>
+                        </span>
                         <ul className="space-y-0.5">
                           {svc.children?.map((child) => {
                             const Icon = getIcon(child.iconName ?? undefined);
                             return (
                               <li key={child.slug}>
-                                <Link href={`/services/${child.path}`} onClick={closeAll} className="flex items-start gap-3 rounded-lg p-2 transition-colors hover:bg-black/[0.04]">
+                                <Link href={`/services/${child.path}`} onClick={closeAll} className="flex items-start gap-3 rounded-lg p-2 transition-colors hover:bg-[var(--color-hover)]">
                                   <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: `${accent}1a`, color: accent }}>
                                     <Icon size={16} />
                                   </span>
@@ -211,7 +210,7 @@ const NavBar = ({ services }: Props) => {
                       return (
                         <li key={item.href}>
                           <Link href={item.href} onClick={closeAll} className="flex items-start gap-3 rounded-lg p-2 transition-colors hover:bg-[var(--color-primary-tint)]">
-                            <Icon size={18} className="mt-0.5 shrink-0 text-[var(--color-primary)]" />
+                            <Icon size={18} className="mt-0.5 shrink-0 text-[var(--color-primary-bright)]" />
                             <span>
                               <span className="block text-[13px] font-semibold text-[var(--color-primary-to-white)]">{item.title}</span>
                               <span className="block text-[12px] leading-snug text-[var(--color-dark-gray)]">{item.description}</span>
@@ -221,14 +220,14 @@ const NavBar = ({ services }: Props) => {
                       );
                     })}
                   </ul>
-                  <Link href={EXPLORE_FEATURED.href} onClick={closeAll} className="group flex flex-col overflow-hidden rounded-xl border border-[var(--color-gray)] transition-colors hover:border-[var(--color-primary)] lg:w-[240px]">
+                  <Link href={EXPLORE_FEATURED.href} onClick={closeAll} className="group flex flex-col overflow-hidden rounded-xl border border-[var(--color-gray)] transition-colors hover:border-[var(--color-primary-bright)] lg:w-[240px]">
                     <figure className="h-28 overflow-hidden bg-[var(--color-gray)]">
                       <img src={EXPLORE_FEATURED.image} alt={EXPLORE_FEATURED.title} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                     </figure>
                     <div className="flex flex-col gap-1 p-3">
                       <span className="text-[13px] font-semibold text-[var(--color-primary-to-white)]">{EXPLORE_FEATURED.title}</span>
                       <span className="text-[12px] leading-snug text-[var(--color-dark-gray)]">{EXPLORE_FEATURED.description}</span>
-                      <span className="mt-1 flex items-center gap-1 text-[12px] font-medium text-[var(--color-primary)]">Leer más <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" /></span>
+                      <span className="mt-1 flex items-center gap-1 text-[12px] font-medium text-[var(--color-primary-bright)]">Leer más <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" /></span>
                     </div>
                   </Link>
                 </div>

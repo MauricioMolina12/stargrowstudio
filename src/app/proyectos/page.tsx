@@ -14,14 +14,14 @@ export default async function ProjectsPage() {
 
   return (
     <main className="w-full bg-[var(--color-light)]">
-      <section className="w-full border-b border-black/[0.06]">
+      <section className="w-full border-b border-[var(--color-border-subtle)]">
         <div className="container-app py-16 md:py-24">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)]">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary-bright)]">
             Casos de éxito
           </span>
           <h1 className="mt-4 text-[clamp(2rem,4.5vw,3.2rem)] font-bold leading-[1.08] tracking-tight text-[var(--color-dark)]">
             Proyectos que transforman{' '}
-            <span className="text-[var(--color-primary)]">ideas en resultados</span>
+            <span className="text-[var(--color-primary-bright)]">ideas en resultados</span>
           </h1>
         </div>
       </section>
@@ -35,7 +35,7 @@ export default async function ProjectsPage() {
               <Link
                 key={project._id}
                 href={`/proyectos/${project.slug}`}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-24px_rgba(0,0,0,0.22)]"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-24px_rgba(0,0,0,0.22)]"
               >
                 {project.cover ? (
                   <div className="aspect-[16/10] overflow-hidden">
@@ -48,12 +48,12 @@ export default async function ProjectsPage() {
                   </div>
                 ) : (
                   <div className="flex aspect-[16/10] items-center justify-center bg-[var(--color-primary)]/5">
-                    <FolderKanban className="h-12 w-12 text-[var(--color-primary)]/20" strokeWidth={1} />
+                    <FolderKanban className="h-12 w-12 text-[var(--color-primary-bright)]/20" strokeWidth={1} />
                   </div>
                 )}
                 <div className="flex flex-1 flex-col gap-2 p-6">
                   {project.client && (
-                    <span className="text-xs font-semibold uppercase tracking-[0.1em] text-[var(--color-primary)]">
+                    <span className="text-xs font-semibold uppercase tracking-[0.1em] text-[var(--color-primary-bright)]">
                       {project.client.name}
                     </span>
                   )}
@@ -64,10 +64,10 @@ export default async function ProjectsPage() {
                     </p>
                   )}
                   <div className="mt-auto flex items-center gap-2 pt-2">
-                    <span className="text-sm font-semibold text-[var(--color-primary)]">
+                    <span className="text-sm font-semibold text-[var(--color-primary-bright)]">
                       Ver caso de éxito
                     </span>
-                    <ArrowRight className="h-4 w-4 text-[var(--color-primary)] transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-4 w-4 text-[var(--color-primary-bright)] transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               </Link>

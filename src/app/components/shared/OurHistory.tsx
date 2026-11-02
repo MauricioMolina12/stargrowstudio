@@ -27,7 +27,7 @@ export default function OurHistory() {
       <div className="container-app">
         {/* ── Header ── */}
         <div className="mb-16 md:mb-20">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)]">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary-bright)]">
             Nuestra historia
           </span>
         </div>
@@ -83,7 +83,7 @@ export default function OurHistory() {
               }`}
             >
               Dos personas,{' '}
-              <span className="text-[var(--color-primary)]">una visión</span>
+              <span className="text-[var(--color-primary-bright)]">una visión</span>
             </h2>
             <div
               className={`mt-6 space-y-4 text-[clamp(0.95rem,1.1vw,1.05rem)] leading-relaxed text-[var(--color-dark-gray)] ${stagger.body} ${
@@ -146,7 +146,7 @@ export default function OurHistory() {
               }`}
             >
               Tecnología con{' '}
-              <span className="text-[var(--color-primary)]">propósito</span>
+              <span className="text-[var(--color-primary-bright)]">propósito</span>
             </h2>
             <div
               className={`mt-6 space-y-4 text-[clamp(0.95rem,1.1vw,1.05rem)] leading-relaxed text-[var(--color-dark-gray)] ${stagger.body} ${
@@ -181,7 +181,7 @@ export default function OurHistory() {
             >
               <div className="p-8 text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[var(--color-primary)]/10 mb-4">
-                  <TrendingUp className="h-8 w-8 text-[var(--color-primary)]" strokeWidth={1.5} />
+                  <TrendingUp className="h-8 w-8 text-[var(--color-primary-bright)]" strokeWidth={1.5} />
                 </div>
                 <p className="text-sm font-semibold text-[var(--color-dark)]">Resultados medibles</p>
                 <p className="text-xs text-[var(--color-dark-gray)] mt-1">
@@ -213,7 +213,7 @@ export default function OurHistory() {
           >
             Cada empresa tiene una historia distinta.
             <br />
-            <span className="text-[var(--color-primary)]">
+            <span className="text-[var(--color-primary-bright)]">
               Cada historia merece una solución distinta.
             </span>
           </h2>
@@ -235,7 +235,7 @@ export default function OurHistory() {
           <div
             className={`mt-10 ${stagger.coda} ${inView ? visible : hidden}`}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--color-primary)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--color-primary-bright)]">
               STAR GROW STUDIO
             </p>
             <p className="mt-1 text-[11px] text-[var(--color-dark-gray)] italic">

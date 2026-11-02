@@ -14,9 +14,9 @@ export default function Plans({ plansView }: PlansProps) {
             {plansView.map((plan) => (
                 <div
                     key={plan.name}
-                    className={`parallax relative snap-start bg-[#FAFBFF] w-full max-w-[340px] md:w-[340px] flex-shrink-0 rounded-2xl overflow-hidden border-2  ${plan.tier === "Premium"
+                    className={`parallax relative snap-start bg-[var(--color-surface)] w-full max-w-[340px] md:w-[340px] flex-shrink-0 rounded-2xl overflow-hidden border-2  ${plan.tier === "Premium"
                         ? "border-[var(--color-primary)] after:content-[''] after:absolute after:inset-0 after:bg-[var(--color-primary)] after:opacity-10 after:-z-10"
-                        : "border-gray-100"
+                        : "border-[var(--color-border)]"
                         }`}>
                     <div className="relative p-6 flex flex-col justify-between h-full">
                         {/* Cinta en la esquina */}
@@ -31,23 +31,23 @@ export default function Plans({ plansView }: PlansProps) {
                         {/* Precios */}
                         <div className="flex flex-col items-start py-4">
                             {plan.priceOld && (
-                                <p className={`text-xs line-through text-gray-400`}>${plan.priceOld}</p>
+                                <p className={`text-xs line-through text-[var(--color-muted)]`}>${plan.priceOld}</p>
                             )}
-                            <p className={`text-[30px] font-bold text-[var(--color-primary)]`}>
+                            <p className={`text-[30px] font-bold text-[var(--color-primary-bright)]`}>
                                 ${plan.priceNew}
-                                <span className="text-sm font-normal text-white"> <span className="text-black">(COP)</span></span>
+                                <span className="text-sm font-normal text-white"> <span className="text-[var(--color-foreground)]">(COP)</span></span>
                             </p>
                         </div>
 
                         <p className="text-[12px] mb-4 text-justify leading-relaxed">{plan.description}</p>
 
-                        <hr className="text-gray-200 mb-3" />
+                        <hr className="text-[var(--color-border)] mb-3" />
 
                         <ul className="list-none text-left text-sm mb-6 space-y-1 flex flex-col gap-3">
                             {plan.features.included.map((feature, i) => (
                                 <li
                                     key={`i-${i}`}
-                                    className={`flex items-center gap-2 text-neutral-800 ${plan.tier === "premium" ? "text-gray-50" : ""
+                                    className={`flex items-center gap-2 text-[var(--color-foreground)] ${plan.tier === "premium" ? "text-gray-50" : ""
                                         }`}>
                                     <CheckCircle
                                         className="text-green-500 w-[15px] h-[15px] flex-shrink-0"
@@ -57,7 +57,7 @@ export default function Plans({ plansView }: PlansProps) {
                             ))}
 
                             {plan.features.excluded && plan.features.excluded.map((feature, i) => (
-                                <li key={`e-${i}`} className="flex items-center text-neutral-800 line-through">
+                                <li key={`e-${i}`} className="flex items-center text-[var(--color-foreground)] line-through">
                                     <span className="text-red-400 font-bold text-lg mr-2">✕</span>
                                     {feature}
                                 </li>

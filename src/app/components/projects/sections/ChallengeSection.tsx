@@ -9,7 +9,7 @@ export function ChallengeSection({ data }: SectionProps) {
   const watermark = "RETO";
 
   return (
-    <section className="relative w-full py-20 md:py-28 bg-white overflow-hidden">
+    <section className="relative w-full py-20 md:py-28 bg-[var(--color-surface)] overflow-hidden">
       {/* Watermark — large editorial typography behind content */}
       <div
         className="absolute inset-0 overflow-hidden select-none pointer-events-none"
@@ -33,7 +33,7 @@ export function ChallengeSection({ data }: SectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-start">
           {/* Left: challenge indicator */}
           <div className="lg:sticky lg:top-24">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)]">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary-bright)]">
               El reto
             </span>
             <Target

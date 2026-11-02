@@ -7,6 +7,7 @@ import {
   projectsByServiceQuery,
 } from "@/sanity/queries";
 import type { ProjectListItem, ProjectDetail } from "@/sanity/types/project";
+export type { ProjectListItem, ProjectDetail };
 
 const TAG = "project";
 

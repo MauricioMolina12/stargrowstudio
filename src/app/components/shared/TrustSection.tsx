@@ -1,36 +1,60 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Code2, BarChart3, HeartHandshake } from 'lucide-react';
+import {
+  ArrowRight,
+  Code2,
+  BarChart3,
+  HeartHandshake,
+  Compass,
+  Layers,
+  Cpu,
+} from 'lucide-react';
 import { useInView } from '@/app/hooks/useInView';
+
+const identityDimensions = [
+  {
+    icon: Compass,
+    title: 'Estrategia & Branding',
+    detail: 'Marcas memorables con propósito comercial.',
+  },
+  {
+    icon: Layers,
+    title: 'Diseño UI/UX',
+    detail: 'Interfaces intuitivas que retienen y convierten.',
+  },
+  {
+    icon: Cpu,
+    title: 'Software a Medida',
+    detail: 'Tecnología rápida, segura y lista para escalar.',
+  },
+];
 
 const pillars = [
   {
     id: '01',
     icon: Code2,
     title: 'Excelencia Técnica',
-    description: 'Arquitecturas modulares, seguras y preparadas para escalar sin reescrituras costosas.',
-    tags: ['Escalabilidad', 'Rendimiento', 'Calidad', 'Seguridad'],
+    description: 'Arquitecturas modulares y seguras para crecer sin reescrituras.',
+    tags: ['Escalabilidad', 'Rendimiento', 'Seguridad'],
   },
   {
     id: '02',
     icon: BarChart3,
     title: 'Impacto de Negocio',
-    description: 'Cada decisión técnica responde a un objetivo medible: más conversión, menos costos, mejor experiencia.',
-    tags: ['Resultados', 'Eficiencia', 'Conversión', 'Datos'],
+    description: 'Diseñamos para lograr más conversión, eficiencia y retorno.',
+    tags: ['Conversión', 'ROI', 'Datos'],
   },
   {
     id: '03',
     icon: HeartHandshake,
-    title: 'Relación a Largo Plazo',
-    description: 'Te acompañamos desde el descubrimiento hasta la evolución continua del producto.',
-    tags: ['Transparencia', 'Soporte', 'Confianza', 'Continuidad'],
+    title: 'Socio a Largo Plazo',
+    description: 'Te acompañamos desde la idea inicial hasta la evolución continua.',
+    tags: ['Transparencia', 'Soporte', 'Continuidad'],
   },
 ];
 
 const staggerDelays = ['0ms', '100ms', '200ms'];
-
-const accent = 'var(--color-primary)';
 
 export default function TrustSection() {
   const { ref, inView } = useInView<HTMLElement>();
@@ -38,33 +62,74 @@ export default function TrustSection() {
   return (
     <section
       ref={ref}
-      className="w-full bg-white py-20 md:py-28"
+      className="w-full bg-[var(--color-surface)] py-20 md:py-28"
       aria-labelledby="trust-heading"
     >
       <div className="container-app">
-        {/* ── Eyebrow + Headline ── */}
-        <header className="mb-14 md:mb-20">
-          <span
-            className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.2em]"
-            style={{ color: accent }}
-          >
-            Por qué Star Grow Studio
-          </span>
-          <h2
-            id="trust-heading"
-            className={`section-heading max-w-3xl text-[var(--color-dark)] transition-all duration-700 ease-out ${
+        {/* ── Bloque 1: ¿Qué es Star Grow Studio? (Directo y conciso) ── */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
+          <div
+            className={`lg:col-span-6 transition-all duration-700 ease-out ${
               inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
             }`}
           >
-            Construimos relaciones,{' '}
-            <span style={{ color: accent }}>no solo código</span>
-          </h2>
-        </header>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary-bright)]">
+              ¿Qué es Star Grow Studio?
+            </span>
 
-        {/* ── Three blocks ── */}
-        <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-3">
+            <h2
+              id="trust-heading"
+              className="section-heading mt-3 text-[var(--color-primary-to-white)]"
+            >
+              Construimos relaciones,{' '}
+              <span className="text-[var(--color-primary-bright)]">no solo código.</span>
+            </h2>
+
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--color-dark-gray)] sm:text-lg">
+              Somos un estudio de transformación digital que une{' '}
+              <strong className="font-semibold text-[var(--color-primary-to-white)]">
+                marca, diseño UI/UX y desarrollo de software
+              </strong>{' '}
+              en un solo equipo para impulsar tu negocio.
+            </p>
+          </div>
+
+          {/* Tarjeta compacta de 3 disciplinas */}
+          <div
+            className={`lg:col-span-6 transition-all duration-700 delay-150 ease-out ${
+              inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            }`}
+          >
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {identityDimensions.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.title}
+                    className="flex flex-col gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-light)] p-5"
+                  >
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary-bright)]">
+                      <Icon className="h-5 w-5" strokeWidth={1.75} />
+                    </span>
+                    <div>
+                      <h3 className="text-sm font-bold text-[var(--color-primary-to-white)]">
+                        {item.title}
+                      </h3>
+                      <p className="mt-1 text-xs leading-snug text-[var(--color-dark-gray)]">
+                        {item.detail}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Bloque 2: Por qué Star Grow Studio (3 Pilares cortos) ── */}
+        <div className="mt-12 grid grid-cols-1 gap-5 md:mt-16 md:grid-cols-3 md:items-stretch">
           {pillars.map((pillar, i) => (
-            <PillarBlock
+            <PillarCard
               key={pillar.id}
               pillar={pillar}
               index={i}
@@ -73,21 +138,23 @@ export default function TrustSection() {
           ))}
         </div>
 
-        {/* ── Trust CTA ── */}
+        {/* ── Barra inferior de respaldo + CTA ── */}
         <div
-          className={`mt-16 flex flex-col items-center justify-between gap-6 rounded-2xl border border-black/[0.06] bg-[var(--color-light)] px-8 py-7 text-center transition-all duration-700 delay-500 ease-out md:mt-24 md:flex-row md:text-left ${
+          className={`mt-12 flex flex-col items-center justify-between gap-5 rounded-2xl border border-[var(--color-primary)]/15 bg-[var(--color-light)] px-7 py-6 text-center transition-all duration-700 delay-300 ease-out md:mt-14 md:flex-row md:px-9 md:text-left ${
             inView ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}
         >
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-[var(--color-dark)]">+120</span>
-            <span className="text-[var(--color-dark-gray)]">
+          <div className="flex items-baseline gap-2.5">
+            <span className="text-3xl font-bold tracking-tight text-[var(--color-primary-to-white)]">
+              +120
+            </span>
+            <span className="text-sm font-medium text-[var(--color-dark-gray)]">
               proyectos entregados con resultados medibles
             </span>
           </div>
           <Link
             href="/cotizar"
-            className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-[var(--color-primary)] px-6 py-3.5 text-sm font-semibold text-white min-h-[44px] transition-all duration-300 hover:bg-[var(--color-secondary)] active:scale-[0.97]"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white min-h-[44px] shadow-xs transition-all duration-300 hover:bg-[var(--color-secondary)] active:scale-[0.97]"
           >
             Hablemos de tu proyecto
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
@@ -98,9 +165,9 @@ export default function TrustSection() {
   );
 }
 
-/* ─────────── Pillar block ─────────── */
+/* ─────────── Tarjeta de Pilar Concisa ─────────── */
 
-function PillarBlock({
+function PillarCard({
   pillar,
   index,
   inView,
@@ -113,42 +180,33 @@ function PillarBlock({
 
   return (
     <article
-      className={`flex flex-col gap-4 transition-all duration-700 ease-out ${
+      className={`group flex h-full flex-col justify-between rounded-2xl border border-[var(--color-border)] bg-[var(--color-light)] p-6 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[var(--color-primary-bright)]/35 ${
         inView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
       }`}
       style={{ transitionDelay: staggerDelays[index] }}
     >
-      {/* Accent bar */}
-      <div className="h-1 w-10 rounded-full" style={{ backgroundColor: accent }} />
+      <div>
+        <div className="flex items-center justify-between">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--color-primary)]/12 text-xs font-bold text-[var(--color-primary-bright)]">
+            {pillar.id}
+          </span>
+          <Icon className="h-5 w-5 text-[var(--color-primary-bright)]" strokeWidth={1.75} />
+        </div>
 
-      {/* Icon + number row */}
-      <div className="flex items-center gap-3">
-        <span
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold"
-          style={{
-            backgroundColor: `color-mix(in srgb, ${accent} 12%, transparent)`,
-            color: accent,
-          }}
-        >
-          {pillar.id}
-        </span>
-        {/* <Icon className="h-5 w-5" style={{ color: accent }} strokeWidth={1.5} /> */}
+        <h3 className="mt-4 text-base font-bold text-[var(--color-primary-to-white)]">
+          {pillar.title}
+        </h3>
+
+        <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-dark-gray)]">
+          {pillar.description}
+        </p>
       </div>
 
-      {/* Title */}
-      <h3 className="text-lg font-bold text-[var(--color-dark)]">{pillar.title}</h3>
-
-      {/* Description — max 2 lines */}
-      <p className="text-sm leading-relaxed text-[var(--color-dark-gray)] line-clamp-2">
-        {pillar.description}
-      </p>
-
-      {/* Tags */}
-      <div className="mt-1 flex flex-wrap gap-1.5">
+      <div className="mt-5 flex flex-wrap gap-1.5 border-t border-[var(--color-border-subtle)] pt-3.5">
         {pillar.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-black/[0.08] px-2.5 py-1 text-[0.7rem] font-medium text-[var(--color-dark-gray)]"
+            className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-2.5 py-0.5 text-[11px] font-medium text-[var(--color-dark-gray)]"
           >
             {tag}
           </span>

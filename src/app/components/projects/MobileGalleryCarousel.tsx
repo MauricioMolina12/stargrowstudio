@@ -132,15 +132,15 @@ export default function MobileGalleryCarousel({ items }: Props) {
   const item = items[current];
 
   return (
-    <section className="w-full bg-white">
+    <section className="w-full bg-[var(--color-surface)]">
       {/* Header */}
       <div className="container-app py-12 md:py-16">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)]">
+        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary-bright)]">
           Galería del proyecto
         </span>
         <h2 className="mt-3 max-w-2xl text-[clamp(1.5rem,3vw,2.2rem)] font-bold leading-[1.08] tracking-tight text-[var(--color-dark)]">
           Imágenes del{' '}
-          <span className="text-[var(--color-primary)]">caso de estudio</span>
+          <span className="text-[var(--color-primary-bright)]">caso de estudio</span>
         </h2>
       </div>
 
@@ -245,7 +245,7 @@ export default function MobileGalleryCarousel({ items }: Props) {
         {/* Caption */}
         <div className="container-app py-6">
           {item?.category && (
-            <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--color-primary)] mb-1.5">
+            <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.15em] text-[var(--color-primary-bright)] mb-1.5">
               {item.category}
             </span>
           )}

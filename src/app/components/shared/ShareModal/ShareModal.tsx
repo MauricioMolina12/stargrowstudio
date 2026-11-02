@@ -49,7 +49,7 @@ export const ShareModal = ({ isOpen, onClose, children }: ShareModalProps) => {
     >
       <div
         className={clsx(
-          "border w-fit border-gray-100 relative z-10 bg-white lg:rounded-xl p-6 max-w-6xl overflow-y-auto max-h-[100vh] lg:max-h-[80vh] transform transition-transform duration-300",
+          "border w-fit border-[var(--color-border)] relative z-10 bg-[var(--color-surface-elevated)] lg:rounded-xl p-6 max-w-6xl overflow-y-auto max-h-[100vh] lg:max-h-[80vh] transform transition-transform duration-300",
           {
             'translate-x-0 opacity-100': animateIn,
             '-translate-x-full opacity-0': !animateIn,

@@ -9,12 +9,12 @@ type Props = {
   projects: ProjectListItem[];
 };
 
-/** Acento por proyecto para dar identidad visual única. */
+/** Acento por proyecto para dar identidad visual única (token, se adapta al tema). */
 const PROJECT_ACCENTS: Record<string, string> = {
-  'opera-multiservicios': '#5656b5',
+  'opera-multiservicios': 'var(--color-primary-bright)',
 };
 
-const DEFAULT_ACCENT = '#5656b5';
+const DEFAULT_ACCENT = 'var(--color-primary-bright)';
 
 const staggerDelay = (i: number) => `${i * 120}ms`;
 
@@ -28,20 +28,34 @@ export default function GalleryWalk({ projects }: Props) {
       id="casos-de-exito"
       ref={ref}
       aria-labelledby="gallery-heading"
-      className="w-full bg-white overflow-hidden"
+      className="w-full bg-[var(--color-surface)] overflow-hidden"
     >
       {/* Header */}
       <div className="container-app py-16 md:py-20">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)]">
-          Casos de éxito
-        </span>
-        <h2
-          id="gallery-heading"
-          className="mt-4 max-w-3xl font-bold leading-[1.08] tracking-tight section-heading text-[var(--color-dark)]"
-        >
-          Historias de{' '}
-          <span className="text-[var(--color-primary)]">transformación digital</span>
-        </h2>
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary-bright)]">
+              Casos de éxito
+            </span>
+            <h2
+              id="gallery-heading"
+              className="mt-4 max-w-3xl font-bold leading-[1.08] tracking-tight section-heading text-[var(--color-dark)]"
+            >
+              Historias de{' '}
+              <span className="text-[var(--color-primary-bright)]">transformación digital</span>
+            </h2>
+          </div>
+
+          {/* Enlace "Ver todos los proyectos" alineado con el título (solo desktop) */}
+          <Link
+            href="/proyectos"
+            className="group hidden shrink-0 items-center gap-1.5 pb-1 text-sm font-semibold text-[var(--color-primary-bright)] transition-colors duration-300 hover:text-[var(--color-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-bright)] focus-visible:ring-offset-2 lg:inline-flex"
+          >
+            Ver todos los proyectos
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </div>
+
         <p className="mt-4 max-w-xl text-[clamp(0.95rem,1.2vw,1.1rem)] leading-relaxed text-[var(--color-dark-gray)]">
           Cada proyecto representa una empresa que evolucionó. Conoce sus historias.
         </p>
@@ -127,17 +141,6 @@ export default function GalleryWalk({ projects }: Props) {
             );
           })}
         </div>
-
-        {/* CTA ver todos */}
-        <div className="mt-12 text-center">
-          <Link
-            href="/proyectos"
-            className="group inline-flex items-center gap-2 rounded-full bg-[var(--color-primary)] px-7 py-3.5 text-sm font-semibold text-white min-h-[44px] transition-all duration-300 hover:bg-[var(--color-secondary)] active:scale-[0.97]"
-          >
-            Ver todos los proyectos
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
-        </div>
       </div>
 
       {/* ── MOBILE/TABLET: Lista vertical editorial (< lg) ── */}
@@ -184,7 +187,7 @@ function EditorialHero({ project, accent }: { project: ProjectListItem; accent: 
   return (
     <Link
       href={`/proyectos/${project.slug}`}
-      className="group relative block w-full h-full min-h-[440px] rounded-2xl overflow-hidden bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]"
+      className="group relative block w-full h-full min-h-[440px] rounded-2xl overflow-hidden bg-[var(--color-surface)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-bright)]"
     >
       {imageUrl ? (
         <img
@@ -220,7 +223,7 @@ function EditorialFeatured({ project, accent }: { project: ProjectListItem; acce
   return (
     <Link
       href={`/proyectos/${project.slug}`}
-      className="group relative w-full min-h-[210px] rounded-2xl overflow-hidden bg-white border border-black/[0.06] flex items-stretch focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] hover:shadow-[0_8px_25px_-12px_rgba(0,0,0,0.12)] transition-all duration-500"
+      className="group relative w-full min-h-[210px] rounded-2xl overflow-hidden bg-[var(--color-surface)] border border-[var(--color-border-subtle)] flex items-stretch focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-bright)] hover:shadow-[0_8px_25px_-12px_rgba(0,0,0,0.12)] transition-all duration-500"
     >
       <div className="flex-1 p-6 flex flex-col justify-center">
         <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.15em] mb-1.5" style={{ color: accent }}>

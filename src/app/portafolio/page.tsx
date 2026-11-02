@@ -28,7 +28,7 @@ export default async function PortfolioPage() {
   return (
     <main className="mx-auto max-w-7xl px-5 py-12 lg:px-8 lg:py-16">
       <header className="mb-10 flex flex-col items-center text-center">
-        <span className="text-lg font-medium text-[var(--color-primary)]">Nuestro portafolio</span>
+        <span className="text-lg font-medium text-[var(--color-primary-bright)]">Nuestro portafolio</span>
         <h1 className="mt-3 max-w-2xl text-3xl font-bold text-[var(--color-primary-to-white)] lg:text-4xl">
           Proyectos que transforman ideas en soluciones reales
         </h1>
@@ -36,13 +36,13 @@ export default async function PortfolioPage() {
 
       {projects.length === 0 ? (
         <div className="mx-auto flex max-w-lg flex-col items-center gap-4 rounded-2xl border border-dashed border-[var(--color-gray)] p-12 text-center">
-          <FolderKanban size={40} className="text-[var(--color-primary)]" />
+          <FolderKanban size={40} className="text-[var(--color-primary-bright)]" />
           <h2 className="text-lg font-semibold text-[var(--color-primary-to-white)]">
             Aún no hay proyectos publicados
           </h2>
           <p className="text-sm text-[var(--color-dark-gray)]">
             Publica tus proyectos desde el{" "}
-            <Link href="/studio" className="font-medium text-[var(--color-primary)] hover:underline">
+            <Link href="/studio" className="font-medium text-[var(--color-primary-bright)] hover:underline">
               panel de contenido
             </Link>{" "}
             y aparecerán aquí automáticamente.
@@ -67,7 +67,7 @@ export default async function PortfolioPage() {
               </figure>
               <div className="flex flex-col gap-2 p-5">
                 {p.serviceLine && (
-                  <span className="w-fit rounded-full bg-[var(--color-primary-tint)] px-2 py-0.5 text-[11px] font-medium text-[var(--color-primary)]">
+                  <span className="w-fit rounded-full bg-[var(--color-primary-tint)] px-2 py-0.5 text-[11px] font-medium text-[var(--color-primary-bright)]">
                     {SERVICE_LINE_LABEL[p.serviceLine] ?? p.serviceLine}
                   </span>
                 )}

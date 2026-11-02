@@ -1,0 +1,66 @@
+
+- Sembrando articulos de blog...
+
+Autor:
+  - Autor ya existe
+
+Categorias:
+  - Categoria "Branding" ya existe
+  - Categoria "Diseno UX/UI" ya existe
+  - Categoria "Marketing Digital" ya existe
+
+Articulos:
+  V Articulo 1: Logos minimalistas - actualizado
+  V Articulo 2: Diseno que no convence - actualizado
+  V Articulo 3: Estrategia de contenidos - actualizado
+  V Articulo 4: Tips UX/UI - actualizado
+
+─────────────────────────────────────────
+PROMPTS PARA IMAGENES DE PORTADA
+─────────────────────────────────────────
+
+--- por-que-las-grandes-marcas-usan-logos-sencillos ---
+Prompt: Una composicion visual minimalista y elegante que muestra la evolucion de logos iconicos como Nike, Apple y Google sobre un fondo blanco impoluto. Estilo editorial premium, fotografia de estudio con iluminacion suave y uniforme. Los logos flotan en el espacio como constelaciones. Blanco, negro y acentos de color. Atmosfera de sofisticacion y estrategia empresarial. Aspect ratio 16:9, 1920x1080.
+
+Alt text: Evolucion de logos minimalistas de marcas iconicas como Nike, Apple y Google sobre fondo blanco, representando branding corporativo estrategico.
+
+Caption: Las marcas mas valiosas del mundo comparten un patron: logos cada vez mas simples y estrategicos.
+
+OG Image description: Imagen de portada: evolucion de logos minimalistas de las marcas mas valiosas del mundo.
+
+--- mi-diseno-no-convence-a-nadie-como-solucionarlo ---
+Prompt: Una interfaz digital abstracta y fragmentada en una mesa de trabajo de diseno. Un disenador sostiene una lupa sobre un punto especifico de la interfaz. Estilo cinematografico, iluminacion tenue con un foco de luz calida sobre el area de analisis. Elementos de UX wireframes, mapas de calor y graficos en segundo plano. Atmosfera de introspeccion profesional, analisis y metodologia. Aspect ratio 16:9, 1920x1080.
+
+Alt text: Disenador analizando una interfaz digital con lupa, wireframes y mapas de calor en segundo plano, representando diagnostico UX profesional.
+
+Caption: El diseno que convence no nace de la intuicion: nace de la investigacion, los datos y la metodologia.
+
+OG Image description: Imagen de portada: analisis profesional de interfaz digital con herramientas de diagnostico UX.
+
+--- que-contenido-subir-para-atraer-mas-publico-b2b ---
+Prompt: Una maquina de engranajes conceptual hecha de cinco piezas modulares de colores, cada una representando uno de los cinco pilares de contenido. Sobre una superficie minimalista blanca, iluminacion limpia y profesional, estilo editorial corporativo. Cada engranaje tiene iconos sutiles: un libro (educativo), una estrella (entretenimiento), una brujula (inspiracion), un diamante (identidad) y un grafico ascendente (tendencias). Aspect ratio 16:9, 1920x1080.
+
+Alt text: Cinco engranajes modulares de colores representando los pilares de una estrategia de contenidos B2B: educativo, entretenimiento, inspiracional, identidad y tendencias.
+
+Caption: Una estrategia de contenidos B2B efectiva se construye sobre cinco pilares que trabajan en sinergia.
+
+OG Image description: Imagen de portada: representacion conceptual de los cinco pilares del content marketing B2B.
+
+--- 4-tips-de-diseno-ux-ui-que-deberias-aplicar-en-tu-producto-digital ---
+Prompt: Cuatro tarjetas modulares flotando sobre un fondo degradado suave de azul a blanco. Cada tarjeta muestra visualizaciones abstractas de conceptos UX: una diana concentrica (Ley de Fitts), un cerebro con conexiones (principio de Jakob), una piramide de elementos (jerarquia visual) y un icono de accesibilidad universal. Estilo tecnologico y cientifico, iluminacion limpia. Aspect ratio 16:9, 1920x1080.
+
+Alt text: Cuatro tarjetas conceptuales representando principios UX/UI: Ley de Fitts, principio de Jakob, jerarquia visual y accesibilidad digital.
+
+Caption: Cuatro principios de diseno UX/UI respaldados por psicologia cognitiva que impactan directamente en los resultados de negocio.
+
+OG Image description: Imagen de portada: los cuatro principios fundamentales de diseno UX/UI explicados en el articulo.
+
+
+V Articulos sembrados exitosamente.
+
+Para usar las imagenes:
+1. Genera cada imagen con el prompt proporcionado.
+2. Subela a Sanity Studio manualmente o mediante script.
+3. Asignala al campo 'mainImage' de cada post.
+4. Asigna la misma imagen al campo 'seo.ogImage'.
+

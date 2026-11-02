@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check, ChevronRight, FolderKanban } from "lucide-react";
+import type { CSSProperties } from "react";
 
 import { getServiceByPath, getServiceSlugParams } from "@/sanity/data/services";
 import { getProjectsByService } from "@/sanity/data/projects";
@@ -11,13 +12,53 @@ import { PortableTextRenderer } from "@/sanity/portableText";
 import { getIcon } from "@/app/components/layout/nav/iconMap";
 import { resolveServiceMeta } from "@/app/components/shared/ServicesSection/serviceMeta";
 import SliderAutomatic from "@/app/components/shared/SliderAutomatic";
-import SliderProjects from "@/app/components/shared/SliderProjects";
 import { FaqSection } from "@/app/components/services/FaqSection";
 
 type Params = { slug: string[] };
 
 /** Revalidate cada 5 minutos en background (ISR). */
 export const revalidate = 300;
+
+/* ─────── Estilos de hero personalizados por servicio ─────── */
+
+interface HeroStyle {
+  /** Desplazamiento horizontal de la imagen (CSS `left`) */
+  left?: string;
+  /** Transformación aplicada a la imagen */
+  transform?: string;
+  /** Gradiente superpuesto sobre la imagen (overlay) */
+  gradient?: string;
+  /** Máscara CSS para difuminar bordes (mask-image) */
+  mask?: string;
+}
+
+/**
+ * Mapa de estilos individuales por slug de servicio.
+ * Para agregar un nuevo servicio solo añade una entrada aquí.
+ * Si no hay entrada, se usan los valores por defecto.
+ */
+const heroStylesBySlug: Record<string, HeroStyle> = {
+  "desarrollo-de-software": {
+    left: "clamp(30px, 8vw, 150px)",
+    transform: "scale(clamp(1.15, 0.8vw + 0.4rem, 1.85))",
+    gradient:
+      "linear-gradient(135deg, transparent 60%, #FAFAFA 100%), linear-gradient(90deg, transparent 70%, #FAFAFA 100%)",
+  },
+  eventos: {
+    left: "clamp(20px, 5vw, 60px)",
+    transform: "scale(clamp(1.15, 0.8vw + 0.4rem, 1.85))",
+    mask: "radial-gradient(ellipse 80% 75% at 50% 50%, black 40%, black 70%, transparent 100%)",
+    gradient:
+      "radial-gradient(ellipse 100% 90% at 50% 50%, transparent 60%, #FAFAFA 100%)",
+  },
+};
+
+/** Obtiene los estilos de hero para un slug dado (fallback a vacío). */
+function getHeroStyle(slug: string): HeroStyle {
+  return heroStylesBySlug[slug] ?? {};
+}
+
+/* ────────────────────────────────────────────────────────── */
 
 /** Pre-genera todas las rutas de servicio (padres e hijos) en build. */
 export async function generateStaticParams() {
@@ -64,10 +105,11 @@ export default async function ServiceDetailPage({
 
   const { slug: serviceSlug, parent } = service;
   const accent = resolveServiceMeta(parent?.slug ?? serviceSlug).accent;
+  const heroStyle = getHeroStyle(serviceSlug);
 
   return (
     <main className="w-full bg-[var(--color-light)]">
-      <ServiceHero service={service} accent={accent} />
+      <ServiceHero service={service} accent={accent} heroStyle={heroStyle} />
 
       <div className="container-app flex flex-col gap-20 py-20 md:gap-28 md:py-28">
         {service.fullDescription && (
@@ -91,7 +133,7 @@ export default async function ServiceDetailPage({
       {service.techs && service.techs.length > 0 && (
         <section className="w-full py-8">
           <header className="mb-6 flex flex-col items-center gap-2 px-4 text-center">
-            <span className="text-sm text-[var(--color-primary)]">
+            <span className="text-sm text-[var(--color-primary-bright)]">
               Adaptamos la tecnología a tu proyecto, no al revés.
             </span>
             <h2 className="text-3xl font-bold lg:text-4xl">Nuestras tecnologías</h2>
@@ -113,18 +155,34 @@ export default async function ServiceDetailPage({
 
 /* ─────────────────────────── Secciones ─────────────────────────── */
 
-function ServiceHero({ service, accent }: { service: ServiceDetail; accent: string }) {
+function ServiceHero({
+  service,
+  accent,
+  heroStyle,
+}: {
+  service: ServiceDetail;
+  accent: string;
+  heroStyle: HeroStyle;
+}) {
   const Icon = getIcon(service.iconName ?? undefined);
   const heading = service.hero?.heading || service.service;
   const subheading = service.hero?.subheading || service.shortDescription;
   const image = service.hero?.image || service.mainImage;
   const ctas =
     service.hero?.ctas && service.hero.ctas.length > 0
-      ? service.hero.ctas
+      ? service.hero.ctas.map((cta) => ({
+          ...cta,
+          href: cta.href || "/cotizar",
+        }))
       : [{ label: "Solicitar diagnóstico", href: "/cotizar", style: "primary" as const }];
 
+  const hasCustomStyle = Object.keys(heroStyle).length > 0;
+  const maskStyle: CSSProperties | undefined = heroStyle.mask
+    ? ({ WebkitMaskImage: heroStyle.mask, maskImage: heroStyle.mask } as CSSProperties)
+    : undefined;
+
   return (
-    <section className="w-full border-b border-black/[0.06]">
+    <section className="w-full border-b border-[var(--color-border-subtle)]">
       <div className="container-app grid items-center gap-10 py-16 md:py-24 lg:grid-cols-2">
         <div>
           <Breadcrumb service={service} />
@@ -150,7 +208,7 @@ function ServiceHero({ service, accent }: { service: ServiceDetail; accent: stri
                   className={`group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 ${
                     primary
                       ? "bg-[var(--color-primary)] text-white hover:bg-[var(--color-secondary)]"
-                      : "border border-black/10 text-[var(--color-dark)] hover:border-[var(--color-primary)]"
+                      : "border border-[var(--color-border-subtle)] text-[var(--color-dark)] hover:border-[var(--color-primary-bright)]"
                   }`}
                 >
                   {cta.label}
@@ -162,13 +220,28 @@ function ServiceHero({ service, accent }: { service: ServiceDetail; accent: stri
         </div>
 
         {image && (
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+          <div
+            className="relative aspect-[4/3] overflow-hidden rounded-2xl"
+            style={maskStyle}
+          >
+            {/* Overlay con gradiente si el servicio lo define */}
+            {heroStyle.gradient && (
+              <div
+                className="pointer-events-none absolute inset-0 z-10"
+                style={{ background: heroStyle.gradient }}
+              />
+            )}
+
             <Image
               src={image}
               alt={service.hero?.imageAlt || service.mainImageAlt || service.service}
               fill
               sizes="(max-width: 1023px) 100vw, 50vw"
-              className="object-cover"
+              className="object-contain"
+              style={{
+                left: heroStyle.left ?? 0,
+                transform: heroStyle.transform ?? "scale(clamp(1.15, 0.8vw + 0.8rem, 1.85))",
+              }}
               priority
             />
           </div>
@@ -181,17 +254,17 @@ function ServiceHero({ service, accent }: { service: ServiceDetail; accent: stri
 function Breadcrumb({ service }: { service: ServiceDetail }) {
   return (
     <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-1.5 text-sm text-[var(--color-dark-gray)]">
-      <Link href="/" className="hover:text-[var(--color-primary)]">
+      <Link href="/" className="hover:text-[var(--color-primary-bright)]">
         Inicio
       </Link>
-      {service.parent && (
+      {/* {service.parent && (
         <>
           <ChevronRight className="h-3.5 w-3.5" />
-          <Link href={`/services/${service.parent.path}`} prefetch={true} className="hover:text-[var(--color-primary)]">
+          <Link href={`/services/${service.parent.path}`} prefetch={true} className="hover:text-[var(--color-primary-bright)]">
             {service.parent.service}
           </Link>
         </>
-      )}
+      )} */}
       <ChevronRight className="h-3.5 w-3.5" />
       <span className="font-medium text-[var(--color-dark)]">{service.service}</span>
     </nav>
@@ -220,7 +293,7 @@ function Benefits({ service, accent }: { service: ServiceDetail; accent: string 
         {service.benefits.map((b, i) => {
           const Icon = getIcon(b.iconName ?? undefined);
           return (
-            <article key={i} className="rounded-2xl border border-black/[0.06] bg-white p-6">
+            <article key={i} className="rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-6">
               <span
                 className="inline-flex h-11 w-11 items-center justify-center rounded-xl"
                 style={{ backgroundColor: `color-mix(in srgb, ${accent} 12%, transparent)`, color: accent }}
@@ -246,7 +319,7 @@ function Features({ service, accent }: { service: ServiceDetail; accent: string 
       <SectionHeading eyebrow="Características" title="Qué incluye" accent={accent} />
       <div className="grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2">
         {service.features.map((f, i) => (
-          <div key={i} className="flex items-start gap-3 border-b border-black/[0.06] pb-5">
+          <div key={i} className="flex items-start gap-3 border-b border-[var(--color-border-subtle)] pb-5">
             <span
               className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
               style={{ backgroundColor: `color-mix(in srgb, ${accent} 14%, transparent)`, color: accent }}
@@ -273,7 +346,7 @@ function Process({ service, accent }: { service: ServiceDetail; accent: string }
       <SectionHeading eyebrow="Proceso" title="Cómo trabajamos" accent={accent} />
       <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {service.process.map((p, i) => (
-          <li key={i} className="relative rounded-2xl border border-black/[0.06] bg-white p-6">
+          <li key={i} className="relative rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-6">
             <span className="text-3xl font-bold" style={{ color: accent }}>
               {String(p.step ?? i + 1).padStart(2, "0")}
             </span>
@@ -301,7 +374,7 @@ function SubServices({ service, accent }: { service: ServiceDetail; accent: stri
               key={child.slug}
               href={`/services/${child.path}`}
               prefetch={true}
-              className="group flex flex-col rounded-2xl border border-black/[0.06] bg-white p-6 transition-transform duration-300 hover:-translate-y-1"
+              className="group flex flex-col rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-6 transition-transform duration-300 hover:-translate-y-1"
             >
               <span
                 className="inline-flex h-11 w-11 items-center justify-center rounded-xl"
@@ -335,7 +408,7 @@ function DescriptionSidebar({ service, accent }: { service: ServiceDetail; accen
   return (
     <div className="sticky top-24 flex flex-col gap-6">
       {/* Tarjeta del servicio */}
-      <div className="rounded-2xl border border-black/[0.06] bg-white p-6">
+      <div className="rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-6">
         <span
           className="inline-flex h-14 w-14 items-center justify-center rounded-2xl"
           style={{ backgroundColor: `color-mix(in srgb, ${accent} 12%, transparent)`, color: accent }}
@@ -359,10 +432,10 @@ function DescriptionSidebar({ service, accent }: { service: ServiceDetail; accen
       {/* CTA rápida */}
       <Link
         href="/cotizar"
-        className="group flex items-center justify-between rounded-2xl border border-black/[0.06] bg-white p-5 transition-all duration-300 hover:border-[var(--color-primary)]"
+        className="group flex items-center justify-between rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] p-5 transition-all duration-300 hover:border-[var(--color-primary-bright)]"
       >
         <span className="text-sm font-semibold text-[var(--color-dark)]">¿Hablamos?</span>
-        <ArrowRight className="h-4 w-4 text-[var(--color-primary)] transition-transform group-hover:translate-x-1" />
+        <ArrowRight className="h-4 w-4 text-[var(--color-primary-bright)] transition-transform group-hover:translate-x-1" />
       </Link>
     </div>
   );
@@ -373,7 +446,7 @@ async function RelatedProjects({ serviceId, accent }: { serviceId: string; accen
   if (!projects.length) return null;
 
   return (
-    <section className="w-full border-t border-black/[0.06] bg-white py-16">
+    <section className="w-full border-t border-[var(--color-border-subtle)] bg-[var(--color-surface)] py-16">
       <div className="container-app">
         <header className="mb-10 max-w-2xl">
           <span className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: accent }}>
@@ -388,7 +461,7 @@ async function RelatedProjects({ serviceId, accent }: { serviceId: string; accen
             <Link
               key={p._id}
               href={`/proyectos/${p.slug}`}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-[var(--color-light)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-24px_rgba(0,0,0,0.22)]"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-24px_rgba(0,0,0,0.22)]"
             >
               {p.cover ? (
                 <div className="aspect-[16/10] overflow-hidden">
@@ -400,7 +473,7 @@ async function RelatedProjects({ serviceId, accent }: { serviceId: string; accen
                   />
                 </div>
               ) : (
-                <div className="flex aspect-[16/10] items-center justify-center bg-black/[0.03]">
+                <div className="flex aspect-[16/10] items-center justify-center bg-[var(--color-hover)]">
                   <FolderKanban className="h-10 w-10 text-[var(--color-dark-gray)]/20" strokeWidth={1} />
                 </div>
               )}
@@ -432,7 +505,7 @@ function FinalCta({ service }: { service: ServiceDetail }) {
   const href = cta?.href || "/cotizar";
 
   return (
-    <section className="w-full border-t border-black/[0.06] bg-[var(--color-primary)]/[0.04]">
+    <section className="w-full border-t border-[var(--color-border-subtle)] bg-[var(--color-primary)]/[0.04]">
       <div className="container-app flex flex-col items-start justify-between gap-6 py-14 md:flex-row md:items-center md:py-16">
         <div>
           <h2 className="text-2xl font-bold tracking-tight text-[var(--color-dark)]">{heading}</h2>

@@ -54,6 +54,14 @@ export const post = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "instagramUrl",
+      title: "Post de Instagram",
+      description:
+        "Enlace a la publicación, carrusel o reel relacionado en Instagram (ej. https://www.instagram.com/p/...).",
+      type: "url",
+      validation: (Rule) => Rule.uri({ scheme: ["http", "https"] }),
+    }),
+    defineField({
       name: "body",
       title: "Contenido",
       type: "blockContent",

@@ -88,23 +88,23 @@ export default function OurServices() {
           {services.map((service) => (
             <div
               key={service.name}
-              className="service-card bg-white dark:bg-[#1e1e1e] rounded-lg p-6 flex flex-col items-start justify-between gap-4 transform transition duration-700 opacity-0 translate-y-10 scale-95"
+              className="service-card bg-[var(--color-surface)] rounded-lg p-6 flex flex-col items-start justify-between gap-4 transform transition duration-700 opacity-0 translate-y-10 scale-95"
             >
               <img
                 src={`/${service.icon}`}
                 alt={service.name}
                 width={40}
                 height={40}
-                className="object-contain bg-gray-100 p-1 rounded-2xl"
+                className="object-contain bg-[var(--color-input)] p-1 rounded-2xl"
               />
-              <h2 className="text-[1rem] font-[600] text-[var(--color-dark)] dark:text-white">
+              <h2 className="text-[1rem] font-[600] text-[var(--color-dark)]">
                 {service.name}
               </h2>
-              <p className="text-[var(--color-dark-gray)] dark:text-gray-300 text-sm">
+              <p className="text-[var(--color-dark-gray)] text-sm">
                 {service.description}
               </p>
 
-              <button onClick={() => detailsService(service)} className="cursor-pointer mt-2 text-[var(--color-primary)] flex items-center gap-1 font-medium transition-colors text-[0.9rem]">
+              <button onClick={() => detailsService(service)} className="cursor-pointer mt-2 text-[var(--color-primary-bright)] flex items-center gap-1 font-medium transition-colors text-[0.9rem]">
                 Leer más
                 {!loadingDetails[service.slug] ? (
                   <span className="material-symbols-outlined">arrow_forward</span>

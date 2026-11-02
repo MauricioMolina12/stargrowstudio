@@ -1,23 +1,69 @@
 @import "tailwindcss";
 
+/* Variante `dark:` nativa de Tailwind v4 basada en la clase .dark en <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — LIGHT THEME (referencia actual, sin cambios visuales)
+   ════════════════════════════════════════════════════════════════════ */
 :root {
+  /* ── Marca ── */
   --color-primary: #5656b5;
   --color-secondary: #121245;
   --color-primary-light: #c7c7fa;
+  --color-primary-tint: #eeeefb;
   --color-yellow: #f3b12a;
   --color-yellow-light: #ffe08a;
-  --color-black: #000000;
+
+  /* ── Texto ── */
   --color-dark: #1e1e1e;
   --color-dark-gray: #6b6b6b;
-  --color-gray: rgb(236, 236, 236);
+  --color-black: #000000;
+
+  /* ── Superficies y bordes ── */
   --color-light: #fafafa;
   --color-white: #ffffff;
-  --color-primary-tint: #eeeefb;
-  --font-main: "Montserrat", sans-serif;
+  --color-gray: rgb(236, 236, 236);
 
+  /* ── Tokens semánticos (equivalentes al light actual) ── */
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+  --color-input: #f7f8fa;
+  --color-foreground: #1e1e1e;
+  --color-muted: #6b6b6b;
+  --color-border: rgb(236, 236, 236);
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-hover: rgba(0, 0, 0, 0.05);
+  --color-primary-bright: #5656b5;
+  --color-primary-hover: #4545a0;
+  --color-on-primary: #ffffff;
+
+  /* ── Conmutadores semánticos (uso existente en el sitio) ── */
   --color-primary-to-white: var(--color-primary);
   --color-dark-to-yellow: #1e1e1e;
   --color-white-to-primary: white;
+
+  /* ── Service Cards: acentos pastel (light) ── */
+  --sg-dev: #6a6ac6;
+  --sg-dev-soft: #ececf9;
+  --sg-design: #a75797;
+  --sg-design-soft: #f6eaf2;
+  --sg-photo: #a06a3c;
+  --sg-photo-soft: #f9efe3;
+  --sg-consult: #3a8378;
+  --sg-consult-soft: #e6f2ef;
+
+  /* ── Banner: gradientes (light) ── */
+  --sg-banner-grad-start: #f6f6ff;
+  --sg-banner-grad-end: #fefeff;
+  --sg-banner-mask: 255, 255, 255;
+
+  /* ── Texto con gradiente de marca ── */
+  --color-text-grad-from: #5656b5;
+  --color-text-grad-to: #121245;
+
+  --font-main: "Montserrat", sans-serif;
 
   /* Título de sección unificado para todo el sitio */
   --section-heading-size: clamp(1.5rem, 3vw, 2rem);
@@ -25,6 +71,71 @@
   /* Ancho máximo compartido para alinear todo el sitio en desktop */
   --container-max: 1390px;
   --container-padding: clamp(1rem, 3vw, 2rem);
+
+  color-scheme: light;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — DARK THEME (premium, sin negro puro, #5656B5 como marca)
+   ════════════════════════════════════════════════════════════════════ */
+.dark {
+  /* ── Marca: se mantiene #5656B5 como relleno; variantes claras para texto ── */
+  --color-primary: #5656b5;
+  --color-primary-bright: #9d9dee;
+  --color-primary-hover: #6b6bd0;
+  --color-secondary: #6b6bd0;
+  --color-primary-light: #8f8fe0;
+  --color-primary-tint: #24243a;
+  --color-yellow: #f3b12a;
+  --color-yellow-light: #ffe08a;
+
+  /* ── Texto ── */
+  --color-dark: #f0f0f6;
+  --color-dark-gray: #9d9db0;
+  --color-black: #000000;
+
+  /* ── Superficies y bordes ── */
+  --color-light: #0f0f12;
+  --color-white: #ffffff;
+  --color-gray: #26262f;
+
+  /* ── Tokens semánticos (dark) ── */
+  --color-background: #0f0f12;
+  --color-surface: #16161c;
+  --color-surface-elevated: #1d1d25;
+  --color-input: #121217;
+  --color-foreground: #f0f0f6;
+  --color-muted: #9d9db0;
+  --color-border: #26262f;
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-hover: rgba(255, 255, 255, 0.06);
+  --color-on-primary: #ffffff;
+
+  /* ── Conmutadores semánticos (dark) ── */
+  --color-primary-to-white: #f0f0f6;
+  --color-dark-to-yellow: var(--color-yellow);
+  --color-white-to-primary: var(--color-surface);
+
+  /* ── Service Cards: acentos pastel adaptados al fondo oscuro ── */
+  --sg-dev: #8f8fe0;
+  --sg-dev-soft: #232339;
+  --sg-design: #cf8fbe;
+  --sg-design-soft: #322333;
+  --sg-photo: #d99f6b;
+  --sg-photo-soft: #322a1f;
+  --sg-consult: #6fb5a8;
+  --sg-consult-soft: #1f2c29;
+
+  /* ── Banner: gradientes (dark) ── */
+  --sg-banner-grad-start: #15151c;
+  --sg-banner-grad-end: #0e0e12;
+  --sg-banner-mask: 15, 15, 18;
+
+  /* ── Texto con gradiente de marca (dark: variantes claras) ── */
+  --color-text-grad-from: #9d9dee;
+  --color-text-grad-to: #c7c7fa;
+
+  color-scheme: dark;
 }
 
 /* Fondo con textura diagonal sutil (sección de contacto) */
@@ -55,18 +166,16 @@
   padding-inline: var(--container-padding);
 }
 
-.dark {
-  --color-primary: #121245;
-  --color-white: #ffffff;
-  --color-primary-to-white: #fff;
-  --color-primary-light: #c7c7fa;
-  --color-yellow: #f3b12a;
-  --color-black: #ffffff;
-  --color-white: #1e1e1e;
-  --font-main: "Montserrat", sans-serif;
-
-  --color-dark-to-yellow: #f3b12a;
-  --color-white-to-primary: var(--color-primary);
+/* Transición suave de tema (solo propiedades visuales; se activa al alternar) */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease !important;
 }
 
 html {

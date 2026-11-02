@@ -34,7 +34,7 @@ export default function FaqPage() {
   return (
     <main className="mx-auto max-w-3xl px-5 py-12 lg:py-16">
       <header className="mb-10 flex flex-col items-center text-center">
-        <span className="text-lg font-medium text-[var(--color-primary)]">Preguntas frecuentes</span>
+        <span className="text-lg font-medium text-[var(--color-primary-bright)]">Preguntas frecuentes</span>
         <h1 className="mt-3 max-w-2xl text-3xl font-bold text-[var(--color-primary-to-white)] lg:text-4xl">
           Todo lo que necesitas saber
         </h1>
@@ -48,7 +48,7 @@ export default function FaqPage() {
           >
             <summary className="flex cursor-pointer items-center justify-between gap-4 text-[15px] font-semibold text-[var(--color-primary-to-white)] [&::-webkit-details-marker]:hidden">
               {item.q}
-              <span className="text-[var(--color-primary)] transition-transform duration-300 group-open:rotate-45">
+              <span className="text-[var(--color-primary-bright)] transition-transform duration-300 group-open:rotate-45">
                 +
               </span>
             </summary>

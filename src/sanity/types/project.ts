@@ -18,6 +18,7 @@ export type ProjectListItem = {
   featured?: boolean;
   status?: ProjectStatus;
   visibility?: ProjectVisibility;
+  serviceLine?: string;
   seo?: SeoMeta | null;
 };
 
@@ -40,6 +41,7 @@ export type ProjectDetail = {
   visibility: ProjectVisibility;
   year: number | null;
   url: string | null;
+  instagramUrl?: string | null;
   durationStart: string | null;
   durationEnd: string | null;
   team: TeamMember[];

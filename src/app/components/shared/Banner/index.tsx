@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from './Banner.module.scss';
-import useDarkMode from "@/app/hooks/useDarkMode";
 import { Check } from "lucide-react";
 
 const WHATSAPP_NUMBER = "573003856084";
@@ -45,6 +44,7 @@ const SERVICE_NAMES = [
    ───────────────────────────────────────────── */
 type Props = {
   banners?: never[];
+  services?: unknown[];
   isDynamic?: boolean;
   fallbackBanner?: never;
   defaultCallActions?: never[];
@@ -52,7 +52,6 @@ type Props = {
 };
 
 export default function Banner({}: Props) {
-  const { isDark } = useDarkMode();
   const router = useRouter();
 
   /* ── Imágenes: carrusel (misma animación) ── */
@@ -128,9 +127,7 @@ export default function Banner({}: Props) {
      Render
      ───────────────────────────────────────────── */
   return (
-    <section
-      className={`${styles.banner} ${isDark ? styles.dark : styles.light}`}
-    >
+    <section className={styles.banner}>
       <div className={styles["banner--inner"]}>
         <div className={styles.banner__content} ref={bannerContentRef}>
           {/* ── Texto / Hero ── */}

@@ -30,7 +30,7 @@ const Grid = ({ title, subtitle, showMeetingCall = true, children}: Props) => {
                     <div className="inner w-full h-full p-3 rounded-xl bg-[var(--color-primary)] flex flex-col lg:flex-row justify-between lg:items-center items-start">
                         <div className="description w-full h-1/2 flex flex-col gap-3">
                             <h2 className="text-white font-bold text-[1.3rem]">¿Estás listo para llevar tu proyecto al siguiente nivel?</h2>
-                            <p className="text-gray-200">Contáctanos hoy mismo y comencemos a trabajar juntos en tu próximo proyecto</p>
+                            <p className="text-[var(--color-on-primary)]/80">Contáctanos hoy mismo y comencemos a trabajar juntos en tu próximo proyecto</p>
                         </div>
                         <button className="cursor-pointer w-fit bg-white p-3 text-nowrap rounded-[10px] font-medium text-[var(--color-primary)]" onClick={show}>Solicitar una cita</button>
                     </div>

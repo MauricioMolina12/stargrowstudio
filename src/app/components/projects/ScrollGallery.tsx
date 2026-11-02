@@ -47,15 +47,15 @@ export default function ScrollGallery({ items }: Props) {
 
 function DesktopScrollGallery({ items }: { items: GalleryItem[] }) {
   return (
-    <section className="w-full bg-white">
+    <section className="w-full bg-[var(--color-surface)]">
       {/* Header */}
       <div className="container-app py-16 md:py-20">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary)]">
+        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-primary-bright)]">
           Galería del proyecto
         </span>
         <h2 className="mt-4 max-w-2xl text-[clamp(1.8rem,3.5vw,2.8rem)] font-bold leading-[1.08] tracking-tight text-[var(--color-dark)]">
           Imágenes del{' '}
-          <span className="text-[var(--color-primary)]">caso de estudio</span>
+          <span className="text-[var(--color-primary-bright)]">caso de estudio</span>
         </h2>
       </div>
 

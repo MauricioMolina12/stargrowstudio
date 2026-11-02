@@ -43,7 +43,7 @@ export const CardLinkList = ({
   return (
     <div>
       {title && (
-        <h3 className="font-semibold text-sm text-gray-500 mb-4 hidden lg:block">
+        <h3 className="font-semibold text-sm text-[var(--color-muted)] mb-4 hidden lg:block">
           {title}
         </h3>
       )}
@@ -53,7 +53,7 @@ export const CardLinkList = ({
         {items.map((item, idx) => (
           <li
             key={idx}
-            className="p-3 rounded-md cursor-pointer hover:bg-indigo-50"
+            className="p-3 rounded-md cursor-pointer hover:bg-[var(--color-primary-tint)]"
             onClick={() => handleClick(item.cta)}
           >
             <div className="flex items-start gap-3">
@@ -64,12 +64,12 @@ export const CardLinkList = ({
                     {item.title}
                   </span>
                   {item.badge && (
-                    <span className="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full">
+                    <span className="text-xs bg-[var(--color-primary-tint)] text-[var(--color-primary-bright)] px-2 py-0.5 rounded-full">
                       {item.badge}
                     </span>
                   )}
                 </div>
-                <p className="text-[12px] text-gray-500">{item.description}</p>
+                <p className="text-[12px] text-[var(--color-muted)]">{item.description}</p>
               </div>
             </div>
           </li>
@@ -79,10 +79,10 @@ export const CardLinkList = ({
       {/* Versión móvil */}
       <div className={`${isGrouped ? 'block lg:hidden' : 'block'} space-y-3`}>
         {isGrouped ? (
-          <div className="rounded-md border border-gray-200 p-3">
+          <div className="rounded-md border border-[var(--color-border)] p-3">
             <button
               onClick={handleToggle}
-              className="w-full text-left font-semibold text-sm text-gray-600 cursor-pointer"
+              className="w-full text-left font-semibold text-sm text-[var(--color-foreground)] cursor-pointer"
             >
               {title}
             </button>
@@ -95,7 +95,7 @@ export const CardLinkList = ({
                 {items.map((item, idx) => (
                   <li
                     key={idx}
-                    className="p-2 rounded-md cursor-pointer hover:bg-indigo-100"
+                    className="p-2 rounded-md cursor-pointer hover:bg-[var(--color-primary-tint)]"
                     onClick={() => handleClick(item.cta)}
                   >
                     <div className="flex items-start gap-3">
@@ -106,12 +106,12 @@ export const CardLinkList = ({
                             {item.title}
                           </span>
                           {item.badge && (
-                            <span className="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full">
+                            <span className="text-xs bg-[var(--color-primary-tint)] text-[var(--color-primary-bright)] px-2 py-0.5 rounded-full">
                               {item.badge}
                             </span>
                           )}
                         </div>
-                        <p className="text-[12px] text-gray-500">
+                        <p className="text-[12px] text-[var(--color-muted)]">
                           {item.description}
                         </p>
                       </div>
@@ -126,7 +126,7 @@ export const CardLinkList = ({
             {items.map((item, idx) => (
               <li
                 key={idx}
-                className="p-3 rounded-md cursor-pointer hover:bg-indigo-50"
+                className="p-3 rounded-md cursor-pointer hover:bg-[var(--color-primary-tint)]"
                 onClick={() => handleClick(item.cta)}
               >
                 <div className="flex items-start gap-3">
@@ -137,12 +137,12 @@ export const CardLinkList = ({
                         {item.title}
                       </span>
                       {item.badge && (
-                        <span className="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full">
+                        <span className="text-xs bg-[var(--color-primary-tint)] text-[var(--color-primary-bright)] px-2 py-0.5 rounded-full">
                           {item.badge}
                         </span>
                       )}
                     </div>
-                    <p className="text-[12px] text-gray-500">
+                    <p className="text-[12px] text-[var(--color-muted)]">
                       {item.description}
                     </p>
                   </div>

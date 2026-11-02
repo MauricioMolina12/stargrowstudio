@@ -235,6 +235,15 @@ export const project = defineType({
       group: "meta",
     }),
     defineField({
+      name: "instagramUrl",
+      title: "Post de Instagram",
+      description:
+        "Enlace a la publicación, carrusel o reel de este proyecto en Instagram (ej. https://www.instagram.com/p/...).",
+      type: "url",
+      group: "meta",
+      validation: (Rule) => Rule.uri({ scheme: ["http", "https"] }),
+    }),
+    defineField({
       name: "durationStart",
       title: "Fecha de inicio",
       type: "date",

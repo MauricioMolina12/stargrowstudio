@@ -1,0 +1,310 @@
+/* ─────────── Design tokens de animación ─────────── */
+:root {
+  --anim-duration-fast: 150ms;
+  --anim-duration-normal: 300ms;
+  --anim-duration-slow: 500ms;
+  --anim-duration-reveal: 700ms;
+
+  --anim-ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --anim-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --anim-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --anim-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* overshoot suave */
+  --anim-ease-smooth: cubic-bezier(0.16, 1, 0.3, 1); /* premium, tipo Linear */
+
+  --anim-stagger: 80ms; /* delay entre items animados en serie */
+}
+
+/* ─────────── Keyframes ─────────── */
+
+@keyframes anim-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes anim-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes anim-fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes anim-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes anim-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Skeleton shimmer */
+@keyframes anim-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Reading progress bar */
+@keyframes anim-progress-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ─────────── Clases utilitarias ─────────── */
+
+/* Animación automática al montar el elemento */
+.anim-fade-in {
+  animation: anim-fade-in var(--anim-duration-normal) var(--anim-ease-out) forwards;
+}
+
+.anim-fade-up {
+  animation: anim-fade-up var(--anim-duration-slow) var(--anim-ease-out) forwards;
+}
+
+.anim-fade-down {
+  animation: anim-fade-down var(--anim-duration-fast) var(--anim-ease-out) forwards;
+}
+
+.anim-scale-in {
+  animation: anim-scale-in var(--anim-duration-normal) var(--anim-ease-spring) forwards;
+}
+
+.anim-slide-left {
+  animation: anim-slide-left var(--anim-duration-fast) var(--anim-ease-out) forwards;
+}
+
+/* Stagger: retraso progresivo basado en nth-child / data-index */
+.anim-stagger {
+  opacity: 0;
+  animation: anim-fade-up var(--anim-duration-slow) var(--anim-ease-out) forwards;
+  animation-delay: calc(var(--anim-stagger, 80ms) * var(--anim-index, 0));
+}
+
+/* ─────────── Scroll reveal (animación al entrar en viewport) ─────────── */
+.anim-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--anim-duration-slow) var(--anim-ease-smooth),
+    transform var(--anim-duration-slow) var(--anim-ease-smooth);
+}
+
+.anim-reveal.anim-reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variante: reveal sin desplazamiento */
+.anim-reveal-fade {
+  opacity: 0;
+  transition: opacity var(--anim-duration-slow) var(--anim-ease-smooth);
+}
+
+.anim-reveal-fade.anim-reveal--visible {
+  opacity: 1;
+}
+
+/* Variante: reveal lateral */
+.anim-reveal-right {
+  opacity: 0;
+  transform: translateX(16px);
+  transition:
+    opacity var(--anim-duration-slow) var(--anim-ease-smooth),
+    transform var(--anim-duration-slow) var(--anim-ease-smooth);
+}
+
+.anim-reveal-right.anim-reveal--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+.card-modern {
+  border: 1px solid var(--color-gray);
+  background-color: var(--color-white-to-primary);
+  border-radius: 10px;
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+  will-change: transform;
+  padding: 10px;
+}
+
+.card-modern:hover,
+.card-modern:focus-within {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--color-primary-bright) 25%, transparent);
+}
+
+/* En Dark Mode la clase `.dark` está en <html> (no en prefers-color-scheme). */
+.dark .card-modern:hover,
+.dark .card-modern:focus-within {
+  border-color: color-mix(in srgb, var(--color-primary-bright) 35%, transparent);
+}
+
+
+.card-hover {
+  transition:
+    transform var(--anim-duration-normal) var(--anim-ease-out),
+    box-shadow var(--anim-duration-normal) var(--anim-ease-out);
+  will-change: transform;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+}
+
+/* Image zoom on hover */
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  transition: transform var(--anim-duration-slow) var(--anim-ease-out);
+  will-change: transform;
+}
+
+.img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Subtle "read more" indicator on card hover */
+.read-more-indicator span {
+  opacity: 0;
+  transform: translateX(4px);
+  transition:
+    opacity var(--anim-duration-normal) var(--anim-ease-out),
+    transform var(--anim-duration-normal) var(--anim-ease-out);
+}
+
+.card-hover:hover .read-more-indicator span,
+.card-hover:focus-within .read-more-indicator span {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─────────── Dropdown / Menu ─────────── */
+.dropdown-enter {
+  animation: anim-scale-in var(--anim-duration-fast) var(--anim-ease-out) forwards;
+  transform-origin: top right;
+}
+
+/* ─────────── Skeleton shimmer ─────────── */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base, #e5e7eb) 25%,
+    var(--skeleton-shine, #f3f4f6) 50%,
+    var(--skeleton-base, #e5e7eb) 75%
+  );
+  background-size: 200% 100%;
+  animation: anim-shimmer 1.5s ease-in-out infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .skeleton-shimmer {
+    --skeleton-base: #374151;
+    --skeleton-shine: #4b5563;
+  }
+}
+
+/* ─────────── Reading progress bar ─────────── */
+.reading-progress {
+  transition: transform 50ms linear;
+  will-change: transform;
+}
+
+/* ─────────── Reduced motion ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .anim-reveal,
+  .anim-reveal-fade,
+  .anim-reveal-right {
+    opacity: 1;
+    transform: none;
+  }
+
+  .card-hover:hover,
+  .card-modern:hover,
+  .card-modern:focus-within {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .img-zoom:hover img {
+    transform: none;
+  }
+
+  .read-more-indicator span {
+    opacity: 1;
+    transform: none;
+  }
+
+  .skeleton-shimmer {
+    animation: none;
+    background: var(--skeleton-base, #e5e7eb);
+  }
+}
+
+
+/* ─────────── Editorial Typography (NYT Style) ─────────── */
+.font-editorial {
+  font-family: var(--font-editorial), Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+.editorial-p {
+  font-family: var(--font-editorial), Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/* Capitular (Drop Cap) clásica en el primer párrafo del artículo */
+.editorial-body > p.editorial-p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-editorial), Georgia, Cambria, serif;
+  font-size: 3.65rem;
+  font-weight: 700;
+  line-height: 0.82;
+  padding-top: 0.08em;
+  padding-right: 0.14em;
+  padding-bottom: 0.04em;
+  color: var(--color-primary-to-white);
+}

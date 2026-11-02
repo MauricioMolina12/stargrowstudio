@@ -49,7 +49,7 @@ export default function GallerySlider({ items }: Props) {
 
   return (
     <div
-      className="relative w-full overflow-hidden rounded-2xl bg-black/[0.03] select-none"
+      className="relative w-full overflow-hidden rounded-2xl bg-[var(--color-hover)] select-none"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

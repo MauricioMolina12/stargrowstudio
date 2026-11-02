@@ -19,10 +19,10 @@ interface ServiceCardProps {
 
 /* Clases compartidas. Hover minimalista: solo una elevación sutil, sin borde ni gradientes. */
 const BASE =
-  'group relative flex h-full flex-col overflow-hidden rounded-2xl border border-black/[0.06] ' +
-  'bg-white transition-[transform,box-shadow] duration-500 ease-out ' +
+  'group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border-subtle)] ' +
+  'bg-[var(--color-surface)] transition-[transform,box-shadow] duration-500 ease-out ' +
   'hover:-translate-y-1 hover:shadow-[0_10px_30px_-24px_rgba(0,0,0,0.22)] ' +
-  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2 ' +
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-bright)] focus-visible:ring-offset-2 ' +
   'motion-reduce:transition-none motion-reduce:hover:translate-y-0 ' +
   // reveal on-scroll
   'translate-y-6 opacity-0 [transition-property:transform,box-shadow,opacity] ' +
@@ -36,19 +36,9 @@ export default function ServiceCard({ service, variant, index, className = '' }:
 
   const style = {
     '--accent': meta.accent,
+    '--accent-soft': meta.soft,
     transitionDelay: `${index * 90}ms`,
   } as React.CSSProperties;
-
-  const IconChip = ({ big = false }: { big?: boolean }) => (
-    <span
-      className={`inline-flex shrink-0 items-center justify-center rounded-xl transition-transform duration-500 group-hover:scale-105 motion-reduce:group-hover:scale-100 ${
-        big ? 'h-12 w-12' : 'h-11 w-11'
-      }`}
-      style={{ backgroundColor: 'color-mix(in srgb, var(--accent) 12%, transparent)', color: 'var(--accent)' }}
-    >
-      <Icon className={big ? 'h-6 w-6' : 'h-5 w-5'} strokeWidth={1.75} />
-    </span>
-  );
 
   const Eyebrow = () => (
     <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em]" style={{ color: 'var(--accent)' }}>
@@ -63,32 +53,20 @@ export default function ServiceCard({ service, variant, index, className = '' }:
     </span>
   );
 
-  /* Visual reutilizable: imagen si existe; si no, panel de tinte sólido con marca de agua. */
-  const Visual = ({ className: c = '' }: { className?: string }) => (
-    <div className={`relative overflow-hidden ${c}`}>
-      {service.image ? (
-        <img
-          src={service.image}
-          alt={service.alt || service.service}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:group-hover:scale-100"
-          loading="lazy"
-        />
-      ) : (
-        <div
-          className="absolute inset-0"
-          style={{ backgroundColor: 'color-mix(in srgb, var(--accent) 8%, white)' }}
-        >
-          <Icon
-            className="absolute -bottom-4 -right-3 h-40 w-40 opacity-[0.08]"
-            style={{ color: 'var(--accent)' }}
-            strokeWidth={1}
-          />
-        </div>
-      )}
+  /* ── COVER ── contenedor para la portada: fondo pastel (tinte del servicio) + icono
+     en el acento de la línea. En tarjetas verticales va arriba; en horizontales, a la derecha. */
+  const Cover = ({ big = false, className = '' }: { big?: boolean; className?: string }) => (
+    <div
+      className={`relative flex shrink-0 items-center justify-center overflow-hidden bg-[var(--accent-soft)] ${className}`}
+      aria-hidden="true"
+    >
+      <Icon
+        className={`text-[var(--accent)] ${big ? 'h-24 w-24 md:h-28 md:w-28' : 'h-16 w-16 md:h-20 md:w-20'}`}
+        strokeWidth={1}
+      />
     </div>
   );
 
-  /* ── HERO ── servicio núcleo: horizontal (texto + visual), tamaño contenido. */
   if (variant === 'hero') {
     return (
       <Link
@@ -99,16 +77,14 @@ export default function ServiceCard({ service, variant, index, className = '' }:
         className={`${BASE} md:flex-row ${className}`}
         aria-label={`Explorar ${service.service}`}
       >
-        <div className="relative z-10 flex flex-col gap-5 p-8 md:flex-1 md:p-10">
-          <div className="flex items-center justify-between gap-3">
-            <IconChip big />
-            <span
-              className="rounded-full px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em]"
-              style={{ backgroundColor: 'color-mix(in srgb, var(--accent) 12%, transparent)', color: 'var(--accent)' }}
-            >
-              {meta.eyebrow}
-            </span>
-          </div>
+        {/* Contenido. En móvil (vertical) queda debajo del cover; en desktop va a la izquierda. */}
+        <div className="order-2 relative z-10 flex flex-col gap-5 p-8 md:order-1 md:flex-1 md:p-10">
+          <span
+            className="w-fit rounded-full px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em]"
+            style={{ backgroundColor: 'color-mix(in srgb, var(--accent) 12%, transparent)', color: 'var(--accent)' }}
+          >
+            {meta.eyebrow}
+          </span>
 
           <div>
             <h3 className="text-2xl font-bold tracking-tight text-[var(--color-dark)]">
@@ -124,7 +100,7 @@ export default function ServiceCard({ service, variant, index, className = '' }:
               {service.list.slice(0, 3).map((item) => (
                 <li
                   key={item}
-                  className="rounded-full border border-black/10 px-3 py-1 text-xs font-medium text-[var(--color-dark-gray)]"
+                  className="rounded-full border border-[var(--color-border-subtle)] px-3 py-1 text-xs font-medium text-[var(--color-dark-gray)]"
                 >
                   {item}
                 </li>
@@ -135,19 +111,12 @@ export default function ServiceCard({ service, variant, index, className = '' }:
           <ExploreLink />
         </div>
 
-        <div className="flex min-h-[180px] items-center justify-center md:w-[42%]">
-          <div
-            className="flex h-32 w-32 items-center justify-center rounded-3xl md:h-40 md:w-40"
-            style={{ backgroundColor: 'color-mix(in srgb, var(--accent) 10%, white)' }}
-          >
-            <Icon className="h-16 w-16 md:h-20 md:w-20" style={{ color: 'var(--accent)' }} strokeWidth={1.25} />
-          </div>
-        </div>
+        {/* Portada: bg = color del servicio + icono blanco, a la derecha en horizontal. */}
+        <Cover big className="order-1 min-h-[200px] w-full md:order-2 md:min-h-0 md:w-[42%]" />
       </Link>
     );
   }
 
-  /* ── WIDE ── banda ancha (Consultoría): layout horizontal. */
   if (variant === 'wide') {
     return (
       <Link
@@ -155,11 +124,10 @@ export default function ServiceCard({ service, variant, index, className = '' }:
         href={`/services/${service.path}`}
         data-visible={inView}
         style={style}
-        className={`${BASE} !flex-row items-center justify-between gap-6 p-6 md:p-8 ${className}`}
+        className={`${BASE} sm:flex-row sm:items-stretch ${className}`}
         aria-label={`Explorar ${service.service}`}
       >
-        <div className="flex items-start gap-4 md:items-center">
-          <IconChip />
+        <div className="order-2 flex flex-1 flex-col gap-4 p-6 sm:order-1 sm:flex-row sm:items-center sm:justify-between sm:gap-6 md:p-8">
           <div>
             <Eyebrow />
             <h3 className="mt-1 text-lg font-bold tracking-tight text-[var(--color-dark)] md:text-xl">
@@ -169,39 +137,44 @@ export default function ServiceCard({ service, variant, index, className = '' }:
               {service.shortDescription}
             </p>
           </div>
+          <span
+            className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold sm:inline-flex"
+            style={{ color: 'var(--accent)' }}
+          >
+            Explorar
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
+          </span>
         </div>
-        <span
-          className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold sm:inline-flex"
-          style={{ color: 'var(--accent)' }}
-        >
-          Explorar
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" />
-        </span>
+
+        <Cover big className="order-1 min-h-[140px] w-full sm:order-2 sm:min-h-0 sm:w-32 md:w-40" />
       </Link>
     );
   }
 
-  /* ── COMPACT ── tarjeta mediana, guiada por icono. */
   return (
     <Link
       ref={ref}
       href={`/services/${service.slug}`}
       data-visible={inView}
       style={style}
-      className={`${BASE} gap-4 p-6 md:p-7 ${className}`}
+      className={`${BASE} ${className}`}
       aria-label={`Explorar ${service.service}`}
     >
-      <IconChip />
-      <div>
+      {/* Portada: bg = color del servicio + icono blanco, arriba en vertical. */}
+      <Cover className="aspect-[16/9] w-full shrink-0" />
+
+      <div className="flex flex-1 flex-col gap-4 p-6 md:p-7">
         <Eyebrow />
-        <h3 className="mt-1 text-lg font-bold tracking-tight text-[var(--color-dark)]">
-          {service.service}
-        </h3>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--color-dark-gray)] line-clamp-3">
-          {service.shortDescription}
-        </p>
+        <div>
+          <h3 className="text-lg font-bold tracking-tight text-[var(--color-dark)]">
+            {service.service}
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--color-dark-gray)] line-clamp-3">
+            {service.shortDescription}
+          </p>
+        </div>
+        <ExploreLink />
       </div>
-      <ExploreLink />
     </Link>
   );
 }

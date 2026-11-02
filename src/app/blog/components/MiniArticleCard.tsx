@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { IconArrowUpRight, IconCalendar, IconClock } from "@tabler/icons-react";
+import { ArrowUpRight as IconArrowUpRight, Calendar as IconCalendar, Clock as IconClock } from "lucide-react";
 import { imageUrl } from "@/sanity/image";
 import { formatDateShort } from "../utils";
 import type { PostListItem } from "../types";

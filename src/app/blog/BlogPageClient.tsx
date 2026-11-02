@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { Newsreader } from "next/font/google";
-import { IconArrowRight, IconArrowUp } from "@tabler/icons-react";
+import { ArrowRight as IconArrowRight, ArrowUp as IconArrowUp } from "lucide-react";
 import Link from "next/link";
 
 import { BlogHero } from "./components/BlogHero";

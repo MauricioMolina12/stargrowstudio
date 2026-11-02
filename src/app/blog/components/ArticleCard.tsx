@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { IconArrowUpRight, IconBrandInstagram, IconCalendar, IconClock, IconUser } from "@tabler/icons-react";
+import {
+  ArrowUpRight as IconArrowUpRight,
+  Instagram as IconBrandInstagram,
+  Calendar as IconCalendar,
+  Clock as IconClock,
+  User as IconUser,
+} from "lucide-react";
 import { imageUrl } from "@/sanity/image";
 import { resolveInstagramUrl } from "@/app/components/shared/instagramUtils";
 import { formatDateShort } from "../utils";

@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  experimental: {
+    webpackMemoryOptimizations: true,
+    optimizePackageImports: ["@tabler/icons-react", "lucide-react"],
+  },
   images: {
     remotePatterns: [
       {

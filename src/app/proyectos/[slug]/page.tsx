@@ -50,16 +50,16 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
   }
 
   return (
-    <main className="w-full bg-[var(--color-light)]">
+    <main className="relative w-full bg-[var(--color-light)]">
       {/* Breadcrumb */}
-      <nav aria-label="Breadcrumb" className="absolute top-0 left-0 right-0 z-20 py-4">
+      <nav aria-label="Breadcrumb" className="absolute top-0 left-0 right-0 z-20 py-5">
         <div className="container-app">
-          <div className="flex flex-wrap items-center gap-1.5 text-sm text-white/60">
+          <div className="inline-flex flex-wrap items-center gap-1.5 rounded-full border border-white/10 bg-black/25 px-3.5 py-1.5 text-xs sm:text-sm text-white/80 backdrop-blur-md">
             <Link href="/" className="hover:text-white transition-colors">Inicio</Link>
-            <ChevronRight className="h-3 w-3" />
+            <ChevronRight className="h-3.5 w-3.5 text-white/50" />
             <Link href="/proyectos" className="hover:text-white transition-colors">Casos de éxito</Link>
-            <ChevronRight className="h-3 w-3" />
-            <span className="text-white/80 font-medium">{project.name}</span>
+            <ChevronRight className="h-3.5 w-3.5 text-white/50" />
+            <span className="text-white font-semibold">{project.name}</span>
           </div>
         </div>
       </nav>

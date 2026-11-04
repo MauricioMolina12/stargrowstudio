@@ -54,7 +54,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="absolute top-0 left-0 right-0 z-20 py-5">
         <div className="container-app">
-          <div className="inline-flex flex-wrap items-center gap-1.5 rounded-full border border-white/10 bg-black/25 px-3.5 py-1.5 text-xs sm:text-sm text-white/80 backdrop-blur-md">
+          <div className="inline-flex flex-wrap items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs sm:text-sm text-white/90 backdrop-blur-sm">
             <Link href="/" className="hover:text-white transition-colors">Inicio</Link>
             <ChevronRight className="h-3.5 w-3.5 text-white/50" />
             <Link href="/proyectos" className="hover:text-white transition-colors">Casos de éxito</Link>

@@ -32,17 +32,9 @@ export function HeroSection({ data, project }: SectionProps) {
         />
       )}
 
-      {/* Subtle contrast layer: keeps background image sharp and bright while grounding text */}
+      {/* Single soft contrast layer — light enough to preserve bright photography */}
       <div
-        className="pointer-events-none absolute inset-0 bg-black/15"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b0b1a]/75 via-[#0b0b1a]/25 to-transparent"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0b0b1a]/45 via-transparent to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/20 to-black/10"
         aria-hidden="true"
       />
 

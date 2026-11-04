@@ -21,7 +21,7 @@ export function HeroSection({ data, project }: SectionProps) {
         <img
           src={image}
           alt={heading}
-          className="absolute inset-0 h-full w-full object-cover object-center scale-[1.01]"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
       ) : (
         <div
@@ -32,25 +32,17 @@ export function HeroSection({ data, project }: SectionProps) {
         />
       )}
 
-      {/* Layer 1: Uniform dark-indigo contrast veil + subtle blur over background image */}
+      {/* Subtle contrast layer: keeps background image sharp and bright while grounding text */}
       <div
-        className="absolute inset-0 bg-[#090918]/55 backdrop-blur-[2px]"
-        aria-hidden="true"
-      />
-
-      {/* Layer 2: Top vignette to protect breadcrumb legibility */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#070714]/80 via-[#070714]/35 to-transparent"
-        aria-hidden="true"
-      />
-
-      {/* Layer 3: Directional bottom + left gradient for text & CTA contrast */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#070714]/95 via-[#070714]/65 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-black/15"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#070714]/80 via-[#070714]/40 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b0b1a]/75 via-[#0b0b1a]/25 to-transparent"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0b0b1a]/45 via-transparent to-transparent"
         aria-hidden="true"
       />
 
